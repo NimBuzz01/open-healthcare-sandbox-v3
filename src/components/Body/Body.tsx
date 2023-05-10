@@ -8,7 +8,7 @@ const Body = () => {
   return (
     <Box sx={{ flexGrow: 1, display: "flex", overflowY: "auto" }}>
       <SideNavigation items={items} />
-      <Box ml={32}>
+      <Box ml={33}>
         <Routes items={items} />
       </Box>
     </Box>
