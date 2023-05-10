@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import sendFeedback, { FeedbackRequest } from "../../utils/FeedbackAPI";
 
 interface FeedbackFormProps {
@@ -6,7 +6,7 @@ interface FeedbackFormProps {
 }
 
 const FeedbackForm = ({ onSubmit }: FeedbackFormProps) => {
-  const [feedback, setFeedback] = React.useState<FeedbackRequest>({
+  const [feedback, setFeedback] = useState<FeedbackRequest>({
     name: "",
     registration: "",
     ease: 0,
@@ -16,7 +16,7 @@ const FeedbackForm = ({ onSubmit }: FeedbackFormProps) => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFeedback((prevFeedback: FeedbackRequest) => ({
+    setFeedback((prevFeedback) => ({
       ...prevFeedback,
       [name]: value,
     }));
@@ -33,11 +33,36 @@ const FeedbackForm = ({ onSubmit }: FeedbackFormProps) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="name" value={feedback.name} onChange={handleInputChange} />
-      <input type="text" name="registration" value={feedback.registration} onChange={handleInputChange} />
-      <input type="number" name="ease" value={feedback.ease} onChange={handleInputChange} />
-      <input type="number" name="overall" value={feedback.overall} onChange={handleInputChange} />
-      <input type="text" name="improvement" value={feedback.improvement} onChange={handleInputChange} />
+      <input
+        type="text"
+        name="name"
+        value={feedback.name}
+        onChange={handleInputChange}
+      />
+      <input
+        type="text"
+        name="registration"
+        value={feedback.registration}
+        onChange={handleInputChange}
+      />
+      <input
+        type="number"
+        name="ease"
+        value={feedback.ease}
+        onChange={handleInputChange}
+      />
+      <input
+        type="number"
+        name="overall"
+        value={feedback.overall}
+        onChange={handleInputChange}
+      />
+      <input
+        type="text"
+        name="improvement"
+        value={feedback.improvement}
+        onChange={handleInputChange}
+      />
       <button type="submit">Submit</button>
     </form>
   );

@@ -23,8 +23,9 @@ const CommonButton = ({ variant, label, onClick }: ButtonProps) => {
         ":hover": {
           border: 2,
           bgcolor:
-            variant === "background" ? "success.main" : "background.paper",
-          borderColor: "success.main",
+            variant === "background" ? "success.light" : "secondary.light",
+          borderColor:
+            variant === "background" ? "success.light" : "secondary.light",
         },
       }}
     >
