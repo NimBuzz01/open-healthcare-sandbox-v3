@@ -19,7 +19,7 @@ const items = [
     component: <Sample2 />,
   },
   {
-    label: "SMART on FHIR",
+    label: "Connect to EMR",
     path: "/sample3",
     icon: <FireHydrantAltOutlinedIcon sx={{width:26,height:26}}/>,
     component: <Sample3 />,

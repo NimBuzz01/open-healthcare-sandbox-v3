@@ -1,14 +1,39 @@
-import { Box } from '@mui/material'
-import ContactBtn from './ContactButton'
-import Logo from './Logo'
+import { Box } from "@mui/material";
+import ContactBtn from "./ContactButton";
+import Logo from "./Logo";
+import { useState, useEffect } from "react";
+import AlertModal from "../AlertModal";
 
 const Header = () => {
-  return (
-    <Box sx={{display:'flex', justifyContent:"space-between", py:1.5, px:1, boxShadow:"rgba(0, 0, 0, 0.24) 0px 3px 8px;"}}>
-      <Logo/>
-      <ContactBtn/>
-    </Box>
-  )
-}
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-export default Header
+  const handleResize = () => setScreenWidth(window.innerWidth);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return (
+    <>
+      {screenWidth < 960 && (
+        <AlertModal contentText="Sign in on a laptop or desktop to try out the Open Healthcare Sandbox seamlessly." />
+      )}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          py: 1.5,
+          px: 1,
+          boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px;",
+        }}
+      >
+        <Logo />
+        <ContactBtn />
+      </Box>
+    </>
+  );
+};
+
+export default Header;
