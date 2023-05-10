@@ -1,49 +1,28 @@
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import LocalFireDepartmentOutlinedIcon from '@mui/icons-material/LocalFireDepartmentOutlined';
 import FireHydrantAltOutlinedIcon from '@mui/icons-material/FireHydrantAltOutlined';
-import Hl7v2ToFhir from "../Accelerator/Hl7v2ToFhir";
-import FhirValidation from "../Accelerator/FhirValidation";
-import SmartOnFhir from "../Accelerator/SmartOnFhir";
-import CcdaToFhir from "../Accelerator/CcdaToFhir";
-import FhirPath from "../Accelerator/FhirPath";
-import ConnectToEmr from "../Accelerator/ConnectToEmr";
+import Sample1 from "../Features/Sample1";
+import Sample2 from "../Features/Sample2";
+import Sample3 from "../Features/Sample3";
 
 const items = [
   {
-    label: "HL7V2 To FHIR",
+    label: "Sample 1",
     path: "/",
-    icon: <AccountBoxOutlinedIcon sx={{width:30,height:30}} />,
-    component: <Hl7v2ToFhir />,
+    icon: <AccountBoxOutlinedIcon sx={{width:26,height:26}} />,
+    component: <Sample1 />,
   },
   {
-    label: "FHIR Validation",
-    path: "/fhir-validation",
-    icon: <LocalFireDepartmentOutlinedIcon sx={{width:30,height:30}}/>,
-    component: <FhirValidation />,
+    label: "Sample 2",
+    path: "/sample2",
+    icon: <LocalFireDepartmentOutlinedIcon sx={{width:26,height:26}}/>,
+    component: <Sample2 />,
   },
   {
-    label: "SMART on FHIR",
-    path: "/smart-on-fhir",
-    icon: <FireHydrantAltOutlinedIcon sx={{width:30,height:30}}/>,
-    component: <SmartOnFhir />,
-  },
-  {
-    label: "C-CDA To FHIR",
-    path: "/c-cda-to-fhir",
-    icon: <FireHydrantAltOutlinedIcon sx={{width:30,height:30}}/>,
-    component: <CcdaToFhir />,
-  },
-  {
-    label: "FHIR Path",
-    path: "/fhir-path",
-    icon: <FireHydrantAltOutlinedIcon sx={{width:30,height:30}}/>,
-    component: <FhirPath />,
-  },
-  {
-    label: "Connect To EMR",
-    path: "/connect-to-emr",
-    icon: <FireHydrantAltOutlinedIcon sx={{width:30,height:30}}/>,
-    component: <ConnectToEmr />,
+    label: "Sample 3",
+    path: "/sample3",
+    icon: <FireHydrantAltOutlinedIcon sx={{width:26,height:26}}/>,
+    component: <Sample3 />,
   },
 ];
 
