@@ -1,9 +1,9 @@
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import LocalFireDepartmentOutlinedIcon from '@mui/icons-material/LocalFireDepartmentOutlined';
 import FireHydrantAltOutlinedIcon from '@mui/icons-material/FireHydrantAltOutlined';
-import Sample1 from "../Features/Sample1";
-import Sample2 from "../Features/Sample2";
-import Sample3 from "../Features/Sample3";
+import Sample1 from "../Accelerators/Sample1";
+import Sample2 from "../Accelerators/Sample2";
+import Sample3 from "../Accelerators/Sample3";
 
 const items = [
   {
