@@ -31,13 +31,14 @@ const SideNav = ({ items }: Props) => {
         flexDirection: "column",
         bgcolor: "secondary.main",
         p: 2,
-        minWidth: 250,
+        minWidth: 260,
+        maxWidth: 260,
         position: "fixed",
         height:"100%",
         zIndex:2,
       }}
     >
-      <Typography variant="h4" sx={{ color: "background.paper", mt: 2, ml: 2 }}>
+      <Typography variant="h6" sx={{ color: "background.paper", mt: 2, ml: 2 }}>
         Accelerators
       </Typography>
       <Divider
@@ -63,7 +64,7 @@ const SideNav = ({ items }: Props) => {
             }}
           >
             {item.icon}
-            <Typography variant="h6">{item.label}</Typography>
+            <Typography variant="h5">{item.label}</Typography>
           </Box>
         </Link>
       ))}

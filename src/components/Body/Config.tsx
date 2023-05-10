@@ -7,19 +7,19 @@ import Sample3 from "../Accelerators/Sample3";
 
 const items = [
   {
-    label: "Sample 1",
+    label: "HL7v2 to FHIR",
     path: "/",
     icon: <AccountBoxOutlinedIcon sx={{width:26,height:26}} />,
     component: <Sample1 />,
   },
   {
-    label: "Sample 2",
+    label: "FHIR Validator",
     path: "/sample2",
     icon: <LocalFireDepartmentOutlinedIcon sx={{width:26,height:26}}/>,
     component: <Sample2 />,
   },
   {
-    label: "Sample 3",
+    label: "SMART on FHIR",
     path: "/sample3",
     icon: <FireHydrantAltOutlinedIcon sx={{width:26,height:26}}/>,
     component: <Sample3 />,
