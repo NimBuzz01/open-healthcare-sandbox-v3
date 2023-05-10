@@ -6,8 +6,8 @@ import { Box, Divider, Typography } from "@mui/material";
 interface SideNavItem {
   label: string;
   path: string;
-  icon: any;
-  component: any;
+  icon: JSX.Element;
+  component: JSX.Element;
 }
 
 interface Props {
@@ -32,10 +32,13 @@ const SideNav = ({ items }: Props) => {
         bgcolor: "secondary.main",
         p: 2,
         minWidth: 250,
+        position: "fixed",
+        height:"100%",
+        zIndex:2,
       }}
     >
       <Typography variant="h4" sx={{ color: "background.paper", mt: 2, ml: 2 }}>
-        Tools
+        Accelerators
       </Typography>
       <Divider
         light

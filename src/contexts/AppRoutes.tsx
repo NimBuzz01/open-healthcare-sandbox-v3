@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 interface SideNavItem {
   path: string;
-  component: any;
+  component: JSX.Element;
 }
 
 interface Props {
