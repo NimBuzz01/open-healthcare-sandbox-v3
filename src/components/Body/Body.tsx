@@ -3,15 +3,18 @@ import { Box } from "@mui/material";
 import Routes from "../../contexts/AppRoutes";
 import SideNavigation from "../SideNavigation";
 import items from "./Config";
+import { Scrollbars } from "react-custom-scrollbars";
 
 const Body = () => {
   return (
-    <Box sx={{ flexGrow: 1, display: "flex", overflowY: "auto" }}>
-      <SideNavigation items={items} />
-      <Box ml={33}>
-        <Routes items={items} />
+    <Scrollbars>
+      <Box sx={{ flexGrow: 1, display: "flex", overflowY: "auto" }}>
+        <SideNavigation items={items} />
+        <Box ml={33}>
+          <Routes items={items} />
+        </Box>
       </Box>
-    </Box>
+    </Scrollbars>
   );
 };
 
