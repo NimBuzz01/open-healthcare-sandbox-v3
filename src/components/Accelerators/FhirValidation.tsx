@@ -1,13 +1,11 @@
 import React from "react";
 import Heading from "../Common/Heading";
-import { Grid } from "@mui/material";
-import BodyContainer from "../Body/BodyContainer";
-import ConvertButton from "../Common/ConvertButton";
+import { Container, Grid } from "@mui/material";
 import TextArea from "../Common/TextArea";
 
 const FhirValidation = () => {
   return (
-    <BodyContainer>
+    <Container>
       <Heading
         heading="Connect to EMR"
         description="Connect with your EMR system"
@@ -16,7 +14,7 @@ const FhirValidation = () => {
       <Grid
         container
         spacing={2}
-        marginTop={5}
+        marginTop={1}
         alignItems="center"
         justifyContent="center"
       >
@@ -36,7 +34,7 @@ const FhirValidation = () => {
     </Grid>
   </Grid> */}
       </Grid>
-    </BodyContainer>
+    </Container>
   );
 };
 

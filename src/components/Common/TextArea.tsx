@@ -19,7 +19,7 @@ const TextArea = ({
   rows = 25,
   maxRows = "Infinity",
   width = "700px",
-  isUploadRequired = true,
+  isUploadRequired = false,
   iconWidth = 30,
   handleOnChange,
   data,
@@ -30,8 +30,8 @@ const TextArea = ({
         <Grid item xs={8} xl={8}>
           <Typography
             color="secondary.dark"
-            variant="h6"
-            sx={{ fontWeight: 400, lineHeight: "3" }}
+            variant="h5"
+            sx={{ fontWeight: 400, py:1 }}
           >
             {label}
           </Typography>

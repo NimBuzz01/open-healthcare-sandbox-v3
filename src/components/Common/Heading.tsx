@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import ViewDocument from "./ViewDocument";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 const Heading = ({ heading, description, url }: Props) => {
   return (
     <>
-      <Box>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Typography
           color="secondary.dark"
           variant="h3"
@@ -18,20 +18,16 @@ const Heading = ({ heading, description, url }: Props) => {
         >
           {heading}
         </Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={8} xl={8}>
-            <Typography
-              color="primary.dark"
-              variant="h6"
-              sx={{ fontWeight: 400, lineHeight: "3" }}
-            >
-              {description}
-            </Typography>
-          </Grid>
-          <Grid item xs={4} xl={4}>
-            <ViewDocument url={url}></ViewDocument>
-          </Grid>
-        </Grid>
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography
+            color="primary.dark"
+            variant="h6"
+            sx={{ fontWeight: 400, my: 1 }}
+          >
+            {description}
+          </Typography>
+          <ViewDocument url={url}></ViewDocument>
+        </Box>
         <Divider />
       </Box>
     </>

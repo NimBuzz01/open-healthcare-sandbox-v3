@@ -1,12 +1,11 @@
-import { Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import React from "react";
-import BodyContainer from "../Body/BodyContainer";
 import Heading from "../Common/Heading";
 import TextArea from "../Common/TextArea";
 
 const FhirPath = () => {
   return (
-    <BodyContainer>
+    <Container>
       <Heading
         heading="Connect to EMR"
         description="Connect with your EMR system"
@@ -15,7 +14,7 @@ const FhirPath = () => {
       <Grid
         container
         spacing={2}
-        marginTop={5}
+        marginTop={1}
         alignItems="center"
         justifyContent="center"
       >
@@ -35,7 +34,7 @@ const FhirPath = () => {
     </Grid>
   </Grid> */}
       </Grid>
-    </BodyContainer>
+    </Container>
   );
 };
 

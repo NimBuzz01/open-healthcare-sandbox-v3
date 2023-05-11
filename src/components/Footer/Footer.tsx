@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import FeedbackForm from "../FeedbackForm";
+import CopyrightIcon from '@mui/icons-material/Copyright';
+
 
 const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,6 +46,7 @@ const Footer = () => {
           bgcolor: "background.paper",
         }}
       >
+        <CopyrightIcon sx={{color:"primary.light", mr:0.5}}/>
         <Typography
           variant="h6"
           sx={{ marginRight: "auto", color: "primary.light" }}

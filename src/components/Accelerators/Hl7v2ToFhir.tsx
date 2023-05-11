@@ -1,10 +1,9 @@
 import Heading from "../Common/Heading";
-import { Grid } from "@mui/material";
-import ConvertButton from "../Common/ConvertButton";
+import { Container, Grid } from "@mui/material";
 import TextArea from "../Common/TextArea";
-import BodyContainer from "../Body/BodyContainer";
 import { useState } from "react";
 import axios from "axios";
+import CommonButton from "../Common/CommonButton";
 
 const Hl7v2ToFhir = () => {
   const [data, setData] = useState("");
@@ -39,7 +38,7 @@ const Hl7v2ToFhir = () => {
   };
 
   return (
-    <BodyContainer>
+    <Container>
       <Heading
         heading="HL7V2 To FHIR"
         description="Convert HL7 V2 data to FHIR"
@@ -48,11 +47,11 @@ const Hl7v2ToFhir = () => {
       <Grid
         container
         spacing={2}
-        marginTop={3}
+        marginTop={1}
         alignItems="center"
         justifyContent="center"
       >
-        <Grid item xs={12} sm={12} md={12} lg={5.5} xl={5.5}>
+        <Grid item xs={12} sm={12} md={12} lg={5} xl={5.3}>
           <Grid container alignItems="center" justifyContent="center">
             <TextArea
               label="Paste your HL7 resource here:"
@@ -60,18 +59,18 @@ const Hl7v2ToFhir = () => {
             />
           </Grid>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={1} xl={1}>
+        <Grid item xs={12} sm={12} md={12} lg={2} xl={1.4}>
           <Grid container alignItems="center" justifyContent="center">
-            <ConvertButton handleSubmit={callBackend} />
+            <CommonButton variant="border" onClick={callBackend} label="Convert"/>
           </Grid>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={5.5} xl={5.5}>
+        <Grid item xs={12} sm={12} md={12} lg={5} xl={5.3}>
           <Grid container alignItems="center" justifyContent="center">
             <TextArea label="Converted FHIR resource here:" data={response} />
           </Grid>
         </Grid>
       </Grid>
-    </BodyContainer>
+    </Container>
   );
 };
 
