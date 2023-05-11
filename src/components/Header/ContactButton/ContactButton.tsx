@@ -9,6 +9,7 @@ const ContactButton = () => {
       aria-label="contact-button"
       startIcon={<MailIcon />}
       sx={{
+        visibility:"hidden",
         fontSize: 16,
         mx: 2,
         my: 1.2,
