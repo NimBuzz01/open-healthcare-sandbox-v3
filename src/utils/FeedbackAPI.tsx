@@ -15,7 +15,11 @@ interface SendFeedbackProps {
   onError: (error: any) => void;
 }
 
-const sendFeedback = async ({ request, onSuccess, onError }: SendFeedbackProps) => {
+const sendFeedback = async ({
+  request,
+  onSuccess,
+  onError,
+}: SendFeedbackProps) => {
   try {
     const response: AxiosResponse<any> = await axios.post(
       "/api/healthcare/manage/feedback",

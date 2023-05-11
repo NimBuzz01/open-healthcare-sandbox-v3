@@ -9,12 +9,11 @@ const Sample2 = () => {
 
   return (
     <>
-      <Box sx={{p:2}}>
+      <Box sx={{ p: 2 }}>
         <CommonButton
           variant="background"
           label="Validate"
           onClick={handleButtonClick}
-
         />
         <CommonButton
           variant="border"

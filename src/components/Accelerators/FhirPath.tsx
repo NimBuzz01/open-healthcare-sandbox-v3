@@ -1,8 +1,8 @@
-import { Grid } from '@mui/material'
-import React from 'react'
-import BodyContainer from '../Body/BodyContainer'
-import Heading from '../Common/Heading'
-import TextArea from '../Common/TextArea'
+import { Grid } from "@mui/material";
+import React from "react";
+import BodyContainer from "../Body/BodyContainer";
+import Heading from "../Common/Heading";
+import TextArea from "../Common/TextArea";
 
 const FhirPath = () => {
   return (
@@ -36,7 +36,7 @@ const FhirPath = () => {
   </Grid> */}
       </Grid>
     </BodyContainer>
-  )
-}
+  );
+};
 
-export default FhirPath
+export default FhirPath;

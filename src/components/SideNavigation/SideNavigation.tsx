@@ -34,8 +34,8 @@ const SideNav = ({ items }: Props) => {
         minWidth: 250,
         maxWidth: 250,
         position: "fixed",
-        height:"100%",
-        zIndex:2,
+        height: "100%",
+        zIndex: 2,
       }}
     >
       <Typography variant="h6" sx={{ color: "background.paper", mt: 2, ml: 2 }}>

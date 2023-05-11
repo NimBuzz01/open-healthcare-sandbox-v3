@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
-import config from '../../../app-config.json'
+import config from "../../../app-config.json";
 
 const ContactButton = () => {
   return (
@@ -9,7 +9,7 @@ const ContactButton = () => {
       aria-label="contact-button"
       startIcon={<MailIcon />}
       sx={{
-        visibility:"hidden",
+        visibility: "hidden",
         fontSize: 16,
         mx: 2,
         my: 1.2,

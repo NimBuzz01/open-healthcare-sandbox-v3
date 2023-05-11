@@ -1,8 +1,8 @@
-import { Grid } from '@mui/material'
-import React from 'react'
-import BodyContainer from '../Body/BodyContainer'
-import Heading from '../Common/Heading'
-import TextArea from '../Common/TextArea'
+import { Grid } from "@mui/material";
+import React from "react";
+import BodyContainer from "../Body/BodyContainer";
+import Heading from "../Common/Heading";
+import TextArea from "../Common/TextArea";
 
 const SmartOnFhir = () => {
   return (
@@ -36,7 +36,7 @@ const SmartOnFhir = () => {
   </Grid> */}
       </Grid>
     </BodyContainer>
-  )
-}
+  );
+};
 
-export default SmartOnFhir
+export default SmartOnFhir;
