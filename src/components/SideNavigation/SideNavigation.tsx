@@ -64,7 +64,7 @@ const SideNav = ({ items }: Props) => {
             }}
           >
             {item.icon}
-            <Typography variant="h5">{item.label}</Typography>
+            <Typography variant="h6">{item.label}</Typography>
           </Box>
         </Link>
       ))}
