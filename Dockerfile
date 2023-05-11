@@ -24,4 +24,4 @@ USER 10001
 EXPOSE 80
 
 # Start the application
-CMD ["npm", "start", "--cache", "/tmp"]
+CMD ["npm", "start", "--cache", "/tmp", "--force"]
