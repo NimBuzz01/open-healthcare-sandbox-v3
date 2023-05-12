@@ -7,10 +7,22 @@ interface Props {
 
 const ConvertButton = ({ handleSubmit }: Props) => {
   return (
-    <Button variant="outlined" onClick={handleSubmit}>
+    <Button
+      variant="outlined"
+      sx={{
+        borderRadius: 1,
+        color: "success.main",
+        border: 1,
+        borderColor: "primary.light",
+        ":hover": {
+          border: 1,
+          borderColor: "secondary.light",
+        },
+      }}
+      onClick={handleSubmit}
+    >
       <ArrowForwardIosIcon
-        color="secondary"
-        sx={{ fontSize: 70 }}
+        sx={{ width: 50, height: 50 }}
       ></ArrowForwardIosIcon>
     </Button>
   );

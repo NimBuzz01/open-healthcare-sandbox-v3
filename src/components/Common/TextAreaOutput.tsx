@@ -6,7 +6,6 @@ import CopyContent from "./CopyContent";
 interface Props {
   label: string;
   rows?: number;
-  maxRows?: string;
   width?: string;
   isDownloadButtonRequired?: boolean;
   isCopyRequired?: boolean;
@@ -20,7 +19,6 @@ interface Props {
 const TextAreaOutput = ({
   label,
   rows = 30,
-  maxRows = "Infinity",
   width = "950px",
   isDownloadButtonRequired = false,
   isCopyRequired = true,
@@ -69,7 +67,6 @@ const TextAreaOutput = ({
       <TextField
         multiline
         rows={rows}
-        maxRows={maxRows}
         variant="outlined"
         style={{ width: width }}
         onChange={handleOnChange}

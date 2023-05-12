@@ -5,7 +5,7 @@ import TextArea from "../Common/TextAreaOutput";
 
 const SmartOnFhir = () => {
   return (
-    <Container>
+    <Container maxWidth="xl">
       <Heading
         heading="Connect to EMR"
         description="Connect with your EMR system"
@@ -24,15 +24,15 @@ const SmartOnFhir = () => {
           </Grid>
         </Grid>
         {/* <Grid item xs={12} sm={12} md={12} lg={1} xl={1}>
-    <Grid container alignItems="center" justifyContent="center">
-      <ConvertButton></ConvertButton>
-    </Grid>
-  </Grid>
-  <Grid item xs={12} sm={12} md={12} lg={5.5} xl={5.5}>
-    <Grid container alignItems="center" justifyContent="center">
-      <TextArea label="Converted FHIR resource here:" />
-    </Grid>
-  </Grid> */}
+          <Grid container alignItems="center" justifyContent="center">
+            <ConvertButton></ConvertButton>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={5.5} xl={5.5}>
+          <Grid container alignItems="center" justifyContent="center">
+            <TextArea label="Converted FHIR resource here:" />
+          </Grid>
+        </Grid> */}
       </Grid>
     </Container>
   );
