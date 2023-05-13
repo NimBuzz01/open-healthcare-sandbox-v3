@@ -1,7 +1,6 @@
 import { Container, Grid } from "@mui/material";
-import React from "react";
 import Heading from "../Common/Heading";
-import TextArea from "../Common/TextArea";
+import TextAreaInput from "../Common/TextAreaInput";
 
 const FhirPath = () => {
   return (
@@ -20,7 +19,9 @@ const FhirPath = () => {
       >
         <Grid item xs={12} sm={12} md={12} lg={5.5} xl={5.5}>
           <Grid container alignItems="center" justifyContent="center">
-            <TextArea label="Paste your request resource here:" />
+            <TextAreaInput label="Paste your request resource here:" readFile={function (fileInput?: string | ArrayBuffer | null | undefined, errors?: Error | undefined) {
+              throw new Error("Function not implemented.");
+            } } />
           </Grid>
         </Grid>
         {/* <Grid item xs={12} sm={12} md={12} lg={1} xl={1}>

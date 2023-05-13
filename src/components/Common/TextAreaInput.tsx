@@ -1,5 +1,6 @@
 import { Box, Grid, TextField, Typography } from "@mui/material";
 import UploadIcon from "./UploadIcon";
+import { useState } from "react";
 
 interface Props {
   label: string;
@@ -12,18 +13,21 @@ interface Props {
   handleOnChange?(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): any;
+  readFile(fileInput?: string | ArrayBuffer | null): any;
 }
 
-const TextArea = ({
+const TextAreaInput = ({
   label,
-  rows = 25,
+  rows = 30,
   maxRows = "Infinity",
-  width = "700px",
+  width = "950px",
   isUploadRequired = false,
-  iconWidth = 30,
+  iconWidth = 25,
   handleOnChange,
+  readFile,
   data,
 }: Props) => {
+
   return (
     <>
       <Grid container spacing={2}>
@@ -31,14 +35,14 @@ const TextArea = ({
           <Typography
             color="secondary.dark"
             variant="h5"
-            sx={{ fontWeight: 400, py:1 }}
+            sx={{ fontWeight: 400, py: 1 }}
           >
             {label}
           </Typography>
         </Grid>
         <Grid item xs={4} xl={4}>
           <Box justifyContent="right" alignItems="right">
-            {isUploadRequired && <UploadIcon size={iconWidth} />}
+            {isUploadRequired && <UploadIcon size={iconWidth} readFile={readFile} />}
           </Box>
         </Grid>
       </Grid>
@@ -50,10 +54,10 @@ const TextArea = ({
         variant="outlined"
         style={{ width: width }}
         onChange={handleOnChange}
-        value={data && JSON.stringify(data, null, 2)}
+        value={data && data}
       />
     </>
   );
 };
 
-export default TextArea;
+export default TextAreaInput;

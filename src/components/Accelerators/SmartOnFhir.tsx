@@ -1,7 +1,7 @@
 import { Container, Grid } from "@mui/material";
 import React from "react";
 import Heading from "../Common/Heading";
-import TextArea from "../Common/TextArea";
+import TextArea from "../Common/TextAreaOutput";
 
 const SmartOnFhir = () => {
   return (

@@ -10,7 +10,7 @@ const ConvertButton = ({ handleSubmit }: Props) => {
     <Button variant="outlined" onClick={handleSubmit}>
       <ArrowForwardIosIcon
         color="secondary"
-        sx={{ fontSize: 100 }}
+        sx={{ fontSize: 70 }}
         onClick={() => {
           console.log("Clicked");
         }}
