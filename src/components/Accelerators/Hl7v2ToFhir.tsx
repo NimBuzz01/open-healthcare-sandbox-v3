@@ -1,10 +1,11 @@
 import Heading from "../Common/Heading";
 import { Container, Grid } from "@mui/material";
 import { useState } from "react";
-import axios from "axios";
 import ConvertButton from "../Common/ConvertButton";
 import TextAreaInput from "../Common/TextAreaInput";
 import TextAreaOutput from "../Common/TextAreaOutput";
+import apiClient from "../../services/api-client";
+import { HL7_TO_FHIR_CONVERTER_BASE_URL } from "../Constants";
 
 const Hl7v2ToFhir = () => {
   const [data, setData] = useState("");
@@ -17,23 +18,18 @@ const Hl7v2ToFhir = () => {
     setData(event.target.value);
   };
 
-  const readFile = (
-    fileInput?: string | ArrayBuffer | null
-  ) => {
-    console.log(fileInput);
+  const readFile = (fileInput?: string | ArrayBuffer | null) => {
     if (typeof fileInput == "string") {
       setData(fileInput);
     }
   };
 
   const callBackend = () => {
-    const url: string =
-      "https://c32618cf-389d-44f1-93ee-b67a3468aae3-dev.e1-us-east-azure.choreoapis.dev/hdbb/bffservice/endpoint-9090-803/1.0.0/v2tofhir/transform";
+    setResponse("");
 
-    axios
-      .post(url, data)
+    apiClient(HL7_TO_FHIR_CONVERTER_BASE_URL)
+      .post("/v2tofhir/transform", data)
       .then((res) => {
-        console.log(res.data);
         setResponse(res.data);
       })
       .catch((e) => {
