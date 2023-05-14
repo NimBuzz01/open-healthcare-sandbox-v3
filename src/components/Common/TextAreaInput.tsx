@@ -1,6 +1,6 @@
 import { Box, Grid, TextField, Typography } from "@mui/material";
 import UploadIcon from "./UploadIcon";
-import { useState } from "react";
+import CopyContent from "./CopyContent";
 
 interface Props {
   label: string;
@@ -8,8 +8,9 @@ interface Props {
   maxRows?: string;
   width?: string;
   isUploadRequired?: boolean;
+  isCopyRequired?: boolean;
   iconWidth?: number;
-  data?: {};
+  data?: string;
   handleOnChange?(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): any;
@@ -22,6 +23,7 @@ const TextAreaInput = ({
   maxRows = "Infinity",
   width = "950px",
   isUploadRequired = false,
+  isCopyRequired = true,
   iconWidth = 25,
   handleOnChange,
   readFile,
@@ -42,7 +44,10 @@ const TextAreaInput = ({
         </Grid>
         <Grid item xs={4} xl={4}>
           <Box justifyContent="right" alignItems="right">
-            {isUploadRequired && <UploadIcon size={iconWidth} readFile={readFile} />}
+            {isUploadRequired && (
+              <UploadIcon size={iconWidth} readFile={readFile} />
+            )}
+            {isCopyRequired && <CopyContent size={iconWidth} data={data!} />}
           </Box>
         </Grid>
       </Grid>
