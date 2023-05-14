@@ -51,12 +51,16 @@ const TextAreaOutput = ({
           </Typography>
         </Grid>
         <Grid item xs={4} xl={4}>
-          <Box justifyContent="right" alignItems="right">
-            {isDownloadButtonRequired && (
-              <DownloadIcon size={iconWidth} handleDownload={downloadContent} />
-            )}
+          <Box
+            justifyContent="right"
+            alignItems="right"
+            sx={{ display: "flex" }}
+          >
             {isCopyRequired && (
               <CopyContent size={iconWidth} data={JSON.stringify(data!)} />
+            )}
+            {isDownloadButtonRequired && (
+              <DownloadIcon size={iconWidth} handleDownload={downloadContent} />
             )}
           </Box>
         </Grid>

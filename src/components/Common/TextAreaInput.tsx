@@ -43,11 +43,15 @@ const TextAreaInput = ({
           </Typography>
         </Grid>
         <Grid item xs={4} xl={4}>
-          <Box justifyContent="right" alignItems="right">
+          <Box
+            justifyContent="right"
+            alignItems="right"
+            sx={{ display: "flex" }}
+          >
+            {isCopyRequired && <CopyContent size={iconWidth} data={data!} />}
             {isUploadRequired && (
               <UploadIcon size={iconWidth} readFile={readFile} />
             )}
-            {isCopyRequired && <CopyContent size={iconWidth} data={data!} />}
           </Box>
         </Grid>
       </Grid>
