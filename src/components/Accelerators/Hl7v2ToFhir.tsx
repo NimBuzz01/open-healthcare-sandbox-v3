@@ -1,5 +1,5 @@
 import Heading from "../Common/Heading";
-import { Container, Grid } from "@mui/material";
+import { Alert, Box, Collapse, Container, Grid } from "@mui/material";
 import { useState } from "react";
 import ConvertButton from "../Common/ConvertButton";
 import TextAreaInput from "../Common/TextAreaInput";
@@ -10,6 +10,8 @@ import { HL7_TO_FHIR_CONVERTER_BASE_URL } from "../Constants";
 const Hl7v2ToFhir = () => {
   const [data, setData] = useState("");
   const [response, setResponse] = useState({});
+  const [error, setError] = useState("");
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleOnChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -26,19 +28,37 @@ const Hl7v2ToFhir = () => {
 
   const callBackend = () => {
     setResponse("");
+    setIsOpen(true);
+    setError("");
 
     apiClient(HL7_TO_FHIR_CONVERTER_BASE_URL)
       .post("/v2tofhir/transform", data)
       .then((res) => {
         setResponse(res.data);
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((error) => {
+        setError(error.message);
+        setResponse(error.response);
       });
   };
 
   return (
     <Container>
+      {error && (
+        <Collapse in={isOpen}>
+          <Box display="flex" justifyContent="flex-end">
+            <Alert
+              severity="error"
+              sx={{ fontSize: 15, width: 500 }}
+              onClose={() => {
+                setIsOpen(false);
+              }}
+            >
+              {error}
+            </Alert>
+          </Box>
+        </Collapse>
+      )}
       <Heading
         heading="HL7V2 To FHIR"
         description="Convert HL7 V2 data to FHIR"
