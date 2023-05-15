@@ -2,6 +2,7 @@ import { Box, Grid, TextField, Typography } from "@mui/material";
 import DownloadIcon from "./DownloadIcon";
 import FileSaver from "file-saver";
 import CopyContent from "./CopyContent";
+import ReactJson from "react-json-view";
 
 interface Props {
   label: string;
@@ -11,6 +12,7 @@ interface Props {
   isCopyRequired?: boolean;
   iconWidth?: number;
   data?: {};
+  isJson?: boolean;
   handleOnChange?(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): any;
@@ -25,6 +27,7 @@ const TextAreaOutput = ({
   iconWidth = 25,
   handleOnChange,
   data,
+  isJson,
 }: Props) => {
   const downloadContent = () => {
     if (data != null) {
@@ -64,14 +67,38 @@ const TextAreaOutput = ({
         </Grid>
       </Grid>
 
-      <TextField
-        multiline
-        rows={rows}
-        variant="outlined"
-        style={{ width: width }}
-        onChange={handleOnChange}
-        value={data && JSON.stringify(data, null, 2)}
-      />
+      {isJson ? (
+        <Box
+          sx={{
+            overflow: "auto",
+            height: 634,
+            width: 1,
+            border: 1,
+            borderRadius: 1,
+            borderColor: "primary.light",
+            fontSize: 20,
+          }}
+        >
+          <ReactJson
+            name="fhir-output"
+            src={data!}
+            displayDataTypes={false}
+            displayObjectSize
+            style={{ fontSize: "16px" }}
+            onEdit={() => {}}
+            theme="summerfruit:inverted"
+          />
+        </Box>
+      ) : (
+        <TextField
+          multiline
+          rows={rows}
+          variant="outlined"
+          style={{ width: width }}
+          onChange={handleOnChange}
+          value={data && JSON.stringify(data, null, 2)}
+        />
+      )}
     </>
   );
 };

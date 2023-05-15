@@ -1,19 +1,11 @@
 import Heading from "../Common/Heading";
-import {
-  Alert,
-  Box,
-  Collapse,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, Collapse, Container, Grid } from "@mui/material";
 import { useState } from "react";
 import ConvertButton from "../Common/ConvertButton";
 import TextAreaInput from "../Common/TextAreaInput";
 import TextAreaOutput from "../Common/TextAreaOutput";
 import apiClient from "../../services/api-client";
 import { HL7_TO_FHIR_CONVERTER_BASE_URL } from "../Constants";
-import ReactJson from "react-json-view";
 
 const Hl7v2ToFhir = () => {
   const [data, setData] = useState("");
@@ -95,42 +87,16 @@ const Hl7v2ToFhir = () => {
             <ConvertButton handleSubmit={callBackend} />
           </Grid>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={5} xl={5.3}>
+        <Grid item xs={12} sm={12} md={12} lg={6} xl={7}>
           <Grid container alignItems="center" justifyContent="center">
             <TextAreaOutput
               label="Converted FHIR resource here:"
               data={response}
               isDownloadButtonRequired={true}
+              isJson
             />
           </Grid>
         </Grid>
-        {/* <Grid item xs={12} sm={12} md={12} lg={6} xl={7}>
-          <Grid container alignItems="center">
-            <Typography variant="h5" sx={{ color: "secondary.dark", py:1 }}>
-              Converted FHIR resource here:
-            </Typography>
-            <Box
-              sx={{
-                overflow: "auto",
-                height: 533,
-                width: 1,                
-                border: 1,
-                borderRadius: 1,
-                borderColor: "primary.light",
-                fontSize: 20
-              }}
-            >
-              <ReactJson
-                name="fhir-output"                
-                src={response}
-                displayDataTypes={false}
-                displayObjectSize
-                style={{ fontSize: "16px" }}
-                onEdit={() => {}}
-                theme="summerfruit:inverted"
-              />
-            </Box>
-          </Grid> */}
       </Grid>
     </Container>
   );
