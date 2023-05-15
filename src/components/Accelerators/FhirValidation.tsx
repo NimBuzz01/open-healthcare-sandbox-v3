@@ -1,8 +1,7 @@
-import Heading from "../Common/Heading";
 import { Container, Grid } from "@mui/material";
-import TextAreaInput from "../Common/TextAreaInput";
+import { TextAreaInput, Heading } from "../Common";
 
-const FhirValidation = () => {
+export const FhirValidation = () => {
   return (
     <Container maxWidth="xl">
       <Heading
@@ -44,5 +43,3 @@ const FhirValidation = () => {
     </Container>
   );
 };
-
-export default FhirValidation;

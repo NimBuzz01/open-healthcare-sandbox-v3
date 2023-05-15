@@ -1,8 +1,7 @@
 import { Box, Grid, TextField, Typography } from "@mui/material";
-import DownloadIcon from "./DownloadIcon";
 import FileSaver from "file-saver";
-import CopyContent from "./CopyContent";
 import ReactJson from "react-json-view";
+import { DownloadIcon, CopyContent } from "../Common";
 
 interface Props {
   label: string;
@@ -18,7 +17,7 @@ interface Props {
   ): any;
 }
 
-const TextAreaOutput = ({
+export const TextAreaOutput = ({
   label,
   rows = 30,
   width = 1,
@@ -81,10 +80,11 @@ const TextAreaOutput = ({
         >
           {data && (
             <ReactJson
-              name="fhir-output"
+              name={false}
               src={data!}
               displayDataTypes={false}
-              displayObjectSize
+              displayObjectSize={false}
+              enableClipboard={false}
               style={{ fontSize: "14px" }}
               onEdit={() => ({ handleOnChange })}
               theme="summerfruit:inverted"
@@ -104,5 +104,3 @@ const TextAreaOutput = ({
     </>
   );
 };
-
-export default TextAreaOutput;

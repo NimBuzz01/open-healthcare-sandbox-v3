@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
-import ViewDocument from "./ViewDocument";
+import { ViewDocument } from "../Common";
 
 interface Props {
   heading: string;
@@ -7,7 +7,7 @@ interface Props {
   url: string;
 }
 
-const Heading = ({ heading, description, url }: Props) => {
+export const Heading = ({ heading, description, url }: Props) => {
   return (
     <>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -33,5 +33,3 @@ const Heading = ({ heading, description, url }: Props) => {
     </>
   );
 };
-
-export default Heading;

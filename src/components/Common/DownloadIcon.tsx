@@ -1,12 +1,12 @@
-import { IconButton } from "@mui/material";
 import { CloudDownloadRounded } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 
 interface Props {
   size?: number;
   handleDownload(): any;
 }
 
-const DownloadIcon = ({ size = 30, handleDownload }: Props) => {
+export const DownloadIcon = ({ size = 30, handleDownload }: Props) => {
   return (
     <>
       <IconButton
@@ -20,5 +20,3 @@ const DownloadIcon = ({ size = 30, handleDownload }: Props) => {
     </>
   );
 };
-
-export default DownloadIcon;

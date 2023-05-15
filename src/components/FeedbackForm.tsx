@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import sendFeedback, { FeedbackRequest } from "../../utils/FeedbackAPI";
+import sendFeedback, { FeedbackRequest } from "../utils/FeedbackAPI";
 
 interface FeedbackFormProps {
   onSubmit: () => void;
 }
 
-const FeedbackForm = ({ onSubmit }: FeedbackFormProps) => {
+export const FeedbackForm = ({ onSubmit }: FeedbackFormProps) => {
   const [feedback, setFeedback] = useState<FeedbackRequest>({
     name: "",
     registration: "",
@@ -67,5 +67,3 @@ const FeedbackForm = ({ onSubmit }: FeedbackFormProps) => {
     </form>
   );
 };
-
-export default FeedbackForm;

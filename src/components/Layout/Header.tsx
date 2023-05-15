@@ -1,10 +1,10 @@
-import { Box } from "@mui/material";
-import ContactBtn from "./ContactButton";
-import Logo from "./Logo";
 import { useState, useEffect } from "react";
-import AlertModal from "../AlertModal";
+import { Box } from "@mui/material";
+import { ContactButton } from "../ContactButton";
+import { Logo } from "../Logo";
+import { AlertModal } from "../Common";
 
-const Header = () => {
+export const Header = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const handleResize = () => setScreenWidth(window.innerWidth);
@@ -30,10 +30,8 @@ const Header = () => {
         }}
       >
         <Logo />
-        <ContactBtn />
+        <ContactButton />
       </Box>
     </>
   );
 };
-
-export default Header;

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -7,12 +8,10 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import FeedbackForm from "../FeedbackForm";
-import CopyrightIcon from '@mui/icons-material/Copyright';
+import { FeedbackForm } from "../FeedbackForm";
+import CopyrightIcon from "@mui/icons-material/Copyright";
 
-
-const Footer = () => {
+export const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -46,7 +45,7 @@ const Footer = () => {
           bgcolor: "background.paper",
         }}
       >
-        <CopyrightIcon sx={{color:"primary.light", mr:0.5}}/>
+        <CopyrightIcon sx={{ color: "primary.light", mr: 0.5 }} />
         <Typography
           variant="h6"
           sx={{ marginRight: "auto", color: "primary.light" }}
@@ -76,5 +75,3 @@ const Footer = () => {
     </>
   );
 };
-
-export default Footer;

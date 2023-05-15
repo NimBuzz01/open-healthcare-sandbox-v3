@@ -1,6 +1,5 @@
 import { Box, Grid, TextField, Typography } from "@mui/material";
-import UploadIcon from "./UploadIcon";
-import CopyContent from "./CopyContent";
+import { CopyContent, UploadIcon } from "../Common";
 
 interface Props {
   label: string;
@@ -16,7 +15,7 @@ interface Props {
   readFile(fileInput?: string | ArrayBuffer | null): any;
 }
 
-const TextAreaInput = ({
+export const TextAreaInput = ({
   label,
   rows = 30,
   width = 1,
@@ -65,5 +64,3 @@ const TextAreaInput = ({
     </>
   );
 };
-
-export default TextAreaInput;

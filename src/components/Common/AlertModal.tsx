@@ -1,10 +1,10 @@
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { useState } from "react";
 import InfoIcon from "@mui/icons-material/Info";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -12,7 +12,7 @@ interface AlertModalProps {
   contentText: string;
 }
 
-const AlertModal = ({ contentText }: AlertModalProps) => {
+export const AlertModal = ({ contentText }: AlertModalProps) => {
   const [open, setOpen] = useState(true);
   const handleClose = () => setOpen(false);
 
@@ -48,5 +48,3 @@ const AlertModal = ({ contentText }: AlertModalProps) => {
     </>
   );
 };
-
-export default AlertModal;

@@ -1,14 +1,15 @@
+import { useEffect, useState } from "react";
 import { Alert, IconButton } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import { useEffect, useState } from "react";
+
 
 interface Props {
   data: string;
   size?: number;
 }
 
-const CopyContent = ({ data, size = 25 }: Props) => {
+export const CopyContent = ({ data, size = 25 }: Props) => {
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
@@ -48,4 +49,3 @@ const CopyContent = ({ data, size = 25 }: Props) => {
   );
 };
 
-export default CopyContent;

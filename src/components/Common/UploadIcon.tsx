@@ -1,21 +1,26 @@
 import { IconButton } from "@mui/material";
-import { CloudUploadRounded } from "@mui/icons-material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 interface Props {
   size?: number;
   readFile(data?: string | ArrayBuffer | null, errors?: Error): any;
 }
 
-const UploadIcon = ({ size = 30, readFile }: Props) => {
-  const reader = (file: Blob) => {
+export const UploadIcon = ({ size = 30, readFile }: Props) => {
+  const reader = async (file: Blob): Promise<void> => {
     const fr = new FileReader();
-    fr.onload = () => {
-      {
-        readFile(fr.result);
-      }
+
+    fr.onerror = (err: ProgressEvent<FileReader>) => {
+      console.error("Error reading file:", err);
     };
-    fr.onerror = (err) => {};
-    fr.readAsText(file);
+
+    await new Promise<void>((resolve) => {
+      fr.onload = () => {
+        readFile(fr.result);
+        resolve();
+      };
+      fr.readAsText(file);
+    });
   };
 
   return (
@@ -35,11 +40,9 @@ const UploadIcon = ({ size = 30, readFile }: Props) => {
       />
       <label htmlFor="icon-button-file">
         <IconButton color="primary" aria-label="upload file" component="span">
-          <CloudUploadRounded sx={{ fontSize: size }} />
+          <CloudUploadIcon sx={{ fontSize: size }} />
         </IconButton>
       </label>
     </>
   );
 };
-
-export default UploadIcon;

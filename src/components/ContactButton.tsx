@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
-import config from "../../../app-config.json";
+import { WSO2_CONTACT_URL } from "../Config";
 
-const ContactButton = () => {
+export const ContactButton = () => {
   return (
     <Button
       variant="outlined"
@@ -25,12 +25,10 @@ const ContactButton = () => {
         },
       }}
       component="a"
-      href={config.wso2_contact_url}
+      href={WSO2_CONTACT_URL}
       target="_blank"
     >
       Contact Us
     </Button>
   );
 };
-
-export default ContactButton;

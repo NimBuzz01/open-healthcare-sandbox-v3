@@ -5,7 +5,7 @@ interface Props {
   handleSubmit?(): any;
 }
 
-const ConvertButton = ({ handleSubmit }: Props) => {
+export const ConvertButton = ({ handleSubmit }: Props) => {
   return (
     <Button
       variant="outlined"
@@ -27,5 +27,3 @@ const ConvertButton = ({ handleSubmit }: Props) => {
     </Button>
   );
 };
-
-export default ConvertButton;

@@ -5,7 +5,7 @@ interface Props {
   url: string;
 }
 
-const ViewDocument = ({ url }: Props) => {
+export const ViewDocument = ({ url }: Props) => {
   return (
     <>
       <Box sx={{ display: "flex", gap: 0.5 }}>
@@ -31,5 +31,3 @@ const ViewDocument = ({ url }: Props) => {
     </>
   );
 };
-
-export default ViewDocument;

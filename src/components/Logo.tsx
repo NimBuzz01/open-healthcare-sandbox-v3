@@ -1,7 +1,7 @@
 import { Typography, Box } from "@mui/material";
-import choreologo from "./../../../assets/choreo-logo-black.svg";
+import choreologo from "./../assets/choreo-logo-black.svg";
 
-const Logo = () => {
+export const Logo = () => {
   return (
     <Box
       sx={{

@@ -1,4 +1,3 @@
-import * as React from "react";
 import Button from "@mui/material/Button";
 
 interface ButtonProps {
@@ -7,7 +6,7 @@ interface ButtonProps {
   onClick: () => void;
 }
 
-const CommonButton = ({ variant, label, onClick }: ButtonProps) => {
+export const CommonButton = ({ variant, label, onClick }: ButtonProps) => {
   return (
     <Button
       onClick={onClick}
@@ -33,5 +32,3 @@ const CommonButton = ({ variant, label, onClick }: ButtonProps) => {
     </Button>
   );
 };
-
-export default CommonButton;

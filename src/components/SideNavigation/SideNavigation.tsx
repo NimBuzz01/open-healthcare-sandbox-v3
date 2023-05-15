@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import "./style.css";
 import { Box, Divider, Typography } from "@mui/material";
+import "./style.css";
 
 interface SideNavItem {
   label: string;
@@ -14,7 +14,7 @@ interface Props {
   items: SideNavItem[];
 }
 
-const SideNav = ({ items }: Props) => {
+export const SideNavigation = ({ items }: Props) => {
   const location = useLocation();
   const [currentSelection, setCurrentSelection] = useState<string>(
     location.pathname
@@ -71,5 +71,3 @@ const SideNav = ({ items }: Props) => {
     </Box>
   );
 };
-
-export default SideNav;

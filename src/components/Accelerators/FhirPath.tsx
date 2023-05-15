@@ -1,8 +1,7 @@
 import { Container, Grid } from "@mui/material";
-import Heading from "../Common/Heading";
-import TextAreaInput from "../Common/TextAreaInput";
+import { TextAreaInput, Heading } from "../Common";
 
-const FhirPath = () => {
+export const FhirPath = () => {
   return (
     <Container maxWidth="xl">
       <Heading
@@ -44,5 +43,3 @@ const FhirPath = () => {
     </Container>
   );
 };
-
-export default FhirPath;

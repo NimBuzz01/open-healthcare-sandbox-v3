@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const apiClinet = (url: string) => {
+const apiClient = (url: string) => {
   return axios.create({
     baseURL: url,
   });
 };
 
-export default apiClinet;
+export default apiClient;

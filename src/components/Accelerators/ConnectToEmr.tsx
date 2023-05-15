@@ -1,8 +1,7 @@
 import { Container, Grid } from "@mui/material";
-import Heading from "../Common/Heading";
-import TextAreaInput from "../Common/TextAreaInput";
+import { TextAreaInput, Heading } from "../Common";
 
-const ConnectToEmr = () => {
+export const ConnectToEmr = () => {
   return (
     <Container maxWidth="xl">
       <Heading
@@ -44,5 +43,3 @@ const ConnectToEmr = () => {
     </Container>
   );
 };
-
-export default ConnectToEmr;

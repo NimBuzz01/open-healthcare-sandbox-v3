@@ -1,4 +1,3 @@
-// sendFeedback.ts
 import axios, { AxiosResponse } from "axios";
 
 export interface FeedbackRequest {

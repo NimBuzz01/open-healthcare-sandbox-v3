@@ -1,11 +1,10 @@
-import React from "react";
 import { Box } from "@mui/material";
 import Routes from "../../contexts/AppRoutes";
-import SideNavigation from "../SideNavigation";
-import items from "./Config";
+import { SideNavigation } from "../SideNavigation";
+import { items } from "../../Config";
 import { Scrollbars } from "react-custom-scrollbars";
 
-const Body = () => {
+export const MainContent = () => {
   return (
     <Scrollbars>
       <Box sx={{ flexGrow: 1, display: "flex", overflowY: "auto" }}>
@@ -17,5 +16,3 @@ const Body = () => {
     </Scrollbars>
   );
 };
-
-export default Body;

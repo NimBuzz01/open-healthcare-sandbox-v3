@@ -1,13 +1,15 @@
-import Heading from "../Common/Heading";
-import { Alert, Box, Collapse, Container, Grid } from "@mui/material";
 import { useState } from "react";
-import ConvertButton from "../Common/ConvertButton";
-import TextAreaInput from "../Common/TextAreaInput";
-import TextAreaOutput from "../Common/TextAreaOutput";
+import { Alert, Box, Collapse, Container, Grid } from "@mui/material";
+import {
+  ConvertButton,
+  TextAreaInput,
+  TextAreaOutput,
+  Heading,
+} from "../Common";
 import apiClient from "../../services/api-client";
-import { HL7_TO_FHIR_CONVERTER_BASE_URL } from "../Constants";
+import { HL7_TO_FHIR_CONVERTER_BASE_URL } from "../../Config";
 
-const Hl7v2ToFhir = () => {
+export const Hl7v2ToFhir = () => {
   const [data, setData] = useState("");
   const [response, setResponse] = useState({});
   const [error, setError] = useState("");
@@ -101,5 +103,3 @@ const Hl7v2ToFhir = () => {
     </Container>
   );
 };
-
-export default Hl7v2ToFhir;
