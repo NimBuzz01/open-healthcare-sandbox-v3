@@ -5,7 +5,7 @@ import CopyContent from "./CopyContent";
 interface Props {
   label: string;
   rows?: number;
-  width?: string;
+  width?: number;
   isUploadRequired?: boolean;
   isCopyRequired?: boolean;
   iconWidth?: number;
@@ -19,7 +19,7 @@ interface Props {
 const TextAreaInput = ({
   label,
   rows = 30,
-  width = "950px",
+  width = 1,
   isUploadRequired = false,
   isCopyRequired = true,
   iconWidth = 25,
@@ -58,7 +58,7 @@ const TextAreaInput = ({
         multiline
         rows={rows}
         variant="outlined"
-        style={{ width: width }}
+        sx={{ width: width }}
         onChange={handleOnChange}
         value={data && data}
       />

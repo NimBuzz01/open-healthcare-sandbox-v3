@@ -7,7 +7,7 @@ import ReactJson from "react-json-view";
 interface Props {
   label: string;
   rows?: number;
-  width?: string;
+  width?: number;
   isDownloadButtonRequired?: boolean;
   isCopyRequired?: boolean;
   iconWidth?: number;
@@ -21,7 +21,7 @@ interface Props {
 const TextAreaOutput = ({
   label,
   rows = 30,
-  width = "950px",
+  width = 1,
   isDownloadButtonRequired = false,
   isCopyRequired = true,
   iconWidth = 25,
@@ -96,7 +96,7 @@ const TextAreaOutput = ({
           multiline
           rows={rows}
           variant="outlined"
-          style={{ width: width }}
+          sx={{ width: width }}
           onChange={handleOnChange}
           value={data && JSON.stringify(data, null, 2)}
         />

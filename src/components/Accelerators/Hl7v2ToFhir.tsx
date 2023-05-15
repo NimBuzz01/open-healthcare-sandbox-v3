@@ -71,12 +71,12 @@ const Hl7v2ToFhir = () => {
         spacing={2}
         marginTop={1}
       >
-        <Grid item xs={12} sm={12} md={12} lg={5} xl={4}>
+        <Grid item xs={12} sm={12} md={12} lg={5.5} xl={5.5}>
           <Grid container alignItems="center" justifyContent="center">
             <TextAreaInput
               label="Paste your HL7 resource here:"
               handleOnChange={handleOnChange}
-              isUploadRequired={true}
+              isUploadRequired
               readFile={readFile}
               data={data}
             />
@@ -87,12 +87,12 @@ const Hl7v2ToFhir = () => {
             <ConvertButton handleSubmit={callBackend} />
           </Grid>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={6} xl={7}>
+        <Grid item xs={12} sm={12} md={12} lg={5.5} xl={5.5}>
           <Grid container alignItems="center" justifyContent="center">
             <TextAreaOutput
               label="Converted FHIR resource here:"
               data={response}
-              isDownloadButtonRequired={true}
+              isDownloadButtonRequired
               isJson
             />
           </Grid>
