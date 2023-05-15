@@ -76,18 +76,20 @@ const TextAreaOutput = ({
             border: 1,
             borderRadius: 1,
             borderColor: "primary.light",
-            p:1,
+            p: 1,
           }}
         >
-          <ReactJson
-            name="fhir-output"
-            src={data!}
-            displayDataTypes={false}
-            displayObjectSize
-            style={{ fontSize: "14px" }}
-            onEdit={() => {}}
-            theme="summerfruit:inverted"
-          />
+          {data && (
+            <ReactJson
+              name="fhir-output"
+              src={data!}
+              displayDataTypes={false}
+              displayObjectSize
+              style={{ fontSize: "14px" }}
+              onEdit={() => ({ handleOnChange })}
+              theme="summerfruit:inverted"
+            />
+          )}
         </Box>
       ) : (
         <TextField
