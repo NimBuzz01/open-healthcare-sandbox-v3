@@ -76,7 +76,7 @@ const TextAreaOutput = ({
             border: 1,
             borderRadius: 1,
             borderColor: "primary.light",
-            fontSize: 20,
+            p:1,
           }}
         >
           <ReactJson
@@ -84,7 +84,7 @@ const TextAreaOutput = ({
             src={data!}
             displayDataTypes={false}
             displayObjectSize
-            style={{ fontSize: "16px" }}
+            style={{ fontSize: "14px" }}
             onEdit={() => {}}
             theme="summerfruit:inverted"
           />
