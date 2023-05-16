@@ -7,7 +7,10 @@ import {
   Heading,
 } from "../Common";
 import apiClient from "../../services/api-client";
-import { HL7_TO_FHIR_CONVERTER_BASE_URL } from "../../Config";
+import {
+  HL7_TO_FHIR_ABOUT_URL,
+  HL7_TO_FHIR_CONVERTER_BASE_URL,
+} from "../../Config";
 
 export const Hl7v2ToFhir = () => {
   const [data, setData] = useState("");
@@ -64,7 +67,7 @@ export const Hl7v2ToFhir = () => {
       <Heading
         heading="HL7V2 To FHIR"
         description="Convert HL7 V2 data to FHIR"
-        url="https://wso2.com/solutions/healthcare/"
+        url={HL7_TO_FHIR_ABOUT_URL}
       ></Heading>
       <Grid
         container

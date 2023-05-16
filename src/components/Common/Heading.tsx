@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { ViewDocument } from "../Common";
+import { AboutTool } from "../Common";
 
 interface Props {
   heading: string;
@@ -26,7 +26,7 @@ export const Heading = ({ heading, description, url }: Props) => {
           >
             {description}
           </Typography>
-          <ViewDocument url={url}></ViewDocument>
+          <AboutTool url={url}></AboutTool>
         </Box>
         <Divider />
       </Box>
