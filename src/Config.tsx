@@ -56,4 +56,4 @@ export const HL7_TO_FHIR_CONVERTER_BASE_URL: string = "https://c32618cf-389d-44f
 
 export const WSO2_CONTACT_URL: string = "https://wso2.com/contact/?src=healthcare";
 
-export const HL7_TO_FHIR_ABOUT_URL:string = "https://wso2.com/solutions/healthcare/"
+export const HL7_TO_FHIR_ABOUT_URL:string = "https://wso2.com/solutions/healthcare/";
