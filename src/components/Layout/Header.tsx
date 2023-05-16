@@ -18,7 +18,7 @@ export const Header = () => {
   return (
     <>
       {screenWidth < 960 && (
-        <AlertModal contentText="Please use a medium or large seize display to try out the Open Healthcare Sandbox seamlessly." />
+        <AlertModal contentText="Please use a laptop or a desktop to try out the Open Healthcare Sandbox seamlessly." />
       )}
       <Box
         sx={{
