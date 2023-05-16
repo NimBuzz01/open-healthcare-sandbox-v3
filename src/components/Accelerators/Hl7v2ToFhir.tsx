@@ -50,7 +50,7 @@ export const Hl7v2ToFhir = () => {
   return (
     <Container maxWidth="xl">
       {error && (
-        <Collapse in={isOpen}>
+        <Collapse in={isOpen} sx={{position:"fixed", bottom:60, right:30, zIndex:2, transition:"0.3s ease"}}>
           <Box display="flex" justifyContent="flex-end">
             <Alert
               severity="error"

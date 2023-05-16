@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, IconButton } from "@mui/material";
+import { Alert, Box, IconButton, Typography } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
@@ -21,8 +21,8 @@ export const CopyContent = ({ data, size = 25 }: Props) => {
 
   return (
     <>
-      <div style={{ display: "flex" }}>
-        <span>
+      <Box style={{ display: "flex" }}>
+        <Typography component="span">
           {isCopied && (
             <Alert
               severity="success"
@@ -32,7 +32,7 @@ export const CopyContent = ({ data, size = 25 }: Props) => {
               Copied
             </Alert>
           )}
-        </span>
+        </Typography>
         <IconButton
           color="primary"
           aria-label="upload file"
@@ -44,7 +44,7 @@ export const CopyContent = ({ data, size = 25 }: Props) => {
         >
           <ContentCopyIcon sx={{ fontSize: { size } }} />
         </IconButton>
-      </div>
+      </Box>
     </>
   );
 };
