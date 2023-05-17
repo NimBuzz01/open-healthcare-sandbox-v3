@@ -7,10 +7,7 @@ import {
   Heading,
 } from "../Common";
 import apiClient from "../../services/api-client";
-import {
-  HL7_TO_FHIR_ABOUT_URL,
-  HL7_TO_FHIR_CONVERTER_BASE_URL,
-} from "../../Config";
+import { HL7_TO_FHIR_ABOUT_URL, BFF_BASE_URL } from "../../Config";
 
 export const Hl7v2ToFhir = () => {
   const [data, setData] = useState("");
@@ -36,7 +33,7 @@ export const Hl7v2ToFhir = () => {
     setIsOpen(true);
     setError("");
 
-    apiClient(HL7_TO_FHIR_CONVERTER_BASE_URL)
+    apiClient(BFF_BASE_URL)
       .post("/v2tofhir/transform", data)
       .then((res) => {
         setResponse(res.data);
@@ -50,7 +47,16 @@ export const Hl7v2ToFhir = () => {
   return (
     <Container maxWidth="xl">
       {error && (
-        <Collapse in={isOpen} sx={{position:"fixed", bottom:60, right:30, zIndex:2, transition:"0.3s ease"}}>
+        <Collapse
+          in={isOpen}
+          sx={{
+            position: "fixed",
+            bottom: 60,
+            right: 30,
+            zIndex: 2,
+            transition: "0.3s ease",
+          }}
+        >
           <Box display="flex" justifyContent="flex-end">
             <Alert
               severity="error"
