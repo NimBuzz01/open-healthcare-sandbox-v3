@@ -15,13 +15,13 @@ export const ContactButton = () => {
         my: 1.2,
         border: 2,
         borderRadius: 1,
-        color: "success.main",
+        color: "secondary.main",
         transition: "0.2s",
         ":hover": {
           border: 2,
-          bgcolor: "success.main",
-          color: "background.paper",
-          borderColor: "success.main",
+          bgcolor: "secondary.main",
+          color: "background.default",
+          borderColor: "secondary.main",
         },
       }}
       component="a"

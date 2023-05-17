@@ -11,9 +11,9 @@ export const ConvertButton = ({ handleSubmit }: Props) => {
       variant="outlined"
       sx={{
         borderRadius: 1,
-        color: "success.main",
+        color: "secondary.main",
         border: 1,
-        borderColor: "primary.light",
+        borderColor: "grey.400",
         ":hover": {
           border: 1,
           borderColor: "secondary.light",
@@ -21,9 +21,7 @@ export const ConvertButton = ({ handleSubmit }: Props) => {
       }}
       onClick={handleSubmit}
     >
-      <ArrowForwardIosIcon
-        sx={{ width: 50, height: 50 }}
-      ></ArrowForwardIosIcon>
+      <ArrowForwardIosIcon sx={{ width: 50, height: 50 }}></ArrowForwardIosIcon>
     </Button>
   );
 };

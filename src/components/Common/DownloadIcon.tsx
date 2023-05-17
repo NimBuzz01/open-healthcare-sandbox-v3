@@ -9,10 +9,12 @@ interface Props {
 export const DownloadIcon = ({ size = 30, handleDownload }: Props) => {
   return (
     <>
-      <IconButton
-        color="primary"
+      <IconButton        
         aria-label="upload file"
         component="span"
+        sx={{
+          color: "primary.main",
+        }}
         onClick={handleDownload}
       >
         <CloudDownloadRounded sx={{ fontSize: size }} />

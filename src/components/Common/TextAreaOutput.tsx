@@ -43,7 +43,7 @@ export const TextAreaOutput = ({
       <Grid container spacing={2}>
         <Grid item xs={8} xl={8}>
           <Typography
-            color="secondary.dark"
+            color="primary.dark"
             variant="h5"
             sx={{ fontWeight: 400, py: 1 }}
           >
@@ -74,7 +74,7 @@ export const TextAreaOutput = ({
             width: 1,
             border: 1,
             borderRadius: 1,
-            borderColor: "primary.light",
+            borderColor: "grey.400",
             p: 1,
           }}
         >

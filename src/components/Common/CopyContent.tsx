@@ -3,7 +3,6 @@ import { Alert, Box, IconButton, Typography } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
-
 interface Props {
   data: string;
   size?: number;
@@ -34,9 +33,11 @@ export const CopyContent = ({ data, size = 25 }: Props) => {
           )}
         </Typography>
         <IconButton
-          color="primary"
           aria-label="upload file"
           component="span"
+          sx={{
+            color: "primary.main",
+          }}
           onClick={() => {
             navigator.clipboard.writeText(data!);
             setIsCopied(true);
@@ -48,4 +49,3 @@ export const CopyContent = ({ data, size = 25 }: Props) => {
     </>
   );
 };
-

@@ -32,7 +32,7 @@ export const TextAreaInput = ({
       <Grid container spacing={2}>
         <Grid item xs={8} xl={8}>
           <Typography
-            color="secondary.dark"
+            color="primary.dark"
             variant="h5"
             sx={{ fontWeight: 400, py: 1 }}
           >

@@ -14,13 +14,13 @@ export const ViewDocument = ({ url }: Props) => {
         </Typography>
         <Link href={url} target="_blank" underline="none">
           <Typography
-            color="secondary.main"
+            color="primary.main"
             variant="h6"
             sx={{
               fontWeight: 400,
               transition: "0.2s",
               ":hover": {
-                color: "secondary.dark",
+                color: "primary.dark",
               },
             }}
           >

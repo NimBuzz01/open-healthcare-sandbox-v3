@@ -8,13 +8,21 @@ interface Props {
 export const AboutTool = ({ url }: Props) => {
   return (
     <Link href={url} target="_blank" underline="none">
-      <Box sx={{ display: "flex", alignItems:"center",  gap: 1, color: "info", transition:"0.3s", ":hover":{color:"info.dark"} }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 1,
+          color: "primary.main",
+          transition: "0.3s",
+          ":hover": { color: "primary.dark" },
+        }}
+      >
         <InfoOutlinedIcon sx={{ width: 23, height: 23 }} />
         <Typography
-          color="info"
           variant="h5"
           sx={{
-            fontWeight: 400
+            fontWeight: 400,
           }}
         >
           About this accelerator

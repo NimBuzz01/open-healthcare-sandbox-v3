@@ -15,16 +15,15 @@ export const CommonButton = ({ variant, label, onClick }: ButtonProps) => {
         fontSize: 16,
         borderRadius: 1,
         backgroundColor:
-          variant === "background" ? "success.main" : "transparent",
-        color: variant === "background" ? "white" : "success.main",
+          variant === "background" ? "secondary.main" : "transparent",
+        color: variant === "background" ? "white" : "secondary.main",
         border: 2,
-        borderColor: "success.main",
+        borderColor: "secondary.main",
         ":hover": {
           border: 2,
-          bgcolor:
-            variant === "background" ? "success.light" : "secondary.light",
+          bgcolor: variant === "background" ? "secondary.light" : "grey.400",
           borderColor:
-            variant === "background" ? "success.light" : "secondary.light",
+            variant === "background" ? "secondary.light" : "secondary.light",
         },
       }}
     >

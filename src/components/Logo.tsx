@@ -12,13 +12,13 @@ export const Logo = () => {
         margin: 1,
       }}
     >
-      <Typography color="secondary.dark" variant="h3" sx={{ fontWeight: 600 }}>
+      <Typography color="primary.dark" variant="h3" sx={{ fontWeight: 600 }}>
         Open Healthcare Sandbox
       </Typography>
       <Box sx={{ alignSelf: "flex-end" }}>
         <Box sx={{ display: "flex", gap: 1 }}>
           <Typography
-            color="secondary.main"
+            color="primary.main"
             variant="h5"
             sx={{ fontWeight: 600 }}
           >

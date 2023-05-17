@@ -28,7 +28,7 @@ export const SideNavigation = ({ items }: Props) => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        bgcolor: "secondary.main",
+        bgcolor: "primary.main",
         p: 2,
         minWidth: 250,
         maxWidth: 250,
@@ -37,13 +37,13 @@ export const SideNavigation = ({ items }: Props) => {
         zIndex: 2,
       }}
     >
-      <Typography variant="h6" sx={{ color: "background.paper", mt: 2, ml: 2 }}>
+      <Typography variant="h6" sx={{ color: "background.default", mt: 2, ml: 2 }}>
         Accelerators
       </Typography>
       <Divider
         light
         variant="middle"
-        sx={{ m: 1, bgcolor: "background.paper" }}
+        sx={{ m: 1, bgcolor: "background.default" }}
       />
       {items.map((item) => (
         <Link
@@ -61,7 +61,7 @@ export const SideNavigation = ({ items }: Props) => {
               alignItems: "center",
               flexWrap: "wrap",
               gap: 2,
-              color: "background.paper",
+              color: "background.default",
               py: 1.25,
               px: 2.5,
               margin: 0.62,
@@ -70,8 +70,8 @@ export const SideNavigation = ({ items }: Props) => {
               textDecoration: "none",
               fontSize: 16,
               ...(currentSelection === item.path && {
-                backgroundColor: "background.paper",
-                color: "secondary.dark",
+                backgroundColor: "background.default",
+                color: "primary.dark",
                 borderRadius: "10px 0 0 10px",
                 marginRight: -2,
                 paddingRight: 2,

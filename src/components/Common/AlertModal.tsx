@@ -39,7 +39,7 @@ export const AlertModal = ({ contentText }: AlertModalProps) => {
         <DialogContent
           sx={{ display: "flex", alignItems: "center", gap: 2, pb: 4 }}
         >
-          <InfoIcon color="info" sx={{ width: 26, height: 26 }} />
+          <InfoIcon sx={{ width: 26, height: 26, color: "primary.main" }} />
           <DialogContentText id="alert-dialog-description">
             {contentText}
           </DialogContentText>

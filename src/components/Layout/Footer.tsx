@@ -36,19 +36,19 @@ export const Footer = () => {
       <Box
         sx={{
           display: "flex",
-          color: "secondary.dark",
+          color: "primary.dark",
           px: 2,
           py: 1,
           boxShadow:
             "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
           zIndex: 3,
-          bgcolor: "background.paper",
+          bgcolor: "background.default",
         }}
       >
-        <CopyrightIcon sx={{ color: "primary.light", mr: 0.5 }} />
+        <CopyrightIcon sx={{ color: "grey.500", mr: 0.5 }} />
         <Typography
           variant="h6"
-          sx={{ marginRight: "auto", color: "primary.light" }}
+          sx={{ marginRight: "auto", color: "grey.500" }}
         >
           2023 WSO2 LLC.
         </Typography>
@@ -61,11 +61,11 @@ export const Footer = () => {
         <Typography
           onClick={handleClick}
           sx={{
-            color: "secondary.main",
+            color: "primary.main",
             cursor: "pointer",
             transition: "0.3s",
             ":hover": {
-              color: "secondary.dark",
+              color: "primary.dark",
             },
           }}
         >

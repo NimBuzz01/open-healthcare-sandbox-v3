@@ -12,7 +12,7 @@ export const Heading = ({ heading, description, url }: Props) => {
     <>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Typography
-          color="secondary.dark"
+          color="primary.dark"
           variant="h3"
           sx={{ fontWeight: 600 }}
         >
@@ -20,7 +20,7 @@ export const Heading = ({ heading, description, url }: Props) => {
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography
-            color="primary.dark"
+            color="common.black"
             variant="h6"
             sx={{ fontWeight: 400, my: 1 }}
           >

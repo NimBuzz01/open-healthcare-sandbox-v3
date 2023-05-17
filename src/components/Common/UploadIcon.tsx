@@ -39,7 +39,13 @@ export const UploadIcon = ({ size = 30, readFile }: Props) => {
         }}
       />
       <label htmlFor="icon-button-file">
-        <IconButton color="primary" aria-label="upload file" component="span">
+        <IconButton
+          aria-label="upload file"
+          component="span"
+          sx={{
+            color: "primary.main",
+          }}
+        >
           <CloudUploadIcon sx={{ fontSize: size }} />
         </IconButton>
       </label>
