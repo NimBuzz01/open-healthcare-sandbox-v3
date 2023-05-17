@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
-import Routes from "../../contexts/AppRoutes";
-import { SideNavigation } from "../SideNavigation";
-import { items } from "../../Config";
 import { Scrollbars } from "react-custom-scrollbars";
+import Routes from "../../contexts/AppRoutes";
+import { SideNavigation } from "../Layout";
+import { items } from "../../Config";
 
 export const MainContent = () => {
   return (

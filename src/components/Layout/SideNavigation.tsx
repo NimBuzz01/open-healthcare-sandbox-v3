@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Box, Divider, Typography } from "@mui/material";
-import "./style.css";
 
 interface SideNavItem {
   label: string;
@@ -48,19 +47,35 @@ export const SideNavigation = ({ items }: Props) => {
       />
       {items.map((item) => (
         <Link
+          style={{ textDecoration: "none" }}
           key={item.path}
-          className={`sidenav-item ${
-            currentSelection === item.path ? "selected" : ""
-          }`}
           to={item.path}
           onClick={() => handleItemClick(item.path)}
         >
           <Box
+            className={`sidenav-item ${
+              currentSelection === item.path ? "selected" : ""
+            }`}
             sx={{
               display: "flex",
               alignItems: "center",
               flexWrap: "wrap",
               gap: 2,
+              color: "background.paper",
+              py: 1.25,
+              px: 2.5,
+              margin: 0.62,
+              cursor: "pointer",
+              transition: "0.2s ease-in",
+              textDecoration: "none",
+              fontSize: 16,
+              ...(currentSelection === item.path && {
+                backgroundColor: "background.paper",
+                color: "secondary.dark",
+                borderRadius: "10px 0 0 10px",
+                marginRight: -2,
+                paddingRight: 2,
+              }),
             }}
           >
             {item.icon}
