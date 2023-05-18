@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { Scrollbars } from "react-custom-scrollbars";
 import Routes from "../../contexts/AppRoutes";
 import { SideNavigation } from "../Layout";
-import { items } from "../../Config";
+import { items } from "../Configs/AcceleratorConfig";
 
 export const MainContent = () => {
   return (

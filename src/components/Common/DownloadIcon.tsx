@@ -9,7 +9,7 @@ interface Props {
 export const DownloadIcon = ({ size = 30, handleDownload }: Props) => {
   return (
     <>
-      <IconButton        
+      <IconButton
         aria-label="upload file"
         component="span"
         sx={{

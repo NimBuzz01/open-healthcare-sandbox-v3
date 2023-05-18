@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
-import { WSO2_CONTACT_URL } from "../Config";
+import { WSO2_CONTACT_URL } from "./Configs/Constants";
 
 export const ContactButton = () => {
   return (

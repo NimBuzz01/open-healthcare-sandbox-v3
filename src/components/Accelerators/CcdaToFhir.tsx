@@ -7,7 +7,7 @@ import {
   ResponseAlert,
 } from "../Common";
 import { useState } from "react";
-import { BFF_BASE_URL } from "../../Config";
+import { BFF_BASE_URL, CCDA_TO_FHIR_ABOUT_URL } from "../Configs/Constants";
 import apiClient from "../../services/api-client";
 
 export const CcdaToFhir = () => {
@@ -47,11 +47,6 @@ export const CcdaToFhir = () => {
 
   return (
     <Container maxWidth="xl">
-      <Heading
-        heading="C-CDA To FHIR"
-        description="Convert C-CDA data to FHIR"
-        url="https://wso2.com/solutions/healthcare/"
-      ></Heading>
       {error && (
         <ResponseAlert
           isOpen={isOpen}
@@ -60,6 +55,11 @@ export const CcdaToFhir = () => {
           setIsOpen={setIsOpen}
         />
       )}
+      <Heading
+        heading="C-CDA To FHIR"
+        description="Convert C-CDA data to FHIR"
+        url={CCDA_TO_FHIR_ABOUT_URL}
+      ></Heading>
       <Grid
         container
         spacing={2}

@@ -10,7 +10,12 @@ interface Props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ResponseAlert = ({ isOpen, severity, message, setIsOpen }: Props) => {
+export const ResponseAlert = ({
+  isOpen,
+  severity,
+  message,
+  setIsOpen,
+}: Props) => {
   return (
     <Collapse
       in={isOpen}
@@ -23,7 +28,7 @@ export const ResponseAlert = ({ isOpen, severity, message, setIsOpen }: Props) =
       }}
     >
       <Box display="flex" justifyContent="flex-end">
-      <Alert
+        <Alert
           severity={severity}
           sx={{ fontSize: 15, width: 500, mt: 2 }}
           onClose={() => {

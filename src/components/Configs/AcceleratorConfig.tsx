@@ -5,18 +5,26 @@ import {
   Hl7v2ToFhir,
   SmartOnFhir,
   FhirValidation,
-} from "./components/Accelerators";
+  FhirApis,
+} from "../Accelerators";
 
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import TransformOutlinedIcon from "@mui/icons-material/TransformOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 import CableOutlinedIcon from "@mui/icons-material/CableOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
+import LocalFireDepartmentOutlinedIcon from "@mui/icons-material/LocalFireDepartmentOutlined";
 
 export const items = [
   {
-    label: "HL7V2 To FHIR",
+    label: "FHIR APIs",
     path: "/",
+    icon: <LocalFireDepartmentOutlinedIcon sx={{ width: 26, height: 26 }} />,
+    component: <FhirApis />,
+  },
+  {
+    label: "HL7V2 To FHIR",
+    path: "/hl7-to-fhir",
     icon: <TransformOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <Hl7v2ToFhir />,
   },
@@ -51,12 +59,3 @@ export const items = [
     component: <ConnectToEmr />,
   },
 ];
-
-export const BFF_BASE_URL: string =
-  "https://c32618cf-389d-44f1-93ee-b67a3468aae3-dev.e1-us-east-azure.choreoapis.dev/hdbb/bffservice/endpoint-9090-803/1.0.0";
-
-export const WSO2_CONTACT_URL: string =
-  "https://wso2.com/contact/?src=healthcare";
-
-export const HL7_TO_FHIR_ABOUT_URL: string =
-  "https://wso2.com/solutions/healthcare/";

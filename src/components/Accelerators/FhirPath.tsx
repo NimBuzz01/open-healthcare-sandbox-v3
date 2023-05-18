@@ -1,5 +1,6 @@
 import { Container, Grid } from "@mui/material";
 import { TextAreaInput, Heading } from "../Common";
+import { FHIR_PATH_ABOUT_URL } from "../Configs/Constants";
 
 export const FhirPath = () => {
   return (
@@ -7,7 +8,7 @@ export const FhirPath = () => {
       <Heading
         heading="Connect to EMR"
         description="Connect with your EMR system"
-        url="https://wso2.com/solutions/healthcare/"
+        url={FHIR_PATH_ABOUT_URL}
       ></Heading>
       <Grid
         container
@@ -29,16 +30,6 @@ export const FhirPath = () => {
             />
           </Grid>
         </Grid>
-        {/* <Grid item xs={12} sm={12} md={12} lg={1} xl={1}>
-          <Grid container alignItems="center" justifyContent="center">
-            <ConvertButton></ConvertButton>
-          </Grid>
-        </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={5.5} xl={5.5}>
-          <Grid container alignItems="center" justifyContent="center">
-            <TextArea label="Converted FHIR resource here:" />
-          </Grid>
-        </Grid> */}
       </Grid>
     </Container>
   );

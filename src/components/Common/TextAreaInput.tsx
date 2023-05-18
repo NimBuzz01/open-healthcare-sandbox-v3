@@ -12,7 +12,7 @@ interface Props {
   handleOnChange?(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): any;
-  readFile(fileInput?: string | ArrayBuffer | null): any;
+  readFile?(fileInput?: string | ArrayBuffer | null): any;
 }
 
 export const TextAreaInput = ({
@@ -26,7 +26,6 @@ export const TextAreaInput = ({
   readFile,
   data,
 }: Props) => {
-
   return (
     <>
       <Grid container spacing={2}>
@@ -47,7 +46,7 @@ export const TextAreaInput = ({
           >
             {isCopyRequired && <CopyContent size={iconWidth} data={data!} />}
             {isUploadRequired && (
-              <UploadIcon size={iconWidth} readFile={readFile} />
+              <UploadIcon size={iconWidth} readFile={readFile!} />
             )}
           </Box>
         </Grid>
