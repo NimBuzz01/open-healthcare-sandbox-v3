@@ -8,7 +8,7 @@ import {
 } from "../Common";
 import { useState } from "react";
 import { BFF_BASE_URL } from "../../Config";
-import apiClient from "../../services/api-client";
+import { apiClient } from "../../services/api-client";
 
 export const CcdaToFhir = () => {
   const [data, setData] = useState("");

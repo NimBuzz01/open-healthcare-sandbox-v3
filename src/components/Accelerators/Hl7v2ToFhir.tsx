@@ -7,7 +7,7 @@ import {
   Heading,
   ResponseAlert,
 } from "../Common";
-import apiClient from "../../services/api-client";
+import { apiClient } from "../../services/api-client";
 import { HL7_TO_FHIR_ABOUT_URL, BFF_BASE_URL } from "../../Config";
 
 export const Hl7v2ToFhir = () => {

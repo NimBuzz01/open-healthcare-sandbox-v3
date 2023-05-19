@@ -1,9 +1,20 @@
 import axios from "axios";
 
-const apiClient = (url: string) => {
+export const apiClient = (url: string) => {
   return axios.create({
     baseURL: url,
   });
 };
 
-export default apiClient;
+interface Params {
+  [key: string]: string;
+}
+
+export const setParamsToUrl = (url: string, params: Params): string => {
+  let updatedUrl = url;
+  Object.keys(params).forEach((key) => {
+    const paramKey = `{${key}}`;
+    updatedUrl = updatedUrl.replace(paramKey, params[key]);
+  });
+  return updatedUrl;
+}
