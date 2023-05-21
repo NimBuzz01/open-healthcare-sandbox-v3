@@ -88,7 +88,7 @@ export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
           {isSearchOperation && (
             <Box sx={{ display: "flex" }}>
               <Button
-                disabled={searchBoxCount == 7}
+                disabled={searchBoxCount === 7}
                 onClick={() => {
                   setSearchBoxCount(searchBoxCount + 1);
                 }}
@@ -96,10 +96,10 @@ export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
                 <AddCircleIcon sx={{ fontSize: 30 }} />
               </Button>
               <Button
-                disabled={searchBoxCount == 1}
+                disabled={searchBoxCount === 1}
                 onClick={() => {
                   setSearchBoxCount(
-                    searchBoxCount == 1 ? searchBoxCount : searchBoxCount - 1
+                    searchBoxCount === 1 ? searchBoxCount : searchBoxCount - 1
                   );
                 }}
               >
