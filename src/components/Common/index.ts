@@ -10,3 +10,4 @@ export { UploadIcon } from "./UploadIcon";
 export { ViewDocument } from "./ViewDocument";
 export { AboutTool } from "./AboutTool";
 export { ResponseAlert } from "./ResponseAlert";
+export { CodeEditor } from "./CodeEditor";
