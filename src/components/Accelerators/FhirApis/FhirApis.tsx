@@ -5,7 +5,7 @@ import { FHIR_APIS_ABOUT_URL } from "../../Configs/Constants";
 
 export const FhirApis = () => {
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{minHeight:"80vh"}}>
       <Heading
         heading="FHIR APIs"
         description="Try out a set of sample fhir apis"

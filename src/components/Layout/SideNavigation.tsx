@@ -120,7 +120,7 @@ export const SideNavigation = ({ items }: Props) => {
                 gap: 2,
                 color: "background.default",
                 py: 1.25,
-                px: isExpanded ? 2.5 : 1,
+                px: isExpanded ? 2.0 : 1,
                 margin: 0.62,
                 cursor: "pointer",
                 transition: "0.2s ease-in",

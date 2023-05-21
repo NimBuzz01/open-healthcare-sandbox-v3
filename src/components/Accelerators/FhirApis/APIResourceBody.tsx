@@ -72,19 +72,19 @@ export const APIResourceBody = () => {
         </AccordionSummary>
         <Divider />
         <AccordionDetails>
-          {(container.resourceMethod == "POST" ||
-            container.resourceMethod == "PUT") && <CreateOperationContent />}
-          {container.resourceMethod == "GET" && (
+          {(container.resourceMethod === "POST" ||
+            container.resourceMethod === "PUT") && <CreateOperationContent />}
+          {container.resourceMethod === "GET" && (
             <GetResourceContent
               isSearchOperation={
-                container.resourceOperation == OpearionTypes.SEARCH
+                container.resourceOperation === OpearionTypes.SEARCH
               }
             />
           )}
-          {container.resourceMethod == "DELETE" && (
+          {container.resourceMethod === "DELETE" && (
             <DeleteResourceContent
               isSearchOperation={
-                container.resourceOperation == OpearionTypes.SEARCH
+                container.resourceOperation === OpearionTypes.SEARCH
               }
             />
           )}

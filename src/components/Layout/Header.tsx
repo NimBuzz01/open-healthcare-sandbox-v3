@@ -24,7 +24,7 @@ export const Header = () => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          py: 1.5,
+          py: 0.5,
           px: 1,
           boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px;",
         }}
