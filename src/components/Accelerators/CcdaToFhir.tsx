@@ -1,13 +1,12 @@
 import { Container, Grid } from "@mui/material";
 import {
   TextAreaInput,
-  Heading,
   TextAreaOutput,
   ConvertButton,
   ResponseAlert,
 } from "../Common";
 import { useState } from "react";
-import { BFF_BASE_URL, CCDA_TO_FHIR_ABOUT_URL } from "../Configs/Constants";
+import { BFF_BASE_URL } from "../Configs/Constants";
 import apiClient from "../../services/api-client";
 
 export const CcdaToFhir = () => {
@@ -55,11 +54,6 @@ export const CcdaToFhir = () => {
           setIsOpen={setIsOpen}
         />
       )}
-      <Heading
-        heading="C-CDA To FHIR"
-        description="Convert C-CDA data to FHIR"
-        url={CCDA_TO_FHIR_ABOUT_URL}
-      ></Heading>
       <Grid
         container
         spacing={2}
