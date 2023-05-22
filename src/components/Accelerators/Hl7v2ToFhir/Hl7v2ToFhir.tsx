@@ -59,7 +59,7 @@ export const Hl7v2ToFhir = () => {
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth={false}>
       <Box
         sx={{
           display: "flex",

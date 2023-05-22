@@ -59,7 +59,7 @@ export const CcdaToFhir = () => {
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth={false}>
       <Box
         sx={{
           display: "flex",
