@@ -15,4 +15,5 @@ export { SamplesModal } from "./SamplesModal"
 export { ComponentTitle } from "./ComponentTitle";
 export { CodeEditor } from "./CodeEditor";
 export { ComponentTitle } from "./ComponentTitle";
-export { CodeEditor } from "./CodeEditor";
+export { ConsoleAccordion } from "./ConsoleAccordion"
+export { SamplesModal } from "./SamplesModal"
