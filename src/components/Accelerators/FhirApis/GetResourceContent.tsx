@@ -24,10 +24,10 @@ export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
 
   const renderSearchBoxes = () => {
     const elements: any[] = [];
-
+  
     for (var i = 1; i <= searchBoxCount; i++) {
       elements.push(
-        <Box sx={{ display: "flex", gap: 2 }}>
+        <Box sx={{ display: "flex", gap: 2 }} key={i}>
           <Box sx={{ minWidth: 200 }}>
             <InputLabel id="demo-simple-select-label" />
             <Select
@@ -42,7 +42,7 @@ export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
                 <em>Search Param</em>
               </MenuItem>
               {searchParams.map((p) => (
-                <MenuItem value={p.param}>{p.display}</MenuItem>
+                <MenuItem key={p.param} value={p.param}>{p.display}</MenuItem>
               ))}
             </Select>
           </Box>
@@ -52,7 +52,7 @@ export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
         </Box>
       );
     }
-
+  
     return elements;
   };
 

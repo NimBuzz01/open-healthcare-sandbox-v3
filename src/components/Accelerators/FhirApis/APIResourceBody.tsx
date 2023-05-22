@@ -22,27 +22,27 @@ import { ResourceMethodIcon } from "./ResourceMethodIcon";
 import { DeleteResourceContent } from "./DeleteResourceContent";
 
 export const APIResourceBody = () => {
-  const [selectedTab, setSelectedTab] = useState(0);
-  const [expandedAccordionIndex, setExpandedAccordionIndex] = useState<
+  const [selectedAPI, setSelectedAPI] = useState(0);
+  const [expandedResourceIndex, setExpandedResourceIndex] = useState<
     number | false
   >(false);
 
-  const handleChangeTab = (event: React.SyntheticEvent, newTab: number) => {
-    setSelectedTab(newTab);
-    setExpandedAccordionIndex(false);
+  const handleChangeAPI = (event: React.SyntheticEvent, newTab: number) => {
+    setSelectedAPI(newTab);
+    setExpandedResourceIndex(false);
   };
 
-  const handleChangeAccordion =
+  const handleChangeResource =
     (index: number) => (_: React.ChangeEvent<{}>, isExpanded: boolean) => {
-      setExpandedAccordionIndex(isExpanded ? index : false);
+      setExpandedResourceIndex(isExpanded ? index : false);
     };
 
   const renderContainers = (containers: ResourceConfig[]) => {
     return containers.map((container, index) => (
       <Accordion
         key={index}
-        expanded={expandedAccordionIndex === index}
-        onChange={handleChangeAccordion(index)}
+        expanded={expandedResourceIndex === index}
+        onChange={handleChangeResource(index)}
         disableGutters
         sx={{
           my: 2,
@@ -93,7 +93,7 @@ export const APIResourceBody = () => {
     ));
   };
 
-  const renderTabs = () => {
+  const renderAPIs = () => {
     return apiList.map((api: ApiConfig, index: number) => (
       <Tab
         key={index}
@@ -108,15 +108,15 @@ export const APIResourceBody = () => {
   return (
     <div>
       <Tabs
-        value={selectedTab}
-        onChange={handleChangeTab}
+        value={selectedAPI}
+        onChange={handleChangeAPI}
         indicatorColor="primary"
         textColor="inherit"
         sx={{ mt: 2 }}
       >
-        {renderTabs()}
+        {renderAPIs()}
       </Tabs>
-      {renderContainers(apiList[selectedTab].resources)}
+      {renderContainers(apiList[selectedAPI].resources)}
     </div>
   );
 };
