@@ -37,8 +37,8 @@ export const APIResourceBody = () => {
       setExpandedResourceIndex(isExpanded ? index : false);
     };
 
-  const renderContainers = (containers: ResourceConfig[]) => {
-    return containers.map((container, index) => (
+  const renderResources = (resources: ResourceConfig[]) => {
+    return resources.map((resource, index) => (
       <Accordion
         key={index}
         expanded={expandedResourceIndex === index}
@@ -59,32 +59,32 @@ export const APIResourceBody = () => {
           id={`container-summary-${index}`}
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
-            <ResourceMethodIcon resourceMethod={container.resourceMethod} />
+            <ResourceMethodIcon resourceMethod={resource.resourceMethod} />
             <Typography sx={{ color: "common.dark", fontSize: 14 }}>
-              {container.resourcePath}
+              {resource.resourcePath}
             </Typography>
             <Typography
               sx={{ color: "grey.500", fontSize: 14, fontWeight: 500 }}
             >
-              {container.resourceDescription}
+              {resource.resourceDescription}
             </Typography>
           </Box>
         </AccordionSummary>
         <Divider />
         <AccordionDetails>
-          {(container.resourceMethod === "POST" ||
-            container.resourceMethod === "PUT") && <CreateOperationContent />}
-          {container.resourceMethod === "GET" && (
+          {(resource.resourceMethod === "POST" ||
+            resource.resourceMethod === "PUT") && <CreateOperationContent />}
+          {resource.resourceMethod === "GET" && (
             <GetResourceContent
               isSearchOperation={
-                container.resourceOperation === OpearionTypes.SEARCH
+                resource.resourceOperation === OpearionTypes.SEARCH
               }
             />
           )}
-          {container.resourceMethod === "DELETE" && (
+          {resource.resourceMethod === "DELETE" && (
             <DeleteResourceContent
               isSearchOperation={
-                container.resourceOperation === OpearionTypes.SEARCH
+                resource.resourceOperation === OpearionTypes.SEARCH
               }
             />
           )}
@@ -116,7 +116,7 @@ export const APIResourceBody = () => {
       >
         {renderAPIs()}
       </Tabs>
-      {renderContainers(apiList[selectedAPI].resources)}
+      {renderResources(apiList[selectedAPI].resources)}
     </div>
   );
 };
