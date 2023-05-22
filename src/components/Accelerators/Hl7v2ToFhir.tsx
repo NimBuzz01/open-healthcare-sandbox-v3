@@ -4,11 +4,10 @@ import {
   ConvertButton,
   TextAreaInput,
   TextAreaOutput,
-  Heading,
   ResponseAlert,
 } from "../Common";
 import apiClient from "../../services/api-client";
-import { HL7_TO_FHIR_ABOUT_URL, BFF_BASE_URL } from "../Configs/Constants";
+import { BFF_BASE_URL } from "../Configs/Constants";
 
 export const Hl7v2ToFhir = () => {
   const [data, setData] = useState("");
@@ -55,11 +54,6 @@ export const Hl7v2ToFhir = () => {
           setIsOpen={setIsOpen}
         />
       )}
-      <Heading
-        heading="HL7V2 To FHIR"
-        description="Convert HL7 V2 data to FHIR"
-        url={HL7_TO_FHIR_ABOUT_URL}
-      ></Heading>
       <Grid
         container
         alignItems="center"

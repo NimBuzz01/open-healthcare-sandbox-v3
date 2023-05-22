@@ -7,25 +7,24 @@ interface Props {
   url: string;
 }
 
-export const Heading = ({ heading, description, url }: Props) => {
+export const ComponentTitle = ({ heading, description, url }: Props) => {
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <Typography color="primary.dark" variant="h3" sx={{ fontWeight: 600 }}>
+      <Box sx={{ display: "flex", flexDirection: "column", mr:"auto" }}>
+        <Typography color="primary.dark" variant="h4" sx={{ fontWeight: 600 }}>
           {heading}
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography
             color="common.black"
             variant="h6"
-            sx={{ fontWeight: 400, my: 1 }}
+            sx={{ fontWeight: 400 }}
           >
             {description}
           </Typography>
-          <AboutTool url={url}></AboutTool>
         </Box>
-        <Divider />
       </Box>
+      <AboutTool url={url}></AboutTool>
     </>
   );
 };

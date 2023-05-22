@@ -8,8 +8,8 @@ export const Logo = () => {
         display: "flex",
         flexDirection: "column",
         width: 267,
-        gap: 0.2,
-        margin: 1,
+        marginLeft: 1,
+        my:1
       }}
     >
       <Typography color="primary.dark" variant="h4" sx={{ fontWeight: 600 }}>

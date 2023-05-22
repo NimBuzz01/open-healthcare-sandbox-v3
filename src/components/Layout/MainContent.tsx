@@ -1,18 +1,18 @@
 import { Box } from "@mui/material";
-import { Scrollbars } from "react-custom-scrollbars";
+import Scrollbars from "react-custom-scrollbars";
 import Routes from "../../contexts/AppRoutes";
 import { SideNavigation } from "../Layout";
 import { items } from "../Configs/AcceleratorConfig";
 
 export const MainContent = () => {
   return (
-    <Scrollbars>
-      <Box sx={{ flexGrow: 1, display: "flex", overflowY: "auto" }}>
-        <SideNavigation items={items} />
-        <Box width={1} mt={5} mb={8} mx={4}>
+    <Box sx={{ flexGrow: 1, display: "flex" }}>
+      <SideNavigation items={items} />
+      <Scrollbars>
+        <Box width={1} my={5} sx={{ overflowY: "auto" }}>
           <Routes items={items} />
         </Box>
-      </Box>
-    </Scrollbars>
+      </Scrollbars>
+    </Box>
   );
 };
