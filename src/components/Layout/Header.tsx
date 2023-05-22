@@ -8,7 +8,7 @@ import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRig
 
 export const Header = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
+  
   const handleResize = () => setScreenWidth(window.innerWidth);
 
   useEffect(() => {
