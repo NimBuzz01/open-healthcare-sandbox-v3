@@ -45,6 +45,6 @@ export const CopyContent = ({ data }: Props) => {
           <ContentCopyIcon />
         </IconButton>
       </Box>
-      </Tooltip>
+    </Tooltip>
   );
 };

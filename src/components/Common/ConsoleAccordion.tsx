@@ -5,10 +5,10 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CodeMirror from "@uiw/react-codemirror";
 import { githubLight, githubDark } from "@uiw/codemirror-themes-all";
 import { langs } from "@uiw/codemirror-extensions-langs";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export interface Props {
   error: string;

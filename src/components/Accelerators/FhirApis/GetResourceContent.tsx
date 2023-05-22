@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -7,12 +8,10 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { CommonButton } from "../../Common/CommonButton";
+import { TextAreaOutput, CommonButton } from "../../Common";
+import { searchParams } from "../../Configs/ApiConfig";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { useState } from "react";
-import { searchParams } from "../../Configs/ApiConfig";
-import { TextAreaOutput } from "../../Common";
 
 interface Props {
   isSearchOperation?: boolean;
@@ -24,7 +23,7 @@ export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
 
   const renderSearchBoxes = () => {
     const elements: any[] = [];
-  
+
     for (var i = 1; i <= searchBoxCount; i++) {
       elements.push(
         <Box sx={{ display: "flex", gap: 2 }} key={i}>
@@ -42,7 +41,9 @@ export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
                 <em>Search Param</em>
               </MenuItem>
               {searchParams.map((p) => (
-                <MenuItem key={p.param} value={p.param}>{p.display}</MenuItem>
+                <MenuItem key={p.param} value={p.param}>
+                  {p.display}
+                </MenuItem>
               ))}
             </Select>
           </Box>
@@ -52,7 +53,7 @@ export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
         </Box>
       );
     }
-  
+
     return elements;
   };
 
@@ -128,7 +129,7 @@ export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
         </Box>
       </Box>
       {data && (
-        <Box sx={{mt: 5}}>
+        <Box sx={{ mt: 5 }}>
           <TextAreaOutput
             label={"Output"}
             isDownloadButtonRequired

@@ -1,13 +1,15 @@
 import React, { useCallback, useState } from "react";
 import { Box, Button, Container, Divider } from "@mui/material";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
-
 import apiClient from "../../../services/api-client";
+import {
+  ConvertButton,
+  SamplesModal,
+  ToggleDarkMode,
+  CodeEditor,
+  ConsoleAccordion,
+} from "../../Common";
 import { BFF_BASE_URL } from "../../Configs/Constants";
-
-import { ConvertButton, SamplesModal } from "../../Common";
-import { ToggleDarkMode } from "../../Common/ToggleDarkMode";
-import { CodeEditor, ConsoleAccordion } from "../../Common";
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 
 export const CcdaToFhir = () => {
   const [input, setInput] = useState("");

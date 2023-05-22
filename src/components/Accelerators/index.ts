@@ -12,4 +12,3 @@ export { PathSamples } from "./FhirPath/PathSamples";
 export { ValidationSamples } from "./FhirValidation/ValidationSamples";
 export { Hl7Samples } from "./Hl7v2ToFhir/Hl7Samples";
 export { SmartSamples } from "./SmartonFhir/SmartSamples";
-export { ApiSamples } from "./FhirApis/ApiSamples";

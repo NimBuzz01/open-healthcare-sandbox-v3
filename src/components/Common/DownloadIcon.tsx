@@ -1,5 +1,5 @@
-import { CloudDownloadRounded } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import { CloudDownloadRounded } from "@mui/icons-material";
 
 interface Props {
   size?: number;

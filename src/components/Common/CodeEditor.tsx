@@ -3,12 +3,11 @@ import CodeMirror from "@uiw/react-codemirror";
 import { githubLight, githubDark } from "@uiw/codemirror-themes-all";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import FileSaver from "file-saver";
+import { CopyContent } from "../Common";
 import {
   SaveAltOutlined as SaveAltOutlinedIcon,
   DeleteOutlineOutlined as DeleteOutlineOutlinedIcon,
 } from "@mui/icons-material";
-
-import { CopyContent } from "./CopyContent";
 
 interface CodeEditorProps {
   title: string;

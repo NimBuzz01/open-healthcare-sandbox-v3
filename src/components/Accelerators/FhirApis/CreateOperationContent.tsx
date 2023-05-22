@@ -1,7 +1,6 @@
-import { Box, Container } from "@mui/material";
-import { CommonButton } from "../../Common/CommonButton";
-import { TextAreaInput, TextAreaOutput } from "../../Common";
 import { useState } from "react";
+import { Box, Container } from "@mui/material";
+import { TextAreaInput, TextAreaOutput, CommonButton } from "../../Common";
 
 export const CreateOperationContent = () => {
   const [data, setData] = useState(false);
@@ -18,7 +17,9 @@ export const CreateOperationContent = () => {
         <CommonButton
           variant="border"
           label="Clear"
-          onClick={()=>{setData(false)}}
+          onClick={() => {
+            setData(false);
+          }}
         />
       </Box>
       <TextAreaInput label="Input: " isCopyRequired isUploadRequired />
