@@ -4,6 +4,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  IconButton,
 } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import CloseIcon from "@mui/icons-material/Close";
@@ -26,15 +27,17 @@ export const AlertModal = ({ contentText }: AlertModalProps) => {
         sx={{ position: "absolute", top: -500 }}
       >
         <DialogTitle>
-          <CloseIcon
+          <IconButton
             onClick={handleClose}
             sx={{
               position: "absolute",
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
+              right: 2,
+              top: 2,
+              color: "grey.500",
             }}
-          />
+          >
+            <CloseIcon />
+          </IconButton>
         </DialogTitle>
         <DialogContent
           sx={{ display: "flex", alignItems: "center", gap: 2, pb: 4 }}

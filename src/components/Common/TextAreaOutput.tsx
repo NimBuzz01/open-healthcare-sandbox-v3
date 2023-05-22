@@ -57,7 +57,7 @@ export const TextAreaOutput = ({
             sx={{ display: "flex" }}
           >
             {isCopyRequired && (
-              <CopyContent size={iconWidth} data={JSON.stringify(data!)} />
+              <CopyContent data={JSON.stringify(data!)} />
             )}
             {isDownloadButtonRequired && (
               <DownloadIcon size={iconWidth} handleDownload={downloadContent} />

@@ -12,7 +12,7 @@ export const CommonButton = ({ variant, label, onClick }: ButtonProps) => {
       onClick={onClick}
       variant="outlined"
       sx={{
-        fontSize: 16,
+        fontSize: 14,
         borderRadius: 1,
         backgroundColor:
           variant === "background" ? "secondary.main" : "transparent",
