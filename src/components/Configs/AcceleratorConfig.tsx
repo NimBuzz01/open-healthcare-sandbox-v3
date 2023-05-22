@@ -29,6 +29,7 @@ export const items = [
     path: "/",
     icon: <LocalFireDepartmentOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <FhirApis />,
+    samples: <ApiSamples />,
   },
   {
     label: "HL7V2 To FHIR",
