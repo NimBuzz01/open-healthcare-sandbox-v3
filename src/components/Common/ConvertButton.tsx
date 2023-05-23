@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
 
 interface Props {
   handleSubmit?(): any;
@@ -8,20 +8,16 @@ interface Props {
 export const ConvertButton = ({ handleSubmit }: Props) => {
   return (
     <Button
-      variant="outlined"
+      variant="contained"
+      color="secondary"
+      endIcon={<NavigateNextOutlinedIcon />}
       sx={{
-        borderRadius: 1,
-        color: "primary.main",
-        border: 1,
-        borderColor: "grey.400",
-        ":hover": {
-          border: 1,
-          borderColor: "primary.light",
-        },
+        fontSize: 14,
+        color: "background.default",
       }}
       onClick={handleSubmit}
     >
-      <ArrowForwardIosIcon sx={{ width: 50, height: 50 }}></ArrowForwardIosIcon>
+      Convert to FHIR
     </Button>
   );
 };
