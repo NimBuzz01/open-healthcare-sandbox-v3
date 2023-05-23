@@ -1,5 +1,4 @@
 import { Box, InputLabel, MenuItem, Select, TextField } from "@mui/material";
-import { searchParams } from "../../Configs/ApiConfig";
 
 interface Props {
   count: number;
@@ -9,7 +8,7 @@ const SearchParamInput = ({ count }: Props) => {
   const element = ``;
 
   const renderMenuItems = () => {
-    return ;
+    return;
   };
 
   const renderSearchBoxes = () => {

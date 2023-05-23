@@ -173,8 +173,8 @@ export const apiList: ApiConfig[] = [
 ];
 
 export const searchParams = [
-  {param:"name", display: "Name"},
-  {param: "url", display: "URL"},
-  {param: "version", display: "Version"},
-  {param: "lastUpdated", display: "Last Updated"}
-]
+  { param: "name", display: "Name" },
+  { param: "url", display: "URL" },
+  { param: "version", display: "Version" },
+  { param: "lastUpdated", display: "Last Updated" },
+];
