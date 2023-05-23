@@ -1,65 +1,149 @@
 import React, { useCallback, useState } from "react";
 import { Box, Button, Container, Divider } from "@mui/material";
-import apiClient from "../../../services/api-client";
 import {
   ConvertButton,
   SamplesModal,
   ToggleDarkMode,
   CodeEditor,
   ConsoleAccordion,
+  ResponseAlert,
 } from "../../Common";
-import { BFF_BASE_URL } from "../../Configs/Constants";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
+import apiClient from "../../../services/api-client";
+import { BFF_BASE_URL } from "../../Configs/Constants";
+
+interface State {
+  input: string;
+  output: string;
+  error: string;
+  errorMessage: string;
+  isError: boolean;
+  darkMode: boolean;
+  isSamplesOpen: boolean;
+  isLoading: boolean;
+}
 
 export const Hl7v2ToFhir = () => {
-  const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
-  const [error, setError] = useState("");
-  const [darkMode, setDarkMode] = useState(true);
-  const [isSamplesOpen, setIsSamplesOpen] = useState(false);
+  const [state, setState] = useState<State>({
+    input: "",
+    output: "",
+    error: "",
+    errorMessage: "",
+    isError: false,
+    darkMode: true,
+    isSamplesOpen: false,
+    isLoading: false,
+  });
+
+  const {
+    input,
+    output,
+    error,
+    errorMessage,
+    isError,
+    darkMode,
+    isSamplesOpen,
+    isLoading,
+  } = state;
 
   const callBackend = () => {
+    setState((prevState) => ({
+      ...prevState,
+      isLoading: true,
+      output: "",
+      error: "",
+      isError: false,
+      errorMessage: "",
+    }));
+
     apiClient(BFF_BASE_URL)
       .post("/v2tofhir/transform", input)
       .then((res) => {
-        setOutput(JSON.stringify(res.data));
+        setState((prevState) => ({
+          ...prevState,
+          output: JSON.stringify(res.data, null, 2),
+          isLoading: false,
+        }));
       })
       .catch((error) => {
-        setOutput(JSON.stringify(error.response));
-        setError(JSON.stringify(error.response));
+        setState((prevState) => ({
+          ...prevState,
+          output: JSON.stringify(error.response, null, 2),
+          error: JSON.stringify(error.response, null, 2),
+          errorMessage: error.message,
+          isError: true,
+          isLoading: false,
+        }));
       });
   };
 
   const openSampleModal = () => {
-    setIsSamplesOpen(true);
+    setState((prevState) => ({
+      ...prevState,
+      isSamplesOpen: true,
+    }));
   };
 
   const closeSampleModal = () => {
-    setIsSamplesOpen(false);
+    setState((prevState) => ({
+      ...prevState,
+      isSamplesOpen: false,
+    }));
+  };
+
+  const closeResponse = () => {
+    setState((prevState) => ({
+      ...prevState,
+      isError: false,
+    }));
   };
 
   const handleInputClear = () => {
-    setInput("");
+    setState((prevState) => ({
+      ...prevState,
+      input: "",
+    }));
   };
 
   const handleOutputClear = () => {
-    setOutput("");
+    setState((prevState) => ({
+      ...prevState,
+      output: "",
+    }));
   };
 
   const handleInputChange = useCallback((value: string) => {
-    setInput(value);
+    setState((prevState) => ({
+      ...prevState,
+      input: value,
+    }));
   }, []);
 
   const handleOutputChange = useCallback((value: string) => {
-    setOutput(value);
+    setState((prevState) => ({
+      ...prevState,
+      output: value,
+    }));
   }, []);
 
   const toggleDarkMode = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDarkMode(event.target.checked);
+    const { checked } = event.target;
+    setState((prevState) => ({
+      ...prevState,
+      darkMode: checked,
+    }));
   };
 
   return (
     <Container maxWidth={false}>
+      {isError && (
+        <ResponseAlert
+          isOpen={isError}
+          severity={"error"}
+          message={errorMessage}
+          setIsOpen={closeResponse}
+        />
+      )}
       <Box
         sx={{
           display: "flex",
@@ -67,15 +151,16 @@ export const Hl7v2ToFhir = () => {
         }}
       >
         <Button
-          variant="text"
+          variant="contained"
+          color="secondary"
           endIcon={<ArticleOutlinedIcon />}
-          sx={{ fontSize: 14, color: "primary.dark" }}
+          sx={{ fontSize: 14, color:"background.default"}}
           onClick={openSampleModal}
         >
           Load Examples
         </Button>
         <SamplesModal isOpen={isSamplesOpen} onClose={closeSampleModal} />
-        <ConvertButton handleSubmit={callBackend} />
+        <ConvertButton handleSubmit={callBackend} isLoading={isLoading} />
         <ToggleDarkMode mode={darkMode} toggleMode={toggleDarkMode} />
       </Box>
       <Box
@@ -90,9 +175,8 @@ export const Hl7v2ToFhir = () => {
           onChange={handleInputChange}
           darkMode={darkMode}
           onClear={handleInputClear}
-          onDownload={() => {}}
           placeholder="Paste or edit HL7 Data here..."
-          fileType="javascript"
+          fileType="xml"
           downloadEnabled
           width="50%"
           height="700px"
@@ -104,7 +188,6 @@ export const Hl7v2ToFhir = () => {
           onChange={handleOutputChange}
           darkMode={darkMode}
           onClear={handleOutputClear}
-          onDownload={() => {}}
           placeholder="Paste or edit Json Data here..."
           fileType="json"
           downloadEnabled

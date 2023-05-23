@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import CodeMirror from "@uiw/react-codemirror";
-import { githubLight, githubDark } from "@uiw/codemirror-themes-all";
+import { bbedit, aura } from "@uiw/codemirror-themes-all";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
@@ -40,7 +40,7 @@ export const ConsoleAccordion = ({ error, darkMode }: Props) => {
           width="100%"
           height="400px"
           value={error}
-          theme={darkMode ? githubDark : githubLight}
+          theme={darkMode ? aura : bbedit}
           extensions={[langExtensions["javascript"]()]}
           readOnly
         />

@@ -25,7 +25,7 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Container
-        maxWidth="xl"
+        maxWidth="lg"
         sx={{ bgcolor: "background.default", height: 750, mt: 5 }}
       >
         <Box
@@ -39,12 +39,8 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
           <Typography variant="h4" component="h2">
             {label} Samples
           </Typography>
-          <IconButton>
-            <CloseIcon
-              onClick={onClose}
-              fontSize="large"
-              sx={{ color: "grey.500" }}
-            />
+          <IconButton onClick={onClose} sx={{ color: "grey.500" }}>
+            <CloseIcon fontSize="large" />
           </IconButton>
         </Box>
         <Divider />

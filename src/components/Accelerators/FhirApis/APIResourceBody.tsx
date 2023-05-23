@@ -112,7 +112,6 @@ export const APIResourceBody = () => {
         onChange={handleChangeAPI}
         indicatorColor="primary"
         textColor="inherit"
-        sx={{ mt: 2 }}
       >
         {renderAPIs()}
       </Tabs>

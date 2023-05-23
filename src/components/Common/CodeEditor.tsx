@@ -1,6 +1,6 @@
 import { Box, Tooltip, IconButton, Typography } from "@mui/material";
 import CodeMirror from "@uiw/react-codemirror";
-import { githubLight, githubDark } from "@uiw/codemirror-themes-all";
+import { aura, bbedit } from "@uiw/codemirror-themes-all";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import FileSaver from "file-saver";
 import { CopyContent } from "../Common";
@@ -15,7 +15,6 @@ interface CodeEditorProps {
   onChange?: (value: string) => void;
   darkMode?: boolean;
   onClear?: () => void;
-  onDownload?: () => void;
   placeholder?: string;
   fileType: string;
   downloadEnabled?: boolean;
@@ -30,7 +29,6 @@ export const CodeEditor = ({
   onChange,
   darkMode,
   onClear,
-  onDownload,
   placeholder,
   fileType,
   downloadEnabled,
@@ -100,7 +98,7 @@ export const CodeEditor = ({
         placeholder={placeholder}
         height={height}
         value={value}
-        theme={darkMode ? githubDark : githubLight}
+        theme={darkMode ? aura : bbedit}
         extensions={[langExtensions[fileType]()]}
         onChange={onChange}
         readOnly={readOnly}

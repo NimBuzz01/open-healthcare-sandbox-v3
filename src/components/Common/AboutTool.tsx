@@ -13,7 +13,7 @@ export const AboutTool = ({ url }: Props) => {
           display: "flex",
           alignItems: "center",
           gap: 1,
-          mr:4,
+          mr: 4,
           color: "primary.main",
           transition: "0.3s",
           ":hover": { color: "primary.dark" },
