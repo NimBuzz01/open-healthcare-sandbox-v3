@@ -7,7 +7,14 @@ import {
   FhirValidation,
   FhirApis,
 } from "../Accelerators";
-
+import {
+  Hl7Samples,
+  ValidationSamples,
+  SmartSamples,
+  CcdaSamples,
+  PathSamples,
+  EmrSamples,
+} from "../Accelerators/Samples";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import TransformOutlinedIcon from "@mui/icons-material/TransformOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
@@ -31,6 +38,7 @@ export const items = [
     path: "/hl7-to-fhir",
     icon: <TransformOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <Hl7v2ToFhir />,
+    samples: <Hl7Samples />,
   },
   {
     label: "FHIR Validation",
@@ -39,6 +47,7 @@ export const items = [
     path: "/fhir-validation",
     icon: <CheckCircleOutlineOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <FhirValidation />,
+    samples: <ValidationSamples />,
   },
   {
     label: "SMART on FHIR",
@@ -47,6 +56,7 @@ export const items = [
     path: "/smart-on-fhir",
     icon: <VpnKeyOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <SmartOnFhir />,
+    samples: <SmartSamples />,
   },
   {
     label: "C-CDA To FHIR",
@@ -55,6 +65,7 @@ export const items = [
     path: "/c-cda-to-fhir",
     icon: <TransformOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <CcdaToFhir />,
+    samples: <CcdaSamples />,
   },
   {
     label: "FHIR Path",
@@ -63,6 +74,7 @@ export const items = [
     path: "/fhir-path",
     icon: <FilterAltOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <FhirPath />,
+    samples: <PathSamples />,
   },
   {
     label: "Connect To EMR",
@@ -71,5 +83,6 @@ export const items = [
     path: "/connect-to-emr",
     icon: <CableOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <ConnectToEmr />,
+    samples: <EmrSamples />,
   },
 ];

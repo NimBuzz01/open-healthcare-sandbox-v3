@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { AboutTool } from "../Common";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 export const ComponentTitle = ({ heading, description, url }: Props) => {
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "column", mr:"auto" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", mr: "auto" }}>
         <Typography color="primary.dark" variant="h4" sx={{ fontWeight: 600 }}>
           {heading}
         </Typography>

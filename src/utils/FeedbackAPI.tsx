@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+// import axios, { AxiosResponse } from "axios";
 
 export interface FeedbackRequest {
   name: string;
@@ -20,10 +20,10 @@ const sendFeedback = async ({
   onError,
 }: SendFeedbackProps) => {
   try {
-    const response: AxiosResponse<any> = await axios.post(
-      "/api/healthcare/manage/feedback",
-      request
-    );
+    // const response: AxiosResponse<any> = await axios.post(
+    //   "/api/healthcare/manage/feedback",
+    //   request
+    // );
     onSuccess();
   } catch (error) {
     onError(error);

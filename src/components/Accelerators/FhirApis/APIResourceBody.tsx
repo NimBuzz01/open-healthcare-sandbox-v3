@@ -22,27 +22,27 @@ import { ResourceMethodIcon } from "./ResourceMethodIcon";
 import { DeleteResourceContent } from "./DeleteResourceContent";
 
 export const APIResourceBody = () => {
-  const [selectedTab, setSelectedTab] = useState(0);
-  const [expandedAccordionIndex, setExpandedAccordionIndex] = useState<
+  const [selectedAPI, setSelectedAPI] = useState(0);
+  const [expandedResourceIndex, setExpandedResourceIndex] = useState<
     number | false
   >(false);
 
-  const handleChangeTab = (event: React.SyntheticEvent, newTab: number) => {
-    setSelectedTab(newTab);
-    setExpandedAccordionIndex(false);
+  const handleChangeAPI = (event: React.SyntheticEvent, newTab: number) => {
+    setSelectedAPI(newTab);
+    setExpandedResourceIndex(false);
   };
 
-  const handleChangeAccordion =
+  const handleChangeResource =
     (index: number) => (_: React.ChangeEvent<{}>, isExpanded: boolean) => {
-      setExpandedAccordionIndex(isExpanded ? index : false);
+      setExpandedResourceIndex(isExpanded ? index : false);
     };
 
-  const renderContainers = (containers: ResourceConfig[]) => {
-    return containers.map((container, index) => (
+  const renderResources = (resources: ResourceConfig[]) => {
+    return resources.map((resource, index) => (
       <Accordion
         key={index}
-        expanded={expandedAccordionIndex === index}
-        onChange={handleChangeAccordion(index)}
+        expanded={expandedResourceIndex === index}
+        onChange={handleChangeResource(index)}
         disableGutters
         sx={{
           my: 2,
@@ -59,32 +59,32 @@ export const APIResourceBody = () => {
           id={`container-summary-${index}`}
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
-            <ResourceMethodIcon resourceMethod={container.resourceMethod} />
+            <ResourceMethodIcon resourceMethod={resource.resourceMethod} />
             <Typography sx={{ color: "common.dark", fontSize: 14 }}>
-              {container.resourcePath}
+              {resource.resourcePath}
             </Typography>
             <Typography
               sx={{ color: "grey.500", fontSize: 14, fontWeight: 500 }}
             >
-              {container.resourceDescription}
+              {resource.resourceDescription}
             </Typography>
           </Box>
         </AccordionSummary>
         <Divider />
         <AccordionDetails>
-          {(container.resourceMethod === "POST" ||
-            container.resourceMethod === "PUT") && <CreateOperationContent />}
-          {container.resourceMethod === "GET" && (
+          {(resource.resourceMethod === "POST" ||
+            resource.resourceMethod === "PUT") && <CreateOperationContent />}
+          {resource.resourceMethod === "GET" && (
             <GetResourceContent
               isSearchOperation={
-                container.resourceOperation === OpearionTypes.SEARCH
+                resource.resourceOperation === OpearionTypes.SEARCH
               }
             />
           )}
-          {container.resourceMethod === "DELETE" && (
+          {resource.resourceMethod === "DELETE" && (
             <DeleteResourceContent
               isSearchOperation={
-                container.resourceOperation === OpearionTypes.SEARCH
+                resource.resourceOperation === OpearionTypes.SEARCH
               }
             />
           )}
@@ -93,7 +93,7 @@ export const APIResourceBody = () => {
     ));
   };
 
-  const renderTabs = () => {
+  const renderAPIs = () => {
     return apiList.map((api: ApiConfig, index: number) => (
       <Tab
         key={index}
@@ -108,15 +108,14 @@ export const APIResourceBody = () => {
   return (
     <div>
       <Tabs
-        value={selectedTab}
-        onChange={handleChangeTab}
+        value={selectedAPI}
+        onChange={handleChangeAPI}
         indicatorColor="primary"
         textColor="inherit"
-        sx={{ mt: 2 }}
       >
-        {renderTabs()}
+        {renderAPIs()}
       </Tabs>
-      {renderContainers(apiList[selectedTab].resources)}
+      {renderResources(apiList[selectedAPI].resources)}
     </div>
   );
 };

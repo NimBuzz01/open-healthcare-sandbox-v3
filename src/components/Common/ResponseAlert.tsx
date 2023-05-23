@@ -1,13 +1,16 @@
-import React from "react";
-import Box from "@mui/material/Box";
 import Alert, { AlertColor } from "@mui/material/Alert";
-import Collapse from "@mui/material/Collapse";
+import { Snackbar, SnackbarOrigin } from "@mui/material";
+import { useState } from "react";
 
 interface Props {
   isOpen: boolean;
   severity: AlertColor;
   message: string;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen: any;
+}
+
+export interface State extends SnackbarOrigin {
+  open: boolean;
 }
 
 export const ResponseAlert = ({
@@ -16,28 +19,22 @@ export const ResponseAlert = ({
   message,
   setIsOpen,
 }: Props) => {
+  const [state] = useState<State>({
+    open: isOpen,
+    vertical: "top",
+    horizontal: "right",
+  });
+  const { vertical, horizontal, open } = state;
+
   return (
-    <Collapse
-      in={isOpen}
-      sx={{
-        position: "fixed",
-        bottom: 60,
-        right: 30,
-        zIndex: 10,
-        transition: "0.3s ease",
-      }}
+    <Snackbar
+      open={open}
+      onClose={setIsOpen}
+      anchorOrigin={{ vertical, horizontal }}
     >
-      <Box display="flex" justifyContent="flex-end">
-        <Alert
-          severity={severity}
-          sx={{ fontSize: 15, width: 500, mt: 2 }}
-          onClose={() => {
-            setIsOpen(false);
-          }}
-        >
-          {message}
-        </Alert>
-      </Box>
-    </Collapse>
+      <Alert onClose={setIsOpen} severity={severity} sx={{ width: "100%", fontSize:14, }}>
+        {message}
+      </Alert>
+    </Snackbar>
   );
 };

@@ -44,7 +44,7 @@ export const TextAreaInput = ({
             alignItems="right"
             sx={{ display: "flex" }}
           >
-            {isCopyRequired && <CopyContent size={iconWidth} data={data!} />}
+            {isCopyRequired && <CopyContent data={data!} />}
             {isUploadRequired && (
               <UploadIcon size={iconWidth} readFile={readFile!} />
             )}

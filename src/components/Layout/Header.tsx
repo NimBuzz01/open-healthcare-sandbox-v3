@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { Logo } from "../Logo";
 import { AlertModal, ComponentTitle } from "../Common";
 import { items } from "../Configs/AcceleratorConfig";
-import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
+import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 
 export const Header = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -31,14 +31,14 @@ export const Header = () => {
         sx={{
           display: "flex",
           alignItems: "center",
-          gap:1,
+          gap: 1,
           py: 0.5,
           px: 1,
           boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px;",
         }}
       >
         <Logo />
-        <KeyboardArrowRightOutlinedIcon fontSize="large" color="primary"/>
+        <KeyboardArrowRightOutlinedIcon fontSize="large" color="primary" />
         <ComponentTitle
           heading={label}
           description={description}

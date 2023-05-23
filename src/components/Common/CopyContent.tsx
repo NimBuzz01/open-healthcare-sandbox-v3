@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { Alert, Box, IconButton, Typography } from "@mui/material";
+import { Alert, Box, IconButton, Tooltip, Typography } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
 interface Props {
   data: string;
-  size?: number;
 }
 
-export const CopyContent = ({ data, size = 25 }: Props) => {
+export const CopyContent = ({ data }: Props) => {
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
@@ -19,7 +18,7 @@ export const CopyContent = ({ data, size = 25 }: Props) => {
   }, [isCopied]);
 
   return (
-    <>
+    <Tooltip key={"copy-icon"} title={"Copy Content"} placement="bottom">
       <Box style={{ display: "flex" }}>
         <Typography component="span">
           {isCopied && (
@@ -43,9 +42,9 @@ export const CopyContent = ({ data, size = 25 }: Props) => {
             setIsCopied(true);
           }}
         >
-          <ContentCopyIcon sx={{ fontSize: { size } }} />
+          <ContentCopyIcon />
         </IconButton>
       </Box>
-    </>
+    </Tooltip>
   );
 };

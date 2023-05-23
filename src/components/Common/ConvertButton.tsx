@@ -1,27 +1,32 @@
-import { Button } from "@mui/material";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Button, CircularProgress } from "@mui/material";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 interface Props {
   handleSubmit?(): any;
+  isLoading: boolean;
 }
 
-export const ConvertButton = ({ handleSubmit }: Props) => {
+export const ConvertButton = ({ isLoading, handleSubmit }: Props) => {
   return (
     <Button
-      variant="outlined"
+      variant="contained"
+      color="secondary"
+      endIcon={
+        isLoading ? (
+          <CircularProgress size={16} sx={{ color: "background.default", ml:0.46 }} />
+        ) : (
+          <ArrowForwardIcon/>
+        )
+      }
       sx={{
-        borderRadius: 1,
-        color: "primary.main",
-        border: 1,
-        borderColor: "grey.400",
-        ":hover": {
-          border: 1,
-          borderColor: "primary.light",
-        },
+        fontSize: 14,
+        color: "background.default",
+        width: 180,
+        mr:4.5
       }}
       onClick={handleSubmit}
     >
-      <ArrowForwardIosIcon sx={{ width: 50, height: 50 }}></ArrowForwardIosIcon>
+      Convert to FHIR
     </Button>
   );
 };
