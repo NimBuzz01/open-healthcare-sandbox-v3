@@ -1,5 +1,5 @@
-import { IconButton } from "@mui/material";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { IconButton, Tooltip } from "@mui/material";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 interface Props {
   size?: number;
@@ -39,15 +39,16 @@ export const UploadIcon = ({ size = 30, readFile }: Props) => {
         }}
       />
       <label htmlFor="icon-button-file">
-        <IconButton
-          aria-label="upload file"
-          component="span"
-          sx={{
-            color: "primary.main",
-          }}
-        >
-          <CloudUploadIcon sx={{ fontSize: size }} />
-        </IconButton>
+        <Tooltip key="upload-icon" title="Upload Content" placement="bottom">
+          <IconButton
+            aria-label="upload file"
+            sx={{
+              color: "primary.main",
+            }}
+          >
+            <FileUploadIcon sx={{ fontSize: size }} />
+          </IconButton>
+        </Tooltip>
       </label>
     </>
   );

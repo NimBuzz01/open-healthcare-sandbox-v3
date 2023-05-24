@@ -126,6 +126,15 @@ export const CcdaToFhir = () => {
     }));
   }, []);
 
+  const readFile = (fileInput?: string | ArrayBuffer | null) => {
+    if (typeof fileInput == "string") {
+      setState((prevState)=>({
+        ...prevState,
+        input: fileInput,
+      }));
+    }
+  };
+
   const toggleDarkMode = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = event.target;
     setState((prevState) => ({
@@ -177,7 +186,9 @@ export const CcdaToFhir = () => {
           onClear={handleInputClear}
           placeholder="Paste or edit C-CDA Data here..."
           fileType="xml"
-          downloadEnabled
+          uploadEnabled          
+          readFile={readFile}
+          clearEnabled
           width="50%"
           height="700px"
         />
@@ -188,9 +199,10 @@ export const CcdaToFhir = () => {
           onChange={handleOutputChange}
           darkMode={darkMode}
           onClear={handleOutputClear}
-          placeholder="Paste or edit Json Data here..."
+          placeholder="FHIR Resource will be displayed here..."
           fileType="json"
           downloadEnabled
+          clearEnabled
           width="50%"
           height="700px"
         />

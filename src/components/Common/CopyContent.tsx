@@ -5,27 +5,27 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
 interface Props {
   data: string;
+  size?: number;
 }
 
-export const CopyContent = ({ data }: Props) => {
+export const CopyContent = ({ data, size = 30 }: Props) => {
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
-    // when the component is mounted, the alert is displayed for 3 seconds
     setTimeout(() => {
       setIsCopied(false);
-    }, 4000);
+    }, 3000);
   }, [isCopied]);
 
   return (
-    <Tooltip key={"copy-icon"} title={"Copy Content"} placement="bottom">
+    <Tooltip key="copy-icon" title="Copy Content" placement="bottom">
       <Box style={{ display: "flex" }}>
         <Typography component="span">
           {isCopied && (
             <Alert
               severity="success"
               icon={<TaskAltIcon sx={{ fontSize: 15 }} />}
-              sx={{ fontSize: 10 }}
+              sx={{ fontSize: 10, py: 0.3 }}
             >
               Copied
             </Alert>
@@ -33,7 +33,6 @@ export const CopyContent = ({ data }: Props) => {
         </Typography>
         <IconButton
           aria-label="upload file"
-          component="span"
           sx={{
             color: "primary.main",
           }}
@@ -42,7 +41,7 @@ export const CopyContent = ({ data }: Props) => {
             setIsCopied(true);
           }}
         >
-          <ContentCopyIcon />
+          <ContentCopyIcon sx={{ fontSize: size }} />
         </IconButton>
       </Box>
     </Tooltip>

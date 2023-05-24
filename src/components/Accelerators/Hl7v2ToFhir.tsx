@@ -126,6 +126,15 @@ export const Hl7v2ToFhir = () => {
     }));
   }, []);
 
+  const readFile = (fileInput?: string | ArrayBuffer | null) => {
+    if (typeof fileInput == "string") {
+      setState((prevState)=>({
+        ...prevState,
+        input: fileInput,
+      }));
+    }
+  };
+
   const toggleDarkMode = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = event.target;
     setState((prevState) => ({
@@ -177,7 +186,9 @@ export const Hl7v2ToFhir = () => {
           onClear={handleInputClear}
           placeholder="Paste or edit HL7 Data here..."
           fileType="xml"
-          downloadEnabled
+          uploadEnabled
+          readFile={readFile}
+          clearEnabled
           width="50%"
           height="700px"
         />
@@ -188,9 +199,10 @@ export const Hl7v2ToFhir = () => {
           onChange={handleOutputChange}
           darkMode={darkMode}
           onClear={handleOutputClear}
-          placeholder="Paste or edit Json Data here..."
+          placeholder="FHIR Resource will be displayed here..."
           fileType="json"
           downloadEnabled
+          clearEnabled
           width="50%"
           height="700px"
         />

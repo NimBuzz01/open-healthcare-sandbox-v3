@@ -1,5 +1,5 @@
-import { IconButton } from "@mui/material";
-import { CloudDownloadRounded } from "@mui/icons-material";
+import { IconButton, Tooltip } from "@mui/material";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
 
 interface Props {
   size?: number;
@@ -9,16 +9,17 @@ interface Props {
 export const DownloadIcon = ({ size = 30, handleDownload }: Props) => {
   return (
     <>
-      <IconButton
-        aria-label="upload file"
-        component="span"
-        sx={{
-          color: "primary.main",
-        }}
-        onClick={handleDownload}
-      >
-        <CloudDownloadRounded sx={{ fontSize: size }} />
-      </IconButton>
+      <Tooltip key="download-icon" title="Download Content" placement="bottom">
+        <IconButton
+          aria-label="download file"
+          sx={{
+            color: "primary.main",
+          }}
+          onClick={handleDownload}
+        >
+          <FileDownloadIcon sx={{ fontSize: size }} />
+        </IconButton>
+      </Tooltip>
     </>
   );
 };

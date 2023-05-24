@@ -1,13 +1,9 @@
-import { Box, Tooltip, IconButton, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import CodeMirror from "@uiw/react-codemirror";
 import { aura, bbedit } from "@uiw/codemirror-themes-all";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import FileSaver from "file-saver";
-import { CopyContent } from "../Common";
-import {
-  SaveAltOutlined as SaveAltOutlinedIcon,
-  DeleteOutlineOutlined as DeleteOutlineOutlinedIcon,
-} from "@mui/icons-material";
+import { ClearIcon, CopyContent, DownloadIcon, UploadIcon } from "../Common";
 
 interface CodeEditorProps {
   title: string;
@@ -18,6 +14,9 @@ interface CodeEditorProps {
   placeholder?: string;
   fileType: string;
   downloadEnabled?: boolean;
+  uploadEnabled?: boolean;
+  clearEnabled?: boolean;
+  readFile?(fileInput?: string | ArrayBuffer | null): any;
   readOnly?: boolean;
   width: string;
   height: string;
@@ -32,6 +31,9 @@ export const CodeEditor = ({
   placeholder,
   fileType,
   downloadEnabled,
+  uploadEnabled,
+  clearEnabled,
+  readFile,
   readOnly,
   width,
   height,
@@ -47,7 +49,7 @@ export const CodeEditor = ({
 
   const handleDownloadClick = () => {
     const content = JSON.stringify(value, null, 2);
-    handleDownload(content, `${fileType}.json`);
+    handleDownload(JSON.parse(content), `${fileType}.json`);
   };
 
   const langExtensions: Record<string, () => any> = langs;
@@ -71,27 +73,12 @@ export const CodeEditor = ({
       >
         <Typography variant="h5">{title}</Typography>
         <Box sx={{ display: "flex" }}>
-          <CopyContent data={JSON.stringify(value!)} />
+          <CopyContent data={JSON.stringify(value!)} size={20} />
           {downloadEnabled && (
-            <Tooltip
-              key={"download-icon"}
-              title={"Download Content"}
-              placement="bottom"
-            >
-              <IconButton color="primary" onClick={handleDownloadClick}>
-                <SaveAltOutlinedIcon />
-              </IconButton>
-            </Tooltip>
+            <DownloadIcon handleDownload={handleDownloadClick} size={22} />
           )}
-          <Tooltip
-            key={"clear-icon"}
-            title={"Clear Content"}
-            placement="bottom"
-          >
-            <IconButton color="primary" onClick={onClear}>
-              <DeleteOutlineOutlinedIcon />
-            </IconButton>
-          </Tooltip>
+          {uploadEnabled && <UploadIcon readFile={readFile!} size={22} />}
+          {clearEnabled && <ClearIcon onClear={onClear!} size={22} />}
         </Box>
       </Box>
       <CodeMirror
