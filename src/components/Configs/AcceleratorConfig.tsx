@@ -6,14 +6,15 @@ import {
   SmartOnFhir,
   FhirValidation,
   FhirApis,
+} from "../Accelerators";
+import {
   Hl7Samples,
   ValidationSamples,
   SmartSamples,
   CcdaSamples,
   PathSamples,
   EmrSamples,
-} from "../Accelerators";
-
+} from "../Accelerators/Samples";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import TransformOutlinedIcon from "@mui/icons-material/TransformOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";

@@ -7,10 +7,10 @@ import {
   CodeEditor,
   ConsoleAccordion,
   ResponseAlert,
-} from "../../Common";
+} from "../Common";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
-import apiClient from "../../../services/api-client";
-import { BFF_BASE_URL } from "../../Configs/Constants";
+import apiClient from "../../services/api-client";
+import { BFF_BASE_URL } from "../Configs/Constants";
 
 interface State {
   input: string;
@@ -23,7 +23,7 @@ interface State {
   isLoading: boolean;
 }
 
-export const CcdaToFhir = () => {
+export const Hl7v2ToFhir = () => {
   const [state, setState] = useState<State>({
     input: "",
     output: "",
@@ -57,7 +57,7 @@ export const CcdaToFhir = () => {
     }));
 
     apiClient(BFF_BASE_URL)
-      .post("/ccdatofhir/transform", input)
+      .post("/v2tofhir/transform", input)
       .then((res) => {
         setState((prevState) => ({
           ...prevState,
@@ -170,12 +170,12 @@ export const CcdaToFhir = () => {
         }}
       >
         <CodeEditor
-          title="C-CDA Resource: "
+          title="HL7 Resource: "
           value={input}
           onChange={handleInputChange}
           darkMode={darkMode}
           onClear={handleInputClear}
-          placeholder="Paste or edit C-CDA Data here..."
+          placeholder="Paste or edit HL7 Data here..."
           fileType="xml"
           downloadEnabled
           width="50%"
