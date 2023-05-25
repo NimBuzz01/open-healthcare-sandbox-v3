@@ -38,10 +38,10 @@ export const SideNavigation = ({ items }: Props) => {
         flexDirection: "column",
         bgcolor: "primary.main",
         p: 2,
-        minWidth: isExpanded ? 250 : 48,
-        maxWidth: 250,
+        width: isExpanded ? 250 : 70,
         zIndex: 2,
-        transition: "width 0.3s ease-in",
+        transition: "0.2s",
+        overflow: "hidden",
       }}
     >
       <Box
@@ -50,7 +50,7 @@ export const SideNavigation = ({ items }: Props) => {
           alignItems: "center",
           justifyContent: "space-between",
           mt: 2,
-          mx: 2,
+          mx: 1,
         }}
       >
         <Typography
@@ -58,7 +58,7 @@ export const SideNavigation = ({ items }: Props) => {
           sx={{
             color: "background.default",
             display: isExpanded ? "block" : "none",
-            transition: "opacity 0.3s ease-in",
+            transition: "0.2s",
             opacity: isExpanded ? 1 : 0,
           }}
         >
@@ -72,7 +72,7 @@ export const SideNavigation = ({ items }: Props) => {
             justifyContent: "center",
             color: "background.default",
             cursor: "pointer",
-            transition: "0.2s ease-in",
+            transition: "0.2s",
             fontSize: 20,
           }}
         >
@@ -93,7 +93,7 @@ export const SideNavigation = ({ items }: Props) => {
         sx={{
           m: 1,
           bgcolor: "background.default",
-          transition: "opacity 0.2s ease-in",
+          transition: "0.2s",
         }}
       />
       {items.map((item) => (
@@ -120,19 +120,19 @@ export const SideNavigation = ({ items }: Props) => {
                 gap: 2,
                 color: "background.default",
                 py: 1.25,
-                px: isExpanded ? 2.0 : 1,
+                width: 250,
+                px: isExpanded ? 1.5 : 0,
                 margin: 0.62,
                 cursor: "pointer",
-                transition: "0.2s ease-in",
+                transition: "0.2s",
                 textDecoration: "none",
                 fontSize: isExpanded ? 16 : 0,
                 ...(currentSelection === item.path && {
                   backgroundColor: "background.default",
                   color: "primary.dark",
                   borderRadius: "10px 0 0 10px",
-                  marginRight: -2,
-                  paddingRight: 2,
-                  paddingLeft: 2,
+                  marginRight: -1,
+                  paddingLeft: 1.5,
                 }),
               }}
             >
