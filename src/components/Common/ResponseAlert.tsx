@@ -21,7 +21,7 @@ export const ResponseAlert = ({
 }: Props) => {
   const [state] = useState<State>({
     open: isOpen,
-    vertical: "top",
+    vertical: "bottom",
     horizontal: "right",
   });
   const { vertical, horizontal, open } = state;
