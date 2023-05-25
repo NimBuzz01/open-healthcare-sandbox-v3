@@ -1,5 +1,5 @@
 import { IconButton, Tooltip } from "@mui/material";
-import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
 interface Props {
   size?: number;
@@ -17,7 +17,7 @@ export const DownloadIcon = ({ size = 30, handleDownload }: Props) => {
           }}
           onClick={handleDownload}
         >
-          <FileDownloadIcon sx={{ fontSize: size }} />
+          <FileDownloadOutlinedIcon sx={{ fontSize: size }} />
         </IconButton>
       </Tooltip>
     </>

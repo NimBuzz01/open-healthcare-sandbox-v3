@@ -5,6 +5,7 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
 interface Props {
   data: string;
+  size?: number;
 }
 
 export const CopyContent = ({ data, size = 30 }: Props) => {

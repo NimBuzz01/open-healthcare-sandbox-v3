@@ -1,5 +1,5 @@
 import { IconButton, Tooltip } from "@mui/material";
-import FileUploadIcon from "@mui/icons-material/FileUpload";
+import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 
 interface Props {
   size?: number;
@@ -46,7 +46,7 @@ export const UploadIcon = ({ size = 30, readFile }: Props) => {
               color: "primary.main",
             }}
           >
-            <FileUploadIcon sx={{ fontSize: size }} />
+            <FileUploadOutlinedIcon sx={{ fontSize: size }} />
           </IconButton>
         </Tooltip>
       </label>
