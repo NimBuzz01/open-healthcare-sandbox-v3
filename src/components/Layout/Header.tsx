@@ -32,9 +32,9 @@ export const Header = () => {
           display: "flex",
           alignItems: "center",
           gap: 1,
-          py: 0.5,
+          py: 0,
           px: 1,
-          boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px;",
+          boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
         }}
       >
         <Logo />

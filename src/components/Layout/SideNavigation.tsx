@@ -39,8 +39,8 @@ export const SideNavigation = ({ items }: Props) => {
           flexGrow: 1,
           flexDirection: "column",
           bgcolor: "primary.main",
-          p: 2,
-          width: isExpanded ? 250 : 70,
+          p: 1,
+          width: isExpanded ? 230 : 70,
           zIndex: 2,
           transition: "0.2s",
           overflow: "hidden",
@@ -53,7 +53,7 @@ export const SideNavigation = ({ items }: Props) => {
             alignItems: "center",
             justifyContent: "space-between",
             mt: 2,
-            mx: 1,
+            mx: 1.8,
           }}
         >
           <Typography
@@ -124,9 +124,10 @@ export const SideNavigation = ({ items }: Props) => {
                     gap: 2,
                     color: "background.default",
                     py: 1.25,
-                    width: 250,
+                    width: 230,
                     px: isExpanded ? 1.5 : 0,
                     margin: 0.62,
+                    mx : isExpanded ? 1.5 : 1.5,
                     cursor: "pointer",
                     transition: "0.2s",
                     textDecoration: "none",

@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import CodeMirror from "@uiw/react-codemirror";
-import { aura, bbedit } from "@uiw/codemirror-themes-all";
+import { aura, xcodeLight } from "@uiw/codemirror-themes-all";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import FileSaver from "file-saver";
 import { ClearIcon, CopyContent, DownloadIcon, UploadIcon } from "../Common";
@@ -69,6 +69,8 @@ export const CodeEditor = ({
           justifyContent: "space-between",
           alignItems: "center",
           px: 1,
+          borderBottom: 1,
+          borderColor: "grey.500",
         }}
       >
         <Typography variant="h5">{title}</Typography>
@@ -85,7 +87,7 @@ export const CodeEditor = ({
         placeholder={placeholder}
         height={height}
         value={value}
-        theme={darkMode ? aura : bbedit}
+        theme={darkMode ? aura : xcodeLight}
         extensions={[langExtensions[fileType]()]}
         onChange={onChange}
         readOnly={readOnly}
