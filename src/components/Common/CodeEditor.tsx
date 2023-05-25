@@ -73,7 +73,7 @@ export const CodeEditor = ({
       >
         <Typography variant="h5">{title}</Typography>
         <Box sx={{ display: "flex" }}>
-          <CopyContent data={JSON.stringify(value!)} size={20} />
+          <CopyContent data={JSON.parse(JSON.stringify(value!))} size={20} />
           {downloadEnabled && (
             <DownloadIcon handleDownload={handleDownloadClick} size={22} />
           )}

@@ -119,12 +119,12 @@ export const CcdaToFhir = () => {
     }));
   }, []);
 
-  const handleOutputChange = useCallback((value: string) => {
-    setState((prevState) => ({
-      ...prevState,
-      output: value,
-    }));
-  }, []);
+  // const handleOutputChange = useCallback((value: string) => {
+  //   setState((prevState) => ({
+  //     ...prevState,
+  //     output: value,
+  //   }));
+  // }, []);
 
   const readFile = (fileInput?: string | ArrayBuffer | null) => {
     if (typeof fileInput == "string") {
@@ -190,13 +190,13 @@ export const CcdaToFhir = () => {
           readFile={readFile}
           clearEnabled
           width="50%"
-          height="700px"
+          height="800px"
         />
         <Divider orientation="vertical" />
         <CodeEditor
           title="FHIR Resource: "
           value={output}
-          onChange={handleOutputChange}
+          readOnly
           darkMode={darkMode}
           onClear={handleOutputClear}
           placeholder="FHIR Resource will be displayed here..."
@@ -204,12 +204,12 @@ export const CcdaToFhir = () => {
           downloadEnabled
           clearEnabled
           width="50%"
-          height="700px"
+          height="800px"
         />
       </Box>
-      <Box>
+      {/* <Box>
         <ConsoleAccordion error={error} darkMode />
-      </Box>
+      </Box> */}
     </Container>
   );
 };
