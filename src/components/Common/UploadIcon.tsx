@@ -45,6 +45,7 @@ export const UploadIcon = ({ size = 30, readFile }: Props) => {
             sx={{
               color: "primary.main",
             }}
+            component="span"
           >
             <FileUploadOutlinedIcon sx={{ fontSize: size }} />
           </IconButton>
