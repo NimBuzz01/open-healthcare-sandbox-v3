@@ -9,7 +9,7 @@ export const MainContent = () => {
     <Box sx={{ flexGrow: 1, display: "flex" }}>
       <SideNavigation items={items} />
       <Scrollbars>
-        <Box width={1} mt={2} mb={6} sx={{ overflowY: "auto" }}>
+        <Box width={1} mt={2} sx={{ overflowY: "auto" }}>
           <Routes items={items} />
         </Box>
       </Scrollbars>
