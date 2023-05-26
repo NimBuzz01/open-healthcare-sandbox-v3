@@ -128,7 +128,7 @@ export const CcdaToFhir = () => {
 
   const readFile = (fileInput?: string | ArrayBuffer | null) => {
     if (typeof fileInput == "string") {
-      setState((prevState)=>({
+      setState((prevState) => ({
         ...prevState,
         input: fileInput,
       }));
@@ -144,7 +144,10 @@ export const CcdaToFhir = () => {
   };
 
   return (
-    <Container maxWidth={false}>
+    <Container
+      maxWidth={false}
+      sx={{ display: "flex", flexDirection: "column", height: 1 }}
+    >
       {isError && (
         <ResponseAlert
           isOpen={isError}
@@ -163,7 +166,7 @@ export const CcdaToFhir = () => {
           variant="contained"
           color="secondary"
           endIcon={<ArticleOutlinedIcon />}
-          sx={{ fontSize: 14, color:"background.default"}}
+          sx={{ fontSize: 14, color: "background.default" }}
           onClick={openSampleModal}
         >
           Load Examples
@@ -176,6 +179,7 @@ export const CcdaToFhir = () => {
         sx={{
           display: "flex",
           mt: 1,
+          flexGrow: 1,
         }}
       >
         <CodeEditor
@@ -186,11 +190,11 @@ export const CcdaToFhir = () => {
           onClear={handleInputClear}
           placeholder="Paste or edit C-CDA Data here..."
           fileType="xml"
-          uploadEnabled          
+          uploadEnabled
           readFile={readFile}
           clearEnabled
           width="50%"
-          height="800px"
+          height="791px"
         />
         <Divider orientation="vertical" />
         <CodeEditor
@@ -204,7 +208,7 @@ export const CcdaToFhir = () => {
           downloadEnabled
           clearEnabled
           width="50%"
-          height="800px"
+          height="791px"
         />
       </Box>
       {/* <Box>

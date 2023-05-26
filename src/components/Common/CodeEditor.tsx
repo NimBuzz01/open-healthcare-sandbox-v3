@@ -61,6 +61,9 @@ export const CodeEditor = ({
         border: 1,
         borderRadius: 1,
         borderColor: "grey.500",
+        display: "flex",
+        flexDirection: "column",
+        height: 1,
       }}
     >
       <Box
@@ -83,15 +86,17 @@ export const CodeEditor = ({
           {clearEnabled && <ClearIcon onClear={onClear!} size={22} />}
         </Box>
       </Box>
-      <CodeMirror
-        placeholder={placeholder}
-        height={height}
-        value={value}
-        theme={darkMode ? aura : xcodeLight}
-        extensions={[langExtensions[fileType]()]}
-        onChange={onChange}
-        readOnly={readOnly}
-      />
+      <Box sx={{ flexGrow: 1 }}>
+        <CodeMirror
+          placeholder={placeholder}
+          value={value}
+          height={height}
+          theme={darkMode ? aura : xcodeLight}
+          extensions={[langExtensions[fileType]()]}
+          onChange={onChange}
+          readOnly={readOnly}
+        />
+      </Box>
     </Box>
   );
 };

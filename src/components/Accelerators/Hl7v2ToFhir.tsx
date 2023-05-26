@@ -128,7 +128,7 @@ export const Hl7v2ToFhir = () => {
 
   const readFile = (fileInput?: string | ArrayBuffer | null) => {
     if (typeof fileInput == "string") {
-      setState((prevState)=>({
+      setState((prevState) => ({
         ...prevState,
         input: fileInput,
       }));
@@ -144,7 +144,10 @@ export const Hl7v2ToFhir = () => {
   };
 
   return (
-    <Container maxWidth={false}>
+    <Container
+      maxWidth={false}
+      sx={{ display: "flex", flexDirection: "column", height: 1 }}
+    >
       {isError && (
         <ResponseAlert
           isOpen={isError}
@@ -163,7 +166,7 @@ export const Hl7v2ToFhir = () => {
           variant="contained"
           color="secondary"
           endIcon={<ArticleOutlinedIcon />}
-          sx={{ fontSize: 14, color:"background.default"}}
+          sx={{ fontSize: 14, color: "background.default" }}
           onClick={openSampleModal}
         >
           Load Examples
@@ -176,6 +179,7 @@ export const Hl7v2ToFhir = () => {
         sx={{
           display: "flex",
           mt: 1,
+          flexGrow: 1,
         }}
       >
         <CodeEditor
@@ -190,7 +194,7 @@ export const Hl7v2ToFhir = () => {
           readFile={readFile}
           clearEnabled
           width="50%"
-          height="800px"
+          height="791px"
         />
         <Divider orientation="vertical" />
         <CodeEditor
@@ -204,7 +208,7 @@ export const Hl7v2ToFhir = () => {
           downloadEnabled
           clearEnabled
           width="50%"
-          height="800px"
+          height="791px"
         />
       </Box>
       {/* <Box>
