@@ -18,8 +18,8 @@ interface CodeEditorProps {
   clearEnabled?: boolean;
   readFile?(fileInput?: string | ArrayBuffer | null): any;
   readOnly?: boolean;
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
 }
 
 export const CodeEditor = ({
@@ -88,6 +88,7 @@ export const CodeEditor = ({
       </Box>
       <Box sx={{ flexGrow: 1 }}>
         <CodeMirror
+          style={{ height: height }}
           placeholder={placeholder}
           value={value}
           height={height}

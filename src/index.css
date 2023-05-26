@@ -1,19 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-/* Colour Pallete */
-:root {
-  --white: #FFF;
-  --blue: #5567D5;
-  --darkblue: #00255C;
-  --black: #222228;
-  --lightblack: #212A3E;
-  --green: #34B474;
-  --gray: #A5A5A5;
-  --lightgray: #D3D3D3;
+* {
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
+  margin: 0;  
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

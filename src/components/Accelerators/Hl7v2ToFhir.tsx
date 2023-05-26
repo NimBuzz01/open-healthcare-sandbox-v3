@@ -5,7 +5,6 @@ import {
   SamplesModal,
   ToggleDarkMode,
   CodeEditor,
-  ConsoleAccordion,
   ResponseAlert,
 } from "../Common";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
@@ -15,7 +14,6 @@ import { BFF_BASE_URL } from "../Configs/Constants";
 interface State {
   input: string;
   output: string;
-  error: string;
   errorMessage: string;
   isError: boolean;
   darkMode: boolean;
@@ -27,7 +25,6 @@ export const Hl7v2ToFhir = () => {
   const [state, setState] = useState<State>({
     input: "",
     output: "",
-    error: "",
     errorMessage: "",
     isError: false,
     darkMode: true,
@@ -38,7 +35,6 @@ export const Hl7v2ToFhir = () => {
   const {
     input,
     output,
-    error,
     errorMessage,
     isError,
     darkMode,
@@ -51,7 +47,6 @@ export const Hl7v2ToFhir = () => {
       ...prevState,
       isLoading: true,
       output: "",
-      error: "",
       isError: false,
       errorMessage: "",
     }));
@@ -69,7 +64,6 @@ export const Hl7v2ToFhir = () => {
         setState((prevState) => ({
           ...prevState,
           output: JSON.stringify(error.response, null, 2),
-          error: JSON.stringify(error.response, null, 2),
           errorMessage: error.message,
           isError: true,
           isLoading: false,
@@ -194,7 +188,7 @@ export const Hl7v2ToFhir = () => {
           readFile={readFile}
           clearEnabled
           width="50%"
-          height="791px"
+          height="calc(100vh - 187px)"
         />
         <Divider orientation="vertical" />
         <CodeEditor
@@ -208,12 +202,9 @@ export const Hl7v2ToFhir = () => {
           downloadEnabled
           clearEnabled
           width="50%"
-          height="791px"
+          height="calc(100vh - 187px)"
         />
       </Box>
-      {/* <Box>
-        <ConsoleAccordion error={error} darkMode />
-      </Box> */}
     </Container>
   );
 };
