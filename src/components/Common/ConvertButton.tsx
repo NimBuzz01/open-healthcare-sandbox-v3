@@ -1,5 +1,5 @@
 import { Button, CircularProgress } from "@mui/material";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 interface Props {
   handleSubmit?(): any;
@@ -13,16 +13,19 @@ export const ConvertButton = ({ isLoading, handleSubmit }: Props) => {
       color="secondary"
       endIcon={
         isLoading ? (
-          <CircularProgress size={16} sx={{ color: "background.default", ml:0.46 }} />
+          <CircularProgress
+            size={16}
+            sx={{ color: "background.default", ml: 0.46 }}
+          />
         ) : (
-          <ArrowForwardIcon/>
+          <ArrowForwardIcon />
         )
       }
       sx={{
         fontSize: 14,
         color: "background.default",
         width: 180,
-        mr:4.5
+        mr: 3,
       }}
       onClick={handleSubmit}
     >

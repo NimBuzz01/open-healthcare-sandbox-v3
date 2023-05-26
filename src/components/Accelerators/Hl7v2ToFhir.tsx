@@ -1,13 +1,13 @@
 import React, { useCallback, useState } from "react";
-import { Box, Button, Container, Divider } from "@mui/material";
+import { Box, Container, Divider } from "@mui/material";
 import {
   ConvertButton,
   SamplesModal,
   ToggleDarkMode,
   CodeEditor,
   ResponseAlert,
+  SamplesButton,
 } from "../Common";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import apiClient from "../../services/api-client";
 import { BFF_BASE_URL } from "../Configs/Constants";
 
@@ -156,15 +156,7 @@ export const Hl7v2ToFhir = () => {
           justifyContent: "space-between",
         }}
       >
-        <Button
-          variant="contained"
-          color="secondary"
-          endIcon={<ArticleOutlinedIcon />}
-          sx={{ fontSize: 14, color: "background.default" }}
-          onClick={openSampleModal}
-        >
-          Load Examples
-        </Button>
+        <SamplesButton onClick={openSampleModal} />
         <SamplesModal isOpen={isSamplesOpen} onClose={closeSampleModal} />
         <ConvertButton handleSubmit={callBackend} isLoading={isLoading} />
         <ToggleDarkMode mode={darkMode} toggleMode={toggleDarkMode} />

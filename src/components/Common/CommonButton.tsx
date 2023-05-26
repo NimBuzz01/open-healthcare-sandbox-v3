@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 interface ButtonProps {
   variant: "background" | "border";
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const CommonButton = ({ variant, label, onClick }: ButtonProps) => {

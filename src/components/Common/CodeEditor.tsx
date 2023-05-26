@@ -88,7 +88,6 @@ export const CodeEditor = ({
       </Box>
       <Box sx={{ flexGrow: 1 }}>
         <CodeMirror
-          style={{ height: height }}
           placeholder={placeholder}
           value={value}
           height={height}

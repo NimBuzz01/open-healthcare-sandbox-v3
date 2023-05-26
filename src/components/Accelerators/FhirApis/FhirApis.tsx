@@ -3,7 +3,7 @@ import { APIResourceBody } from "./APIResourceBody";
 
 export const FhirApis = () => {
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth={false}>
       <Typography
         variant="h5"
         sx={{ mt: 2, fontWeight: 500, color: "primary.dark" }}
