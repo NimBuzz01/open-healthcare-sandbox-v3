@@ -8,18 +8,48 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { TextAreaOutput, CommonButton } from "../../Common";
+import { TextAreaOutput, CommonButton, ResponseAlert } from "../../Common";
 import { searchParams } from "../../Configs/ApiConfig";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import axios from "axios";
 
 interface Props {
   isSearchOperation?: boolean;
+  backendUrl: string;
 }
 
-export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
+export const GetResourceContent = ({
+  isSearchOperation = false,
+  backendUrl,
+}: Props) => {
   const [searchBoxCount, setSearchBoxCount] = useState(1);
-  const [data, setData] = useState(false);
+  const [data, setData] = useState(null);
+  const [isOpen, setIsOpen] = useState(true);
+  const [id, setId] = useState("");
+  const [error, setError] = useState("");
+
+  const callBackend = () => {
+    let url: string = "";
+    if (isSearchOperation) {
+      url = backendUrl;
+    } else {
+      url = backendUrl.concat(id);
+    }
+
+    setData(null);
+    setError("");
+
+    axios
+      .get(url)
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(err.message);
+      });
+  };
 
   const renderSearchBoxes = () => {
     const elements: any[] = [];
@@ -59,6 +89,14 @@ export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 2 }}>
+      {error && (
+        <ResponseAlert
+          isOpen={isOpen}
+          severity="error"
+          message={error}
+          setIsOpen={setIsOpen}
+        />
+      )}
       <Box sx={{ display: "flex", gap: 5 }}>
         {isSearchOperation && (
           <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
@@ -72,7 +110,14 @@ export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
         {!isSearchOperation && (
           <Box sx={{ display: "flex", gap: 70 }}>
             <Box sx={{ display: "flex", gap: 2 }}>
-              <TextField variant="outlined" label="Id" fullWidth />
+            <TextField
+                onChange={(event) => {
+                  setId(event.target.value)}
+                }
+                variant="outlined"
+                label="Id"
+                fullWidth
+              />
             </Box>
           </Box>
         )}
@@ -113,16 +158,16 @@ export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
             <CommonButton
               variant="background"
               label="Execute"
-              onClick={() => {
-                setData(true);
-              }}
+              onClick={callBackend}
             />
             <CommonButton
               variant="border"
               label="Clear"
               onClick={() => {
                 setSearchBoxCount(1);
-                setData(false);
+                setData(null);
+                setError("");
+                setId("");
               }}
             />
           </Box>
@@ -133,6 +178,7 @@ export const GetResourceContent = ({ isSearchOperation = false }: Props) => {
           <TextAreaOutput
             label={"Output"}
             isDownloadButtonRequired
+            data={data}
           ></TextAreaOutput>
         </Box>
       )}

@@ -37,7 +37,7 @@ export const APIResourceBody = () => {
       setExpandedResourceIndex(isExpanded ? index : false);
     };
 
-  const renderResources = (resources: ResourceConfig[]) => {
+  const renderResources = ({baseUrl, resources}: ApiConfig) => {
     return resources.map((resource, index) => (
       <Accordion
         key={index}
@@ -79,6 +79,7 @@ export const APIResourceBody = () => {
               isSearchOperation={
                 resource.resourceOperation === OpearionTypes.SEARCH
               }
+              backendUrl={baseUrl}
             />
           )}
           {resource.resourceMethod === "DELETE" && (
@@ -115,7 +116,7 @@ export const APIResourceBody = () => {
       >
         {renderAPIs()}
       </Tabs>
-      {renderResources(apiList[selectedAPI].resources)}
+      {renderResources(apiList[selectedAPI])}
     </div>
   );
 };
