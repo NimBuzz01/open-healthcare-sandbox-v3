@@ -6,36 +6,73 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  SelectChangeEvent,
   TextField,
 } from "@mui/material";
 import { TextAreaOutput, CommonButton, ResponseAlert } from "../../Common";
-import { searchParams } from "../../Configs/ApiConfig";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import axios from "axios";
+import { SearchParam } from "../../Configs/ApiConfig";
 
 interface Props {
   isSearchOperation?: boolean;
   backendUrl: string;
+  searchParams: SearchParam[];
+}
+
+interface ParamMap {
+  [key: string]: { [key: string]: string };
 }
 
 export const GetResourceContent = ({
   isSearchOperation = false,
   backendUrl,
+  searchParams,
 }: Props) => {
   const [searchBoxCount, setSearchBoxCount] = useState(1);
   const [data, setData] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
   const [id, setId] = useState("");
   const [error, setError] = useState("");
+  const [searchParamPair, setSearchParamPair] = useState({});
 
   const callBackend = () => {
     let url: string = "";
     if (isSearchOperation) {
-      url = backendUrl;
+      console.log(searchParamPair);
+
+      let resultArray = Object.keys(searchParamPair).map(function (
+        personNamedIndex
+      ) {
+        let str = personNamedIndex as keyof typeof searchParamPair;
+        let person = searchParamPair[str];
+        // do something with person
+        return person;
+      });
+
+      console.log(resultArray);
+
+      let searchString: string = "?";
+
+      resultArray.forEach((p) => {
+        searchString = searchString
+          .concat(p["param"])
+          .concat("=")
+          .concat(p["value"])
+          .concat("&");
+      });
+
+      searchString = searchString.substring(0, searchString.length - 1);
+
+      url = backendUrl.concat(searchString);
+
+      console.log(searchString);
     } else {
-      url = backendUrl.concat(id);
+      url = backendUrl.concat("/").concat(id);
     }
+
+    console.log(url);
 
     setData(null);
     setError("");
@@ -48,24 +85,58 @@ export const GetResourceContent = ({
       .catch((err) => {
         console.log(err);
         setError(err.message);
+        setData(err.response.data);
       });
+  };
+
+  const handleSearchParamsKeys = (key: SelectChangeEvent<unknown>) => {
+    console.log(searchParamPair);
+    const id: string = String(key.target.name);
+    const paramName = String(key.target.value);
+
+    setSearchParamPair({ ...searchParamPair, [id]: { param: paramName } });
+  };
+
+  const handleSearchParamsValues = (
+    key: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    console.log(searchParamPair);
+    const id: string = String(key.target.name);
+    const paramName = String(key.target.value);
+
+    const obj: ParamMap = { ...searchParamPair };
+
+    let str = id as keyof typeof obj;
+
+    const obj2 = obj[str];
+
+    obj2["value"] = paramName;
+
+    const final = { ...obj, [str]: obj2 };
+
+    setSearchParamPair(final);
   };
 
   const renderSearchBoxes = () => {
     const elements: any[] = [];
 
     for (var i = 1; i <= searchBoxCount; i++) {
+      let id = "select-".concat(String(i));
       elements.push(
         <Box sx={{ display: "flex", gap: 2 }} key={i}>
           <Box sx={{ minWidth: 200 }}>
             <InputLabel id="demo-simple-select-label" />
             <Select
               labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              id={id}
+              name={id}
               // value={age}
               label="Age"
               displayEmpty
               sx={{ minWidth: 200 }}
+              onChange={(event) => {
+                handleSearchParamsKeys(event);
+              }}
             >
               <MenuItem disabled value="">
                 <em>Search Param</em>
@@ -78,7 +149,14 @@ export const GetResourceContent = ({
             </Select>
           </Box>
           <Box sx={{ minWidth: 250 }}>
-            <TextField fullWidth variant="outlined" />
+            <TextField
+              name={id}
+              fullWidth
+              variant="outlined"
+              onChange={(event) => {
+                handleSearchParamsValues(event);
+              }}
+            />
           </Box>
         </Box>
       );
@@ -110,10 +188,10 @@ export const GetResourceContent = ({
         {!isSearchOperation && (
           <Box sx={{ display: "flex", gap: 70 }}>
             <Box sx={{ display: "flex", gap: 2 }}>
-            <TextField
+              <TextField
                 onChange={(event) => {
-                  setId(event.target.value)}
-                }
+                  setId(event.target.value);
+                }}
                 variant="outlined"
                 label="Id"
                 fullWidth
@@ -168,6 +246,7 @@ export const GetResourceContent = ({
                 setData(null);
                 setError("");
                 setId("");
+                setSearchParamPair({});
               }}
             />
           </Box>

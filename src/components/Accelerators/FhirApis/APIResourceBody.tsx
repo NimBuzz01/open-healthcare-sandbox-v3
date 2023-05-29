@@ -37,7 +37,7 @@ export const APIResourceBody = () => {
       setExpandedResourceIndex(isExpanded ? index : false);
     };
 
-  const renderResources = ({baseUrl, resources}: ApiConfig) => {
+  const renderResources = ({baseUrl, resources, searchParams}: ApiConfig) => {
     return resources.map((resource, index) => (
       <Accordion
         key={index}
@@ -73,13 +73,14 @@ export const APIResourceBody = () => {
         <Divider />
         <AccordionDetails>
           {(resource.resourceMethod === "POST" ||
-            resource.resourceMethod === "PUT") && <CreateOperationContent />}
+            resource.resourceMethod === "PUT") && <CreateOperationContent backendUrl={baseUrl} />}
           {resource.resourceMethod === "GET" && (
             <GetResourceContent
               isSearchOperation={
                 resource.resourceOperation === OpearionTypes.SEARCH
               }
               backendUrl={baseUrl}
+              searchParams={searchParams}
             />
           )}
           {resource.resourceMethod === "DELETE" && (

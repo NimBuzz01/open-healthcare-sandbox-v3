@@ -5,11 +5,6 @@ interface Props {
 }
 
 const SearchParamInput = ({ count }: Props) => {
-  const element = ``;
-
-  const renderMenuItems = () => {
-    return;
-  };
 
   const renderSearchBoxes = () => {
     const elements: any[] = [];
