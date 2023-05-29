@@ -41,6 +41,15 @@ export const items = [
     samples: <Hl7Samples />,
   },
   {
+    label: "C-CDA To FHIR",
+    description: "Convert C-CDA data to FHIR",
+    url: "https://wso2.com/solutions/healthcare/",
+    path: "/c-cda-to-fhir",
+    icon: <TransformOutlinedIcon sx={{ width: 26, height: 26 }} />,
+    component: <CcdaToFhir />,
+    samples: <CcdaSamples />,
+  },
+  {
     label: "FHIR Validation",
     description: "Validate the FHIR Resource",
     url: "https://wso2.com/solutions/healthcare/",
@@ -57,15 +66,6 @@ export const items = [
     icon: <VpnKeyOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <SmartOnFhir />,
     samples: <SmartSamples />,
-  },
-  {
-    label: "C-CDA To FHIR",
-    description: "Convert C-CDA data to FHIR",
-    url: "https://wso2.com/solutions/healthcare/",
-    path: "/c-cda-to-fhir",
-    icon: <TransformOutlinedIcon sx={{ width: 26, height: 26 }} />,
-    component: <CcdaToFhir />,
-    samples: <CcdaSamples />,
   },
   {
     label: "FHIR Path",

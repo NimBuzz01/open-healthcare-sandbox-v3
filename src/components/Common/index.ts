@@ -16,3 +16,4 @@ export { ConsoleAccordion } from "./ConsoleAccordion";
 export { ToggleDarkMode } from "./ToggleDarkMode";
 export { ClearIcon } from "./ClearIcon";
 export { SamplesButton } from "./SamplesButton";
+export { ComingSoon } from "./ComingSoon";
