@@ -43,9 +43,9 @@ export const InputField = ({
           />
         </IconButton>
       )}
-      <Box sx={{ width: 200 }}>
+      <Box sx={{ width: 200, mb: 1 }}>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography>{label}</Typography>
+          <Typography sx={{ color: "primary.dark" }}>{label}</Typography>
           {isRequired && (
             <Typography
               sx={{ fontSize: 11, alignSelf: "flex-end", color: "#FF2E2E" }}

@@ -44,7 +44,7 @@ export const GetResourceContent = ({
       const initialInputField: InputFieldProps = {
         label: firstParam.paramName,
         pValue: firstParam.paramValue,
-        isRequired: firstParam.isRequired,
+        isRequired: true,
         example: firstParam.paramExample,
         dataType: firstParam.paramType,
         onChange: handleChange,
