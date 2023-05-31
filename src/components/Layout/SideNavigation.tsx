@@ -164,7 +164,8 @@ export const SideNavigation = ({ items }: Props) => {
           bgcolor: "background.default",
           px: 1,
           py:0.5,
-          overflow:"hidden"
+          overflow:"hidden",
+          height:31
         }}
       >
         <CopyrightIcon
@@ -176,7 +177,7 @@ export const SideNavigation = ({ items }: Props) => {
         />
         <Typography
           variant="h6"
-          sx={{ color: "grey.500", display: isExpanded ? "block" : "none", width:150 }}
+          sx={{ color: "grey.500", display: isExpanded ? "block" : "block", width:120, position:"absolute", left:35 }}
         >
           2023 WSO2 LLC.
         </Typography>

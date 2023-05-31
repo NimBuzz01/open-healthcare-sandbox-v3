@@ -1,28 +1,45 @@
 import { Box } from "@mui/material";
-import Scrollbars from "react-custom-scrollbars";
 import Routes from "../../contexts/AppRoutes";
 import { SideNavigation } from "../Layout";
 import { items } from "../Configs/AcceleratorConfig";
+import itemConfig from "../../tool-config.json";
+import { ComingSoon } from "../Common";
+
+interface ItemConfig {
+  [key: string]: {
+    status: "enabled" | "disabled" | "maintenance";
+  };
+}
 
 export const MainContent = () => {
+  const filteredItems = items.filter((item) => {
+    const itemStatus = (itemConfig as ItemConfig)[item.label]?.status;
+    return itemStatus !== "disabled";
+  });
+
+  const renderedItems = filteredItems.map((item) => {
+    const itemStatus = (itemConfig as ItemConfig)[item.label]?.status;
+    if (itemStatus === "maintenance") {
+      return { ...item, component: <ComingSoon /> };
+    }
+    return item;
+  });
+
   return (
     <Box sx={{ flexGrow: 1, display: "flex" }}>
-      <SideNavigation items={items} />
-      <Scrollbars>
-        <Box
-          width={1}
-          pt={1}
-          pb={4}
-          sx={{
-            overflowY: "auto",
-            display: "flex",
-            flexDirection: "column",
-            height: 1,
-          }}
-        >
-          <Routes items={items} />
-        </Box>
-      </Scrollbars>
+      <SideNavigation items={renderedItems} />
+      <Box
+        width={1}
+        pt={1}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: "calc(100vh - 94px)",
+          overflowY: "auto",       
+        }}
+      >
+        <Routes items={renderedItems} />
+      </Box>
     </Box>
   );
 };
