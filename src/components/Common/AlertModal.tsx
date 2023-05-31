@@ -24,7 +24,11 @@ export const AlertModal = ({ contentText }: AlertModalProps) => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        sx={{ position: "absolute", top: -500 }}
+        sx={{
+          "& .MuiDialog-container": {
+            alignItems: "flex-start",
+          },
+        }}
       >
         <DialogTitle>
           <IconButton

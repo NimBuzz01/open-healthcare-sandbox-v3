@@ -1,21 +1,36 @@
-import { useState } from "react";
-import { Box, Container } from "@mui/material";
-import { TextAreaInput, TextAreaOutput, CommonButton, ResponseAlert } from "../../Common";
+import { useCallback, useState } from "react";
+import { Box, Container, Typography } from "@mui/material";
+import { CommonButton, ResponseAlert, CodeEditor } from "../../Common";
 import axios from "axios";
+import { ResourceMethodIcon } from "./ResourceMethodIcon";
 
 interface Props {
   backendUrl: string;
+  resource: any;
 }
 
-export const CreateOperationContent = ({backendUrl}: Props) => {
+export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   const [request, setRequest] = useState("");
   const [data, setData] = useState("");
   const [error, setError] = useState("");
-  const [isOpen, setIsOpen] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    console.log(event.target.value);
-    setRequest(event.target.value);
+  const handleOnChange = useCallback((value: string) => {
+    setRequest(value);
+  }, []);
+
+  const handleInputClear = () => {
+    setRequest("");
+  };
+
+  const readFile = (fileInput?: string | ArrayBuffer | null) => {
+    if (typeof fileInput == "string") {
+      setRequest(fileInput);
+    }
+  };
+
+  const closeResponse = () => {
+    setIsError(false);
   };
 
   const callBackend = () => {
@@ -30,51 +45,78 @@ export const CreateOperationContent = ({backendUrl}: Props) => {
       .catch((err) => {
         console.log(err);
         setError(err.message);
-        setData(err.response.data);
+        setIsError(true);
+        setData(err.response);
       });
   };
 
+  const handleReset = () => {
+    setData("");
+    setError("");
+    setIsError(false);
+    setRequest("");
+  };
+
   return (
-    <Container maxWidth="lg" sx={{ py: 2 }}>
-      {error && (
+    <Container maxWidth={false} sx={{ py: 2, height: 1, overflowY: "auto" }}>
+      {isError && (
         <ResponseAlert
-          isOpen={isOpen}
+          isOpen={isError}
           severity="error"
           message={error}
-          setIsOpen={setIsOpen}
+          setIsOpen={closeResponse}
         />
       )}
-      <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1, mb: 2 }}>
-        <CommonButton
-          variant="background"
-          label="Execute"
-          onClick={callBackend}
-        />
-        <CommonButton
-          variant="border"
-          label="Clear"
-          onClick={() => {
-            setData("");
-            setRequest("");
-          }}
-        />
-      </Box>
-      <TextAreaInput
-        label="Input: "
-        isCopyRequired
-        isUploadRequired
-        handleOnChange={handleOnChange}
-        data={request}
-      />
-      {data && (
-        <Box sx={{ mt: 5 }}>
-          <TextAreaOutput
-            label={"Output"}
-            isDownloadButtonRequired
-            data={data}
-          ></TextAreaOutput>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 3, mb: 2 }}>
+        <ResourceMethodIcon resourceMethod={resource.resourceMethod} />
+        <Typography sx={{ color: "common.dark", fontSize: 14 }}>
+          {resource.resourcePath}
+        </Typography>
+        <Typography
+          sx={{ color: "grey.500", fontSize: 14, fontWeight: 500, mr: "auto" }}
+        >
+          {resource.resourceDescription}
+        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <CommonButton
+            variant="background"
+            label="Execute"
+            onClick={callBackend}
+          />
+          <CommonButton variant="border" label="Reset" onClick={handleReset} />
         </Box>
-      )}
+      </Box>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        {/* {!data && ( */}
+        <CodeEditor
+          title="Input: "
+          value={request}
+          onChange={handleOnChange}
+          darkMode
+          onClear={handleInputClear}
+          placeholder="Paste data here..."
+          fileType="json"
+          uploadEnabled
+          readFile={readFile}
+          clearEnabled
+          width="100%"
+          height={data ? "500px" : "calc(100vh - 350px)"}
+        />
+        {/* )} */}
+        {data && (
+          <CodeEditor
+            title="Output:"
+            value={JSON.stringify(data, null, 2)}
+            readOnly
+            darkMode
+            placeholder="Output will be displayed here..."
+            fileType="json"
+            downloadEnabled
+            width="100%"
+            height="500px"
+          />
+        )}
+      </Box>
     </Container>
   );
 };

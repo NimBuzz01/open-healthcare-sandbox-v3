@@ -1,98 +1,115 @@
 import React, { useState } from "react";
-import {
-  Tabs,
-  Tab,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  Divider,
-  Box,
-} from "@mui/material";
-import {
-  ApiConfig,
-  OpearionTypes,
-  ResourceConfig,
-  apiList,
-} from "../../Configs/ApiConfig";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Tabs, Tab, Typography, Box } from "@mui/material";
+import { ApiConfig, OpearionTypes, apiList } from "../../Configs/ApiConfig";
 import { CreateOperationContent } from "./CreateOperationContent";
 import { GetResourceContent } from "./GetResourceContent";
-import { ResourceMethodIcon } from "./ResourceMethodIcon";
-import { DeleteResourceContent } from "./DeleteResourceContent";
 
 export const APIResourceBody = () => {
-  const [selectedAPI, setSelectedAPI] = useState(0);
-  const [expandedResourceIndex, setExpandedResourceIndex] = useState<
-    number | false
-  >(false);
+  const [selectedAPI, setSelectedAPI] = useState<number>(0);
+  const [selectedResource, setSelectedResource] = useState<number>(0);
 
-  const handleChangeAPI = (event: React.SyntheticEvent, newTab: number) => {
+  const handleChangeAPI = (_event: React.SyntheticEvent, newTab: number) => {
     setSelectedAPI(newTab);
-    setExpandedResourceIndex(false);
+    setSelectedResource(0);
   };
 
-  const handleChangeResource =
-    (index: number) => (_: React.ChangeEvent<{}>, isExpanded: boolean) => {
-      setExpandedResourceIndex(isExpanded ? index : false);
-    };
+  const handleChangeResource = (
+    _event: React.ChangeEvent<{}>,
+    newTab: number
+  ) => {
+    setSelectedResource(newTab);
+  };
 
-  const renderResources = ({baseUrl, resources, searchParams}: ApiConfig) => {
-    return resources.map((resource, index) => (
-      <Accordion
-        key={index}
-        expanded={expandedResourceIndex === index}
-        onChange={handleChangeResource(index)}
-        disableGutters
+  const renderResources = ({ baseUrl, resources, searchParams }: ApiConfig) => {
+    return (
+      <Box
         sx={{
-          my: 2,
-          borderRadius: 2,
-          border: 1,
-          borderColor: "grey.300",
-          "&:before": {
-            display: "none",
-          },
+          mt: 1,
+          flexGrow: 1,
+          gap: 1,
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          id={`container-summary-${index}`}
+        <Box
+          sx={{
+            px: 2,
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            border: 1,
+            borderRadius: 2,
+            borderColor: "grey.400",
+          }}
         >
-          <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
-            <ResourceMethodIcon resourceMethod={resource.resourceMethod} />
-            <Typography sx={{ color: "common.dark", fontSize: 14 }}>
-              {resource.resourcePath}
-            </Typography>
-            <Typography
-              sx={{ color: "grey.500", fontSize: 14, fontWeight: 500 }}
-            >
-              {resource.resourceDescription}
-            </Typography>
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: 500, color: "primary.dark" }}
+          >
+            Select Resource:
+          </Typography>
+          <Tabs
+            value={selectedResource}
+            onChange={handleChangeResource}
+            aria-label="Resource tabs"
+          >
+            {resources.map((resource, index) => (
+              <Tab
+                key={index}
+                label={resource.resourceName}
+                id={`resource-tab-${index}`}
+                aria-controls={`resource-tabpanel-${index}`}
+                sx={{
+                  fontSize: 14,
+                  fontWeight: 500,
+                  textTransform: "none",
+                }}
+              />
+            ))}
+          </Tabs>
+        </Box>
+
+        {resources.map((resource, index) => (
+          <Box
+            sx={{
+              width: 1,
+              border: 1,
+              borderRadius: 2,
+              borderColor: "grey.400",
+              flexGrow: 1,
+              height: 1,
+            }}
+            key={index}
+            role="tabpanel"
+            hidden={selectedResource !== index}
+            id={`resource-tabpanel-${index}`}
+            aria-labelledby={`resource-tab-${index}`}
+          >
+            {selectedResource === index && (
+              <>
+                {(resource.resourceMethod === "POST" ||
+                  resource.resourceMethod === "PUT") && (
+                  <CreateOperationContent
+                    backendUrl={baseUrl}
+                    resource={resource}
+                  />
+                )}
+                {resource.resourceMethod === "GET" && (
+                  <GetResourceContent
+                    resource={resource}
+                    isSearchOperation={
+                      resource.resourceOperation === OpearionTypes.SEARCH
+                    }
+                    backendUrl={baseUrl}
+                    searchParams={searchParams}
+                  />
+                )}
+              </>
+            )}
           </Box>
-        </AccordionSummary>
-        <Divider />
-        <AccordionDetails>
-          {(resource.resourceMethod === "POST" ||
-            resource.resourceMethod === "PUT") && <CreateOperationContent backendUrl={baseUrl} />}
-          {resource.resourceMethod === "GET" && (
-            <GetResourceContent
-              isSearchOperation={
-                resource.resourceOperation === OpearionTypes.SEARCH
-              }
-              backendUrl={baseUrl}
-              searchParams={searchParams}
-            />
-          )}
-          {resource.resourceMethod === "DELETE" && (
-            <DeleteResourceContent
-              isSearchOperation={
-                resource.resourceOperation === OpearionTypes.SEARCH
-              }
-            />
-          )}
-        </AccordionDetails>
-      </Accordion>
-    ));
+        ))}
+      </Box>
+    );
   };
 
   const renderAPIs = () => {
@@ -102,22 +119,47 @@ export const APIResourceBody = () => {
         label={api.name}
         id={`tab-${index}`}
         aria-controls={`tabpanel-${index}`}
-        sx={{ fontSize: 14, fontWeight: 500 }}
+        sx={{ fontSize: 14, fontWeight: 500, textTransform: "none" }}
       />
     ));
   };
 
   return (
-    <div>
-      <Tabs
-        value={selectedAPI}
-        onChange={handleChangeAPI}
-        indicatorColor="primary"
-        textColor="inherit"
+    <Box sx={{ display: "flex", flexDirection: "column", height: 1 }}>
+      <Box
+        sx={{
+          px: 2,
+          display: "flex",
+          alignItems: "center",
+          gap: 2,
+          border: 1,
+          borderRadius: 2,
+          borderColor: "grey.400",
+        }}
       >
-        {renderAPIs()}
-      </Tabs>
+        <Typography
+          variant="h6"
+          sx={{ fontWeight: 500, color: "primary.dark" }}
+        >
+          Select API:
+        </Typography>
+        <Tabs
+          value={selectedAPI}
+          onChange={handleChangeAPI}
+          // TabIndicatorProps={{ style: { display: "none" } }}
+          // sx={{
+          //   "& button": { borderRadius: 1 },
+          //   "& .Mui-selected": {
+          //     bgcolor: "primary.main",
+          //     border: "none",
+          //     color: "background.default",
+          //   },
+          // }}
+        >
+          {renderAPIs()}
+        </Tabs>
+      </Box>
       {renderResources(apiList[selectedAPI])}
-    </div>
+    </Box>
   );
 };

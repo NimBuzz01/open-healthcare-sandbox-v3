@@ -1,79 +1,134 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
+  Alert,
   Box,
-  Button,
   Container,
-  InputLabel,
+  Divider,
+  IconButton,
   MenuItem,
   Select,
   SelectChangeEvent,
-  TextField,
+  Typography,
 } from "@mui/material";
-import { TextAreaOutput, CommonButton, ResponseAlert } from "../../Common";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import axios from "axios";
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import { CommonButton, ResponseAlert, CodeEditor } from "../../Common";
 import { SearchParam } from "../../Configs/ApiConfig";
+import { InputField, Props as InputFieldProps } from "./InputField";
+import { ResourceMethodIcon } from "./ResourceMethodIcon";
+import InfoOutlineIcon from "@mui/icons-material/InfoOutlined";
 
 interface Props {
   isSearchOperation?: boolean;
   backendUrl: string;
   searchParams: SearchParam[];
-}
-
-interface ParamMap {
-  [key: string]: { [key: string]: string };
+  resource: any;
 }
 
 export const GetResourceContent = ({
   isSearchOperation = false,
   backendUrl,
   searchParams,
+  resource,
 }: Props) => {
-  const [searchBoxCount, setSearchBoxCount] = useState(1);
-  const [data, setData] = useState(null);
-  const [isOpen, setIsOpen] = useState(true);
-  const [id, setId] = useState("");
-  const [error, setError] = useState("");
-  const [searchParamPair, setSearchParamPair] = useState({});
+  const [data, setData] = useState<any>(null);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [inputFields, setInputFields] = useState<InputFieldProps[]>([]);
+  const [selectedLabel, setSelectedLabel] = useState<string>("");
+  const [isAdded, setIsAdded] = useState(false);
+
+  useEffect(() => {
+    if (!isSearchOperation && searchParams.length > 0) {
+      const firstParam = searchParams[0];
+      const initialInputField: InputFieldProps = {
+        label: firstParam.paramName,
+        pValue: firstParam.paramValue,
+        isRequired: firstParam.isRequired,
+        example: firstParam.paramExample,
+        dataType: firstParam.paramType,
+        onChange: handleChange,
+        onDelete: handleDeleteInputField,
+        fieldIndex: 0,
+      };
+      setInputFields([initialInputField]);
+    }
+  }, [isSearchOperation, searchParams]);
+
+  const handleAddInputField = () => {
+    const selectedLabelObject = searchParams.find(
+      (param) => param.paramName === selectedLabel
+    );
+
+    if (
+      selectedLabelObject &&
+      !inputFields.some((field) => field.label === selectedLabel)
+    ) {
+      const newInputField: InputFieldProps = {
+        label: selectedLabelObject.paramName,
+        pValue: selectedLabelObject.paramValue,
+        isRequired: selectedLabelObject.isRequired,
+        example: selectedLabelObject.paramExample,
+        dataType: selectedLabelObject.paramType,
+        isDeleteRequired: true,
+        onChange: handleChange,
+        onDelete: handleDeleteInputField,
+        fieldIndex: 0,
+      };
+
+      setInputFields((prevInputFields) => [...prevInputFields, newInputField]);
+    } else {
+      setIsAdded(true);
+      setTimeout(() => {
+        setIsAdded(false);
+      }, 2000);
+    }
+  };
+
+  const handleChange = (fieldIndex: number, field: string, value: any) => {
+    setInputFields((prevInputFields) => {
+      const updatedInputFields = [...prevInputFields];
+      updatedInputFields[fieldIndex][field] = value;
+      return updatedInputFields;
+    });
+  };
+
+  const handleDeleteInputField = (fieldIndex: number) => {
+    setInputFields((prevInputFields) => {
+      const updatedInputFields = [...prevInputFields];
+      updatedInputFields.splice(fieldIndex, 1);
+      return updatedInputFields;
+    });
+  };
+
+  const handleLabelChange = (event: SelectChangeEvent<string>) => {
+    setSelectedLabel(event.target.value);
+  };
 
   const callBackend = () => {
     let url: string = "";
+    let searchString: string = "";
+
     if (isSearchOperation) {
-      console.log(searchParamPair);
+      searchString = Object.keys(inputFields).reduce((searchString, index) => {
+        let str = index as keyof typeof inputFields;
+        let result = inputFields[str];
 
-      let resultArray = Object.keys(searchParamPair).map(function (
-        personNamedIndex
-      ) {
-        let str = personNamedIndex as keyof typeof searchParamPair;
-        let person = searchParamPair[str];
-        // do something with person
-        return person;
-      });
+        if (isInputFieldProps(result)) {
+          return searchString + `${result.pValue}=${result.value}&`;
+        }
 
-      console.log(resultArray);
-
-      let searchString: string = "?";
-
-      resultArray.forEach((p) => {
-        searchString = searchString
-          .concat(p["param"])
-          .concat("=")
-          .concat(p["value"])
-          .concat("&");
-      });
+        return searchString;
+      }, "?");
 
       searchString = searchString.substring(0, searchString.length - 1);
 
       url = backendUrl.concat(searchString);
-
-      console.log(searchString);
     } else {
-      url = backendUrl.concat("/").concat(id);
+      url = `${backendUrl}/${inputFields[0].value}`;
     }
 
     console.log(url);
-
     setData(null);
     setError("");
 
@@ -85,182 +140,119 @@ export const GetResourceContent = ({
       .catch((err) => {
         console.log(err);
         setError(err.message);
-        setData(err.response.data);
+        setIsError(true);
+        setData(err.response);
       });
   };
 
-  const handleSearchParamsKeys = (key: SelectChangeEvent<unknown>) => {
-    console.log(searchParamPair);
-    const id: string = String(key.target.name);
-    const paramName = String(key.target.value);
+  function isInputFieldProps(obj: any): obj is InputFieldProps {
+    return obj && obj.hasOwnProperty("pValue") && obj.hasOwnProperty("value");
+  }
 
-    setSearchParamPair({ ...searchParamPair, [id]: { param: paramName } });
+  const handleReset = () => {
+    setData(null);
+    setIsError(false);
+    setError("");
+    setInputFields([]);
+    setSelectedLabel("");
   };
 
-  const handleSearchParamsValues = (
-    key: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    console.log(searchParamPair);
-    const id: string = String(key.target.name);
-    const paramName = String(key.target.value);
-
-    const obj: ParamMap = { ...searchParamPair };
-
-    let str = id as keyof typeof obj;
-
-    const obj2 = obj[str];
-
-    obj2["value"] = paramName;
-
-    const final = { ...obj, [str]: obj2 };
-
-    setSearchParamPair(final);
-  };
-
-  const renderSearchBoxes = () => {
-    const elements: any[] = [];
-
-    for (var i = 1; i <= searchBoxCount; i++) {
-      let id = "select-".concat(String(i));
-      elements.push(
-        <Box sx={{ display: "flex", gap: 2 }} key={i}>
-          <Box sx={{ minWidth: 200 }}>
-            <InputLabel id="demo-simple-select-label" />
-            <Select
-              labelId="demo-simple-select-label"
-              id={id}
-              name={id}
-              // value={age}
-              label="Age"
-              displayEmpty
-              sx={{ minWidth: 200 }}
-              onChange={(event) => {
-                handleSearchParamsKeys(event);
-              }}
-            >
-              <MenuItem disabled value="">
-                <em>Search Param</em>
-              </MenuItem>
-              {searchParams.map((p) => (
-                <MenuItem key={p.param} value={p.param}>
-                  {p.display}
-                </MenuItem>
-              ))}
-            </Select>
-          </Box>
-          <Box sx={{ minWidth: 250 }}>
-            <TextField
-              name={id}
-              fullWidth
-              variant="outlined"
-              onChange={(event) => {
-                handleSearchParamsValues(event);
-              }}
-            />
-          </Box>
-        </Box>
-      );
-    }
-
-    return elements;
+  const closeResponse = () => {
+    setIsError(false);
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 2 }}>
-      {error && (
+    <Container maxWidth={false} sx={{ mt: 2 }}>
+      {isError && (
         <ResponseAlert
-          isOpen={isOpen}
+          isOpen={isError}
           severity="error"
           message={error}
-          setIsOpen={setIsOpen}
+          setIsOpen={closeResponse}
         />
       )}
-      <Box sx={{ display: "flex", gap: 5 }}>
-        {isSearchOperation && (
-          <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
-            {/* Box to wrap the list of dropdown list and text of pairs */}
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              {/* Box to wrap a one dropdown list and text of pairs */}
-              {renderSearchBoxes()}
-            </Box>
-          </Box>
-        )}
-        {!isSearchOperation && (
-          <Box sx={{ display: "flex", gap: 70 }}>
-            <Box sx={{ display: "flex", gap: 2 }}>
-              <TextField
-                onChange={(event) => {
-                  setId(event.target.value);
-                }}
-                variant="outlined"
-                label="Id"
-                fullWidth
-              />
-            </Box>
-          </Box>
-        )}
-
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-            gap: 10,
-            mb: 2,
-            height: "25%",
-          }}
+      <Box sx={{ display: "flex", alignItems: "center", gap: 3, mb: 2 }}>
+        <ResourceMethodIcon resourceMethod={resource.resourceMethod} />
+        <Typography sx={{ color: "common.dark", fontSize: 14 }}>
+          {resource.resourcePath}
+        </Typography>
+        <Typography
+          sx={{ color: "grey.500", fontSize: 14, fontWeight: 500, mr: "auto" }}
         >
-          {isSearchOperation && (
-            <Box sx={{ display: "flex" }}>
-              <Button
-                disabled={searchBoxCount === 7}
-                onClick={() => {
-                  setSearchBoxCount(searchBoxCount + 1);
-                }}
-              >
-                <AddCircleIcon sx={{ fontSize: 30 }} />
-              </Button>
-              <Button
-                disabled={searchBoxCount === 1}
-                onClick={() => {
-                  setSearchBoxCount(
-                    searchBoxCount === 1 ? searchBoxCount : searchBoxCount - 1
-                  );
-                }}
-              >
-                <RemoveCircleIcon sx={{ fontSize: 30 }} />
-              </Button>
-            </Box>
-          )}
-
-          <Box sx={{ gap: 2, display: "flex" }}>
-            <CommonButton
-              variant="background"
-              label="Execute"
-              onClick={callBackend}
-            />
-            <CommonButton
-              variant="border"
-              label="Clear"
-              onClick={() => {
-                setSearchBoxCount(1);
-                setData(null);
-                setError("");
-                setId("");
-                setSearchParamPair({});
-              }}
-            />
-          </Box>
+          {resource.resourceDescription}
+        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <CommonButton
+            variant="background"
+            label="Execute"
+            onClick={callBackend}
+          />
+          <CommonButton variant="border" label="Reset" onClick={handleReset} />
         </Box>
       </Box>
-      {data && (
-        <Box sx={{ mt: 5 }}>
-          <TextAreaOutput
-            label={"Output"}
-            isDownloadButtonRequired
-            data={data}
-          ></TextAreaOutput>
+      <Divider />
+      <Box>
+        <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
+          <Typography sx={{ color: "primary.dark", my: 2 }}>
+            Enter Required Parameters
+          </Typography>
+          {isSearchOperation && (
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+              <Select
+                value={selectedLabel}
+                onChange={handleLabelChange}
+                size="small"
+                sx={{ width: 200 }}
+              >
+                <MenuItem value="">Select Label</MenuItem>
+                {searchParams.map((searchParams) => (
+                  <MenuItem
+                    key={searchParams.paramName}
+                    value={searchParams.paramName}
+                  >
+                    {searchParams.paramName}
+                  </MenuItem>
+                ))}
+              </Select>
+              <IconButton
+                onClick={handleAddInputField}
+                disabled={!selectedLabel}
+              >
+                <AddCircleOutlineOutlinedIcon
+                  sx={{ fontSize: 26, color: "primary.main" }}
+                />
+              </IconButton>
+              {isAdded && (
+                <Alert
+                  severity="warning"
+                  icon={<InfoOutlineIcon sx={{ fontSize: 15 }} />}
+                  sx={{ fontSize: 12, py: 0.3 }}
+                >
+                  Already added!
+                </Alert>
+              )}
+            </Box>
+          )}
         </Box>
-      )}
+        {inputFields.map((inputField, index) => (
+          <InputField key={index} {...inputField} fieldIndex={index} />
+        ))}
+      </Box>
+      <Box sx={{ mt: 2, mb: 2 }}>
+        {data && (
+          <CodeEditor
+            title="Output:"
+            value={JSON.stringify(data, null, 2)}
+            readOnly
+            darkMode
+            placeholder="Output will be displayed here..."
+            fileType="json"
+            downloadEnabled
+            width="100%"
+            height="500px"
+          />
+        )}
+      </Box>
     </Container>
   );
 };

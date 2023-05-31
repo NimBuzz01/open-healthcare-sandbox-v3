@@ -1,5 +1,7 @@
-export interface ParamConfig {
+export interface SearchParam {
   paramName: string;
+  paramValue: string;
+  paramType: string;
   paramExample: string;
   isRequired: boolean;
 }
@@ -12,16 +14,12 @@ export enum OpearionTypes {
 }
 
 export interface ResourceConfig {
+  resourceName: string;
   resourceMethod: string;
   resourcePath: string;
   resourceDescription: string;
-  resourceParameters?: ParamConfig[];
+  resourceParameters?: SearchParam[];
   resourceOperation: OpearionTypes;
-}
-
-export interface SearchParam {
-  param: string;
-  display: string;
 }
 
 export interface ApiConfig {
@@ -37,35 +35,56 @@ export const apiList: ApiConfig[] = [
     baseUrl:
       "https://c32618cf-389d-44f1-93ee-b67a3468aae3-dev.e1-us-east-azure.choreoapis.dev/hdbb/bffservice/endpoint-9090-803/1.0.0/fhir/r4/patient",
     searchParams: [
-      { param: "_id", display: "Id" },
-      { param: "gender", display: "Gender" },
-      { param: "active", display: "Active" },
+      {
+        paramName: "ID",
+        paramValue: "_id",
+        isRequired: true,
+        paramType: "integer",
+        paramExample: "1",
+      },
+      {
+        paramName: "Gender",
+        paramValue: "gender",
+        isRequired: true,
+        paramType: "string",
+        paramExample: "male",
+      },
+      {
+        paramName: "Active",
+        paramValue: "active",
+        isRequired: true,
+        paramType: "boolean",
+        paramExample: "true",
+      },
     ],
     resources: [
       {
+        resourceName: "SEARCH",
         resourceMethod: "GET",
         resourcePath: "/Patient",
         resourceDescription: "Search patient resources",
         resourceOperation: OpearionTypes.SEARCH,
       },
       {
+        resourceName: "READ",
         resourceMethod: "GET",
         resourcePath: "/Patient/{id}",
         resourceDescription: "Read patient resource by Id",
         resourceOperation: OpearionTypes.READ,
       },
       {
+        resourceName: "CREATE",
         resourceMethod: "POST",
         resourcePath: "/Patient",
         resourceDescription: "Create patient resource",
         resourceOperation: OpearionTypes.CREATE,
       },
-      {
-        resourceMethod: "DELETE",
-        resourcePath: "/Patient/{id}",
-        resourceDescription: "Delete patient resource",
-        resourceOperation: OpearionTypes.DELETE,
-      },
+      // {
+      //   resourceMethod: "DELETE",
+      //   resourcePath: "/Patient/{id}",
+      //   resourceDescription: "Delete patient resource",
+      //   resourceOperation: OpearionTypes.DELETE,
+      // },
     ],
   },
   {
@@ -75,28 +94,25 @@ export const apiList: ApiConfig[] = [
     searchParams: [],
     resources: [
       {
+        resourceName: "SEARCH",
         resourceMethod: "GET",
         resourcePath: "/ExplanationOfBenefit",
         resourceDescription: "Search ExplanationOfBenefit resources",
         resourceOperation: OpearionTypes.SEARCH,
       },
       {
+        resourceName: "READ",
         resourceMethod: "GET",
         resourcePath: "/ExplanationOfBenefit/{id}",
         resourceDescription: "Read ExplanationOfBenefit resource by id",
         resourceOperation: OpearionTypes.READ,
       },
       {
+        resourceName: "CREATE",
         resourceMethod: "POST",
         resourcePath: "/ExplanationOfBenefit",
         resourceDescription: "Create ExplanationOfBenefit resource",
         resourceOperation: OpearionTypes.CREATE,
-      },
-      {
-        resourceMethod: "DELETE",
-        resourcePath: "/ExplanationOfBenefit/{id}",
-        resourceDescription: "Delete ExplanationOfBenefit resource",
-        resourceOperation: OpearionTypes.DELETE,
       },
     ],
   },
@@ -107,28 +123,25 @@ export const apiList: ApiConfig[] = [
     searchParams: [],
     resources: [
       {
+        resourceName: "SEARCH",
         resourceMethod: "GET",
         resourcePath: "/Claim",
         resourceDescription: "Search Claim resources",
         resourceOperation: OpearionTypes.SEARCH,
       },
       {
+        resourceName: "READ",
         resourceMethod: "GET",
         resourcePath: "/Claim/{id}",
         resourceDescription: "Read Claim resource by id",
         resourceOperation: OpearionTypes.READ,
       },
       {
+        resourceName: "CREATE",
         resourceMethod: "POST",
         resourcePath: "/Claim",
         resourceDescription: "Create Claim resource",
         resourceOperation: OpearionTypes.CREATE,
-      },
-      {
-        resourceMethod: "DELETE",
-        resourcePath: "/Claim/{id}",
-        resourceDescription: "Delete Claim resource",
-        resourceOperation: OpearionTypes.DELETE,
       },
     ],
   },
@@ -139,28 +152,25 @@ export const apiList: ApiConfig[] = [
     searchParams: [],
     resources: [
       {
+        resourceName: "SEARCH",
         resourceMethod: "GET",
         resourcePath: "/Observation",
         resourceDescription: "Search Observation resources",
         resourceOperation: OpearionTypes.SEARCH,
       },
       {
+        resourceName: "READ",
         resourceMethod: "GET",
         resourcePath: "/Observation/{id}",
         resourceDescription: "Read Observation resource by id",
         resourceOperation: OpearionTypes.READ,
       },
       {
+        resourceName: "CREATE",
         resourceMethod: "POST",
         resourcePath: "/Observation",
         resourceDescription: "Create Observation resource",
         resourceOperation: OpearionTypes.CREATE,
-      },
-      {
-        resourceMethod: "DELETE",
-        resourcePath: "/Observation/{id}",
-        resourceDescription: "Delete Observation resource",
-        resourceOperation: OpearionTypes.DELETE,
       },
     ],
   },
@@ -171,30 +181,26 @@ export const apiList: ApiConfig[] = [
     searchParams: [],
     resources: [
       {
+        resourceName: "SEARCH",
         resourceMethod: "GET",
         resourcePath: "/Observation",
         resourceDescription: "Search Observation resources",
         resourceOperation: OpearionTypes.SEARCH,
       },
       {
+        resourceName: "READ",
         resourceMethod: "GET",
         resourcePath: "/Observation/{id}",
         resourceDescription: "Read Observation resources by id",
         resourceOperation: OpearionTypes.READ,
       },
       {
+        resourceName: "CREATE",
         resourceMethod: "POST",
         resourcePath: "/Observation",
         resourceDescription: "Create Observation resource",
         resourceOperation: OpearionTypes.CREATE,
       },
-      {
-        resourceMethod: "DELETE",
-        resourcePath: "/Observation/{id}",
-        resourceDescription: "Delete Observation resource",
-        resourceOperation: OpearionTypes.DELETE,
-      },
     ],
   },
 ];
-

@@ -6,8 +6,6 @@ export { ComponentTitle } from "./ComponentTitle";
 export { ConvertButton } from "./ConvertButton";
 export { CopyContent } from "./CopyContent";
 export { DownloadIcon } from "./DownloadIcon";
-export { TextAreaInput } from "./TextAreaInput";
-export { TextAreaOutput } from "./TextAreaOutput";
 export { UploadIcon } from "./UploadIcon";
 export { ViewDocument } from "./ViewDocument";
 export { ResponseAlert } from "./ResponseAlert";
