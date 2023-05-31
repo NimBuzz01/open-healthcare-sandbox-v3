@@ -76,8 +76,8 @@ export const APIResourceBody = () => {
               border: 1,
               borderRadius: 2,
               borderColor: "grey.400",
-              flexGrow: 1,
-              height: 1,
+              // flexGrow: 1,
+              // height: 1,
             }}
             key={index}
             role="tabpanel"
