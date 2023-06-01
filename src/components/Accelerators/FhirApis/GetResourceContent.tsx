@@ -202,7 +202,7 @@ export const GetResourceContent = ({
                 value={selectedLabel}
                 onChange={handleLabelChange}
                 size="small"
-                sx={{ minWidth: 200 }}
+                sx={{ width: 250 }}
               >
                 {searchParams.map((searchParams) => (
                   <MenuItem
@@ -218,7 +218,7 @@ export const GetResourceContent = ({
                 disabled={!selectedLabel}
               >
                 <AddCircleOutlineOutlinedIcon
-                  sx={{ fontSize: 26, color: "primary.main" }}
+                  sx={{ fontSize: 26, color: "secondary.main" }}
                 />
               </IconButton>
               {isAdded && (
