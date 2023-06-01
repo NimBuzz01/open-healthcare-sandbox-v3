@@ -35,41 +35,43 @@ export const InputField = ({
   };
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", gap: 2, my: 1 }}>
-      {isDeleteRequired && (
-        <IconButton onClick={handleDelete} sx={{ mt: 2 }}>
-          <RemoveCircleOutlineOutlinedIcon
-            sx={{ fontSize: 26, color: "primary.main" }}
+    <Box sx={{ width: 550 }}>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 2, my: 1 }}>
+        <Box sx={{ width: 200, mb: 1 }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography sx={{ color: "primary.dark" }}>{label}</Typography>
+            {isRequired && (
+              <Typography
+                sx={{ fontSize: 11, alignSelf: "flex-end", color: "#FF2E2E" }}
+              >
+                *required
+              </Typography>
+            )}
+          </Box>
+          <TextField
+            size="small"
+            value=""
+            onChange={(event) => handleChange("value", event.target.value)}
+            {...props}
           />
-        </IconButton>
-      )}
-      <Box sx={{ width: 200, mb: 1 }}>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography sx={{ color: "primary.dark" }}>{label}</Typography>
-          {isRequired && (
-            <Typography
-              sx={{ fontSize: 11, alignSelf: "flex-end", color: "#FF2E2E" }}
-            >
-              *required
-            </Typography>
-          )}
         </Box>
-        <TextField
-          size="small"
-          value=""
-          onChange={(event) => handleChange("value", event.target.value)}
-          {...props}
-        />
+        <Typography
+          variant="h6"
+          sx={{ color: "grey.500", pt: 2, fontStyle: "italic", width: 70 }}
+        >
+          {dataType}
+        </Typography>
+        <Typography variant="h6" sx={{ color: "grey.500", pt: 2 }}>
+          Example: {example}
+        </Typography>
+        {isDeleteRequired && (
+          <IconButton onClick={handleDelete} sx={{ mt: 1.5, ml: "auto" }}>
+            <RemoveCircleOutlineOutlinedIcon
+              sx={{ fontSize: 26, color: "primary.main" }}
+            />
+          </IconButton>
+        )}
       </Box>
-      <Typography
-        variant="h6"
-        sx={{ color: "grey.500", pt: 2, fontStyle: "italic", width: 70 }}
-      >
-        {dataType}
-      </Typography>
-      <Typography variant="h6" sx={{ color: "grey.500", pt: 2 }}>
-        Example: {example}
-      </Typography>
     </Box>
   );
 };

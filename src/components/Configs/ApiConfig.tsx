@@ -1,11 +1,3 @@
-export interface SearchParam {
-  paramName: string;
-  paramValue: string;
-  paramType: string;
-  paramExample: string;
-  isRequired: boolean;
-}
-
 export enum OpearionTypes {
   CREATE,
   SEARCH,
@@ -29,6 +21,15 @@ export interface ApiConfig {
   searchParams: SearchParam[];
 }
 
+export interface SearchParam {
+  paramName: string;
+  paramValue: string;
+  paramDescription: string;
+  paramType: string;
+  paramExample: string;
+  isRequired: boolean;
+}
+
 export const apiList: ApiConfig[] = [
   {
     name: "Patient",
@@ -38,12 +39,14 @@ export const apiList: ApiConfig[] = [
       {
         paramName: "ID",
         paramValue: "_id",
+        paramDescription: "ID of the patient",
         isRequired: false,
         paramType: "integer",
         paramExample: "1",
       },
       {
         paramName: "Gender",
+        paramDescription: "Gender of the person",
         paramValue: "gender",
         isRequired: false,
         paramType: "string",
@@ -51,6 +54,7 @@ export const apiList: ApiConfig[] = [
       },
       {
         paramName: "Active",
+        paramDescription: "Whether the patient record is active",
         paramValue: "active",
         isRequired: false,
         paramType: "boolean",

@@ -194,7 +194,7 @@ export const GetResourceContent = ({
       <Box>
         <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
           <Typography sx={{ color: "primary.dark", my: 2 }}>
-            Enter Required Parameters
+            Add optional search parameter(s)
           </Typography>
           {isSearchOperation && (
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
@@ -202,15 +202,14 @@ export const GetResourceContent = ({
                 value={selectedLabel}
                 onChange={handleLabelChange}
                 size="small"
-                sx={{ width: 200 }}
+                sx={{ minWidth: 200 }}
               >
-                <MenuItem value="">Select Label</MenuItem>
                 {searchParams.map((searchParams) => (
                   <MenuItem
                     key={searchParams.paramName}
                     value={searchParams.paramName}
                   >
-                    {searchParams.paramName}
+                    {searchParams.paramName} - {searchParams.paramDescription}
                   </MenuItem>
                 ))}
               </Select>
@@ -225,7 +224,7 @@ export const GetResourceContent = ({
               {isAdded && (
                 <Alert
                   severity="warning"
-                  icon={<InfoOutlineIcon sx={{ fontSize: 15 }} />}
+                  icon={<InfoOutlineIcon sx={{ fontSize: 18 }} />}
                   sx={{ fontSize: 12, py: 0.3 }}
                 >
                   Already added!
