@@ -37,6 +37,7 @@ export const GetResourceContent = ({
   const [inputFields, setInputFields] = useState<InputFieldProps[]>([]);
   const [selectedLabel, setSelectedLabel] = useState<string>("");
   const [isAdded, setIsAdded] = useState(false);
+  const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isSearchOperation && searchParams.length > 0) {
@@ -106,6 +107,14 @@ export const GetResourceContent = ({
   };
 
   const callBackend = () => {
+    if (inputFields.some((field) => !field.value)) {
+      setIsInputEmpty(true);
+      return;
+    }
+
+    // Reset the isInputEmpty state if all input fields are filled
+    setIsInputEmpty(false);
+
     let url: string = "";
     let searchString: string = "";
 
@@ -231,6 +240,13 @@ export const GetResourceContent = ({
                 </Alert>
               )}
             </Box>
+          )}
+        </Box>
+        <Box sx={{ my: 1 }}>
+          {isInputEmpty && (
+            <Alert severity="error" sx={{ fontSize: 13 }}>
+              Please fill all input fields.
+            </Alert>
           )}
         </Box>
         {inputFields.map((inputField, index) => (

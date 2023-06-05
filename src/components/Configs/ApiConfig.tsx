@@ -60,6 +60,14 @@ export const apiList: ApiConfig[] = [
         paramType: "boolean",
         paramExample: "true",
       },
+      {
+        paramName: "Birthdate",
+        paramDescription: "The patients birthdate (NOT IMPLEMENTED YET)",
+        paramValue: "birthDate",
+        isRequired: false,
+        paramType: "date",
+        paramExample: "2023-07-31",
+      },
     ],
     resources: [
       {

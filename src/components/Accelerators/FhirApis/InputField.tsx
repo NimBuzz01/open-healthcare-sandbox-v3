@@ -9,6 +9,9 @@ import {
 import { useState } from "react";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutline";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 
 export interface Props {
   fieldIndex: number;
@@ -95,45 +98,58 @@ export const InputField = ({
             </Typography>
           )}
         </Box>
-        <TextField
-          size="small"
-          value=""
-          onChange={(event) => handleChange("value", event.target.value)}
-          {...props}
-          error={error !== null}
-          helperText={error}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Tooltip
-                  title={
-                    <Box sx={{ p: 1 }}>
-                      <Typography variant="body2" sx={{ mb: 1 }}>
-                        Datatype: {dataType}
-                      </Typography>
-                      <Typography variant="body2">
-                        Example: {example}
-                      </Typography>
-                    </Box>
-                  }
-                  open={isInfoOpen}
-                  onClose={handleInfoClose}
-                  disableFocusListener
-                  disableHoverListener
-                  disableTouchListener
-                >
-                  <IconButton
-                    onMouseEnter={handleInfoOpen}
-                    onMouseLeave={handleInfoClose}
-                    sx={{ p: 0 }}
+        {dataType === "date" ? (
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              slotProps={{ textField: { size: "small" } }}
+              format="YYYY-MM-DD"
+              value={dayjs(pValue || undefined)}
+              onChange={(value) =>
+                handleChange("value", value?.format("YYYY-MM-DD"))
+              }
+            />
+          </LocalizationProvider>
+        ) : (
+          <TextField
+            size="small"
+            value=""
+            onChange={(event) => handleChange("value", event.target.value)}
+            {...props}
+            error={error !== null}
+            helperText={error}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Tooltip
+                    title={
+                      <Box sx={{ p: 1 }}>
+                        <Typography variant="body2" sx={{ mb: 1 }}>
+                          Datatype: {dataType}
+                        </Typography>
+                        <Typography variant="body2">
+                          Example: {example}
+                        </Typography>
+                      </Box>
+                    }
+                    open={isInfoOpen}
+                    onClose={handleInfoClose}
+                    disableFocusListener
+                    disableHoverListener
+                    disableTouchListener
                   >
-                    <HelpOutlineOutlinedIcon sx={{ fontSize: 20 }} />
-                  </IconButton>
-                </Tooltip>
-              </InputAdornment>
-            ),
-          }}
-        />
+                    <IconButton
+                      onMouseEnter={handleInfoOpen}
+                      onMouseLeave={handleInfoClose}
+                      sx={{ p: 0 }}
+                    >
+                      <HelpOutlineOutlinedIcon sx={{ fontSize: 20 }} />
+                    </IconButton>
+                  </Tooltip>
+                </InputAdornment>
+              ),
+            }}
+          />
+        )}
       </Box>
       {isDeleteRequired && (
         <IconButton onClick={handleDelete} sx={{ mt: 1.5 }}>
