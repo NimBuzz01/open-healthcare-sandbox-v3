@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
+import axios from "axios";
 import { Box, Container, Typography } from "@mui/material";
 import { CommonButton, ResponseAlert, CodeEditor } from "../../Common";
-import axios from "axios";
 import { ResourceMethodIcon } from "./ResourceMethodIcon";
 
 interface Props {
@@ -10,10 +10,10 @@ interface Props {
 }
 
 export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
-  const [request, setRequest] = useState("");
-  const [data, setData] = useState("");
-  const [error, setError] = useState("");
-  const [isError, setIsError] = useState(false);
+  const [request, setRequest] = useState<string>("");
+  const [data, setData] = useState<any>("");
+  const [error, setError] = useState<string>("");
+  const [isError, setIsError] = useState<boolean>(false);
 
   const handleOnChange = useCallback((value: string) => {
     setRequest(value);
@@ -24,7 +24,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   };
 
   const readFile = (fileInput?: string | ArrayBuffer | null) => {
-    if (typeof fileInput == "string") {
+    if (typeof fileInput === "string") {
       setRequest(fileInput);
     }
   };
@@ -87,7 +87,6 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
         </Box>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-        {/* {!data && ( */}
         <CodeEditor
           title="Input: "
           value={request}
@@ -102,7 +101,6 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           width="100%"
           height={data ? "500px" : "calc(100vh - 350px)"}
         />
-        {/* )} */}
         {data && (
           <CodeEditor
             title="Output:"

@@ -12,7 +12,7 @@ import { FeedbackForm } from "../FeedbackForm";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 
 export const Footer = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleClick = () => {
     setIsOpen(!isOpen);

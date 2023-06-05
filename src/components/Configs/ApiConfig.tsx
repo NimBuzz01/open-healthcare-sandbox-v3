@@ -1,4 +1,6 @@
-export enum OpearionTypes {
+import { BFF_BASE_URL } from "./Constants";
+
+export enum OperationTypes {
   CREATE,
   SEARCH,
   READ,
@@ -11,7 +13,7 @@ export interface ResourceConfig {
   resourcePath: string;
   resourceDescription: string;
   resourceParameters?: SearchParam[];
-  resourceOperation: OpearionTypes;
+  resourceOperation: OperationTypes;
 }
 
 export interface ApiConfig {
@@ -33,15 +35,14 @@ export interface SearchParam {
 export const apiList: ApiConfig[] = [
   {
     name: "Patient",
-    baseUrl:
-      "https://c32618cf-389d-44f1-93ee-b67a3468aae3-dev.e1-us-east-azure.choreoapis.dev/hdbb/bffservice/endpoint-9090-803/1.0.0/fhir/r4/patient",
+    baseUrl: BFF_BASE_URL + "/fhir/r4/patient",
     searchParams: [
       {
         paramName: "ID",
         paramValue: "_id",
         paramDescription: "ID of the patient",
         isRequired: false,
-        paramType: "integer",
+        paramType: "string",
         paramExample: "1",
       },
       {
@@ -60,14 +61,14 @@ export const apiList: ApiConfig[] = [
         paramType: "boolean",
         paramExample: "true",
       },
-      {
-        paramName: "Birthdate",
-        paramDescription: "The patients birthdate (NOT IMPLEMENTED YET)",
-        paramValue: "birthDate",
-        isRequired: false,
-        paramType: "date",
-        paramExample: "2023-07-31",
-      },
+      // {
+      //   paramName: "Birthdate",
+      //   paramDescription: "The patients birthdate (NOT IMPLEMENTED YET)",
+      //   paramValue: "birthDate",
+      //   isRequired: false,
+      //   paramType: "date",
+      //   paramExample: "2023-07-31",
+      // },
     ],
     resources: [
       {
@@ -75,21 +76,21 @@ export const apiList: ApiConfig[] = [
         resourceMethod: "GET",
         resourcePath: "/Patient",
         resourceDescription: "Search patient resources",
-        resourceOperation: OpearionTypes.SEARCH,
+        resourceOperation: OperationTypes.SEARCH,
       },
       {
         resourceName: "READ",
         resourceMethod: "GET",
         resourcePath: "/Patient/{id}",
         resourceDescription: "Read patient resource by Id",
-        resourceOperation: OpearionTypes.READ,
+        resourceOperation: OperationTypes.READ,
       },
       {
         resourceName: "CREATE",
         resourceMethod: "POST",
         resourcePath: "/Patient",
         resourceDescription: "Create patient resource",
-        resourceOperation: OpearionTypes.CREATE,
+        resourceOperation: OperationTypes.CREATE,
       },
       // {
       //   resourceMethod: "DELETE",
@@ -100,96 +101,92 @@ export const apiList: ApiConfig[] = [
     ],
   },
   {
-    name: "Explanation Of Benefit",
-    baseUrl:
-      "https://c32618cf-389d-44f1-93ee-b67a3468aae3-dev.e1-us-east-azure.choreoapis.dev/hdbb/bffservice/endpoint-9090-803/1.0.0/fhir/r4/patient",
+    name: "Encounter",
+    baseUrl: BFF_BASE_URL + "/fhir/r4/encounter",
     searchParams: [],
     resources: [
       {
         resourceName: "SEARCH",
         resourceMethod: "GET",
-        resourcePath: "/ExplanationOfBenefit",
-        resourceDescription: "Search ExplanationOfBenefit resources",
-        resourceOperation: OpearionTypes.SEARCH,
+        resourcePath: "/Encounter",
+        resourceDescription: "Search Encounter resources",
+        resourceOperation: OperationTypes.SEARCH,
       },
       {
         resourceName: "READ",
         resourceMethod: "GET",
-        resourcePath: "/ExplanationOfBenefit/{id}",
-        resourceDescription: "Read ExplanationOfBenefit resource by id",
-        resourceOperation: OpearionTypes.READ,
+        resourcePath: "/Encounter/{id}",
+        resourceDescription: "Read Encounter resource by id",
+        resourceOperation: OperationTypes.READ,
       },
       {
         resourceName: "CREATE",
         resourceMethod: "POST",
-        resourcePath: "/ExplanationOfBenefit",
-        resourceDescription: "Create ExplanationOfBenefit resource",
-        resourceOperation: OpearionTypes.CREATE,
+        resourcePath: "/Encounter",
+        resourceDescription: "Create Encounter resource",
+        resourceOperation: OperationTypes.CREATE,
       },
     ],
   },
   {
-    name: "Claim",
-    baseUrl:
-      "https://c32618cf-389d-44f1-93ee-b67a3468aae3-dev.e1-us-east-azure.choreoapis.dev/hdbb/bffservice/endpoint-9090-803/1.0.0/fhir/r4/patient",
+    name: "Practitioner",
+    baseUrl: BFF_BASE_URL + "/fhir/r4/practitioner",
     searchParams: [],
     resources: [
       {
         resourceName: "SEARCH",
         resourceMethod: "GET",
-        resourcePath: "/Claim",
-        resourceDescription: "Search Claim resources",
-        resourceOperation: OpearionTypes.SEARCH,
+        resourcePath: "/Practitioner",
+        resourceDescription: "Search Practitioner resources",
+        resourceOperation: OperationTypes.SEARCH,
       },
       {
         resourceName: "READ",
         resourceMethod: "GET",
-        resourcePath: "/Claim/{id}",
-        resourceDescription: "Read Claim resource by id",
-        resourceOperation: OpearionTypes.READ,
+        resourcePath: "/Practitioner/{id}",
+        resourceDescription: "Read Practitioner resource by id",
+        resourceOperation: OperationTypes.READ,
       },
       {
         resourceName: "CREATE",
         resourceMethod: "POST",
-        resourcePath: "/Claim",
-        resourceDescription: "Create Claim resource",
-        resourceOperation: OpearionTypes.CREATE,
-      },
-    ],
-  },
-  {
-    name: "Observation",
-    baseUrl:
-      "https://c32618cf-389d-44f1-93ee-b67a3468aae3-dev.e1-us-east-azure.choreoapis.dev/hdbb/bffservice/endpoint-9090-803/1.0.0/fhir/r4/patient",
-    searchParams: [],
-    resources: [
-      {
-        resourceName: "SEARCH",
-        resourceMethod: "GET",
-        resourcePath: "/Observation",
-        resourceDescription: "Search Observation resources",
-        resourceOperation: OpearionTypes.SEARCH,
-      },
-      {
-        resourceName: "READ",
-        resourceMethod: "GET",
-        resourcePath: "/Observation/{id}",
-        resourceDescription: "Read Observation resource by id",
-        resourceOperation: OpearionTypes.READ,
-      },
-      {
-        resourceName: "CREATE",
-        resourceMethod: "POST",
-        resourcePath: "/Observation",
-        resourceDescription: "Create Observation resource",
-        resourceOperation: OpearionTypes.CREATE,
+        resourcePath: "/Practitioner",
+        resourceDescription: "Create Practitioner resource",
+        resourceOperation: OperationTypes.CREATE,
       },
     ],
   },
   {
     name: "Organization",
-    baseUrl:
-      "https://c32618cf-389d-44f1-93ee-b67a3468aae3-dev.e1-us-east-azure.choreoapis.dev/hdbb/bffservice/endpoint-9090-803/1.0.0/fhir/r4/patient",
+    baseUrl: BFF_BASE_URL + "/fhir/r4/organization",
+    searchParams: [],
+    resources: [
+      {
+        resourceName: "SEARCH",
+        resourceMethod: "GET",
+        resourcePath: "/Organization",
+        resourceDescription: "Search Organization resources",
+        resourceOperation: OperationTypes.SEARCH,
+      },
+      {
+        resourceName: "READ",
+        resourceMethod: "GET",
+        resourcePath: "/Organization/{id}",
+        resourceDescription: "Read Organization resource by id",
+        resourceOperation: OperationTypes.READ,
+      },
+      {
+        resourceName: "CREATE",
+        resourceMethod: "POST",
+        resourcePath: "/Organization",
+        resourceDescription: "Create Organization resource",
+        resourceOperation: OperationTypes.CREATE,
+      },
+    ],
+  },
+  {
+    name: "Observation",
+    baseUrl: BFF_BASE_URL + "/fhir/r4/observation",
     searchParams: [],
     resources: [
       {
@@ -197,21 +194,21 @@ export const apiList: ApiConfig[] = [
         resourceMethod: "GET",
         resourcePath: "/Observation",
         resourceDescription: "Search Observation resources",
-        resourceOperation: OpearionTypes.SEARCH,
+        resourceOperation: OperationTypes.SEARCH,
       },
       {
         resourceName: "READ",
         resourceMethod: "GET",
         resourcePath: "/Observation/{id}",
         resourceDescription: "Read Observation resources by id",
-        resourceOperation: OpearionTypes.READ,
+        resourceOperation: OperationTypes.READ,
       },
       {
         resourceName: "CREATE",
         resourceMethod: "POST",
         resourcePath: "/Observation",
         resourceDescription: "Create Observation resource",
-        resourceOperation: OpearionTypes.CREATE,
+        resourceOperation: OperationTypes.CREATE,
       },
     ],
   },

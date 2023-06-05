@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import {
   Alert,
   Box,
@@ -10,12 +11,11 @@ import {
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import axios from "axios";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import { CommonButton, ResponseAlert, CodeEditor } from "../../Common";
-import { SearchParam } from "../../Configs/ApiConfig";
 import { InputField, Props as InputFieldProps } from "./InputField";
+import { SearchParam } from "../../Configs/ApiConfig";
 import { ResourceMethodIcon } from "./ResourceMethodIcon";
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutlined";
 
 interface Props {
@@ -36,7 +36,7 @@ export const GetResourceContent = ({
   const [error, setError] = useState<string>("");
   const [inputFields, setInputFields] = useState<InputFieldProps[]>([]);
   const [selectedLabel, setSelectedLabel] = useState<string>("");
-  const [isAdded, setIsAdded] = useState(false);
+  const [isAdded, setIsAdded] = useState<boolean>(false);
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
 
   useEffect(() => {
@@ -112,7 +112,6 @@ export const GetResourceContent = ({
       return;
     }
 
-    // Reset the isInputEmpty state if all input fields are filled
     setIsInputEmpty(false);
 
     let url: string = "";
@@ -137,7 +136,6 @@ export const GetResourceContent = ({
       url = `${backendUrl}/${inputFields[0].value}`;
     }
 
-    console.log(url);
     setData(null);
     setError("");
 

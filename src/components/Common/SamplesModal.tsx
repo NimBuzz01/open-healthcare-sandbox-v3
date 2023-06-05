@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import {
   Box,
   Container,
@@ -7,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import { items } from "../Configs/AcceleratorConfig";
-import { useLocation } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 
 interface SamplesModalProps {

@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { Logo } from "../Logo";
 import { AlertModal, ComponentTitle } from "../Common";
-import { items } from "../Configs/AcceleratorConfig";
+import { items, Item } from "../Configs/AcceleratorConfig";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 
 export const Header = () => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  
-  const handleResize = () => setScreenWidth(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+
+  const handleResize = (): void => setScreenWidth(window.innerWidth);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -17,7 +17,9 @@ export const Header = () => {
   }, []);
 
   const location = useLocation();
-  const currentItem = items.find((item) => item.path === location.pathname);
+  const currentItem = items.find(
+    (item: Item) => item.path === location.pathname
+  );
   const label = currentItem ? currentItem.label : "";
   const description = currentItem ? currentItem.description : "";
   const url = currentItem ? currentItem.url : "";
@@ -34,7 +36,8 @@ export const Header = () => {
           gap: 1,
           py: 0,
           px: 1,
-          boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+          boxShadow:
+            "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
         }}
       >
         <Logo />

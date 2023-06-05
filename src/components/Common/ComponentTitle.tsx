@@ -10,10 +10,17 @@ interface Props {
 export const ComponentTitle = ({ heading, description, url }: Props) => {
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "column", mr: "auto" }}>
-        <Typography color="primary.dark" variant="h5" sx={{ fontWeight: 600 }}>
-          {heading}
-        </Typography>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <Typography
+            color="primary.dark"
+            variant="h5"
+            sx={{ fontWeight: 600 }}
+          >
+            {heading}
+          </Typography>
+          <AboutTool url={url}></AboutTool>
+        </Box>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography
             color="common.black"
@@ -24,7 +31,6 @@ export const ComponentTitle = ({ heading, description, url }: Props) => {
           </Typography>
         </Box>
       </Box>
-      <AboutTool url={url}></AboutTool>
     </>
   );
 };

@@ -14,7 +14,8 @@ interface AlertModalProps {
 }
 
 export const AlertModal = ({ contentText }: AlertModalProps) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState<boolean>(true);
+
   const handleClose = () => setOpen(false);
 
   return (

@@ -113,13 +113,6 @@ export const Hl7v2ToFhir = () => {
     }));
   }, []);
 
-  // const handleOutputChange = useCallback((value: string) => {
-  //   setState((prevState) => ({
-  //     ...prevState,
-  //     output: value,
-  //   }));
-  // }, []);
-
   const readFile = (fileInput?: string | ArrayBuffer | null) => {
     if (typeof fileInput == "string") {
       setState((prevState) => ({

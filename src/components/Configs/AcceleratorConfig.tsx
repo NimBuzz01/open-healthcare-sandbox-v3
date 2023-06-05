@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import {
   ConnectToEmr,
   CcdaToFhir,
@@ -22,10 +23,20 @@ import CableOutlinedIcon from "@mui/icons-material/CableOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import LocalFireDepartmentOutlinedIcon from "@mui/icons-material/LocalFireDepartmentOutlined";
 
-export const items = [
+export interface Item {
+  label: string;
+  description: string;
+  url: string;
+  path: string;
+  icon: ReactElement;
+  component: ReactElement;
+  samples?: ReactElement;
+}
+
+export const items: Item[] = [
   {
     label: "FHIR APIs",
-    description: "Test out a list of sample APIs",
+    description: "Test out a list of sample FHIR APIs",
     url: "https://wso2.com/solutions/healthcare/",
     path: "/",
     icon: <LocalFireDepartmentOutlinedIcon sx={{ width: 26, height: 26 }} />,
@@ -51,7 +62,8 @@ export const items = [
   },
   {
     label: "FHIR Validation",
-    description: "Validate the FHIR Resource",
+    description:
+      "Validate the FHIR Resource that complies with the FHIR standards",
     url: "https://wso2.com/solutions/healthcare/",
     path: "/fhir-validation",
     icon: <CheckCircleOutlineOutlinedIcon sx={{ width: 26, height: 26 }} />,
@@ -60,7 +72,7 @@ export const items = [
   },
   {
     label: "SMART on FHIR",
-    description: "Try out a standalone end user application",
+    description: "Try out a standalone end user FHIR application",
     url: "https://wso2.com/solutions/healthcare/",
     path: "/smart-on-fhir",
     icon: <VpnKeyOutlinedIcon sx={{ width: 26, height: 26 }} />,
@@ -69,7 +81,8 @@ export const items = [
   },
   {
     label: "FHIR Path",
-    description: "FHIR Path Description Idk",
+    description:
+      "Easily convert, transform and extract healthcare data to meet HL7 FHIR standards",
     url: "https://wso2.com/solutions/healthcare/",
     path: "/fhir-path",
     icon: <FilterAltOutlinedIcon sx={{ width: 26, height: 26 }} />,
@@ -78,7 +91,7 @@ export const items = [
   },
   {
     label: "Connect To EMR",
-    description: "Connect FHIR to EMR",
+    description: "Connect FHIR resource to EMR",
     url: "https://wso2.com/solutions/healthcare/",
     path: "/connect-to-emr",
     icon: <CableOutlinedIcon sx={{ width: 26, height: 26 }} />,

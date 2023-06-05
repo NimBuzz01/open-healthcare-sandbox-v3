@@ -10,7 +10,6 @@ export { UploadIcon } from "./UploadIcon";
 export { ViewDocument } from "./ViewDocument";
 export { ResponseAlert } from "./ResponseAlert";
 export { SamplesModal } from "./SamplesModal";
-export { ConsoleAccordion } from "./ConsoleAccordion";
 export { ToggleDarkMode } from "./ToggleDarkMode";
 export { ClearIcon } from "./ClearIcon";
 export { SamplesButton } from "./SamplesButton";

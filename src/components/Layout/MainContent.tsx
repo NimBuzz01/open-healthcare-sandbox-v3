@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Routes from "../../contexts/AppRoutes";
+import Routes from "../../routes/AppRoutes";
 import { SideNavigation } from "../Layout";
 import { items } from "../Configs/AcceleratorConfig";
 import itemConfig from "../../tool-config.json";
@@ -35,7 +35,7 @@ export const MainContent = () => {
           display: "flex",
           flexDirection: "column",
           height: "calc(100vh - 94px)",
-          overflowY: "auto",       
+          overflowY: "auto",
         }}
       >
         <Routes items={renderedItems} />

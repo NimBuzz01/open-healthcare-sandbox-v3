@@ -57,7 +57,7 @@ export const CodeEditor = ({
   return (
     <Box
       sx={{
-        width: { width },
+        width,
         border: 1,
         borderRadius: 1,
         borderColor: "grey.500",

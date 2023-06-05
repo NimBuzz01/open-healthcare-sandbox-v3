@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   IconButton,
@@ -6,12 +7,12 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutline";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import { withStyles } from "@mui/styles";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutline";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 
 export interface Props {
   fieldIndex: number;
@@ -26,6 +27,13 @@ export interface Props {
   [key: string]: any;
 }
 
+const MuiTooltip = withStyles({
+  tooltip: {
+    backgroundColor: "#fcfcfc",
+    border: "1px solid #b8b8b8",
+  },
+})(Tooltip);
+
 export const InputField = ({
   fieldIndex,
   label,
@@ -38,11 +46,12 @@ export const InputField = ({
   isDeleteRequired,
   ...props
 }: Props) => {
-  const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const [isInfoOpen, setIsInfoOpen] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleChange = (field: string, value: any) => {
-    let errorMessage = null;
+    let errorMessage: string | null = null;
+
     if (dataType === "integer" && isNaN(value)) {
       errorMessage = "Please enter a valid integer";
     } else if (dataType === "email" && !validateEmail(value)) {
@@ -52,12 +61,13 @@ export const InputField = ({
     } else if (dataType === "boolean" && !isValidBoolean(value)) {
       errorMessage = "Please enter a valid boolean value";
     }
+
     setError(errorMessage);
     onChange(fieldIndex, field, value);
   };
 
   const handleDelete = () => {
-    onDelete!(fieldIndex);
+    onDelete?.(fieldIndex);
   };
 
   const handleInfoOpen = () => {
@@ -69,19 +79,16 @@ export const InputField = ({
   };
 
   const validateEmail = (email: string) => {
-    // Regular expression to validate email address
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
   const isValidDate = (dateString: string) => {
-    // Check if the date string is a valid date
     const date = new Date(dateString);
     return !isNaN(date.getTime());
   };
 
   const isValidBoolean = (value: string) => {
-    // Check if the value is a valid boolean (true/false)
     return value === "true" || value === "false";
   };
 
@@ -120,14 +127,16 @@ export const InputField = ({
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <Tooltip
+                  <MuiTooltip
                     title={
-                      <Box sx={{ p: 1 }}>
-                        <Typography variant="body2" sx={{ mb: 1 }}>
-                          Datatype: {dataType}
+                      <Box sx={{ p: 1, color: "common.black" }}>
+                        <Typography sx={{ mb: 1 }}>
+                          <Typography variant="body2">Datatype:</Typography>{" "}
+                          {dataType}
                         </Typography>
-                        <Typography variant="body2">
-                          Example: {example}
+                        <Typography>
+                          <Typography variant="body2">Example:</Typography>{" "}
+                          {example}
                         </Typography>
                       </Box>
                     }
@@ -144,7 +153,7 @@ export const InputField = ({
                     >
                       <HelpOutlineOutlinedIcon sx={{ fontSize: 20 }} />
                     </IconButton>
-                  </Tooltip>
+                  </MuiTooltip>
                 </InputAdornment>
               ),
             }}

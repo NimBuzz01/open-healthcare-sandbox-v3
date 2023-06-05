@@ -1,6 +1,6 @@
+import { useState } from "react";
 import Alert, { AlertColor } from "@mui/material/Alert";
 import { Snackbar, SnackbarOrigin } from "@mui/material";
-import { useState } from "react";
 
 interface Props {
   isOpen: boolean;
@@ -32,7 +32,11 @@ export const ResponseAlert = ({
       onClose={setIsOpen}
       anchorOrigin={{ vertical, horizontal }}
     >
-      <Alert onClose={setIsOpen} severity={severity} sx={{ width: "100%", fontSize:14, }}>
+      <Alert
+        onClose={setIsOpen}
+        severity={severity}
+        sx={{ width: "100%", fontSize: 14 }}
+      >
         {message}
       </Alert>
     </Snackbar>

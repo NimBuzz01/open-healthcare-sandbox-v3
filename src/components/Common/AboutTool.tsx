@@ -1,4 +1,4 @@
-import { Box, Link, Typography } from "@mui/material";
+import { IconButton, Link, Tooltip } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 interface Props {
@@ -8,27 +8,11 @@ interface Props {
 export const AboutTool = ({ url }: Props) => {
   return (
     <Link href={url} target="_blank" underline="none">
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 1,
-          mr: 4,
-          color: "primary.main",
-          transition: "0.3s",
-          ":hover": { color: "primary.dark" },
-        }}
-      >
-        <InfoOutlinedIcon sx={{ width: 23, height: 23 }} />
-        <Typography
-          variant="h5"
-          sx={{
-            fontWeight: 400,
-          }}
-        >
-          About this accelerator
-        </Typography>
-      </Box>
+      <Tooltip key={"about-tool"} title={"About Tool"} placement="right">
+        <IconButton color="primary" sx={{ p: 0 }}>
+          <InfoOutlinedIcon />
+        </IconButton>
+      </Tooltip>
     </Link>
   );
 };
