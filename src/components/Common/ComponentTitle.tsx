@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { AboutTool } from "../Common";
+import { AboutTool, RatingIcons } from "../Common";
 
 interface Props {
   heading: string;
@@ -10,7 +10,7 @@ interface Props {
 export const ComponentTitle = ({ heading, description, url }: Props) => {
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", mr: "auto" }}>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <Typography
             color="primary.dark"
@@ -30,6 +30,9 @@ export const ComponentTitle = ({ heading, description, url }: Props) => {
             {description}
           </Typography>
         </Box>
+      </Box>
+      <Box sx={{ mr: 2 }}>
+        <RatingIcons toolName={heading} />
       </Box>
     </>
   );
