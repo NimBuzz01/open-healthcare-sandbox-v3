@@ -3,7 +3,7 @@ interface Sample {
   data: string;
 }
 
-// Use \ if theres a \ in the data to prevent the character from being ignored. Keep the indendations exact.
+// Use \ if theres a \ in the data to prevent the character from being ignored. Keep the indentations exact.
 
 export const data: Sample[] = [
   {
