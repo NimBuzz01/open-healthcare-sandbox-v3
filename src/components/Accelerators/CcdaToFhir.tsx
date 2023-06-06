@@ -180,7 +180,7 @@ export const CcdaToFhir = () => {
           readFile={readFile}
           clearEnabled
           width="50%"
-          height="calc(100vh - 187px)"
+          height="calc(100vh - 187.5px)"
         />
         <Divider orientation="vertical" />
         <CodeEditor
@@ -194,7 +194,7 @@ export const CcdaToFhir = () => {
           downloadEnabled
           clearEnabled
           width="50%"
-          height="calc(100vh - 187px)"
+          height="calc(100vh - 187.5px)"
         />
       </Box>
     </Container>

@@ -59,7 +59,7 @@ export const CodeEditor = ({
       sx={{
         width,
         border: 1,
-        borderRadius: 1,
+        borderRadius: "4px 4px 0 0",
         borderColor: "grey.500",
         display: "flex",
         flexDirection: "column",

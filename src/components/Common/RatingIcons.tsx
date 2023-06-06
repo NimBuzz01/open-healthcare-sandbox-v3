@@ -21,7 +21,7 @@ export const RatingIcons = ({ toolName }: ToolRatingProps) => {
   useEffect(() => {
     setTimeout(() => {
       setIsRated(false);
-    }, 2000);
+    }, 1500);
   }, [isRated]);
 
   const handleThumbsUpClick = (clickedToolName: string) => {
@@ -113,6 +113,7 @@ export const RatingIcons = ({ toolName }: ToolRatingProps) => {
             position: "absolute",
             top: 50,
             right: 20,
+            zIndex: 1000,
           }}
         >
           Thank you for your rating!

@@ -36,7 +36,7 @@ export interface Item {
 export const items: Item[] = [
   {
     label: "FHIR APIs",
-    description: "Test out a list of sample FHIR APIs",
+    description: "Try out sample FHIR APIs",
     url: "https://wso2.com/solutions/healthcare/",
     path: "/",
     icon: <LocalFireDepartmentOutlinedIcon sx={{ width: 26, height: 26 }} />,
