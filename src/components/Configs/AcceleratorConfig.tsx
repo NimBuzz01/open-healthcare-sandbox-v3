@@ -8,14 +8,9 @@ import {
   FhirValidation,
   FhirApis,
 } from "../Accelerators";
-import {
-  Hl7Samples,
-  ValidationSamples,
-  SmartSamples,
-  CcdaSamples,
-  PathSamples,
-  EmrSamples,
-} from "../Accelerators/Samples";
+import { data as ccdaData } from "../Accelerators/Samples/CcdaData";
+import { data as hl7Data } from "../Accelerators/Samples/Hl7Data";
+import { data as fhirData } from "../Accelerators/Samples/FhirData";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import TransformOutlinedIcon from "@mui/icons-material/TransformOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
@@ -30,7 +25,12 @@ export interface Item {
   path: string;
   icon: ReactElement;
   component: ReactElement;
-  samples?: ReactElement;
+  sampleData?: Sample[];
+}
+
+export interface Sample {
+  name: string;
+  data: string;
 }
 
 export const items: Item[] = [
@@ -41,6 +41,7 @@ export const items: Item[] = [
     path: "/",
     icon: <LocalFireDepartmentOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <FhirApis />,
+    sampleData: fhirData,
   },
   {
     label: "HL7V2 To FHIR",
@@ -49,7 +50,7 @@ export const items: Item[] = [
     path: "/hl7-to-fhir",
     icon: <TransformOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <Hl7v2ToFhir />,
-    samples: <Hl7Samples />,
+    sampleData: hl7Data,
   },
   {
     label: "C-CDA To FHIR",
@@ -58,7 +59,7 @@ export const items: Item[] = [
     path: "/c-cda-to-fhir",
     icon: <TransformOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <CcdaToFhir />,
-    samples: <CcdaSamples />,
+    sampleData: ccdaData,
   },
   {
     label: "FHIR Validation",
@@ -68,7 +69,6 @@ export const items: Item[] = [
     path: "/fhir-validation",
     icon: <CheckCircleOutlineOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <FhirValidation />,
-    samples: <ValidationSamples />,
   },
   {
     label: "SMART on FHIR",
@@ -77,7 +77,6 @@ export const items: Item[] = [
     path: "/smart-on-fhir",
     icon: <VpnKeyOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <SmartOnFhir />,
-    samples: <SmartSamples />,
   },
   {
     label: "FHIR Path",
@@ -87,7 +86,6 @@ export const items: Item[] = [
     path: "/fhir-path",
     icon: <FilterAltOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <FhirPath />,
-    samples: <PathSamples />,
   },
   {
     label: "Connect To EMR",
@@ -96,6 +94,5 @@ export const items: Item[] = [
     path: "/connect-to-emr",
     icon: <CableOutlinedIcon sx={{ width: 26, height: 26 }} />,
     component: <ConnectToEmr />,
-    samples: <EmrSamples />,
   },
 ];

@@ -1,7 +1,13 @@
 import { useCallback, useState } from "react";
 import axios from "axios";
 import { Box, Container, Typography } from "@mui/material";
-import { CommonButton, ResponseAlert, CodeEditor } from "../../Common";
+import {
+  CommonButton,
+  ResponseAlert,
+  CodeEditor,
+  SamplesButton,
+  SamplesModal,
+} from "../../Common";
 import { ResourceMethodIcon } from "./ResourceMethodIcon";
 
 interface Props {
@@ -14,6 +20,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   const [data, setData] = useState<any>("");
   const [error, setError] = useState<string>("");
   const [isError, setIsError] = useState<boolean>(false);
+  const [sampleOpen, setSampleOpen] = useState(false);
 
   const handleOnChange = useCallback((value: string) => {
     setRequest(value);
@@ -31,6 +38,14 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
 
   const closeResponse = () => {
     setIsError(false);
+  };
+
+  const openSampleModal = () => {
+    setSampleOpen(true);
+  };
+
+  const closeSampleModal = () => {
+    setSampleOpen(false);
   };
 
   const callBackend = () => {
@@ -86,7 +101,9 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           <CommonButton variant="border" label="Reset" onClick={handleReset} />
         </Box>
       </Box>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+      <SamplesButton onClick={openSampleModal} />
+      <SamplesModal isOpen={sampleOpen} onClose={closeSampleModal} />
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
         <CodeEditor
           title="Input: "
           value={request}
@@ -99,7 +116,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           readFile={readFile}
           clearEnabled
           width="100%"
-          height={data ? "500px" : "calc(100vh - 350px)"}
+          height={data ? "500px" : "calc(100vh - 395px)"}
         />
         {data && (
           <CodeEditor
