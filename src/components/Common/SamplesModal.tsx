@@ -27,16 +27,18 @@ interface SamplesModalProps {
 }
 
 export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
-  const [selectedSample, setSelectedSample] = useState<Sample | null>();
-
-  const handleSampleClick = (sample: Sample) => {
-    setSelectedSample(sample);
-  };
-
   const location = useLocation();
   const currentItem = items.find((item) => item.path === location.pathname);
   const data = currentItem ? currentItem.sampleData : "";
   const label = currentItem ? currentItem.label : "";
+
+  const [selectedSample, setSelectedSample] = useState<Sample | null>(
+    data && data.length > 0 ? data[0] : null
+  );
+
+  const handleSampleClick = (sample: Sample) => {
+    setSelectedSample(sample);
+  };
 
   return (
     <Modal open={isOpen} onClose={onClose}>
@@ -86,7 +88,7 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
             </List>
           </Box>
           <Box sx={{ width: "75%", display: "flex", justifyContent: "center" }}>
-            {selectedSample ? (
+            {selectedSample && (
               <CodeEditor
                 title={selectedSample.name}
                 value={selectedSample.data}
@@ -97,10 +99,6 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
                 width="98%"
                 height="calc(90vh - 110px)"
               />
-            ) : (
-              <Typography variant="h6">
-                Select a sample to view its data
-              </Typography>
             )}
           </Box>
         </Box>
