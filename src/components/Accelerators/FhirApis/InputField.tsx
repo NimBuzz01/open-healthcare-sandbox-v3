@@ -163,7 +163,7 @@ export const InputField = ({
       {isDeleteRequired && (
         <IconButton onClick={handleDelete} sx={{ mt: 1.5 }}>
           <RemoveCircleOutlineOutlinedIcon
-            sx={{ fontSize: 26, color: "#FF2E2E" }}
+            sx={{ fontSize: 26, color: "#DC143C" }}
           />
         </IconButton>
       )}

@@ -11,7 +11,7 @@ export const SamplesButton = ({ onClick }: ButtonProps) => {
       variant="contained"
       color="secondary"
       endIcon={<ArticleOutlinedIcon />}
-      sx={{ fontSize: 14, color: "background.default" }}
+      sx={{ fontSize: 14, color: "background.default", textTransform: "none" }}
       onClick={onClick}
     >
       Load Samples

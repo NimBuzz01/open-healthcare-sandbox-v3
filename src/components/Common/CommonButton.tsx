@@ -14,6 +14,7 @@ export const CommonButton = ({ variant, label, onClick }: ButtonProps) => {
       sx={{
         fontSize: 14,
         borderRadius: 1,
+        textTransform: "none",
         backgroundColor:
           variant === "background" ? "secondary.main" : "transparent",
         color: variant === "background" ? "white" : "secondary.main",
@@ -21,7 +22,7 @@ export const CommonButton = ({ variant, label, onClick }: ButtonProps) => {
         borderColor: "secondary.main",
         ":hover": {
           border: 2,
-          bgcolor: variant === "background" ? "secondary.light" : "grey.400",
+          bgcolor: variant === "background" ? "secondary.light" : "grey.100",
           borderColor:
             variant === "background" ? "secondary.light" : "secondary.light",
         },

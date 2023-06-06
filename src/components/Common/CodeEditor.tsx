@@ -12,7 +12,7 @@ interface CodeEditorProps {
   darkMode?: boolean;
   onClear?: () => void;
   placeholder?: string;
-  fileType: string;
+  fileType?: string;
   downloadEnabled?: boolean;
   uploadEnabled?: boolean;
   clearEnabled?: boolean;
@@ -29,7 +29,7 @@ export const CodeEditor = ({
   darkMode,
   onClear,
   placeholder,
-  fileType,
+  fileType = "jsx",
   downloadEnabled,
   uploadEnabled,
   clearEnabled,

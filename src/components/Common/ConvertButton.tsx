@@ -24,6 +24,7 @@ export const ConvertButton = ({ isLoading, handleSubmit }: Props) => {
       sx={{
         fontSize: 14,
         color: "background.default",
+        textTransform: "none",
         width: 180,
         mr: 3,
       }}
