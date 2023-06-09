@@ -131,7 +131,7 @@ export const InputField = ({
                     title={
                       <Box sx={{ p: 1, color: "common.black" }}>
                         <Typography sx={{ mb: 1 }}>
-                          <Typography variant="body2">Datatype:</Typography>{" "}
+                          <Typography variant="body2">ParamType:</Typography>{" "}
                           {dataType}
                         </Typography>
                         <Typography>
@@ -163,7 +163,7 @@ export const InputField = ({
       {isDeleteRequired && (
         <IconButton onClick={handleDelete} sx={{ mt: 1.5 }}>
           <RemoveCircleOutlineOutlinedIcon
-            sx={{ fontSize: 26, color: "#DC143C" }}
+            sx={{ fontSize: 26, color: "#FF2E2E" }}
           />
         </IconButton>
       )}

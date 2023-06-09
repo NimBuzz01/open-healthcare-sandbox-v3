@@ -73,7 +73,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   };
 
   return (
-    <Container maxWidth={false} sx={{ py: 2, height: 1, overflowY: "auto" }}>
+    <>
       {isError && (
         <ResponseAlert
           isOpen={isError}
@@ -116,7 +116,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           readFile={readFile}
           clearEnabled
           width="100%"
-          height={data ? "500px" : "calc(100vh - 395px)"}
+          height={data ? "500px" : "calc(100vh - 352px)"}
         />
         {data && (
           <CodeEditor
@@ -132,6 +132,6 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           />
         )}
       </Box>
-    </Container>
+    </>
   );
 };

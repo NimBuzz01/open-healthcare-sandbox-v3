@@ -162,6 +162,7 @@ export const GetResourceContent = ({
     setError("");
     setInputFields([]);
     setSelectedLabel("");
+    setIsInputEmpty(false);
   };
 
   const closeResponse = () => {
@@ -169,7 +170,7 @@ export const GetResourceContent = ({
   };
 
   return (
-    <Container maxWidth={false} sx={{ mt: 2 }}>
+    <>
       {isError && (
         <ResponseAlert
           isOpen={isError}
@@ -266,6 +267,6 @@ export const GetResourceContent = ({
           />
         )}
       </Box>
-    </Container>
+    </>
   );
 };

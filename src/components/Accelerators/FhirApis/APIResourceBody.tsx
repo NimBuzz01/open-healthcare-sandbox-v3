@@ -10,7 +10,14 @@ export const APIResourceBody = () => {
 
   const handleChangeAPI = (_event: SyntheticEvent, newTab: number) => {
     setSelectedAPI(newTab);
-    setSelectedResource(0);
+    if (selectedResource === 0) {
+      setSelectedResource(-1);
+      setTimeout(() => {
+        setSelectedResource(0);
+      }, 1);
+    } else {
+      setSelectedResource(0);
+    }
   };
 
   const handleChangeResource = (_event: ChangeEvent<{}>, newTab: number) => {
@@ -20,8 +27,6 @@ export const APIResourceBody = () => {
   const renderResources = ({ baseUrl, resources, searchParams }: ApiConfig) => (
     <Box
       sx={{
-        mt: 1,
-        flexGrow: 1,
         gap: 1,
         display: "flex",
         flexDirection: "column",
@@ -29,12 +34,10 @@ export const APIResourceBody = () => {
     >
       <Box
         sx={{
-          px: 2,
           display: "flex",
           alignItems: "center",
           gap: 2,
-          border: 1,
-          borderRadius: 2,
+          borderBottom: 1,
           borderColor: "grey.400",
         }}
       >
@@ -68,11 +71,7 @@ export const APIResourceBody = () => {
       {resources.map((resource, index) => (
         <Box
           sx={{
-            width: 1,
-            border: 1,
-            borderRadius: 2,
-            borderColor: "grey.400",
-            flexGrow: 1,
+            mt: 0.5,
           }}
           key={index}
           role="tabpanel"
@@ -121,12 +120,10 @@ export const APIResourceBody = () => {
     <Box sx={{ display: "flex", flexDirection: "column", height: 1 }}>
       <Box
         sx={{
-          px: 2,
           display: "flex",
           alignItems: "center",
           gap: 2,
-          border: 1,
-          borderRadius: 2,
+          borderBottom: 1,
           borderColor: "grey.400",
         }}
       >
