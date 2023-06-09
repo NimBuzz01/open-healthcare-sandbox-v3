@@ -43,15 +43,15 @@ export const apiList: ApiConfig[] = [
         paramDescription: "ID of the patient",
         isRequired: true,
         paramType: "string",
-        paramExample: "1",
+        paramExample: "25285",
       },
       {
         paramName: "Gender",
         paramDescription: "Gender of the person",
         paramValue: "gender",
         isRequired: true,
-        paramType: "string",
-        paramExample: "male",
+        paramType: "code",
+        paramExample: "male | female | other | unknown",
       },
       {
         paramName: "Active",
@@ -59,7 +59,7 @@ export const apiList: ApiConfig[] = [
         paramValue: "active",
         isRequired: true,
         paramType: "boolean",
-        paramExample: "true",
+        paramExample: "true | false",
       },
       // {
       //   paramName: "Birthdate",
@@ -103,7 +103,32 @@ export const apiList: ApiConfig[] = [
   {
     name: "Encounter",
     baseUrl: BFF_BASE_URL + "/fhir/r4/encounter",
-    searchParams: [],
+    searchParams: [
+      {
+        paramName: "ID",
+        paramValue: "_id",
+        paramDescription: "ID of the encounter",
+        isRequired: true,
+        paramType: "string",
+        paramExample: "25285",
+      },
+      {
+        paramName: "Status",
+        paramDescription: "Status of the encounter",
+        paramValue: "status",
+        isRequired: true,
+        paramType: "code",
+        paramExample: "planned | arrived | triaged | in-progress +",
+      },
+      {
+        paramName: "Class",
+        paramDescription: "Classification of patient encounter",
+        paramValue: "class",
+        isRequired: true,
+        paramType: "CodeableConcept",
+        paramExample: "inpatient | outpatient",
+      },
+    ],
     resources: [
       {
         resourceName: "SEARCH",
@@ -131,7 +156,24 @@ export const apiList: ApiConfig[] = [
   {
     name: "Practitioner",
     baseUrl: BFF_BASE_URL + "/fhir/r4/practitioner",
-    searchParams: [],
+    searchParams: [
+      {
+        paramName: "ID",
+        paramValue: "_id",
+        paramDescription: "ID of the practitioner",
+        isRequired: true,
+        paramType: "string",
+        paramExample: "25285",
+      },
+      {
+        paramName: "Active",
+        paramDescription: "Whether the practitioner is active",
+        paramValue: "active",
+        isRequired: true,
+        paramType: "boolean",
+        paramExample: "true | false",
+      },
+    ],
     resources: [
       {
         resourceName: "SEARCH",
@@ -159,7 +201,32 @@ export const apiList: ApiConfig[] = [
   {
     name: "Organization",
     baseUrl: BFF_BASE_URL + "/fhir/r4/organization",
-    searchParams: [],
+    searchParams: [
+      {
+        paramName: "ID",
+        paramValue: "_id",
+        paramDescription: "ID of the organization",
+        isRequired: true,
+        paramType: "string",
+        paramExample: "25285",
+      },
+      {
+        paramName: "Name",
+        paramDescription: "The organization name",
+        paramValue: "name",
+        isRequired: true,
+        paramType: "string",
+        paramExample: "Hospital Krel Tarron",
+      },
+      {
+        paramName: "Address-City",
+        paramDescription: "Address-City of the organization",
+        paramValue: "class",
+        isRequired: true,
+        paramType: "Address",
+        paramExample: "Ann Arbor",
+      },
+    ],
     resources: [
       {
         resourceName: "SEARCH",
@@ -187,7 +254,32 @@ export const apiList: ApiConfig[] = [
   {
     name: "Observation",
     baseUrl: BFF_BASE_URL + "/fhir/r4/observation",
-    searchParams: [],
+    searchParams: [
+      {
+        paramName: "ID",
+        paramValue: "_id",
+        paramDescription: "ID of the observation",
+        isRequired: true,
+        paramType: "string",
+        paramExample: "25285",
+      },
+      {
+        paramName: "Status",
+        paramDescription: "The status of the result value.",
+        paramValue: "status",
+        isRequired: true,
+        paramType: "code",
+        paramExample: "registered | preliminary | final | amended +",
+      },
+      {
+        paramName: "Subject",
+        paramDescription: "The subject of the observation",
+        paramValue: "class",
+        isRequired: true,
+        paramType: "Reference",
+        paramExample: "Patient/10552508",
+      },
+    ],
     resources: [
       {
         resourceName: "SEARCH",
