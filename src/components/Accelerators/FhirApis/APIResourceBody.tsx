@@ -10,21 +10,14 @@ export const APIResourceBody = () => {
 
   const handleChangeAPI = (_event: SyntheticEvent, newTab: number) => {
     setSelectedAPI(newTab);
-    if (selectedResource === 0) {
-      setSelectedResource(-1);
-      setTimeout(() => {
-        setSelectedResource(0);
-      }, 1);
-    } else {
-      setSelectedResource(0);
-    }
+    setSelectedResource(0);
   };
 
   const handleChangeResource = (_event: ChangeEvent<{}>, newTab: number) => {
     setSelectedResource(newTab);
   };
 
-  const renderResources = ({ baseUrl, resources, searchParams }: ApiConfig) => (
+  const renderResources = ({}: ApiConfig) => (
     <Box
       sx={{
         gap: 1,
@@ -52,12 +45,12 @@ export const APIResourceBody = () => {
           onChange={handleChangeResource}
           aria-label="Resource tabs"
         >
-          {resources.map((resource, index) => (
+          {apiList[selectedAPI].resources.map((resource, index) => (
             <Tab
               key={index}
               label={resource.resourceName}
-              id={`resource-tab-${index}`}
-              aria-controls={`resource-tabpanel-${index}`}
+              id={`resource-tab-${selectedAPI}-${index}`}
+              aria-controls={`resource-tabpanel-${selectedAPI}-${index}`}
               sx={{
                 fontSize: 14,
                 fontWeight: 500,
@@ -68,7 +61,7 @@ export const APIResourceBody = () => {
         </Tabs>
       </Box>
 
-      {resources.map((resource, index) => (
+      {apiList[selectedAPI].resources.map((resource, index) => (
         <Box
           sx={{
             mt: 0.5,
@@ -76,15 +69,15 @@ export const APIResourceBody = () => {
           key={index}
           role="tabpanel"
           hidden={selectedResource !== index}
-          id={`resource-tabpanel-${index}`}
-          aria-labelledby={`resource-tab-${index}`}
+          id={`resource-tabpanel-${selectedAPI}-${index}`}
+          aria-labelledby={`resource-tab-${selectedAPI}-${index}`}
         >
           {selectedResource === index && (
             <>
               {(resource.resourceMethod === "POST" ||
                 resource.resourceMethod === "PUT") && (
                 <CreateOperationContent
-                  backendUrl={baseUrl}
+                  backendUrl={apiList[selectedAPI].baseUrl}
                   resource={resource}
                 />
               )}
@@ -94,8 +87,8 @@ export const APIResourceBody = () => {
                   isSearchOperation={
                     resource.resourceOperation === OperationTypes.SEARCH
                   }
-                  backendUrl={baseUrl}
-                  searchParams={searchParams}
+                  backendUrl={apiList[selectedAPI].baseUrl}
+                  searchParams={apiList[selectedAPI].searchParams}
                 />
               )}
             </>

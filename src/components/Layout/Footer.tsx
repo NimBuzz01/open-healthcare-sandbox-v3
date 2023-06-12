@@ -8,7 +8,6 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
-import { FeedbackForm } from "../FeedbackForm";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 
 export const Footer = () => {
@@ -22,13 +21,7 @@ export const Footer = () => {
     <>
       <Dialog open={isOpen}>
         <DialogTitle>We value your feedback!</DialogTitle>
-        <DialogContent>
-          <FeedbackForm
-            onSubmit={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
-        </DialogContent>
+        <DialogContent>Feedback Link Here</DialogContent>
         <DialogActions>
           <Button onClick={handleClick}>Close</Button>
         </DialogActions>

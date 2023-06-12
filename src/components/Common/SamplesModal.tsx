@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {
   Box,
@@ -13,6 +13,8 @@ import {
   Typography,
 } from "@mui/material";
 import { CodeEditor } from "./CodeEditor";
+import { SelectedSampleContext } from "../contexts/SelectedSampleContext";
+import { CommonButton } from "./CommonButton";
 import { items } from "../Configs/AcceleratorConfig";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -27,6 +29,9 @@ interface SamplesModalProps {
 }
 
 export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
+  const { loadSample, setLoadSample } = useContext(SelectedSampleContext);
+  const { selectedLabel, setSelectedLabel } = useContext(SelectedSampleContext);
+
   const location = useLocation();
   const currentItem = items.find((item) => item.path === location.pathname);
   const data = currentItem ? currentItem.sampleData : "";
@@ -35,9 +40,16 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
   const [selectedSample, setSelectedSample] = useState<Sample | null>(
     data && data.length > 0 ? data[0] : null
   );
+  setSelectedLabel;
 
   const handleSampleClick = (sample: Sample) => {
     setSelectedSample(sample);
+  };
+
+  const handleSampleLoad = () => {
+    setLoadSample(selectedSample);
+    setSelectedLabel(label);
+    onClose();
   };
 
   return (
@@ -69,8 +81,16 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
         </Box>
         <Divider />
         <Box sx={{ flexGrow: 1, my: 1, display: "flex" }}>
-          <Box sx={{ width: "25%", borderRight: 1, borderColor: "grey.400" }}>
-            <List component="nav">
+          <Box
+            sx={{
+              width: "25%",
+              borderRight: 1,
+              borderColor: "grey.400",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <List component="nav" sx={{ mb: "auto" }}>
               {data &&
                 data.map((sample: Sample) => (
                   <ListItem
@@ -86,6 +106,19 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
                   </ListItem>
                 ))}
             </List>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                mb: 2,
+              }}
+            >
+              <CommonButton
+                variant="background"
+                label="Load Sample"
+                onClick={handleSampleLoad}
+              />
+            </Box>
           </Box>
           <Box sx={{ width: "75%", display: "flex", justifyContent: "center" }}>
             {selectedSample && (

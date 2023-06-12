@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Box, Container, Divider } from "@mui/material";
 import {
   ConvertButton,
@@ -8,6 +8,7 @@ import {
   ResponseAlert,
   SamplesButton,
 } from "../Common";
+import { SelectedSampleContext } from "../contexts/SelectedSampleContext";
 import apiClient from "../../services/api-client";
 import { BFF_BASE_URL } from "../Configs/Constants";
 
@@ -41,6 +42,28 @@ export const Hl7v2ToFhir = () => {
     isSamplesOpen,
     isLoading,
   } = state;
+
+  const { loadSample } = useContext(SelectedSampleContext);
+  const { selectedLabel } = useContext(SelectedSampleContext);
+
+  const [alertOpen, setAlertOpen] = useState(false);
+
+  useEffect(() => {
+    if (selectedLabel == "HL7V2 To FHIR") {
+      setState((prevState) => ({
+        ...prevState,
+        input: loadSample!.data,
+      }));
+      setAlertOpen(true);
+      setTimeout(() => {
+        setAlertOpen(false);
+      }, 2000);
+    }
+  }, [loadSample, selectedLabel]);
+
+  const closeAlert = () => {
+    setAlertOpen(false);
+  };
 
   const callBackend = () => {
     setState((prevState) => ({
@@ -141,6 +164,14 @@ export const Hl7v2ToFhir = () => {
           severity={"error"}
           message={errorMessage}
           setIsOpen={closeResponse}
+        />
+      )}
+      {alertOpen && (
+        <ResponseAlert
+          isOpen={alertOpen}
+          severity={"success"}
+          message="Sample Loaded"
+          setIsOpen={closeAlert}
         />
       )}
       <Box

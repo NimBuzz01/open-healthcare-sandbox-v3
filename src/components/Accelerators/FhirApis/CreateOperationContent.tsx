@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Container, Typography } from "@mui/material";
 import {
@@ -8,6 +8,7 @@ import {
   SamplesButton,
   SamplesModal,
 } from "../../Common";
+import { SelectedSampleContext } from "../../contexts/SelectedSampleContext";
 import { ResourceMethodIcon } from "./ResourceMethodIcon";
 
 interface Props {
@@ -20,7 +21,25 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   const [data, setData] = useState<any>("");
   const [error, setError] = useState<string>("");
   const [isError, setIsError] = useState<boolean>(false);
-  const [sampleOpen, setSampleOpen] = useState(false);
+  const [sampleOpen, setSampleOpen] = useState<boolean>(false);
+  const [alertOpen, setAlertOpen] = useState<boolean>(false);
+
+  const { loadSample } = useContext(SelectedSampleContext);
+  const { selectedLabel } = useContext(SelectedSampleContext);
+
+  useEffect(() => {
+    if (selectedLabel == "FHIR APIs") {
+      setRequest(loadSample!.data);
+      setAlertOpen(true);
+      setTimeout(() => {
+        setAlertOpen(false);
+      }, 2000);
+    }
+  }, [loadSample, selectedLabel]);
+
+  const closeAlert = () => {
+    setAlertOpen(false);
+  };
 
   const handleOnChange = useCallback((value: string) => {
     setRequest(value);
@@ -80,6 +99,14 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           severity="error"
           message={error}
           setIsOpen={closeResponse}
+        />
+      )}
+      {alertOpen && (
+        <ResponseAlert
+          isOpen={alertOpen}
+          severity={"success"}
+          message="Sample Loaded"
+          setIsOpen={closeAlert}
         />
       )}
       <Box sx={{ display: "flex", alignItems: "center", gap: 3, mb: 2 }}>

@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { SelectedSampleProvider } from "../components/contexts/SelectedSampleContext";
 
 interface SideNavItem {
   path: string;
@@ -11,11 +12,13 @@ interface Props {
 
 const AppRoutes = ({ items }: Props) => {
   return (
-    <Routes>
-      {items.map((item) => (
-        <Route key={item.path} path={item.path} element={item.component} />
-      ))}
-    </Routes>
+    <SelectedSampleProvider>
+      <Routes>
+        {items.map((item) => (
+          <Route key={item.path} path={item.path} element={item.component} />
+        ))}
+      </Routes>
+    </SelectedSampleProvider>
   );
 };
 
