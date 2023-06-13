@@ -8,23 +8,19 @@ export const ComingSoon = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        gap:60,
+        gap: 60,
         alignItems: "center",
-        height:1
+        height: 1,
       }}
     >
       <Box>
-        <img
-          src={logoBlack}
-          alt="Healthcare Logo"
-          style={{ width: "200px" }}
-        />
+        <img src={logoBlack} alt="Healthcare Logo" style={{ width: "200px" }} />
       </Box>
       <Box sx={{ lineHeight: 0.5, textAlign: "center" }}>
         <Typography variant="h4" color="primary.dark" fontWeight="500">
           Coming Soon
         </Typography>
-        <Typography variant="h6" sx={{ color: "grey.500", mt:1 }}>
+        <Typography variant="h6" sx={{ color: "grey.500", mt: 1 }}>
           We are trying to make your experience even better.
         </Typography>
       </Box>

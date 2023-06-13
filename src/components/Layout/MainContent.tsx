@@ -38,7 +38,16 @@ export const MainContent = () => {
           overflowY: "auto",
         }}
       >
-        <Routes items={renderedItems} />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            mb: "auto",
+            flexGrow: 1,
+          }}
+        >
+          <Routes items={renderedItems} />
+        </Box>
         <Footer />
       </Box>
     </Box>
