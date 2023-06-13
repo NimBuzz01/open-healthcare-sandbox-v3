@@ -5,7 +5,7 @@ interface Sample {
 
 // Use \ if theres a \ in the data to prevent the character from being ignored. Keep the indentations exact.
 
-export const data: Sample[] = [
+export const Hl7Data: Sample[] = [
   {
     name: "ADT_A04",
     data: `MSH|^~\\&|EPIC|EPICADT|SMS|SMSADT|202211031408|CHARRIS|ADT^A04|1817457|D|2.3

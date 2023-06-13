@@ -151,7 +151,9 @@ export const InputField = ({
                       onMouseLeave={handleInfoClose}
                       sx={{ p: 0 }}
                     >
-                      <HelpOutlineOutlinedIcon sx={{ fontSize: 20 }} />
+                      <HelpOutlineOutlinedIcon
+                        sx={{ fontSize: 20, color: "grey.500" }}
+                      />
                     </IconButton>
                   </MuiTooltip>
                 </InputAdornment>

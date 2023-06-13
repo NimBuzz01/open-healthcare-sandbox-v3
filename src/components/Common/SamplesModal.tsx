@@ -72,7 +72,10 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
             pt: 1,
           }}
         >
-          <Typography variant="h4" component="h2">
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: 500, color: "primary.dark" }}
+          >
             {label} Samples
           </Typography>
           <IconButton onClick={onClose} sx={{ color: "grey.500" }}>

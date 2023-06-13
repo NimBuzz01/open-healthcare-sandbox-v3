@@ -3,7 +3,7 @@ interface Sample {
   data: string;
 }
 
-export const data: Sample[] = [
+export const CcdaData: Sample[] = [
   {
     name: "Patient Record",
     data: `<ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:voc="urn:hl7-org:v3/voc" xmlns:sdtc="urn:hl7-org:sdtc">

@@ -136,13 +136,6 @@ export const CcdaToFhir = () => {
     }));
   }, []);
 
-  // const handleOutputChange = useCallback((value: string) => {
-  //   setState((prevState) => ({
-  //     ...prevState,
-  //     output: value,
-  //   }));
-  // }, []);
-
   const readFile = (fileInput?: string | ArrayBuffer | null) => {
     if (typeof fileInput == "string") {
       setState((prevState) => ({
@@ -211,7 +204,7 @@ export const CcdaToFhir = () => {
           readFile={readFile}
           clearEnabled
           width="50%"
-          height="calc(100vh - 187.5px)"
+          height="calc(100vh - 189px)"
         />
         <Divider orientation="vertical" />
         <CodeEditor
@@ -225,7 +218,7 @@ export const CcdaToFhir = () => {
           downloadEnabled
           clearEnabled
           width="50%"
-          height="calc(100vh - 187.5px)"
+          height="calc(100vh - 189px)"
         />
       </Box>
     </Container>

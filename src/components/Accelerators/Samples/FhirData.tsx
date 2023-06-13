@@ -5,7 +5,7 @@ interface Sample {
 
 // Use \ if theres a \ in the data to prevent the character from being ignored.
 
-export const data: Sample[] = [
+export const FhirData: Sample[] = [
   {
     name: "Patient Data",
     data: `{

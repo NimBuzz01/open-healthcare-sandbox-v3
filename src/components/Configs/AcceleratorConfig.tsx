@@ -8,9 +8,7 @@ import {
   FhirValidation,
   FhirApis,
 } from "../Accelerators";
-import { data as ccdaData } from "../Accelerators/Samples/CcdaData";
-import { data as hl7Data } from "../Accelerators/Samples/Hl7Data";
-import { data as fhirData } from "../Accelerators/Samples/FhirData";
+import { CcdaData, Hl7Data, FhirData } from "../Accelerators/Samples";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import TransformOutlinedIcon from "@mui/icons-material/TransformOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
@@ -39,27 +37,27 @@ export const items: Item[] = [
     description: "Try out sample FHIR APIs",
     url: "https://wso2.com/solutions/healthcare/",
     path: "/",
-    icon: <LocalFireDepartmentOutlinedIcon sx={{ width: 26, height: 26 }} />,
+    icon: <LocalFireDepartmentOutlinedIcon sx={{ width: 23, height: 23 }} />,
     component: <FhirApis />,
-    sampleData: fhirData,
+    sampleData: FhirData,
   },
   {
     label: "HL7V2 To FHIR",
     description: "Convert HL7 V2 data to FHIR",
     url: "https://wso2.com/solutions/healthcare/",
     path: "/hl7-to-fhir",
-    icon: <TransformOutlinedIcon sx={{ width: 26, height: 26 }} />,
+    icon: <TransformOutlinedIcon sx={{ width: 23, height: 23 }} />,
     component: <Hl7v2ToFhir />,
-    sampleData: hl7Data,
+    sampleData: Hl7Data,
   },
   {
     label: "C-CDA To FHIR",
     description: "Convert C-CDA data to FHIR",
     url: "https://wso2.com/solutions/healthcare/",
     path: "/c-cda-to-fhir",
-    icon: <TransformOutlinedIcon sx={{ width: 26, height: 26 }} />,
+    icon: <TransformOutlinedIcon sx={{ width: 23, height: 23 }} />,
     component: <CcdaToFhir />,
-    sampleData: ccdaData,
+    sampleData: CcdaData,
   },
   {
     label: "FHIR Validation",
@@ -67,7 +65,7 @@ export const items: Item[] = [
       "Validate the FHIR Resource that complies with the FHIR standards",
     url: "https://wso2.com/solutions/healthcare/",
     path: "/fhir-validation",
-    icon: <CheckCircleOutlineOutlinedIcon sx={{ width: 26, height: 26 }} />,
+    icon: <CheckCircleOutlineOutlinedIcon sx={{ width: 23, height: 23 }} />,
     component: <FhirValidation />,
   },
   {
@@ -75,7 +73,7 @@ export const items: Item[] = [
     description: "Try out a standalone end user FHIR application",
     url: "https://wso2.com/solutions/healthcare/",
     path: "/smart-on-fhir",
-    icon: <VpnKeyOutlinedIcon sx={{ width: 26, height: 26 }} />,
+    icon: <VpnKeyOutlinedIcon sx={{ width: 23, height: 23 }} />,
     component: <SmartOnFhir />,
   },
   {
@@ -84,7 +82,7 @@ export const items: Item[] = [
       "Easily convert, transform and extract healthcare data to meet HL7 FHIR standards",
     url: "https://wso2.com/solutions/healthcare/",
     path: "/fhir-path",
-    icon: <FilterAltOutlinedIcon sx={{ width: 26, height: 26 }} />,
+    icon: <FilterAltOutlinedIcon sx={{ width: 23, height: 23 }} />,
     component: <FhirPath />,
   },
   {
@@ -92,7 +90,7 @@ export const items: Item[] = [
     description: "Connect FHIR resource to EMR",
     url: "https://wso2.com/solutions/healthcare/",
     path: "/connect-to-emr",
-    icon: <CableOutlinedIcon sx={{ width: 26, height: 26 }} />,
+    icon: <CableOutlinedIcon sx={{ width: 23, height: 23 }} />,
     component: <ConnectToEmr />,
   },
 ];

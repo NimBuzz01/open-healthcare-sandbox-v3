@@ -201,44 +201,46 @@ export const GetResourceContent = ({
       <Divider />
       <Box>
         <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
-          <Typography sx={{ color: "primary.dark", my: 2 }}>
-            Add optional search parameter(s)
-          </Typography>
           {isSearchOperation && (
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Select
-                value={selectedLabel}
-                onChange={handleLabelChange}
-                size="small"
-                sx={{ width: 250 }}
-              >
-                {searchParams.map((searchParams) => (
-                  <MenuItem
-                    key={searchParams.paramName}
-                    value={searchParams.paramName}
-                  >
-                    {searchParams.paramName} - {searchParams.paramDescription}
-                  </MenuItem>
-                ))}
-              </Select>
-              <IconButton
-                onClick={handleAddInputField}
-                disabled={!selectedLabel}
-              >
-                <AddCircleOutlineOutlinedIcon
-                  sx={{ fontSize: 26, color: "secondary.main" }}
-                />
-              </IconButton>
-              {isAdded && (
-                <Alert
-                  severity="warning"
-                  icon={<InfoOutlineIcon sx={{ fontSize: 18 }} />}
-                  sx={{ fontSize: 12, py: 0.3 }}
+            <>
+              <Typography sx={{ color: "primary.dark", my: 2 }}>
+                Add optional search parameter(s)
+              </Typography>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                <Select
+                  value={selectedLabel}
+                  onChange={handleLabelChange}
+                  size="small"
+                  sx={{ width: 250 }}
                 >
-                  Already added!
-                </Alert>
-              )}
-            </Box>
+                  {searchParams.map((searchParams) => (
+                    <MenuItem
+                      key={searchParams.paramName}
+                      value={searchParams.paramName}
+                    >
+                      {searchParams.paramName} - {searchParams.paramDescription}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <IconButton
+                  onClick={handleAddInputField}
+                  disabled={!selectedLabel}
+                >
+                  <AddCircleOutlineOutlinedIcon
+                    sx={{ fontSize: 26, color: "secondary.main" }}
+                  />
+                </IconButton>
+                {isAdded && (
+                  <Alert
+                    severity="warning"
+                    icon={<InfoOutlineIcon sx={{ fontSize: 18 }} />}
+                    sx={{ fontSize: 12, py: 0.3 }}
+                  >
+                    Already added!
+                  </Alert>
+                )}
+              </Box>
+            </>
           )}
         </Box>
         <Box sx={{ my: 1 }}>

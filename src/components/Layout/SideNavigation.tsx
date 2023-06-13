@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Box, Divider, Typography, Tooltip } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import CopyrightIcon from "@mui/icons-material/Copyright";
 
 interface SideNavItem {
   label: string;
@@ -39,12 +38,12 @@ export const SideNavigation = ({ items }: Props) => {
           flexGrow: 1,
           flexDirection: "column",
           bgcolor: "primary.main",
-          p: 1,
-          width: isExpanded ? 230 : 70,
+          py: 1,
+          px: 0.5,
+          width: isExpanded ? 230 : 60,
           zIndex: 2,
           transition: "0.2s",
           overflow: "hidden",
-          borderRadius: "0 0 10px 0",
         }}
       >
         <Box
@@ -80,12 +79,20 @@ export const SideNavigation = ({ items }: Props) => {
             }}
           >
             {isExpanded ? (
-              <Tooltip key={"close-icon"} title={"Close"} placement="right">
-                <ChevronLeftIcon sx={{ width: 26, height: 26 }} />
+              <Tooltip
+                key={"close-icon"}
+                title={<Typography fontSize={11}>Collapse</Typography>}
+                placement="right"
+              >
+                <ChevronLeftIcon sx={{ width: 23, height: 23 }} />
               </Tooltip>
             ) : (
-              <Tooltip key={"open-icon"} title={"Open"} placement="right">
-                <ChevronRightIcon sx={{ width: 26, height: 26 }} />
+              <Tooltip
+                key={"open-icon"}
+                title={<Typography fontSize={11}>Expand</Typography>}
+                placement="right"
+              >
+                <ChevronRightIcon sx={{ width: 23, height: 23 }} />
               </Tooltip>
             )}
           </Box>
@@ -103,7 +110,7 @@ export const SideNavigation = ({ items }: Props) => {
           {items.map((item) => (
             <Tooltip
               key={item.path}
-              title={item.label}
+              title={<Typography fontSize={11}>{item.label}</Typography>}
               placement="right"
               disableHoverListener={isExpanded}
             >
@@ -127,7 +134,7 @@ export const SideNavigation = ({ items }: Props) => {
                     width: 230,
                     px: isExpanded ? 1.5 : 0,
                     margin: 0.62,
-                    mx : isExpanded ? 1.5 : 1.5,
+                    mx: 1.5,
                     cursor: "pointer",
                     transition: "0.2s",
                     textDecoration: "none",
@@ -153,34 +160,6 @@ export const SideNavigation = ({ items }: Props) => {
             </Tooltip>
           ))}
         </Box>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          marginTop: "auto",
-          float: "right",
-          transition: "0.3s",
-          bgcolor: "background.default",
-          px: 1,
-          py:0.5,
-          overflow:"hidden",
-          height:31
-        }}
-      >
-        <CopyrightIcon
-          sx={{
-            color: isExpanded ? "grey.500" : "grey.500",
-            mr: 0.5,
-            fontSize: 23,
-          }}
-        />
-        <Typography
-          variant="h6"
-          sx={{ color: "grey.500", display: isExpanded ? "block" : "block", width:120, position:"absolute", left:35 }}
-        >
-          2023 WSO2 LLC.
-        </Typography>
       </Box>
     </Box>
   );
