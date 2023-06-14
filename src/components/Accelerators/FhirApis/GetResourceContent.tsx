@@ -16,7 +16,7 @@ import { SearchParam } from "../../Configs/ApiConfig";
 import { ResourceMethodIcon } from "./ResourceMethodIcon";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutlined";
-import { Preloader } from "../../Common/Preloader";
+import { PreLoader } from "../../Common";
 
 interface Props {
   isSearchOperation?: boolean;
@@ -213,7 +213,7 @@ export const GetResourceContent = ({
               mt: 25,
             }}
           >
-            <Preloader setActive={isLoading} />
+            <PreLoader setActive={isLoading} />
             <Typography variant="h5" sx={{ mt: 4, color: "primary.dark" }}>
               Loading ...
             </Typography>

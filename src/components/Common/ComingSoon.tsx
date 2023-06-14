@@ -1,6 +1,6 @@
 import { Typography, Box } from "@mui/material";
 import logoBlack from "../../assets/logoBlack.png";
-import { Preloader } from "./Preloader";
+import { PreLoader } from "./PreLoader";
 import { useState } from "react";
 
 export const ComingSoon = () => {
@@ -20,7 +20,7 @@ export const ComingSoon = () => {
         <img src={logoBlack} alt="Healthcare Logo" style={{ width: "200px" }} />
       </Box>
       <Box sx={{ lineHeight: 0.5, textAlign: "center" }}>
-        <Preloader setActive={active} />
+        <PreLoader setActive={active} />
         <Typography
           variant="h4"
           color="primary.dark"

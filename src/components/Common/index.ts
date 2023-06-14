@@ -15,3 +15,4 @@ export { ClearIcon } from "./ClearIcon";
 export { SamplesButton } from "./SamplesButton";
 export { ComingSoon } from "./ComingSoon";
 export { RatingIcons } from "./RatingIcons";
+export { PreLoader } from "./PreLoader";

@@ -12,7 +12,7 @@ interface Props {
   setActive: boolean;
 }
 
-export const Preloader = ({ size = 40, setActive }: Props) => {
+export const PreLoader = ({ size = 40, setActive }: Props) => {
   let [loading] = useState(setActive);
   let [color] = useState("#5567D5");
 

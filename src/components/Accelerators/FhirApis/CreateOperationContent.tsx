@@ -10,7 +10,7 @@ import {
 } from "../../Common";
 import { SelectedSampleContext } from "../../Contexts/SelectedSampleContext";
 import { ResourceMethodIcon } from "./ResourceMethodIcon";
-import { Preloader } from "../../Common/Preloader";
+import { PreLoader } from "../../Common";
 
 interface Props {
   backendUrl: string;
@@ -144,7 +144,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
             mt: 25,
           }}
         >
-          <Preloader setActive={isLoading} />
+          <PreLoader setActive={isLoading} />
           <Typography variant="h5" sx={{ mt: 4, color: "primary.dark" }}>
             Loading ...
           </Typography>
