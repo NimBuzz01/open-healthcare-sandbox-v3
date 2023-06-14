@@ -7,10 +7,12 @@ import { GetResourceContent } from "./GetResourceContent";
 export const APIResourceBody = () => {
   const [selectedAPI, setSelectedAPI] = useState<number>(0);
   const [selectedResource, setSelectedResource] = useState<number>(0);
+  const [key, setKey] = useState<number>(0);
 
   const handleChangeAPI = (_event: SyntheticEvent, newTab: number) => {
     setSelectedAPI(newTab);
     setSelectedResource(0);
+    setKey((prevKey) => prevKey + 1);
   };
 
   const handleChangeResource = (_event: ChangeEvent<{}>, newTab: number) => {
@@ -19,6 +21,7 @@ export const APIResourceBody = () => {
 
   const renderResources = ({}: ApiConfig) => (
     <Box
+      key={key}
       sx={{
         gap: 1,
         display: "flex",
