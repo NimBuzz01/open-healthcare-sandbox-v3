@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import { CodeEditor } from "./CodeEditor";
-import { SelectedSampleContext } from "../contexts/SelectedSampleContext";
+import { SelectedSampleContext } from "../Contexts/SelectedSampleContext";
 import { CommonButton } from "./CommonButton";
 import { items } from "../Configs/AcceleratorConfig";
 import CloseIcon from "@mui/icons-material/Close";

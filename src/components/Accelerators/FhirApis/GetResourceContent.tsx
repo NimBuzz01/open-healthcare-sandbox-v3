@@ -3,7 +3,6 @@ import axios from "axios";
 import {
   Alert,
   Box,
-  Container,
   Divider,
   IconButton,
   MenuItem,
@@ -17,6 +16,7 @@ import { SearchParam } from "../../Configs/ApiConfig";
 import { ResourceMethodIcon } from "./ResourceMethodIcon";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutlined";
+import { Preloader } from "../../Common/Preloader";
 
 interface Props {
   isSearchOperation?: boolean;
@@ -38,6 +38,7 @@ export const GetResourceContent = ({
   const [selectedLabel, setSelectedLabel] = useState<string>("");
   const [isAdded, setIsAdded] = useState<boolean>(false);
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!isSearchOperation && searchParams.length > 0) {
@@ -111,8 +112,8 @@ export const GetResourceContent = ({
       setIsInputEmpty(true);
       return;
     }
-
     setIsInputEmpty(false);
+    setIsLoading(true);
 
     let url: string = "";
     let searchString: string = "";
@@ -143,12 +144,14 @@ export const GetResourceContent = ({
       .get(url)
       .then((res) => {
         setData(res.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
         setError(err.message);
         setIsError(true);
         setData(err.response);
+        setIsLoading(false);
       });
   };
 
@@ -200,59 +203,79 @@ export const GetResourceContent = ({
       </Box>
       <Divider />
       <Box>
-        <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
-          {isSearchOperation && (
-            <>
-              <Typography sx={{ color: "primary.dark", my: 2 }}>
-                Add optional search parameter(s)
-              </Typography>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <Select
-                  value={selectedLabel}
-                  onChange={handleLabelChange}
-                  size="small"
-                  sx={{ width: 250 }}
-                >
-                  {searchParams.map((searchParams) => (
-                    <MenuItem
-                      key={searchParams.paramName}
-                      value={searchParams.paramName}
+        {isLoading ? (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              mt: 25,
+            }}
+          >
+            <Preloader setActive={isLoading} />
+            <Typography variant="h5" sx={{ mt: 4, color: "primary.dark" }}>
+              Loading ...
+            </Typography>
+          </Box>
+        ) : (
+          <>
+            <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
+              {isSearchOperation && (
+                <>
+                  <Typography sx={{ color: "primary.dark", my: 2 }}>
+                    Add optional search parameter(s)
+                  </Typography>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                    <Select
+                      value={selectedLabel}
+                      onChange={handleLabelChange}
+                      size="small"
+                      sx={{ width: 250 }}
                     >
-                      {searchParams.paramName} - {searchParams.paramDescription}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <IconButton
-                  onClick={handleAddInputField}
-                  disabled={!selectedLabel}
-                >
-                  <AddCircleOutlineOutlinedIcon
-                    sx={{ fontSize: 26, color: "secondary.main" }}
-                  />
-                </IconButton>
-                {isAdded && (
-                  <Alert
-                    severity="warning"
-                    icon={<InfoOutlineIcon sx={{ fontSize: 18 }} />}
-                    sx={{ fontSize: 12, py: 0.3 }}
-                  >
-                    Already added!
-                  </Alert>
-                )}
-              </Box>
-            </>
-          )}
-        </Box>
-        <Box sx={{ my: 1 }}>
-          {isInputEmpty && (
-            <Alert severity="error" sx={{ fontSize: 13 }}>
-              Please fill all input fields.
-            </Alert>
-          )}
-        </Box>
-        {inputFields.map((inputField, index) => (
-          <InputField key={index} {...inputField} fieldIndex={index} />
-        ))}
+                      {searchParams.map((searchParams) => (
+                        <MenuItem
+                          key={searchParams.paramName}
+                          value={searchParams.paramName}
+                        >
+                          {searchParams.paramName} -{" "}
+                          {searchParams.paramDescription}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    <IconButton
+                      onClick={handleAddInputField}
+                      disabled={!selectedLabel}
+                    >
+                      <AddCircleOutlineOutlinedIcon
+                        sx={{ fontSize: 26, color: "secondary.main" }}
+                      />
+                    </IconButton>
+                    {isAdded && (
+                      <Alert
+                        severity="warning"
+                        icon={<InfoOutlineIcon sx={{ fontSize: 18 }} />}
+                        sx={{ fontSize: 12, py: 0.3 }}
+                      >
+                        Already added!
+                      </Alert>
+                    )}
+                  </Box>
+                </>
+              )}
+            </Box>
+            <Box sx={{ my: 1 }}>
+              {isInputEmpty && (
+                <Alert severity="error" sx={{ fontSize: 13 }}>
+                  Please fill all input fields.
+                </Alert>
+              )}
+            </Box>
+            {inputFields.map((inputField, index) => (
+              <InputField key={index} {...inputField} fieldIndex={index} />
+            ))}
+          </>
+        )}
       </Box>
       <Box sx={{ mt: 2, mb: 2 }}>
         {data && (

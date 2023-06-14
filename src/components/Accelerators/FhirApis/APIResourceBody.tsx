@@ -26,6 +26,8 @@ export const APIResourceBody = () => {
         gap: 1,
         display: "flex",
         flexDirection: "column",
+        px: 2,
+        mb: 2,
       }}
     >
       <Box
@@ -41,7 +43,7 @@ export const APIResourceBody = () => {
           variant="h6"
           sx={{ fontWeight: 500, color: "primary.dark" }}
         >
-          Select Resource:
+          Select Resource
         </Typography>
         <Tabs
           value={selectedResource}
@@ -108,7 +110,18 @@ export const APIResourceBody = () => {
         label={api.name}
         id={`tab-${index}`}
         aria-controls={`tabpanel-${index}`}
-        sx={{ fontSize: 14, fontWeight: 500, textTransform: "none" }}
+        sx={{
+          fontSize: 14,
+          fontWeight: 500,
+          textTransform: "none",
+          transition: "0.2s",
+          borderRadius: 2,
+          "&.Mui-selected": {
+            backgroundColor: "primary.main",
+            color: "background.default",
+            borderRadius: 2,
+          },
+        }}
       />
     ));
 
@@ -119,17 +132,23 @@ export const APIResourceBody = () => {
           display: "flex",
           alignItems: "center",
           gap: 2,
-          borderBottom: 1,
+          border: 1,
           borderColor: "grey.400",
+          borderRadius: 2,
+          px: 2,
         }}
       >
         <Typography
           variant="h6"
           sx={{ fontWeight: 500, color: "primary.dark" }}
         >
-          Select API:
+          Select API
         </Typography>
-        <Tabs value={selectedAPI} onChange={handleChangeAPI}>
+        <Tabs
+          value={selectedAPI}
+          TabIndicatorProps={{ style: { display: "none" } }}
+          onChange={handleChangeAPI}
+        >
           {renderAPIs()}
         </Tabs>
       </Box>

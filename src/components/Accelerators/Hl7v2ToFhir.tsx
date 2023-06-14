@@ -8,7 +8,7 @@ import {
   ResponseAlert,
   SamplesButton,
 } from "../Common";
-import { SelectedSampleContext } from "../contexts/SelectedSampleContext";
+import { SelectedSampleContext } from "../Contexts/SelectedSampleContext";
 import apiClient from "../../services/api-client";
 import { BFF_BASE_URL } from "../Configs/Constants";
 

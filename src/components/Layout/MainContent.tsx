@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Routes from "../../routes/AppRoutes";
+import Routes from "../Routes/AppRoutes";
 import { Footer, SideNavigation } from "../Layout";
 import { items } from "../Configs/AcceleratorConfig";
 import itemConfig from "../../tool-config.json";

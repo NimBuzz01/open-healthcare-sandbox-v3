@@ -9,7 +9,7 @@ export const ResourceMethodIcon = ({ resourceMethod }: ContainerProps) => {
 
   switch (resourceMethod) {
     case "GET":
-      bgcolor = "#6495ED"; //34B474
+      bgcolor = "#34B474"; //34B474
       break;
     case "DELETE":
       bgcolor = "#F35A5A";

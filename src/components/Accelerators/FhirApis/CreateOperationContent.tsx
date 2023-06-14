@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import {
   CommonButton,
   ResponseAlert,
@@ -8,8 +8,9 @@ import {
   SamplesButton,
   SamplesModal,
 } from "../../Common";
-import { SelectedSampleContext } from "../../contexts/SelectedSampleContext";
+import { SelectedSampleContext } from "../../Contexts/SelectedSampleContext";
 import { ResourceMethodIcon } from "./ResourceMethodIcon";
+import { Preloader } from "../../Common/Preloader";
 
 interface Props {
   backendUrl: string;
@@ -23,6 +24,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   const [isError, setIsError] = useState<boolean>(false);
   const [sampleOpen, setSampleOpen] = useState<boolean>(false);
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { loadSample } = useContext(SelectedSampleContext);
   const { selectedLabel } = useContext(SelectedSampleContext);
@@ -68,6 +70,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   };
 
   const callBackend = () => {
+    setIsLoading(true);
     setData("");
     setError("");
 
@@ -75,12 +78,14 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
       .post(backendUrl, request)
       .then((res) => {
         setData(res.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
         setError(err.message);
         setIsError(true);
         setData(err.response);
+        setIsLoading(false);
       });
   };
 
@@ -128,37 +133,57 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           <CommonButton variant="border" label="Reset" onClick={handleReset} />
         </Box>
       </Box>
-      <SamplesButton onClick={openSampleModal} />
-      <SamplesModal isOpen={sampleOpen} onClose={closeSampleModal} />
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
-        <CodeEditor
-          title="Input: "
-          value={request}
-          onChange={handleOnChange}
-          darkMode
-          onClear={handleInputClear}
-          placeholder="Paste data here..."
-          fileType="json"
-          uploadEnabled
-          readFile={readFile}
-          clearEnabled
-          width="100%"
-          height={data ? "500px" : "calc(100vh - 352px)"}
-        />
-        {data && (
-          <CodeEditor
-            title="Output:"
-            value={JSON.stringify(data, null, 2)}
-            readOnly
-            darkMode
-            placeholder="Output will be displayed here..."
-            fileType="json"
-            downloadEnabled
-            width="100%"
-            height="500px"
-          />
-        )}
-      </Box>
+      <Divider sx={{ mb: 1 }} />
+      {isLoading ? (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            mt: 25,
+          }}
+        >
+          <Preloader setActive={isLoading} />
+          <Typography variant="h5" sx={{ mt: 4, color: "primary.dark" }}>
+            Loading ...
+          </Typography>
+        </Box>
+      ) : (
+        <>
+          <SamplesButton onClick={openSampleModal} />
+          <SamplesModal isOpen={sampleOpen} onClose={closeSampleModal} />
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
+            <CodeEditor
+              title="Input: "
+              value={request}
+              onChange={handleOnChange}
+              darkMode
+              onClear={handleInputClear}
+              placeholder="Paste data here..."
+              fileType="json"
+              uploadEnabled
+              readFile={readFile}
+              clearEnabled
+              width="100%"
+              height={data ? "500px" : "calc(100vh - 380px)"}
+            />
+            {data && (
+              <CodeEditor
+                title="Output:"
+                value={JSON.stringify(data, null, 2)}
+                readOnly
+                darkMode
+                placeholder="Output will be displayed here..."
+                fileType="json"
+                downloadEnabled
+                width="100%"
+                height="500px"
+              />
+            )}
+          </Box>
+        </>
+      )}
     </>
   );
 };

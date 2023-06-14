@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { SelectedSampleProvider } from "../components/contexts/SelectedSampleContext";
+import { SelectedSampleProvider } from "../Contexts/SelectedSampleContext";
 
 interface SideNavItem {
   path: string;
