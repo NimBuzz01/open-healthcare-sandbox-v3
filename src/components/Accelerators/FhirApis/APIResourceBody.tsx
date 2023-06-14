@@ -132,8 +132,8 @@ export const APIResourceBody = () => {
           display: "flex",
           alignItems: "center",
           gap: 2,
-          border: 1,
-          borderColor: "grey.400",
+          border: 2,
+          borderColor: "grey.300",
           borderRadius: 2,
           px: 2,
         }}
