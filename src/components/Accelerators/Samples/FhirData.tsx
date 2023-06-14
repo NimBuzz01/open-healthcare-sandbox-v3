@@ -1,5 +1,6 @@
 interface Sample {
   name: string;
+  apiName?: string;
   data: string;
 }
 
@@ -8,6 +9,7 @@ interface Sample {
 export const FhirData: Sample[] = [
   {
     name: "Patient Data",
+    apiName: "Patient",
     data: `{
         "resourceType": "Patient",
         "meta": {
@@ -47,6 +49,7 @@ export const FhirData: Sample[] = [
   },
   {
     name: "Encounter Data",
+    apiName: "Encounter",
     data: `{
       "resourceType": "Encounter",
       "id": "25285",
@@ -160,6 +163,7 @@ export const FhirData: Sample[] = [
   },
   {
     name: "Practitioner Data",
+    apiName: "Practitioner",
     data: `{
       "resourceType": "Practitioner",
       "id": "1895",
@@ -177,6 +181,7 @@ export const FhirData: Sample[] = [
   },
   {
     name: "Organization Data",
+    apiName: "Organization",
     data: `{
       "resourceType": "Organization",
       "id": "39998",
@@ -240,6 +245,7 @@ export const FhirData: Sample[] = [
   },
   {
     name: "Observation Data",
+    apiName: "Observation",
     data: `{
       "resourceType": "Observation",
       "id": "10552513",

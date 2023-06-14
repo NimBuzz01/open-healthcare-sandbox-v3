@@ -115,11 +115,9 @@ export const APIResourceBody = () => {
           fontWeight: 500,
           textTransform: "none",
           transition: "0.2s",
-          borderRadius: 2,
           "&.Mui-selected": {
             backgroundColor: "primary.main",
             color: "background.default",
-            borderRadius: 2,
           },
         }}
       />
@@ -136,6 +134,7 @@ export const APIResourceBody = () => {
           borderColor: "grey.300",
           borderRadius: 2,
           px: 2,
+          mt: 1,
         }}
       >
         <Typography

@@ -28,6 +28,7 @@ export interface Item {
 
 export interface Sample {
   name: string;
+  apiName?: string;
   data: string;
 }
 

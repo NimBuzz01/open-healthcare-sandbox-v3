@@ -58,7 +58,7 @@ export const CodeEditor = ({
     <Box
       sx={{
         width,
-        border: 1,
+        border: 0.5,
         borderRadius: "4px 4px 0 0",
         borderColor: "grey.500",
         display: "flex",
@@ -76,7 +76,11 @@ export const CodeEditor = ({
           borderColor: "grey.500",
         }}
       >
-        <Typography variant="h5">{title}</Typography>
+        <Typography
+          sx={{ color: "primary.dark", fontSize: 15, fontWeight: 500 }}
+        >
+          {title}
+        </Typography>
         <Box sx={{ display: "flex" }}>
           <CopyContent data={JSON.parse(JSON.stringify(value!))} size={20} />
           {downloadEnabled && (

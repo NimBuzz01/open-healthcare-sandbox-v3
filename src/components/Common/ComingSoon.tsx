@@ -11,7 +11,7 @@ export const ComingSoon = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        gap: 40,
+        gap: 60,
         alignItems: "center",
         height: 1,
       }}

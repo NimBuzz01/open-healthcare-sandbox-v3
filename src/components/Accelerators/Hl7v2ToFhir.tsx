@@ -43,8 +43,8 @@ export const Hl7v2ToFhir = () => {
     isLoading,
   } = state;
 
-  const { loadSample } = useContext(SelectedSampleContext);
-  const { selectedLabel } = useContext(SelectedSampleContext);
+  const { loadSample, setLoadSample } = useContext(SelectedSampleContext);
+  const { selectedLabel, setSelectedLabel } = useContext(SelectedSampleContext);
 
   const [alertOpen, setAlertOpen] = useState(false);
 
@@ -54,6 +54,8 @@ export const Hl7v2ToFhir = () => {
         ...prevState,
         input: loadSample!.data,
       }));
+      setLoadSample(null);
+      setSelectedLabel("");
       setAlertOpen(true);
       setTimeout(() => {
         setAlertOpen(false);

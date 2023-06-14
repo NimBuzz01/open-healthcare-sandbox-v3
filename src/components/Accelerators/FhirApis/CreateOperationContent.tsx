@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Divider, Typography } from "@mui/material";
+import { Alert, Box, Divider, Typography } from "@mui/material";
 import {
   CommonButton,
   ResponseAlert,
@@ -26,16 +26,27 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { loadSample } = useContext(SelectedSampleContext);
-  const { selectedLabel } = useContext(SelectedSampleContext);
+  const { loadSample, setLoadSample } = useContext(SelectedSampleContext);
+  const { selectedLabel, setSelectedLabel } = useContext(SelectedSampleContext);
 
   useEffect(() => {
     if (selectedLabel == "FHIR APIs") {
-      setRequest(loadSample!.data);
-      setAlertOpen(true);
-      setTimeout(() => {
-        setAlertOpen(false);
-      }, 2000);
+      const after_ = resource.resourcePath.slice(
+        resource.resourcePath.indexOf("/") + 1
+      );
+      if (loadSample?.apiName == after_) {
+        setRequest(loadSample!.data);
+        setLoadSample(null);
+        setSelectedLabel("");
+        setAlertOpen(true);
+        setTimeout(() => {
+          setAlertOpen(false);
+        }, 2000);
+      } else {
+        alert("Incorrect API Data selected.");
+        setLoadSample(null);
+        setSelectedLabel("");
+      }
     }
   }, [loadSample, selectedLabel]);
 
@@ -109,7 +120,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
       {alertOpen && (
         <ResponseAlert
           isOpen={alertOpen}
-          severity={"success"}
+          severity="success"
           message="Sample Loaded"
           setIsOpen={closeAlert}
         />
@@ -151,7 +162,24 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
         </Box>
       ) : (
         <>
-          <SamplesButton onClick={openSampleModal} />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                fontStyle: "italic",
+                color: "grey.600",
+                alignSelf: "flex-end",
+              }}
+            >
+              Note: Created resources will be available for 2 hours
+            </Typography>
+            <SamplesButton onClick={openSampleModal} />
+          </Box>
           <SamplesModal isOpen={sampleOpen} onClose={closeSampleModal} />
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
             <CodeEditor
@@ -166,7 +194,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
               readFile={readFile}
               clearEnabled
               width="100%"
-              height={data ? "500px" : "calc(100vh - 380px)"}
+              height={data ? "500px" : "calc(100vh - 390px)"}
             />
             {data && (
               <CodeEditor

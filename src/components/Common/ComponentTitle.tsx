@@ -15,20 +15,23 @@ export const ComponentTitle = ({ heading, description, url }: Props) => {
           <Typography
             color="primary.dark"
             variant="h5"
-            sx={{ fontWeight: 600 }}
+            sx={{
+              fontWeight: 600,
+            }}
           >
             {heading}
           </Typography>
-          <AboutTool url={url}></AboutTool>
+          <AboutTool url={url} iconType></AboutTool>
         </Box>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box sx={{ display: "flex", gap: 0.5 }}>
           <Typography
             color="common.black"
             variant="h6"
             sx={{ fontWeight: 400 }}
           >
-            {description}
+            {description}.
           </Typography>
+          <AboutTool url={url}></AboutTool>
         </Box>
       </Box>
       <Box sx={{ mr: 2 }}>

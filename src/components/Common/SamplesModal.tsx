@@ -20,6 +20,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 interface Sample {
   name: string;
+  apiName?: string;
   data: string;
 }
 
@@ -55,7 +56,7 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Container
-        maxWidth="lg"
+        maxWidth="xl"
         sx={{
           bgcolor: "background.default",
           height: "90vh",
@@ -86,7 +87,8 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
         <Box sx={{ flexGrow: 1, my: 1, display: "flex" }}>
           <Box
             sx={{
-              width: "25%",
+              width: "20%",
+              px: 1,
               borderRight: 1,
               borderColor: "grey.400",
               display: "flex",
@@ -98,7 +100,7 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
                 data.map((sample: Sample) => (
                   <ListItem
                     key={sample.name}
-                    sx={{ p: 0, borderBottom: 0.5, borderColor: "grey.400" }}
+                    sx={{ p: 0, borderBottom: 1, borderColor: "grey.300" }}
                   >
                     <ListItemButton
                       selected={selectedSample === sample}
@@ -123,7 +125,7 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
               />
             </Box>
           </Box>
-          <Box sx={{ width: "75%", display: "flex", justifyContent: "center" }}>
+          <Box sx={{ width: "80%", display: "flex", justifyContent: "center" }}>
             {selectedSample && (
               <CodeEditor
                 title={selectedSample.name}

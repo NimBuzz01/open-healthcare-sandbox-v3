@@ -2,6 +2,7 @@ import React, { createContext, useState } from "react";
 
 interface Sample {
   name: string;
+  apiName?: string;
   data: string;
 }
 
