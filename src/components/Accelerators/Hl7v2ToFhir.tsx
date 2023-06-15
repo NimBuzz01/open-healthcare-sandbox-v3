@@ -206,7 +206,7 @@ export const Hl7v2ToFhir = () => {
           readFile={readFile}
           clearEnabled
           width="50%"
-          height="calc(100vh - 189px)"
+          height="calc(100vh - 188px)"
         />
         <Divider orientation="vertical" />
         <CodeEditor
@@ -220,7 +220,7 @@ export const Hl7v2ToFhir = () => {
           downloadEnabled
           clearEnabled
           width="50%"
-          height="calc(100vh - 189px)"
+          height="calc(100vh - 188px)"
         />
       </Box>
     </Container>

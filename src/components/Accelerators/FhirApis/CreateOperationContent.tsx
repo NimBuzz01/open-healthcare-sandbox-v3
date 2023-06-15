@@ -29,12 +29,13 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   const { loadSample, setLoadSample } = useContext(SelectedSampleContext);
   const { selectedLabel, setSelectedLabel } = useContext(SelectedSampleContext);
 
+  const [selectedAPIName, setSelectedAPIName] = useState(
+    resource.resourcePath.slice(resource.resourcePath.indexOf("/") + 1)
+  );
+
   useEffect(() => {
     if (selectedLabel == "FHIR APIs") {
-      const after_ = resource.resourcePath.slice(
-        resource.resourcePath.indexOf("/") + 1
-      );
-      if (loadSample?.apiName == after_) {
+      if (loadSample?.apiName == selectedAPIName) {
         setRequest(loadSample!.data);
         setLoadSample(null);
         setSelectedLabel("");
@@ -180,7 +181,11 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
             </Typography>
             <SamplesButton onClick={openSampleModal} />
           </Box>
-          <SamplesModal isOpen={sampleOpen} onClose={closeSampleModal} />
+          <SamplesModal
+            isOpen={sampleOpen}
+            onClose={closeSampleModal}
+            selectedAPI={selectedAPIName}
+          />
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
             <CodeEditor
               title="Input: "

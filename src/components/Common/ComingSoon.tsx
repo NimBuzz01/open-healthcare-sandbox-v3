@@ -4,14 +4,14 @@ import { PreLoader } from "./PreLoader";
 import { useState } from "react";
 
 export const ComingSoon = () => {
-  const [active, setActive] = useState(true);
+  const [active] = useState(true);
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
-        gap: 60,
+        justifyContent: "space-around",
+        gap: 15,
         alignItems: "center",
         height: 1,
       }}

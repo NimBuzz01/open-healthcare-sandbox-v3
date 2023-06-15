@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import {
   Box,
@@ -15,21 +15,21 @@ import {
 import { CodeEditor } from "./CodeEditor";
 import { SelectedSampleContext } from "../Contexts/SelectedSampleContext";
 import { CommonButton } from "./CommonButton";
+import { Sample } from "../Configs/AcceleratorConfig";
 import { items } from "../Configs/AcceleratorConfig";
 import CloseIcon from "@mui/icons-material/Close";
-
-interface Sample {
-  name: string;
-  apiName?: string;
-  data: string;
-}
 
 interface SamplesModalProps {
   isOpen: boolean;
   onClose: () => void;
+  selectedAPI?: string;
 }
 
-export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
+export const SamplesModal = ({
+  isOpen,
+  onClose,
+  selectedAPI,
+}: SamplesModalProps) => {
   const { loadSample, setLoadSample } = useContext(SelectedSampleContext);
   const { selectedLabel, setSelectedLabel } = useContext(SelectedSampleContext);
 
@@ -38,20 +38,37 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
   const data = currentItem ? currentItem.sampleData : "";
   const label = currentItem ? currentItem.label : "";
 
-  const [selectedSample, setSelectedSample] = useState<Sample | null>(
-    data && data.length > 0 ? data[0] : null
-  );
-  setSelectedLabel;
+  const [selectedSample, setSelectedSample] = useState<Sample | null>(null);
+  const [filteredData, setFilteredData] = useState<Sample[]>([]);
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      let filteredSamples: Sample[] = data;
+      if (label === "FHIR APIs" && selectedAPI) {
+        filteredSamples = data.filter(
+          (sample: Sample) => sample.apiName === selectedAPI
+        );
+      }
+      setFilteredData(filteredSamples);
+      setSelectedSample(filteredSamples[0] || null);
+    }
+  }, [data, label, selectedAPI]);
 
   const handleSampleClick = (sample: Sample) => {
     setSelectedSample(sample);
   };
 
   const handleSampleLoad = () => {
-    setLoadSample(selectedSample);
-    setSelectedLabel(label);
-    onClose();
+    if (selectedSample) {
+      setLoadSample(selectedSample);
+      setSelectedLabel(label);
+      onClose();
+    }
   };
+
+  if (label === "FHIR APIs") {
+    console.log(selectedAPI);
+  }
 
   return (
     <Modal open={isOpen} onClose={onClose}>
@@ -96,20 +113,19 @@ export const SamplesModal = ({ isOpen, onClose }: SamplesModalProps) => {
             }}
           >
             <List component="nav" sx={{ mb: "auto" }}>
-              {data &&
-                data.map((sample: Sample) => (
-                  <ListItem
-                    key={sample.name}
-                    sx={{ p: 0, borderBottom: 1, borderColor: "grey.300" }}
+              {filteredData.map((sample: Sample) => (
+                <ListItem
+                  key={sample.name}
+                  sx={{ p: 0, borderBottom: 1, borderColor: "grey.300" }}
+                >
+                  <ListItemButton
+                    selected={selectedSample === sample}
+                    onClick={() => handleSampleClick(sample)}
                   >
-                    <ListItemButton
-                      selected={selectedSample === sample}
-                      onClick={() => handleSampleClick(sample)}
-                    >
-                      <ListItemText primary={sample.name} />
-                    </ListItemButton>
-                  </ListItem>
-                ))}
+                    <ListItemText primary={sample.name} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
             </List>
             <Box
               sx={{
