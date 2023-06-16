@@ -130,14 +130,20 @@ export const InputField = ({
                   <MuiTooltip
                     title={
                       <Box sx={{ p: 1, color: "common.black" }}>
-                        <Typography sx={{ mb: 1 }}>
-                          <Typography variant="body2">ParamType:</Typography>{" "}
-                          {dataType}
+                        <Typography
+                          variant="body2"
+                          sx={{ color: "primary.dark" }}
+                        >
+                          ParamType:
                         </Typography>
-                        <Typography>
-                          <Typography variant="body2">Example:</Typography>{" "}
-                          {example}
+                        <Typography sx={{ mb: 1 }}>{dataType}</Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{ color: "primary.dark" }}
+                        >
+                          Example:
                         </Typography>
+                        <Typography>{example}</Typography>
                       </Box>
                     }
                     open={isInfoOpen}

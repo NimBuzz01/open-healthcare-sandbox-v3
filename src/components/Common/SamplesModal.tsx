@@ -66,10 +66,6 @@ export const SamplesModal = ({
     }
   };
 
-  if (label === "FHIR APIs") {
-    console.log(selectedAPI);
-  }
-
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Container
