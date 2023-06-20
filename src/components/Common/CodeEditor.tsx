@@ -49,7 +49,7 @@ export const CodeEditor = ({
 
   const handleDownloadClick = () => {
     const content = JSON.stringify(value, null, 2);
-    handleDownload(JSON.parse(content), `${fileType}.json`);
+    handleDownload(JSON.parse(content), `${title}.json`);
   };
 
   const langExtensions: Record<string, () => any> = langs;
@@ -68,13 +68,9 @@ export const CodeEditor = ({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          borderBottom: 1,
-          borderColor: "grey.500",
         }}
       >
-        <Typography
-          sx={{ color: "primary.dark", fontSize: 15, fontWeight: 500 }}
-        >
+        <Typography variant="h6" sx={{ color: "primary.dark" }}>
           {title}
         </Typography>
         <Box sx={{ display: "flex" }}>

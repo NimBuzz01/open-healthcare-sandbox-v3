@@ -99,7 +99,7 @@ export const InputField = ({
           <Typography sx={{ color: "primary.dark" }}>{label}</Typography>
           {isRequired && (
             <Typography
-              sx={{ fontSize: 11, alignSelf: "flex-end", color: "#FF2E2E" }}
+              sx={{ fontSize: 11, alignSelf: "flex-end", color: "#f54545" }}
             >
               *required
             </Typography>
@@ -171,7 +171,7 @@ export const InputField = ({
       {isDeleteRequired && (
         <IconButton onClick={handleDelete} sx={{ mt: 1.5 }}>
           <RemoveCircleOutlineOutlinedIcon
-            sx={{ fontSize: 26, color: "#FF2E2E" }}
+            sx={{ fontSize: 26, color: "#f54545" }}
           />
         </IconButton>
       )}

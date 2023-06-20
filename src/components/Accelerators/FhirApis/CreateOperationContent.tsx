@@ -126,7 +126,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           setIsOpen={closeAlert}
         />
       )}
-      <Box sx={{ display: "flex", alignItems: "center", gap: 3, mb: 2 }}>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 3, mb: 1 }}>
         <ResourceMethodIcon resourceMethod={resource.resourceMethod} />
         <Typography sx={{ color: "common.dark", fontSize: 14 }}>
           {resource.resourcePath}
@@ -174,7 +174,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
               sx={{
                 fontStyle: "italic",
                 color: "grey.600",
-                alignSelf: "flex-end",
+                alignSelf: "flex-start",
               }}
             >
               Note: Created resources will be available for 2 hours
@@ -188,7 +188,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           />
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
             <CodeEditor
-              title="Input: "
+              title="Input"
               value={request}
               onChange={handleOnChange}
               darkMode
@@ -203,7 +203,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
             />
             {data && (
               <CodeEditor
-                title="Output:"
+                title="Output"
                 value={JSON.stringify(data, null, 2)}
                 readOnly
                 darkMode

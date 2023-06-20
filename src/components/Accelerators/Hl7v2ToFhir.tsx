@@ -202,7 +202,7 @@ export const Hl7v2ToFhir = () => {
           }}
         >
           <CodeEditor
-            title="HL7 Resource: "
+            title="HL7 Resource"
             value={input}
             onChange={handleInputChange}
             darkMode={darkMode}
@@ -224,7 +224,7 @@ export const Hl7v2ToFhir = () => {
           }}
         >
           <CodeEditor
-            title="FHIR Resource: "
+            title="FHIR Resource"
             value={output}
             readOnly
             darkMode={darkMode}

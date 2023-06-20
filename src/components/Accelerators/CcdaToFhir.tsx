@@ -202,7 +202,7 @@ export const CcdaToFhir = () => {
           }}
         >
           <CodeEditor
-            title="C-CDA Resource: "
+            title="C-CDA Resource"
             value={input}
             onChange={handleInputChange}
             darkMode={darkMode}
@@ -224,7 +224,7 @@ export const CcdaToFhir = () => {
           }}
         >
           <CodeEditor
-            title="FHIR Resource: "
+            title="FHIR Resource"
             value={output}
             readOnly
             darkMode={darkMode}

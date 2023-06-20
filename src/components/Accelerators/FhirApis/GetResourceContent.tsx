@@ -220,13 +220,6 @@ export const GetResourceContent = ({
           </Box>
         ) : (
           <Box>
-            <Box sx={{ my: 1 }}>
-              {isInputEmpty && (
-                <Alert severity="error" sx={{ fontSize: 13 }}>
-                  Please fill all input fields.
-                </Alert>
-              )}
-            </Box>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Box
                 sx={{
@@ -234,6 +227,7 @@ export const GetResourceContent = ({
                   flexDirection: "column",
                   gap: 2,
                   mr: 1,
+                  mt: 1,
                   border: 0.5,
                   borderRadius: 1,
                   borderColor: "grey.400",
@@ -274,20 +268,20 @@ export const GetResourceContent = ({
                             sx={{ fontSize: 26, color: "secondary.main" }}
                           />
                         </IconButton>
-
-                        {isAdded && (
-                          <Alert
-                            severity="warning"
-                            icon={<InfoOutlineIcon sx={{ fontSize: 18 }} />}
-                            sx={{
-                              fontSize: 12,
-                              py: 0.3,
-                            }}
-                          >
-                            Already added!
-                          </Alert>
-                        )}
                       </Box>
+                      {isAdded && (
+                        <Alert
+                          severity="warning"
+                          icon={<InfoOutlineIcon sx={{ fontSize: 18 }} />}
+                          sx={{
+                            fontSize: 12,
+                            py: 0.3,
+                            my: 1,
+                          }}
+                        >
+                          Already added!
+                        </Alert>
+                      )}
                       <Divider sx={{ my: 1 }} />
                     </>
                   )}
@@ -299,8 +293,13 @@ export const GetResourceContent = ({
                         >
                           Add required search parameter(s)
                         </Typography>
-                        <Divider />
+                        <Divider sx={{ my: 1 }} />
                       </>
+                    )}
+                    {isInputEmpty && (
+                      <Alert severity="error" sx={{ fontSize: 13 }}>
+                        Please fill all input fields.
+                      </Alert>
                     )}
                     {inputFields.map((inputField, index) => (
                       <InputField
@@ -312,14 +311,9 @@ export const GetResourceContent = ({
                   </Box>
                 </Box>
               </Box>
-              <Box
-                sx={{
-                  width: "77%",
-                }}
-              >
-                {/* {data && ( */}
+              <Box sx={{ width: "77%" }}>
                 <CodeEditor
-                  title="Output:"
+                  title="Output"
                   value={data ? JSON.stringify(data, null, 2) : ""}
                   readOnly
                   darkMode
@@ -329,7 +323,6 @@ export const GetResourceContent = ({
                   width="100%"
                   height="calc(100vh - 330px)"
                 />
-                {/* )} */}
               </Box>
             </Box>
           </Box>
