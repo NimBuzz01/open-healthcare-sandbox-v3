@@ -25,6 +25,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   const [sampleOpen, setSampleOpen] = useState<boolean>(false);
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [successAlert, setSuccessAlert] = useState(false);
 
   const { loadSample, setLoadSample } = useContext(SelectedSampleContext);
   const { selectedLabel, setSelectedLabel } = useContext(SelectedSampleContext);
@@ -81,6 +82,10 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
     setSampleOpen(false);
   };
 
+  const closeSuccessAlert = () => {
+    setSuccessAlert(false);
+  };
+
   const callBackend = () => {
     setIsLoading(true);
     setData("");
@@ -91,6 +96,10 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
       .then((res) => {
         setData(res.data);
         setIsLoading(false);
+        setSuccessAlert(true);
+        setTimeout(() => {
+          setSuccessAlert(false);
+        }, 2000);
       })
       .catch((err) => {
         console.log(err);
@@ -124,6 +133,14 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           severity="success"
           message="Sample Loaded"
           setIsOpen={closeAlert}
+        />
+      )}
+      {successAlert && (
+        <ResponseAlert
+          isOpen={successAlert}
+          severity="success"
+          message="Request Successful!"
+          setIsOpen={closeSuccessAlert}
         />
       )}
       <Box sx={{ display: "flex", alignItems: "center", gap: 3, mb: 1 }}>
@@ -166,20 +183,20 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-between",
+              alignItems: "center",
+              gap: 2,
             }}
           >
+            <SamplesButton onClick={openSampleModal} />
             <Typography
               variant="h6"
               sx={{
                 fontStyle: "italic",
                 color: "grey.600",
-                alignSelf: "flex-start",
               }}
             >
               Note: Created resources will be available for 2 hours
             </Typography>
-            <SamplesButton onClick={openSampleModal} />
           </Box>
           <SamplesModal
             isOpen={sampleOpen}
@@ -199,7 +216,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
               readFile={readFile}
               clearEnabled
               width="100%"
-              height={data ? "500px" : "calc(100vh - 390px)"}
+              height={data ? "500px" : "calc(100vh - 370px)"}
             />
             {data && (
               <CodeEditor

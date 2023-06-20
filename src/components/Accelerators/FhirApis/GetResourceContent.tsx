@@ -110,6 +110,9 @@ export const GetResourceContent = ({
   const callBackend = () => {
     if (inputFields.some((field) => !field.value)) {
       setIsInputEmpty(true);
+      setTimeout(() => {
+        setIsInputEmpty(false);
+      }, 2000);
       return;
     }
     setIsInputEmpty(false);
@@ -226,13 +229,11 @@ export const GetResourceContent = ({
                   display: "flex",
                   flexDirection: "column",
                   gap: 2,
-                  mr: 1,
                   mt: 1,
-                  border: 0.5,
-                  borderRadius: 1,
+                  borderRight: 1,
                   borderColor: "grey.400",
-                  p: 1,
-                  px: 1.5,
+                  py: 1,
+                  pr: 1.5,
                 }}
               >
                 <Box>
@@ -321,7 +322,7 @@ export const GetResourceContent = ({
                   fileType="json"
                   downloadEnabled
                   width="100%"
-                  height="calc(100vh - 330px)"
+                  height="calc(100vh - 320px)"
                 />
               </Box>
             </Box>

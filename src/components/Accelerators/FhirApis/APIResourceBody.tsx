@@ -27,7 +27,7 @@ export const APIResourceBody = () => {
         id={`tab-${index}`}
         aria-controls={`tabpanel-${index}`}
         sx={{
-          fontSize: 14,
+          fontSize: 13,
           fontWeight: 500,
           textTransform: "none",
           transition: "0.2s",
@@ -38,6 +38,8 @@ export const APIResourceBody = () => {
             backgroundColor: "primary.main",
             color: "background.default",
           },
+          height: "40px",
+          minHeight: "40px",
         }}
       />
     ));
@@ -50,7 +52,7 @@ export const APIResourceBody = () => {
         id={`resource-tab-${selectedAPI}-${index}`}
         aria-controls={`resource-tabpanel-${selectedAPI}-${index}`}
         sx={{
-          fontSize: 14,
+          fontSize: 13,
           fontWeight: 500,
           textTransform: "none",
           transition: "0.2s",
@@ -61,6 +63,8 @@ export const APIResourceBody = () => {
             backgroundColor: "primary.main",
             color: "background.default",
           },
+          height: "40px",
+          minHeight: "40px",
         }}
       />
     ));

@@ -88,21 +88,21 @@ export const apiList: ApiConfig[] = [
     ],
     resources: [
       {
-        resourceName: "SEARCH",
+        resourceName: "Search",
         resourceMethod: "GET",
         resourcePath: "/Patient",
         resourceDescription: "Search patient resources",
         resourceOperation: OperationTypes.SEARCH,
       },
       {
-        resourceName: "READ",
+        resourceName: "Read",
         resourceMethod: "GET",
         resourcePath: "/Patient/{id}",
         resourceDescription: "Read patient resource by Id",
         resourceOperation: OperationTypes.READ,
       },
       {
-        resourceName: "CREATE",
+        resourceName: "Create",
         resourceMethod: "POST",
         resourcePath: "/Patient",
         resourceDescription: "Create patient resource",
@@ -163,21 +163,21 @@ export const apiList: ApiConfig[] = [
     ],
     resources: [
       {
-        resourceName: "SEARCH",
+        resourceName: "Search",
         resourceMethod: "GET",
         resourcePath: "/Encounter",
         resourceDescription: "Search Encounter resources",
         resourceOperation: OperationTypes.SEARCH,
       },
       {
-        resourceName: "READ",
+        resourceName: "Read",
         resourceMethod: "GET",
         resourcePath: "/Encounter/{id}",
         resourceDescription: "Read Encounter resource by id",
         resourceOperation: OperationTypes.READ,
       },
       {
-        resourceName: "CREATE",
+        resourceName: "Create",
         resourceMethod: "POST",
         resourcePath: "/Encounter",
         resourceDescription: "Create Encounter resource",
@@ -224,21 +224,21 @@ export const apiList: ApiConfig[] = [
     ],
     resources: [
       {
-        resourceName: "SEARCH",
+        resourceName: "Search",
         resourceMethod: "GET",
         resourcePath: "/Practitioner",
         resourceDescription: "Search Practitioner resources",
         resourceOperation: OperationTypes.SEARCH,
       },
       {
-        resourceName: "READ",
+        resourceName: "Read",
         resourceMethod: "GET",
         resourcePath: "/Practitioner/{id}",
         resourceDescription: "Read Practitioner resource by id",
         resourceOperation: OperationTypes.READ,
       },
       {
-        resourceName: "CREATE",
+        resourceName: "Create",
         resourceMethod: "POST",
         resourcePath: "/Practitioner",
         resourceDescription: "Create Practitioner resource",
@@ -293,21 +293,21 @@ export const apiList: ApiConfig[] = [
     ],
     resources: [
       {
-        resourceName: "SEARCH",
+        resourceName: "Search",
         resourceMethod: "GET",
         resourcePath: "/Organization",
         resourceDescription: "Search Organization resources",
         resourceOperation: OperationTypes.SEARCH,
       },
       {
-        resourceName: "READ",
+        resourceName: "Read",
         resourceMethod: "GET",
         resourcePath: "/Organization/{id}",
         resourceDescription: "Read Organization resource by id",
         resourceOperation: OperationTypes.READ,
       },
       {
-        resourceName: "CREATE",
+        resourceName: "Create",
         resourceMethod: "POST",
         resourcePath: "/Organization",
         resourceDescription: "Create Organization resource",
@@ -362,21 +362,21 @@ export const apiList: ApiConfig[] = [
     ],
     resources: [
       {
-        resourceName: "SEARCH",
+        resourceName: "Search",
         resourceMethod: "GET",
         resourcePath: "/Observation",
         resourceDescription: "Search Observation resources",
         resourceOperation: OperationTypes.SEARCH,
       },
       {
-        resourceName: "READ",
+        resourceName: "Read",
         resourceMethod: "GET",
         resourcePath: "/Observation/{id}",
         resourceDescription: "Read Observation resources by id",
         resourceOperation: OperationTypes.READ,
       },
       {
-        resourceName: "CREATE",
+        resourceName: "Create",
         resourceMethod: "POST",
         resourcePath: "/Observation",
         resourceDescription: "Create Observation resource",
