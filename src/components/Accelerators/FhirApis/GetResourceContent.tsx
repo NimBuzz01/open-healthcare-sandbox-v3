@@ -10,13 +10,17 @@ import {
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import { CommonButton, ResponseAlert, CodeEditor } from "../../Common";
+import {
+  CommonButton,
+  ResponseAlert,
+  CodeEditor,
+  PreLoader,
+} from "../../Common";
 import { InputField, Props as InputFieldProps } from "./InputField";
-import { SearchParam } from "../../Configs/ApiConfig";
 import { ResourceMethodIcon } from "./ResourceMethodIcon";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutlined";
-import { PreLoader } from "../../Common";
+import { SearchParam } from "../../Configs/ApiConfig";
 
 interface Props {
   isSearchOperation?: boolean;
@@ -176,7 +180,15 @@ export const GetResourceContent = ({
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        border: 0.5,
+        borderRadius: 1,
+        borderColor: "grey.400",
+        p: 2,
+        bgcolor: "common.white",
+      }}
+    >
       {isError && (
         <ResponseAlert
           isOpen={isError}
@@ -213,7 +225,7 @@ export const GetResourceContent = ({
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              mt: 25,
+              height: "calc(100vh - 304px)",
             }}
           >
             <PreLoader setActive={isLoading} />
@@ -232,14 +244,14 @@ export const GetResourceContent = ({
                   mt: 1,
                   borderRight: 1,
                   borderColor: "grey.400",
-                  py: 1,
+
                   pr: 1.5,
                 }}
               >
                 <Box>
                   {isSearchOperation && (
                     <>
-                      <Typography sx={{ color: "primary.dark", my: 1 }}>
+                      <Typography sx={{ color: "primary.dark", mb: 1 }}>
                         Add optional search parameter(s)
                       </Typography>
                       <Box
@@ -283,22 +295,20 @@ export const GetResourceContent = ({
                           Already added!
                         </Alert>
                       )}
-                      <Divider sx={{ my: 1 }} />
                     </>
                   )}
                   <Box>
                     {!isSearchOperation && (
                       <>
                         <Typography
-                          sx={{ color: "primary.dark", my: 1, width: 300 }}
+                          sx={{ color: "primary.dark", mb: 1, width: 300 }}
                         >
                           Add required search parameter(s)
                         </Typography>
-                        <Divider sx={{ my: 1 }} />
                       </>
                     )}
                     {isInputEmpty && (
-                      <Alert severity="error" sx={{ fontSize: 13 }}>
+                      <Alert severity="error" sx={{ fontSize: 13, my: 1 }}>
                         Please fill all input fields.
                       </Alert>
                     )}
@@ -322,13 +332,13 @@ export const GetResourceContent = ({
                   fileType="json"
                   downloadEnabled
                   width="100%"
-                  height="calc(100vh - 320px)"
+                  height="calc(100vh - 342px)"
                 />
               </Box>
             </Box>
           </Box>
         )}
       </Box>
-    </>
+    </Box>
   );
 };

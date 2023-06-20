@@ -1,16 +1,16 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Alert, Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import {
   CommonButton,
   ResponseAlert,
-  CodeEditor,
   SamplesButton,
   SamplesModal,
+  PreLoader,
+  CodeEditor,
 } from "../../Common";
 import { SelectedSampleContext } from "../../Contexts/SelectedSampleContext";
 import { ResourceMethodIcon } from "./ResourceMethodIcon";
-import { PreLoader } from "../../Common";
 
 interface Props {
   backendUrl: string;
@@ -24,19 +24,19 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   const [isError, setIsError] = useState<boolean>(false);
   const [sampleOpen, setSampleOpen] = useState<boolean>(false);
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [successAlert, setSuccessAlert] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [successAlert, setSuccessAlert] = useState<boolean>(false);
 
-  const { loadSample, setLoadSample } = useContext(SelectedSampleContext);
-  const { selectedLabel, setSelectedLabel } = useContext(SelectedSampleContext);
+  const { loadSample, setLoadSample, selectedLabel, setSelectedLabel } =
+    useContext(SelectedSampleContext);
 
-  const [selectedAPIName, setSelectedAPIName] = useState(
+  const [selectedAPIName] = useState(
     resource.resourcePath.slice(resource.resourcePath.indexOf("/") + 1)
   );
 
   useEffect(() => {
-    if (selectedLabel == "FHIR APIs") {
-      if (loadSample?.apiName == selectedAPIName) {
+    if (selectedLabel === "FHIR APIs") {
+      if (loadSample?.apiName === selectedAPIName) {
         setRequest(loadSample!.data);
         setLoadSample(null);
         setSelectedLabel("");
@@ -70,16 +70,16 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
     }
   };
 
-  const closeResponse = () => {
-    setIsError(false);
-  };
-
   const openSampleModal = () => {
     setSampleOpen(true);
   };
 
   const closeSampleModal = () => {
     setSampleOpen(false);
+  };
+
+  const closeResponse = () => {
+    setIsError(false);
   };
 
   const closeSuccessAlert = () => {
@@ -118,7 +118,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   };
 
   return (
-    <>
+    <Box sx={{ border: 0.5, borderRadius: 1, borderColor: "grey.400", p: 2 }}>
       {isError && (
         <ResponseAlert
           isOpen={isError}
@@ -170,7 +170,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            mt: 25,
+            height: "calc(100vh - 304px)",
           }}
         >
           <PreLoader setActive={isLoading} />
@@ -216,7 +216,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
               readFile={readFile}
               clearEnabled
               width="100%"
-              height={data ? "500px" : "calc(100vh - 370px)"}
+              height={data ? "500px" : "calc(100vh - 394px)"}
             />
             {data && (
               <CodeEditor
@@ -234,6 +234,6 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           </Box>
         </>
       )}
-    </>
+    </Box>
   );
 };
