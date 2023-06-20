@@ -58,9 +58,6 @@ export const CodeEditor = ({
     <Box
       sx={{
         width,
-        border: 0.5,
-        borderRadius: "4px 4px 0 0",
-        borderColor: "grey.500",
         display: "flex",
         flexDirection: "column",
         height: 1,
@@ -71,7 +68,6 @@ export const CodeEditor = ({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          px: 1,
           borderBottom: 1,
           borderColor: "grey.500",
         }}

@@ -28,7 +28,7 @@ export const ResourceMethodIcon = ({ resourceMethod }: ContainerProps) => {
         bgcolor: bgcolor,
         color: "common.white",
         py: 1,
-        borderRadius: 2,
+        borderRadius: 1,
         textAlign: "center",
         width: 90,
         fontWeight: 600,

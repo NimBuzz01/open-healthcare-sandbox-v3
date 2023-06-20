@@ -93,7 +93,7 @@ export const InputField = ({
   };
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", gap: 2, my: 1 }}>
+    <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 1 }}>
       <Box sx={{ width: 250, mb: 1 }}>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography sx={{ color: "primary.dark" }}>{label}</Typography>

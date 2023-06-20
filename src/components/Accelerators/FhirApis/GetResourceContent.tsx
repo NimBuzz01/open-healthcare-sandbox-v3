@@ -182,7 +182,7 @@ export const GetResourceContent = ({
           setIsOpen={closeResponse}
         />
       )}
-      <Box sx={{ display: "flex", alignItems: "center", gap: 3, mb: 2 }}>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 3, mb: 1 }}>
         <ResourceMethodIcon resourceMethod={resource.resourceMethod} />
         <Typography sx={{ color: "common.dark", fontSize: 14 }}>
           {resource.resourcePath}
@@ -219,51 +219,7 @@ export const GetResourceContent = ({
             </Typography>
           </Box>
         ) : (
-          <>
-            <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
-              {isSearchOperation && (
-                <>
-                  <Typography sx={{ color: "primary.dark", my: 2 }}>
-                    Add optional search parameter(s)
-                  </Typography>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                    <Select
-                      value={selectedLabel}
-                      onChange={handleLabelChange}
-                      size="small"
-                      sx={{ width: 250 }}
-                    >
-                      {searchParams.map((searchParams) => (
-                        <MenuItem
-                          key={searchParams.paramName}
-                          value={searchParams.paramName}
-                        >
-                          {searchParams.paramName} -{" "}
-                          {searchParams.paramDescription}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    <IconButton
-                      onClick={handleAddInputField}
-                      disabled={!selectedLabel}
-                    >
-                      <AddCircleOutlineOutlinedIcon
-                        sx={{ fontSize: 26, color: "secondary.main" }}
-                      />
-                    </IconButton>
-                    {isAdded && (
-                      <Alert
-                        severity="warning"
-                        icon={<InfoOutlineIcon sx={{ fontSize: 18 }} />}
-                        sx={{ fontSize: 12, py: 0.3 }}
-                      >
-                        Already added!
-                      </Alert>
-                    )}
-                  </Box>
-                </>
-              )}
-            </Box>
+          <Box>
             <Box sx={{ my: 1 }}>
               {isInputEmpty && (
                 <Alert severity="error" sx={{ fontSize: 13 }}>
@@ -271,25 +227,112 @@ export const GetResourceContent = ({
                 </Alert>
               )}
             </Box>
-            {inputFields.map((inputField, index) => (
-              <InputField key={index} {...inputField} fieldIndex={index} />
-            ))}
-          </>
-        )}
-      </Box>
-      <Box sx={{ mt: 2, mb: 2 }}>
-        {data && (
-          <CodeEditor
-            title="Output:"
-            value={JSON.stringify(data, null, 2)}
-            readOnly
-            darkMode
-            placeholder="Output will be displayed here..."
-            fileType="json"
-            downloadEnabled
-            width="100%"
-            height="500px"
-          />
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 2,
+                  mr: 1,
+                  border: 0.5,
+                  borderRadius: 1,
+                  borderColor: "grey.400",
+                  p: 1,
+                  px: 1.5,
+                }}
+              >
+                <Box>
+                  {isSearchOperation && (
+                    <>
+                      <Typography sx={{ color: "primary.dark", my: 1 }}>
+                        Add optional search parameter(s)
+                      </Typography>
+                      <Box
+                        sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                      >
+                        <Select
+                          value={selectedLabel}
+                          onChange={handleLabelChange}
+                          size="small"
+                          sx={{ width: 250 }}
+                        >
+                          {searchParams.map((searchParams) => (
+                            <MenuItem
+                              key={searchParams.paramName}
+                              value={searchParams.paramName}
+                            >
+                              {searchParams.paramName} -{" "}
+                              {searchParams.paramDescription}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                        <IconButton
+                          onClick={handleAddInputField}
+                          disabled={!selectedLabel}
+                        >
+                          <AddCircleOutlineOutlinedIcon
+                            sx={{ fontSize: 26, color: "secondary.main" }}
+                          />
+                        </IconButton>
+
+                        {isAdded && (
+                          <Alert
+                            severity="warning"
+                            icon={<InfoOutlineIcon sx={{ fontSize: 18 }} />}
+                            sx={{
+                              fontSize: 12,
+                              py: 0.3,
+                            }}
+                          >
+                            Already added!
+                          </Alert>
+                        )}
+                      </Box>
+                      <Divider sx={{ my: 1 }} />
+                    </>
+                  )}
+                  <Box>
+                    {!isSearchOperation && (
+                      <>
+                        <Typography
+                          sx={{ color: "primary.dark", my: 1, width: 300 }}
+                        >
+                          Add required search parameter(s)
+                        </Typography>
+                        <Divider />
+                      </>
+                    )}
+                    {inputFields.map((inputField, index) => (
+                      <InputField
+                        key={index}
+                        {...inputField}
+                        fieldIndex={index}
+                      />
+                    ))}
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  width: "77%",
+                }}
+              >
+                {/* {data && ( */}
+                <CodeEditor
+                  title="Output:"
+                  value={data ? JSON.stringify(data, null, 2) : ""}
+                  readOnly
+                  darkMode
+                  placeholder="Output will be displayed here..."
+                  fileType="json"
+                  downloadEnabled
+                  width="100%"
+                  height="calc(100vh - 330px)"
+                />
+                {/* )} */}
+              </Box>
+            </Box>
+          </Box>
         )}
       </Box>
     </>

@@ -187,41 +187,56 @@ export const CcdaToFhir = () => {
         <ConvertButton handleSubmit={callBackend} isLoading={isLoading} />
         <ToggleDarkMode mode={darkMode} toggleMode={toggleDarkMode} />
       </Box>
+      <Divider sx={{ mt: 1 }} />
       <Box
         sx={{
           display: "flex",
-          mt: 1,
           flexGrow: 1,
         }}
       >
-        <CodeEditor
-          title="C-CDA Resource: "
-          value={input}
-          onChange={handleInputChange}
-          darkMode={darkMode}
-          onClear={handleInputClear}
-          placeholder="Paste or edit C-CDA Data here..."
-          fileType="xml"
-          uploadEnabled
-          readFile={readFile}
-          clearEnabled
-          width="50%"
-          height="calc(100vh - 188px)"
-        />
-        <Divider orientation="vertical" />
-        <CodeEditor
-          title="FHIR Resource: "
-          value={output}
-          readOnly
-          darkMode={darkMode}
-          onClear={handleOutputClear}
-          placeholder="FHIR Resource will be displayed here..."
-          fileType="json"
-          downloadEnabled
-          clearEnabled
-          width="50%"
-          height="calc(100vh - 188px)"
-        />
+        <Box
+          sx={{
+            pr: 1,
+            pb: 1,
+            width: "50%",
+          }}
+        >
+          <CodeEditor
+            title="C-CDA Resource: "
+            value={input}
+            onChange={handleInputChange}
+            darkMode={darkMode}
+            onClear={handleInputClear}
+            placeholder="Paste or edit C-CDA Data here..."
+            fileType="jsx"
+            uploadEnabled
+            readFile={readFile}
+            clearEnabled
+            width="100%"
+            height="calc(100vh - 200px)"
+          />
+        </Box>
+        <Box
+          sx={{
+            pl: 1,
+            pb: 1,
+            width: "50%",
+          }}
+        >
+          <CodeEditor
+            title="FHIR Resource: "
+            value={output}
+            readOnly
+            darkMode={darkMode}
+            onClear={handleOutputClear}
+            placeholder="FHIR Resource will be displayed here..."
+            fileType="json"
+            downloadEnabled
+            clearEnabled
+            width="100%"
+            height="calc(100vh - 200px)"
+          />
+        </Box>
       </Box>
     </Container>
   );

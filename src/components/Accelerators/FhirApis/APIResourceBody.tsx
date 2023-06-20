@@ -19,90 +19,6 @@ export const APIResourceBody = () => {
     setSelectedResource(newTab);
   };
 
-  const renderResources = ({}: ApiConfig) => (
-    <Box
-      key={key}
-      sx={{
-        gap: 1,
-        display: "flex",
-        flexDirection: "column",
-        px: 2,
-        mb: 2,
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 2,
-          borderBottom: 1,
-          borderColor: "grey.400",
-        }}
-      >
-        <Typography
-          variant="h6"
-          sx={{ fontWeight: 500, color: "primary.dark" }}
-        >
-          Select Resource
-        </Typography>
-        <Tabs
-          value={selectedResource}
-          onChange={handleChangeResource}
-          aria-label="Resource tabs"
-        >
-          {apiList[selectedAPI].resources.map((resource, index) => (
-            <Tab
-              key={index}
-              label={resource.resourceName}
-              id={`resource-tab-${selectedAPI}-${index}`}
-              aria-controls={`resource-tabpanel-${selectedAPI}-${index}`}
-              sx={{
-                fontSize: 14,
-                fontWeight: 500,
-                textTransform: "none",
-              }}
-            />
-          ))}
-        </Tabs>
-      </Box>
-
-      {apiList[selectedAPI].resources.map((resource, index) => (
-        <Box
-          sx={{
-            mt: 0.5,
-          }}
-          key={index}
-          role="tabpanel"
-          hidden={selectedResource !== index}
-          id={`resource-tabpanel-${selectedAPI}-${index}`}
-          aria-labelledby={`resource-tab-${selectedAPI}-${index}`}
-        >
-          {selectedResource === index && (
-            <>
-              {(resource.resourceMethod === "POST" ||
-                resource.resourceMethod === "PUT") && (
-                <CreateOperationContent
-                  backendUrl={apiList[selectedAPI].baseUrl}
-                  resource={resource}
-                />
-              )}
-              {resource.resourceMethod === "GET" && (
-                <GetResourceContent
-                  resource={resource}
-                  isSearchOperation={
-                    resource.resourceOperation === OperationTypes.SEARCH
-                  }
-                  backendUrl={apiList[selectedAPI].baseUrl}
-                  searchParams={apiList[selectedAPI].searchParams}
-                />
-              )}
-            </>
-          )}
-        </Box>
-      ))}
-    </Box>
-  );
-
   const renderAPIs = () =>
     apiList.map((api: ApiConfig, index: number) => (
       <Tab
@@ -115,6 +31,9 @@ export const APIResourceBody = () => {
           fontWeight: 500,
           textTransform: "none",
           transition: "0.2s",
+          my: 1,
+          mx: 0.5,
+          borderRadius: 1,
           "&.Mui-selected": {
             backgroundColor: "primary.main",
             color: "background.default",
@@ -123,35 +42,121 @@ export const APIResourceBody = () => {
       />
     ));
 
+  const renderResources = () =>
+    apiList[selectedAPI].resources.map((resource, index) => (
+      <Tab
+        key={index}
+        label={resource.resourceName}
+        id={`resource-tab-${selectedAPI}-${index}`}
+        aria-controls={`resource-tabpanel-${selectedAPI}-${index}`}
+        sx={{
+          fontSize: 14,
+          fontWeight: 500,
+          textTransform: "none",
+          transition: "0.2s",
+          my: 1,
+          mx: 0.5,
+          borderRadius: 1,
+          "&.Mui-selected": {
+            backgroundColor: "primary.main",
+            color: "background.default",
+          },
+        }}
+      />
+    ));
+
+  const renderResourceContent = ({}: ApiConfig) =>
+    apiList[selectedAPI].resources.map((resource, index) => (
+      <Box
+        key={index}
+        role="tabpanel"
+        hidden={selectedResource !== index}
+        id={`resource-tabpanel-${selectedAPI}-${index}`}
+        aria-labelledby={`resource-tab-${selectedAPI}-${index}`}
+      >
+        {selectedResource === index && (
+          <>
+            {(resource.resourceMethod === "POST" ||
+              resource.resourceMethod === "PUT") && (
+              <CreateOperationContent
+                backendUrl={apiList[selectedAPI].baseUrl}
+                resource={resource}
+              />
+            )}
+            {resource.resourceMethod === "GET" && (
+              <GetResourceContent
+                resource={resource}
+                isSearchOperation={
+                  resource.resourceOperation === OperationTypes.SEARCH
+                }
+                backendUrl={apiList[selectedAPI].baseUrl}
+                searchParams={apiList[selectedAPI].searchParams}
+              />
+            )}
+          </>
+        )}
+      </Box>
+    ));
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: 1 }}>
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
-          gap: 2,
-          border: 1,
-          borderColor: "primary.main",
-          borderRadius: 2,
-          px: 2,
+          gap: 5,
           mt: 1,
         }}
       >
-        <Typography
-          variant="h6"
-          sx={{ fontWeight: 500, color: "primary.dark" }}
-        >
-          Select API
-        </Typography>
-        <Tabs
-          value={selectedAPI}
-          TabIndicatorProps={{ style: { display: "none" } }}
-          onChange={handleChangeAPI}
-        >
-          {renderAPIs()}
-        </Tabs>
+        <Box>
+          <Typography variant="h6" sx={{ fontWeight: 500, color: "grey.600" }}>
+            Select API
+          </Typography>
+          <Tabs
+            value={selectedAPI}
+            TabIndicatorProps={{ style: { display: "none" } }}
+            onChange={handleChangeAPI}
+            sx={{
+              border: 0.5,
+              borderRadius: 1,
+              borderColor: "grey.400",
+              px: 1,
+            }}
+          >
+            {renderAPIs()}
+          </Tabs>
+        </Box>
+        <Box>
+          <Typography variant="h6" sx={{ fontWeight: 500, color: "grey.600" }}>
+            Select Resource
+          </Typography>
+          <Tabs
+            value={selectedResource}
+            onChange={handleChangeResource}
+            aria-label="Resource tabs"
+            TabIndicatorProps={{ style: { display: "none" } }}
+            sx={{
+              border: 0.5,
+              borderRadius: 1,
+              borderColor: "grey.400",
+              px: 1,
+            }}
+          >
+            {renderResources()}
+          </Tabs>
+        </Box>
       </Box>
-      {renderResources(apiList[selectedAPI])}
+      <Box
+        key={key}
+        sx={{
+          gap: 1,
+          display: "flex",
+          flexDirection: "column",
+          my: 2,
+        }}
+      >
+        {renderResourceContent(apiList[selectedAPI])}
+      </Box>
     </Box>
   );
 };
