@@ -244,8 +244,8 @@ export const GetResourceContent = ({
                   mt: 1,
                   borderRight: 1,
                   borderColor: "grey.400",
-
-                  pr: 1.5,
+                  width: "23%",
+                  pr: 1,
                 }}
               >
                 <Box>
@@ -308,7 +308,10 @@ export const GetResourceContent = ({
                       </>
                     )}
                     {isInputEmpty && (
-                      <Alert severity="error" sx={{ fontSize: 13, my: 1 }}>
+                      <Alert
+                        severity="error"
+                        sx={{ fontSize: 13, my: 1, py: 0.3 }}
+                      >
                         Please fill all input fields.
                       </Alert>
                     )}
@@ -322,7 +325,7 @@ export const GetResourceContent = ({
                   </Box>
                 </Box>
               </Box>
-              <Box sx={{ width: "77%" }}>
+              <Box sx={{ width: "76%" }}>
                 <CodeEditor
                   title="Output"
                   value={data ? JSON.stringify(data, null, 2) : ""}
