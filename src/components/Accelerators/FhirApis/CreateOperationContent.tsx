@@ -216,7 +216,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
               readFile={readFile}
               clearEnabled
               width="100%"
-              height={data ? "500px" : "calc(100vh - 394px)"}
+              height={data ? "500px" : "calc(100vh - 397px)"}
             />
             {data && (
               <CodeEditor
