@@ -64,7 +64,7 @@ export const apiList: ApiConfig[] = [
       {
         paramName: "Offset",
         paramDescription: "The offset of the payload",
-        paramValue: "offset",
+        paramValue: "_offset",
         isRequired: true,
         paramType: "integer",
         paramExample: "5",
@@ -72,7 +72,7 @@ export const apiList: ApiConfig[] = [
       {
         paramName: "Count",
         paramDescription: "The count of the payload",
-        paramValue: "count",
+        paramValue: "_count",
         isRequired: true,
         paramType: "integer",
         paramExample: "10",
@@ -147,7 +147,7 @@ export const apiList: ApiConfig[] = [
       {
         paramName: "Offset",
         paramDescription: "The offset of the payload",
-        paramValue: "offset",
+        paramValue: "_offset",
         isRequired: true,
         paramType: "integer",
         paramExample: "5",
@@ -155,7 +155,7 @@ export const apiList: ApiConfig[] = [
       {
         paramName: "Count",
         paramDescription: "The count of the payload",
-        paramValue: "count",
+        paramValue: "_count",
         isRequired: true,
         paramType: "integer",
         paramExample: "10",
@@ -208,7 +208,7 @@ export const apiList: ApiConfig[] = [
       {
         paramName: "Offset",
         paramDescription: "The offset of the payload",
-        paramValue: "offset",
+        paramValue: "_offset",
         isRequired: true,
         paramType: "integer",
         paramExample: "5",
@@ -216,7 +216,7 @@ export const apiList: ApiConfig[] = [
       {
         paramName: "Count",
         paramDescription: "The count of the payload",
-        paramValue: "count",
+        paramValue: "_count",
         isRequired: true,
         paramType: "integer",
         paramExample: "10",
@@ -277,7 +277,7 @@ export const apiList: ApiConfig[] = [
       {
         paramName: "Offset",
         paramDescription: "The offset of the payload",
-        paramValue: "offset",
+        paramValue: "_offset",
         isRequired: true,
         paramType: "integer",
         paramExample: "5",
@@ -285,7 +285,7 @@ export const apiList: ApiConfig[] = [
       {
         paramName: "Count",
         paramDescription: "The count of the payload",
-        paramValue: "count",
+        paramValue: "_count",
         isRequired: true,
         paramType: "integer",
         paramExample: "10",
@@ -346,7 +346,7 @@ export const apiList: ApiConfig[] = [
       {
         paramName: "Offset",
         paramDescription: "The offset of the payload",
-        paramValue: "offset",
+        paramValue: "_offset",
         isRequired: true,
         paramType: "integer",
         paramExample: "5",
@@ -354,7 +354,7 @@ export const apiList: ApiConfig[] = [
       {
         paramName: "Count",
         paramDescription: "The count of the payload",
-        paramValue: "count",
+        paramValue: "_count",
         isRequired: true,
         paramType: "integer",
         paramExample: "10",
