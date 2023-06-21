@@ -1,14 +1,14 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { Box, Container, Divider } from "@mui/material";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { Box, Container, Divider, Typography } from "@mui/material";
 import {
   ConvertButton,
   SamplesModal,
-  ToggleDarkMode,
   CodeEditor,
   ResponseAlert,
   SamplesButton,
 } from "../Common";
 import { SelectedSampleContext } from "../Contexts/SelectedSampleContext";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
 import apiClient from "../../services/api-client";
 import { BFF_BASE_URL } from "../Configs/Constants";
 
@@ -17,7 +17,6 @@ interface State {
   output: string;
   errorMessage: string;
   isError: boolean;
-  darkMode: boolean;
   isSamplesOpen: boolean;
   isLoading: boolean;
 }
@@ -28,23 +27,17 @@ export const Hl7v2ToFhir = () => {
     output: "",
     errorMessage: "",
     isError: false,
-    darkMode: true,
     isSamplesOpen: false,
     isLoading: false,
   });
 
-  const {
-    input,
-    output,
-    errorMessage,
-    isError,
-    darkMode,
-    isSamplesOpen,
-    isLoading,
-  } = state;
+  const { input, output, errorMessage, isError, isSamplesOpen, isLoading } =
+    state;
 
   const { loadSample, setLoadSample } = useContext(SelectedSampleContext);
   const { selectedLabel, setSelectedLabel } = useContext(SelectedSampleContext);
+
+  const { darkMode } = useContext(DarkModeContext);
 
   const [alertOpen, setAlertOpen] = useState(false);
 
@@ -147,14 +140,6 @@ export const Hl7v2ToFhir = () => {
     }
   };
 
-  const toggleDarkMode = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked } = event.target;
-    setState((prevState) => ({
-      ...prevState,
-      darkMode: checked,
-    }));
-  };
-
   return (
     <Container
       maxWidth={false}
@@ -185,7 +170,9 @@ export const Hl7v2ToFhir = () => {
         <SamplesButton onClick={openSampleModal} />
         <SamplesModal isOpen={isSamplesOpen} onClose={closeSampleModal} />
         <ConvertButton handleSubmit={callBackend} isLoading={isLoading} />
-        <ToggleDarkMode mode={darkMode} toggleMode={toggleDarkMode} />
+        <Box sx={{ visibility: "hidden" }}>
+          <Typography>PLACEHOLDER ABCXY</Typography>
+        </Box>
       </Box>
       <Divider sx={{ mt: 1 }} />
       <Box

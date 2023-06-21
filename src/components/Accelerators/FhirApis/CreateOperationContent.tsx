@@ -9,8 +9,9 @@ import {
   PreLoader,
   CodeEditor,
 } from "../../Common";
-import { SelectedSampleContext } from "../../Contexts/SelectedSampleContext";
 import { ResourceMethodIcon } from "./ResourceMethodIcon";
+import { DarkModeContext } from "../../Contexts/DarkModeContext";
+import { SelectedSampleContext } from "../../Contexts/SelectedSampleContext";
 
 interface Props {
   backendUrl: string;
@@ -18,6 +19,10 @@ interface Props {
 }
 
 export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
+  const { loadSample, setLoadSample, selectedLabel, setSelectedLabel } =
+    useContext(SelectedSampleContext);
+  const { darkMode } = useContext(DarkModeContext);
+
   const [request, setRequest] = useState<string>("");
   const [data, setData] = useState<any>("");
   const [error, setError] = useState<string>("");
@@ -26,29 +31,19 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [successAlert, setSuccessAlert] = useState<boolean>(false);
-
-  const { loadSample, setLoadSample, selectedLabel, setSelectedLabel } =
-    useContext(SelectedSampleContext);
-
   const [selectedAPIName] = useState(
     resource.resourcePath.slice(resource.resourcePath.indexOf("/") + 1)
   );
 
   useEffect(() => {
     if (selectedLabel === "FHIR APIs") {
-      if (loadSample?.apiName === selectedAPIName) {
-        setRequest(loadSample!.data);
-        setLoadSample(null);
-        setSelectedLabel("");
-        setAlertOpen(true);
-        setTimeout(() => {
-          setAlertOpen(false);
-        }, 2000);
-      } else {
-        alert("Incorrect API Data selected.");
-        setLoadSample(null);
-        setSelectedLabel("");
-      }
+      setRequest(loadSample!.data);
+      setLoadSample(null);
+      setSelectedLabel("");
+      setAlertOpen(true);
+      setTimeout(() => {
+        setAlertOpen(false);
+      }, 2000);
     }
   }, [loadSample, selectedLabel]);
 
@@ -62,12 +57,6 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
 
   const handleInputClear = () => {
     setRequest("");
-  };
-
-  const readFile = (fileInput?: string | ArrayBuffer | null) => {
-    if (typeof fileInput === "string") {
-      setRequest(fileInput);
-    }
   };
 
   const openSampleModal = () => {
@@ -84,6 +73,19 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
 
   const closeSuccessAlert = () => {
     setSuccessAlert(false);
+  };
+
+  const handleReset = () => {
+    setData("");
+    setError("");
+    setIsError(false);
+    setRequest("");
+  };
+
+  const readFile = (fileInput?: string | ArrayBuffer | null) => {
+    if (typeof fileInput === "string") {
+      setRequest(fileInput);
+    }
   };
 
   const callBackend = () => {
@@ -108,13 +110,6 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
         setData(err.response);
         setIsLoading(false);
       });
-  };
-
-  const handleReset = () => {
-    setData("");
-    setError("");
-    setIsError(false);
-    setRequest("");
   };
 
   return (
@@ -216,7 +211,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
                 title="Input"
                 value={request}
                 onChange={handleOnChange}
-                darkMode
+                darkMode={darkMode}
                 onClear={handleInputClear}
                 placeholder="Paste data here..."
                 fileType="json"
@@ -240,7 +235,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
                 title="Output"
                 value={JSON.stringify(data, null, 2)}
                 readOnly
-                darkMode
+                darkMode={darkMode}
                 placeholder="Output will be displayed here..."
                 fileType="json"
                 downloadEnabled

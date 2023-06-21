@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { Logo } from "../Logo";
-import { AlertModal, ComponentTitle } from "../Common";
+import { AlertModal, ComponentTitle, ToggleDarkMode } from "../Common";
 import { items, Item } from "../Configs/AcceleratorConfig";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
+import { DarkModeContext } from "../Contexts/DarkModeContext";
 
 export const Header = () => {
+  const { darkMode, setDarkMode } = useContext(DarkModeContext);
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
   const handleResize = (): void => setScreenWidth(window.innerWidth);
@@ -47,6 +49,12 @@ export const Header = () => {
           description={description}
           url={url}
         ></ComponentTitle>
+        <Box sx={{ ml: "auto", mr: 2, display: "flex", alignItems: "center" }}>
+          <ToggleDarkMode
+            mode={darkMode}
+            toggleMode={() => setDarkMode(!darkMode)}
+          />
+        </Box>
       </Box>
     </>
   );

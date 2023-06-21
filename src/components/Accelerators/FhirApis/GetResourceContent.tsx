@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import {
   Alert,
@@ -21,6 +21,7 @@ import { ResourceMethodIcon } from "./ResourceMethodIcon";
 import AddIcon from "@mui/icons-material/Add";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutlined";
 import { SearchParam } from "../../Configs/ApiConfig";
+import { DarkModeContext } from "../../Contexts/DarkModeContext";
 
 interface Props {
   isSearchOperation?: boolean;
@@ -43,6 +44,7 @@ export const GetResourceContent = ({
   const [isAdded, setIsAdded] = useState<boolean>(false);
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { darkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
     if (!isSearchOperation && searchParams.length > 0) {
@@ -266,7 +268,8 @@ export const GetResourceContent = ({
                           value={selectedLabel}
                           onChange={handleLabelChange}
                           size="small"
-                          sx={{ width: "81%", maxWidth: 250 }}
+                          fullWidth
+                          sx={{ maxWidth: 250 }}
                         >
                           {searchParams.map((searchParams) => (
                             <MenuItem
@@ -348,7 +351,7 @@ export const GetResourceContent = ({
                   title="Output"
                   value={data ? JSON.stringify(data, null, 2) : ""}
                   readOnly
-                  darkMode
+                  darkMode={darkMode}
                   placeholder="Output will be displayed here..."
                   fileType="json"
                   downloadEnabled

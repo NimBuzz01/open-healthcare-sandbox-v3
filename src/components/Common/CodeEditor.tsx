@@ -86,7 +86,7 @@ export const CodeEditor = ({
         sx={{
           flexGrow: 1,
           border: 1,
-          borderColor: "grey.400",
+          borderColor: "grey.500",
         }}
       >
         <CodeMirror
