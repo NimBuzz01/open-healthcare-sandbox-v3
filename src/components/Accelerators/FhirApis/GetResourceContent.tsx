@@ -18,7 +18,7 @@ import {
 } from "../../Common";
 import { InputField, Props as InputFieldProps } from "./InputField";
 import { ResourceMethodIcon } from "./ResourceMethodIcon";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import AddIcon from "@mui/icons-material/Add";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutlined";
 import { SearchParam } from "../../Configs/ApiConfig";
 
@@ -244,8 +244,7 @@ export const GetResourceContent = ({
                   mt: 1,
                   borderRight: 1,
                   borderColor: "grey.400",
-                  width: "23%",
-                  pr: 1,
+                  width: "22%",
                 }}
               >
                 <Box>
@@ -257,13 +256,17 @@ export const GetResourceContent = ({
                         Add optional search parameter(s)
                       </Typography>
                       <Box
-                        sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                        }}
                       >
                         <Select
                           value={selectedLabel}
                           onChange={handleLabelChange}
                           size="small"
-                          sx={{ width: 250 }}
+                          sx={{ width: "81%", maxWidth: 250 }}
                         >
                           {searchParams.map((searchParams) => (
                             <MenuItem
@@ -278,9 +281,15 @@ export const GetResourceContent = ({
                         <IconButton
                           onClick={handleAddInputField}
                           disabled={!selectedLabel}
+                          size="small"
+                          sx={{
+                            border: 1,
+                            borderRadius: 2,
+                            borderColor: "grey.400",
+                          }}
                         >
-                          <AddCircleOutlineOutlinedIcon
-                            sx={{ fontSize: 26, color: "secondary.main" }}
+                          <AddIcon
+                            sx={{ fontSize: 24, color: "secondary.main" }}
                           />
                         </IconButton>
                       </Box>
@@ -303,7 +312,12 @@ export const GetResourceContent = ({
                     {!isSearchOperation && (
                       <>
                         <Typography
-                          sx={{ color: "primary.dark", mb: 1, width: 300 }}
+                          sx={{
+                            color: "primary.dark",
+                            mb: 1,
+                            width: 300,
+                            mt: 0.5,
+                          }}
                         >
                           Add required search parameter(s)
                         </Typography>
@@ -317,17 +331,19 @@ export const GetResourceContent = ({
                         Please fill all input fields.
                       </Alert>
                     )}
-                    {inputFields.map((inputField, index) => (
-                      <InputField
-                        key={index}
-                        {...inputField}
-                        fieldIndex={index}
-                      />
-                    ))}
+                    <Box sx={{ mt: 2 }}>
+                      {inputFields.map((inputField, index) => (
+                        <InputField
+                          key={index}
+                          {...inputField}
+                          fieldIndex={index}
+                        />
+                      ))}
+                    </Box>
                   </Box>
                 </Box>
               </Box>
-              <Box sx={{ width: "76%" }}>
+              <Box sx={{ width: "77%" }}>
                 <CodeEditor
                   title="Output"
                   value={data ? JSON.stringify(data, null, 2) : ""}

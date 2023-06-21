@@ -11,7 +11,7 @@ import { withStyles } from "@mui/styles";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutline";
+import CloseIcon from "@mui/icons-material/Close";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 
 export interface Props {
@@ -94,7 +94,7 @@ export const InputField = ({
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 1 }}>
-      <Box sx={{ width: 250, mb: 1 }}>
+      <Box sx={{ maxWidth: 250, mb: 1 }}>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography sx={{ color: "primary.dark" }}>{label}</Typography>
           {isRequired && (
@@ -119,7 +119,7 @@ export const InputField = ({
         ) : (
           <TextField
             size="small"
-            sx={{ width: 250 }}
+            sx={{ maxWidth: 250 }}
             value=""
             onChange={(event) => handleChange("value", event.target.value)}
             {...props}
@@ -170,10 +170,17 @@ export const InputField = ({
         )}
       </Box>
       {isDeleteRequired && (
-        <IconButton onClick={handleDelete} sx={{ mt: 1.5 }}>
-          <RemoveCircleOutlineOutlinedIcon
-            sx={{ fontSize: 26, color: "#f54545" }}
-          />
+        <IconButton
+          onClick={handleDelete}
+          size="small"
+          sx={{
+            border: 1,
+            borderRadius: 2,
+            borderColor: "transparent",
+            mt: 1.5,
+          }}
+        >
+          <CloseIcon sx={{ fontSize: 24, color: "#f54545" }} />
         </IconButton>
       )}
     </Box>

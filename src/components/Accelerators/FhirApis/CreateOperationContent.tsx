@@ -162,7 +162,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           <CommonButton variant="border" label="Reset" onClick={handleReset} />
         </Box>
       </Box>
-      <Divider sx={{ mb: 1 }} />
+      <Divider />
       {isLoading ? (
         <Box
           sx={{
@@ -170,7 +170,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            height: "calc(100vh - 333px)",
+            height: "calc(100vh - 307px)",
           }}
         >
           <PreLoader setActive={isLoading} />
@@ -183,42 +183,59 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           <Box
             sx={{
               display: "flex",
-              alignItems: "center",
-              gap: 2,
+              justifyContent: "space-between",
             }}
           >
-            <SamplesButton onClick={openSampleModal} />
-            <Typography
-              variant="h6"
+            <Box
               sx={{
-                fontStyle: "italic",
-                color: "grey.600",
+                width: "22%",
+                flexGrow: 1,
+                mt: 1,
+                borderRight: 1,
+                borderColor: "grey.400",
+                mr: 2,
+                pr: 2,
               }}
             >
-              Note: Created resources will be available for 2 hours
-            </Typography>
+              <Box sx={{ mt: 1 }}>
+                <SamplesButton onClick={openSampleModal} />
+              </Box>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontStyle: "italic",
+                  color: "grey.600",
+                  mt: 2,
+                }}
+              >
+                Note: Created resources will be available for 2 hours
+              </Typography>
+            </Box>
+            <Box sx={{ width: "77%" }}>
+              <CodeEditor
+                title="Input"
+                value={request}
+                onChange={handleOnChange}
+                darkMode
+                onClear={handleInputClear}
+                placeholder="Paste data here..."
+                fileType="json"
+                uploadEnabled
+                readFile={readFile}
+                clearEnabled
+                width="100%"
+                height={data ? "500px" : "calc(100vh - 346px)"}
+              />
+            </Box>
           </Box>
           <SamplesModal
             isOpen={sampleOpen}
             onClose={closeSampleModal}
             selectedAPI={selectedAPIName}
           />
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
-            <CodeEditor
-              title="Input"
-              value={request}
-              onChange={handleOnChange}
-              darkMode
-              onClear={handleInputClear}
-              placeholder="Paste data here..."
-              fileType="json"
-              uploadEnabled
-              readFile={readFile}
-              clearEnabled
-              width="100%"
-              height={data ? "500px" : "calc(100vh - 398px)"}
-            />
-            {data && (
+          {data && (
+            <>
+              <Divider sx={{ mt: 1 }} />
               <CodeEditor
                 title="Output"
                 value={JSON.stringify(data, null, 2)}
@@ -230,8 +247,8 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
                 width="100%"
                 height="500px"
               />
-            )}
-          </Box>
+            </>
+          )}
         </>
       )}
     </Box>
