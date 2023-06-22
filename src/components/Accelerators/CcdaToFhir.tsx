@@ -86,6 +86,12 @@ export const CcdaToFhir = () => {
           isError: true,
           isLoading: false,
         }));
+        setTimeout(() => {
+          setState((prevState) => ({
+            ...prevState,
+            isError: false,
+          }));
+        }, 2000);
       });
   };
 

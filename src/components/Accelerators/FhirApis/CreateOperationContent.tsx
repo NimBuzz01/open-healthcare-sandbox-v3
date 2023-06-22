@@ -80,6 +80,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
     setError("");
     setIsError(false);
     setRequest("");
+    setSuccessAlert(false);
   };
 
   const readFile = (fileInput?: string | ArrayBuffer | null) => {
@@ -99,9 +100,6 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
         setData(res.data);
         setIsLoading(false);
         setSuccessAlert(true);
-        setTimeout(() => {
-          setSuccessAlert(false);
-        }, 2000);
       })
       .catch((err) => {
         console.log(err);
@@ -109,6 +107,9 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
         setIsError(true);
         setData(err.response);
         setIsLoading(false);
+        setTimeout(() => {
+          setIsError(false);
+        }, 2000);
       });
   };
 
@@ -128,14 +129,6 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           severity="success"
           message="Sample Loaded"
           setIsOpen={closeAlert}
-        />
-      )}
-      {successAlert && (
-        <ResponseAlert
-          isOpen={successAlert}
-          severity="success"
-          message="Request Successful!"
-          setIsOpen={closeSuccessAlert}
         />
       )}
       <Box sx={{ display: "flex", alignItems: "center", gap: 3, mb: 1 }}>
@@ -183,6 +176,8 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           >
             <Box
               sx={{
+                display: "flex",
+                flexDirection: "column",
                 width: "22%",
                 flexGrow: 1,
                 mt: 1,
@@ -205,6 +200,16 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
               >
                 Note: Created resources will be available for 2 hours
               </Typography>
+              {successAlert && (
+                <Typography
+                  variant="h6"
+                  color="secondary"
+                  sx={{ fontStyle: "italic", mt: "auto", mb: 2 }}
+                >
+                  Resource created! Run the search operation to view the created
+                  resource
+                </Typography>
+              )}
             </Box>
             <Box sx={{ width: "77%" }}>
               <CodeEditor

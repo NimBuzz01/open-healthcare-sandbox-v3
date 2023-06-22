@@ -161,6 +161,9 @@ export const GetResourceContent = ({
         setIsError(true);
         setData(err.response);
         setIsLoading(false);
+        setTimeout(() => {
+          setIsError(false);
+        }, 2000);
       });
   };
 
@@ -321,7 +324,6 @@ export const GetResourceContent = ({
                           sx={{
                             color: "primary.dark",
                             mb: 1,
-                            width: 300,
                             mt: 0.5,
                           }}
                         >
