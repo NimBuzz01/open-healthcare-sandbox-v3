@@ -151,15 +151,15 @@ export const GetResourceContent = ({
 
     axios
       .get(url)
-      .then((res) => {
-        setData(res.data);
+      .then((response) => {
+        console.log(response);
+        setData(response.data);
         setIsLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
-        setError(err.message);
+      .catch((error) => {
+        setError(error.message);
         setIsError(true);
-        setData(err.response);
+        setData(error.response.data);
         setIsLoading(false);
         setTimeout(() => {
           setIsError(false);
@@ -175,9 +175,11 @@ export const GetResourceContent = ({
     setData(null);
     setIsError(false);
     setError("");
-    setInputFields([]);
     setSelectedLabel("");
     setIsInputEmpty(false);
+    if (isSearchOperation) {
+      setInputFields([]);
+    }
   };
 
   const closeResponse = () => {
@@ -223,135 +225,136 @@ export const GetResourceContent = ({
       </Box>
       <Divider />
       <Box>
-        {isLoading ? (
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "calc(100vh - 307px)",
-            }}
-          >
-            <PreLoader setActive={isLoading} />
-            <Typography variant="h5" sx={{ mt: 4, color: "primary.dark" }}>
-              Loading ...
-            </Typography>
-          </Box>
-        ) : (
-          <Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 2,
-                  mt: 1,
-                  borderRight: 1,
-                  borderColor: "grey.400",
-                  width: "22%",
-                  pr: 2,
-                }}
-              >
-                <Box>
-                  {isSearchOperation && (
-                    <>
-                      <Typography
-                        sx={{ color: "primary.dark", mb: 1, mt: 0.5 }}
+        <Box>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+                mt: 1,
+                borderRight: 1,
+                borderColor: "grey.400",
+                width: "22%",
+                pr: 2,
+              }}
+            >
+              <Box>
+                {isSearchOperation && (
+                  <>
+                    <Typography sx={{ color: "primary.dark", mb: 1, mt: 0.5 }}>
+                      Add optional search parameter(s)
+                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                        gap: 1,
+                        width: 1,
+                      }}
+                    >
+                      <Select
+                        value={selectedLabel}
+                        onChange={handleLabelChange}
+                        size="small"
+                        fullWidth
+                        sx={{ maxWidth: 250 }}
                       >
-                        Add optional search parameter(s)
-                      </Typography>
-                      <Box
+                        {searchParams.map((searchParams) => (
+                          <MenuItem
+                            key={searchParams.paramName}
+                            value={searchParams.paramName}
+                          >
+                            {searchParams.paramName} -{" "}
+                            {searchParams.paramDescription}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                      <IconButton
+                        onClick={handleAddInputField}
+                        disabled={!selectedLabel}
+                        size="small"
                         sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          flexWrap: "wrap",
-                          gap: 1,
-                          width: 1,
+                          border: 1,
+                          borderRadius: 1,
+                          borderColor: "grey.400",
                         }}
                       >
-                        <Select
-                          value={selectedLabel}
-                          onChange={handleLabelChange}
-                          size="small"
-                          fullWidth
-                          sx={{ maxWidth: 250 }}
-                        >
-                          {searchParams.map((searchParams) => (
-                            <MenuItem
-                              key={searchParams.paramName}
-                              value={searchParams.paramName}
-                            >
-                              {searchParams.paramName} -{" "}
-                              {searchParams.paramDescription}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                        <IconButton
-                          onClick={handleAddInputField}
-                          disabled={!selectedLabel}
-                          size="small"
-                          sx={{
-                            border: 1,
-                            borderRadius: 2,
-                            borderColor: "grey.400",
-                          }}
-                        >
-                          <AddIcon
-                            sx={{ fontSize: 24, color: "secondary.main" }}
-                          />
-                        </IconButton>
-                      </Box>
-                      {isAdded && (
-                        <Alert
-                          severity="warning"
-                          icon={<InfoOutlineIcon sx={{ fontSize: 18 }} />}
-                          sx={{
-                            fontSize: 12,
-                            py: 0.3,
-                            my: 1,
-                          }}
-                        >
-                          Already added!
-                        </Alert>
-                      )}
-                    </>
-                  )}
-                  <Box>
-                    {!isSearchOperation && (
-                      <>
-                        <Typography
-                          sx={{
-                            color: "primary.dark",
-                            mb: 1,
-                            mt: 0.5,
-                          }}
-                        >
-                          Add required search parameter(s)
-                        </Typography>
-                      </>
-                    )}
-                    {isInputEmpty && (
+                        <AddIcon
+                          sx={{ fontSize: 24, color: "secondary.main" }}
+                        />
+                      </IconButton>
+                    </Box>
+                    {isAdded && (
                       <Alert
-                        severity="error"
-                        sx={{ fontSize: 13, my: 1, py: 0.3 }}
+                        severity="warning"
+                        icon={<InfoOutlineIcon sx={{ fontSize: 18 }} />}
+                        sx={{
+                          fontSize: 12,
+                          py: 0.3,
+                          my: 1,
+                        }}
                       >
-                        Please fill all input fields.
+                        Already added!
                       </Alert>
                     )}
-                    <Box sx={{ mt: 2 }}>
-                      {inputFields.map((inputField, index) => (
-                        <InputField
-                          key={index}
-                          {...inputField}
-                          fieldIndex={index}
-                        />
-                      ))}
-                    </Box>
+                  </>
+                )}
+                <Box>
+                  {!isSearchOperation && (
+                    <>
+                      <Typography
+                        sx={{
+                          color: "primary.dark",
+                          mb: 1,
+                          mt: 0.5,
+                        }}
+                      >
+                        Add required search parameter(s)
+                      </Typography>
+                    </>
+                  )}
+                  {isInputEmpty && (
+                    <Alert
+                      severity="error"
+                      sx={{ fontSize: 13, my: 1, py: 0.3 }}
+                    >
+                      Please fill all input fields.
+                    </Alert>
+                  )}
+                  <Box sx={{ mt: 2 }}>
+                    {inputFields.map((inputField, index) => (
+                      <InputField
+                        key={index}
+                        {...inputField}
+                        fieldIndex={index}
+                      />
+                    ))}
                   </Box>
                 </Box>
               </Box>
-              <Box sx={{ width: "77%" }}>
+            </Box>
+            <Box sx={{ width: "77%" }}>
+              {isLoading ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "calc(100vh - 306px)",
+                  }}
+                >
+                  <PreLoader setActive={isLoading} />
+                  <Typography
+                    variant="h5"
+                    sx={{ mt: 4, color: "primary.dark" }}
+                  >
+                    Loading ...
+                  </Typography>
+                </Box>
+              ) : (
                 <CodeEditor
                   title="Output"
                   value={data ? JSON.stringify(data, null, 2) : ""}
@@ -363,10 +366,10 @@ export const GetResourceContent = ({
                   width="100%"
                   height="calc(100vh - 346px)"
                 />
-              </Box>
+              )}
             </Box>
           </Box>
-        )}
+        </Box>
       </Box>
     </Box>
   );

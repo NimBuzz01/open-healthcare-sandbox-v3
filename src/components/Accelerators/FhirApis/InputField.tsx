@@ -177,7 +177,8 @@ export const InputField = ({
             border: 1,
             borderRadius: 2,
             borderColor: "transparent",
-            mt: 1.5,
+            mt: 2.7,
+            alignSelf: "flex-start",
           }}
         >
           <CloseIcon sx={{ fontSize: 24, color: "#f54545" }} />

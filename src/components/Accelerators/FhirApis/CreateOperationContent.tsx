@@ -96,16 +96,15 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
 
     axios
       .post(backendUrl, request)
-      .then((res) => {
-        setData(res.data);
+      .then((response) => {
+        setData(response.data);
         setIsLoading(false);
         setSuccessAlert(true);
       })
-      .catch((err) => {
-        console.log(err);
-        setError(err.message);
+      .catch((error) => {
+        setError(error.message);
         setIsError(true);
-        setData(err.response);
+        setData(error.response);
         setIsLoading(false);
         setTimeout(() => {
           setIsError(false);
@@ -151,67 +150,67 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
         </Box>
       </Box>
       <Divider />
-      {isLoading ? (
+      <>
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "calc(100vh - 307px)",
+            justifyContent: "space-between",
           }}
         >
-          <PreLoader setActive={isLoading} />
-          <Typography variant="h5" sx={{ mt: 4, color: "primary.dark" }}>
-            Loading ...
-          </Typography>
-        </Box>
-      ) : (
-        <>
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-between",
+              flexDirection: "column",
+              width: "22%",
+              flexGrow: 1,
+              mt: 1,
+              borderRight: 1,
+              borderColor: "grey.400",
+              mr: 2,
+              pr: 2,
             }}
           >
-            <Box
+            <Box sx={{ mt: 1 }}>
+              <SamplesButton onClick={openSampleModal} />
+            </Box>
+            <Typography
+              variant="h6"
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                width: "22%",
-                flexGrow: 1,
-                mt: 1,
-                borderRight: 1,
-                borderColor: "grey.400",
-                mr: 2,
-                pr: 2,
+                fontStyle: "italic",
+                color: "grey.600",
+                mt: 2,
               }}
             >
-              <Box sx={{ mt: 1 }}>
-                <SamplesButton onClick={openSampleModal} />
-              </Box>
+              Note: Created resources will be available for 2 hours
+            </Typography>
+            {successAlert && (
               <Typography
                 variant="h6"
+                color="secondary"
+                sx={{ fontStyle: "italic", mt: "auto", mb: 2 }}
+              >
+                Resource created! Run the search operation to view the created
+                resource
+              </Typography>
+            )}
+          </Box>
+          <Box sx={{ width: "77%" }}>
+            {isLoading ? (
+              <Box
                 sx={{
-                  fontStyle: "italic",
-                  color: "grey.600",
-                  mt: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "calc(100vh - 306px)",
                 }}
               >
-                Note: Created resources will be available for 2 hours
-              </Typography>
-              {successAlert && (
-                <Typography
-                  variant="h6"
-                  color="secondary"
-                  sx={{ fontStyle: "italic", mt: "auto", mb: 2 }}
-                >
-                  Resource created! Run the search operation to view the created
-                  resource
+                <PreLoader setActive={isLoading} />
+                <Typography variant="h5" sx={{ mt: 4, color: "primary.dark" }}>
+                  Loading ...
                 </Typography>
-              )}
-            </Box>
-            <Box sx={{ width: "77%" }}>
+              </Box>
+            ) : (
               <CodeEditor
                 title="Input"
                 value={request}
@@ -226,31 +225,31 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
                 width="100%"
                 height={data ? "500px" : "calc(100vh - 346px)"}
               />
-            </Box>
+            )}
           </Box>
-          <SamplesModal
-            isOpen={sampleOpen}
-            onClose={closeSampleModal}
-            selectedAPI={selectedAPIName}
-          />
-          {data && (
-            <>
-              <Divider sx={{ mt: 1 }} />
-              <CodeEditor
-                title="Output"
-                value={JSON.stringify(data, null, 2)}
-                readOnly
-                darkMode={darkMode}
-                placeholder="Output will be displayed here..."
-                fileType="json"
-                downloadEnabled
-                width="100%"
-                height="500px"
-              />
-            </>
-          )}
-        </>
-      )}
+        </Box>
+        <SamplesModal
+          isOpen={sampleOpen}
+          onClose={closeSampleModal}
+          selectedAPI={selectedAPIName}
+        />
+        {data && (
+          <>
+            <Divider sx={{ mt: 1 }} />
+            <CodeEditor
+              title="Output"
+              value={JSON.stringify(data, null, 2)}
+              readOnly
+              darkMode={darkMode}
+              placeholder="Output will be displayed here..."
+              fileType="json"
+              downloadEnabled
+              width="100%"
+              height="500px"
+            />
+          </>
+        )}
+      </>
     </Box>
   );
 };
