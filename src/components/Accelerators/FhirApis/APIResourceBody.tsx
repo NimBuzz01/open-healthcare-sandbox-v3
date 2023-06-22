@@ -112,8 +112,16 @@ export const APIResourceBody = () => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: 1 }}>
-      <Box sx={{ display: "flex", alignItems: "center", gap: 5, mt: 1 }}>
-        <Box>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          mt: 1,
+          gap: 1,
+          flexWrap: "wrap",
+        }}
+      >
+        <Box sx={{ mr: 4 }}>
           <Typography variant="h6" sx={labelStyles}>
             Select API
           </Typography>

@@ -247,6 +247,7 @@ export const GetResourceContent = ({
                   borderRight: 1,
                   borderColor: "grey.400",
                   width: "22%",
+                  pr: 2,
                 }}
               >
                 <Box>
@@ -261,7 +262,9 @@ export const GetResourceContent = ({
                         sx={{
                           display: "flex",
                           alignItems: "center",
+                          flexWrap: "wrap",
                           gap: 1,
+                          width: 1,
                         }}
                       >
                         <Select
