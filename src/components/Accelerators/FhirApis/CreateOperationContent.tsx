@@ -4,7 +4,6 @@ import { Box, Divider, Typography } from "@mui/material";
 import {
   CommonButton,
   ResponseAlert,
-  SamplesButton,
   SamplesModal,
   PreLoader,
   CodeEditor,
@@ -12,6 +11,7 @@ import {
 import { ResourceMethodIcon } from "./ResourceMethodIcon";
 import { DarkModeContext } from "../../Contexts/DarkModeContext";
 import { SelectedSampleContext } from "../../Contexts/SelectedSampleContext";
+import { HeadersTab } from "./HeadersTab";
 
 interface Props {
   backendUrl: string;
@@ -23,11 +23,10 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
     useContext(SelectedSampleContext);
   const { darkMode } = useContext(DarkModeContext);
 
-  const [request, setRequest] = useState<string>("");
+  const [postRequest, setPostRequest] = useState<string>("");
   const [data, setData] = useState<any>("");
   const [error, setError] = useState<string>("");
   const [isError, setIsError] = useState<boolean>(false);
-  const [sampleOpen, setSampleOpen] = useState<boolean>(false);
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [successAlert, setSuccessAlert] = useState<boolean>(false);
@@ -35,9 +34,21 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
     resource.resourcePath.slice(resource.resourcePath.indexOf("/") + 1)
   );
 
+  const [response, setResponse] = useState<any>({
+    statusCode: null,
+    statusText: "",
+    resUrl: "",
+    contentType: "",
+  });
+  const [request, setRequest] = useState<any>({
+    reqUrl: "",
+    contentType: "",
+    method: "",
+  });
+
   useEffect(() => {
     if (selectedLabel === "FHIR APIs") {
-      setRequest(loadSample!.data);
+      setPostRequest(loadSample!.data);
       setLoadSample(null);
       setSelectedLabel("");
       setAlertOpen(true);
@@ -52,40 +63,28 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   };
 
   const handleOnChange = useCallback((value: string) => {
-    setRequest(value);
+    setPostRequest(value);
   }, []);
 
   const handleInputClear = () => {
-    setRequest("");
-  };
-
-  const openSampleModal = () => {
-    setSampleOpen(true);
-  };
-
-  const closeSampleModal = () => {
-    setSampleOpen(false);
+    setPostRequest("");
   };
 
   const closeResponse = () => {
     setIsError(false);
   };
 
-  const closeSuccessAlert = () => {
-    setSuccessAlert(false);
-  };
-
   const handleReset = () => {
     setData("");
     setError("");
     setIsError(false);
-    setRequest("");
+    setPostRequest("");
     setSuccessAlert(false);
   };
 
   const readFile = (fileInput?: string | ArrayBuffer | null) => {
     if (typeof fileInput === "string") {
-      setRequest(fileInput);
+      setPostRequest(fileInput);
     }
   };
 
@@ -94,17 +93,35 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
     setData("");
     setError("");
 
+    setRequest({
+      reqUrl: backendUrl,
+      contentType: "application/fhir+json;charset=utf-8",
+      method: "POST",
+    });
+
     axios
-      .post(backendUrl, request)
-      .then((response) => {
-        setData(response.data);
+      .post(backendUrl, postRequest)
+      .then((res) => {
+        setData(res.data);
         setIsLoading(false);
         setSuccessAlert(true);
+        setResponse({
+          statusCode: res.status,
+          statusText: res.statusText,
+          resUrl: res.config.url,
+          contentType: res.headers["content-type"],
+        });
       })
       .catch((error) => {
         setError(error.message);
         setIsError(true);
         setData(error.response);
+        setResponse({
+          statusCode: error.response.status,
+          statusText: error.response.statusText,
+          resUrl: error.config.url,
+          contentType: error.response.headers["content-type"],
+        });
         setIsLoading(false);
         setTimeout(() => {
           setIsError(false);
@@ -161,7 +178,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              width: "22%",
+              width: "23%",
               flexGrow: 1,
               mt: 1,
               borderRight: 1,
@@ -171,7 +188,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
             }}
           >
             <Box sx={{ mt: 1 }}>
-              <SamplesButton onClick={openSampleModal} />
+              <SamplesModal selectedAPI={selectedAPIName} />
             </Box>
             <Typography
               variant="h6"
@@ -194,7 +211,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
               </Typography>
             )}
           </Box>
-          <Box sx={{ width: "77%" }}>
+          <Box sx={{ width: "76%" }}>
             {isLoading ? (
               <Box
                 sx={{
@@ -211,28 +228,36 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
                 </Typography>
               </Box>
             ) : (
-              <CodeEditor
-                title="Input"
-                value={request}
-                onChange={handleOnChange}
-                darkMode={darkMode}
-                onClear={handleInputClear}
-                placeholder="Paste data here..."
-                fileType="json"
-                uploadEnabled
-                readFile={readFile}
-                clearEnabled
-                width="100%"
-                height={data ? "500px" : "calc(100vh - 346px)"}
-              />
+              <Box sx={{ display: "flex", flexDirection: "column" }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    mb: 0.5,
+                    pb: 5.5,
+                  }}
+                >
+                  <HeadersTab request={request} response={response} />
+                </Box>
+                <Divider />
+                <CodeEditor
+                  title="Input"
+                  value={postRequest}
+                  onChange={handleOnChange}
+                  darkMode={darkMode}
+                  onClear={handleInputClear}
+                  placeholder="Paste data here..."
+                  fileType="json"
+                  uploadEnabled
+                  readFile={readFile}
+                  clearEnabled
+                  width="100%"
+                  height={data ? "500px" : "calc(100vh - 393px)"}
+                />
+              </Box>
             )}
           </Box>
         </Box>
-        <SamplesModal
-          isOpen={sampleOpen}
-          onClose={closeSampleModal}
-          selectedAPI={selectedAPIName}
-        />
         {data && (
           <>
             <Divider sx={{ mt: 1 }} />

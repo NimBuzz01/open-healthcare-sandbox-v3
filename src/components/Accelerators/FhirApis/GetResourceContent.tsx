@@ -22,6 +22,7 @@ import AddIcon from "@mui/icons-material/Add";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutlined";
 import { SearchParam } from "../../Configs/ApiConfig";
 import { DarkModeContext } from "../../Contexts/DarkModeContext";
+import { HeadersTab } from "./HeadersTab";
 
 interface Props {
   isSearchOperation?: boolean;
@@ -62,6 +63,18 @@ export const GetResourceContent = ({
       setInputFields([initialInputField]);
     }
   }, [isSearchOperation, searchParams]);
+
+  const [response, setResponse] = useState<any>({
+    statusCode: null,
+    statusText: "",
+    resUrl: "",
+    contentType: "",
+  });
+  const [request, setRequest] = useState<any>({
+    reqUrl: "",
+    contentType: "",
+    method: "",
+  });
 
   const handleAddInputField = () => {
     const selectedLabelObject = searchParams.find(
@@ -149,18 +162,35 @@ export const GetResourceContent = ({
     setData(null);
     setError("");
 
+    setRequest({
+      reqUrl: url,
+      contentType: "application/fhir+json;charset=utf-8",
+      method: "GET",
+    });
+
     axios
       .get(url)
-      .then((response) => {
-        console.log(response);
-        setData(response.data);
+      .then((res) => {
+        setData(res.data);
         setIsLoading(false);
+        setResponse({
+          statusCode: res.status,
+          statusText: res.statusText,
+          resUrl: url,
+          contentType: res.headers["content-type"],
+        });
       })
       .catch((error) => {
         setError(error.message);
         setIsError(true);
         setData(error.response.data);
         setIsLoading(false);
+        setResponse({
+          statusCode: error.response.status,
+          statusText: error.response.statusText,
+          resUrl: url,
+          contentType: error.response.headers["content-type"],
+        });
         setTimeout(() => {
           setIsError(false);
         }, 2000);
@@ -225,136 +255,139 @@ export const GetResourceContent = ({
       </Box>
       <Divider />
       <Box>
-        <Box>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 2,
-                mt: 1,
-                borderRight: 1,
-                borderColor: "grey.400",
-                width: "22%",
-                pr: 2,
-              }}
-            >
-              <Box>
-                {isSearchOperation && (
-                  <>
-                    <Typography sx={{ color: "primary.dark", mb: 1, mt: 0.5 }}>
-                      Add optional search parameter(s)
-                    </Typography>
-                    <Box
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              mt: 1,
+              borderRight: 1,
+              borderColor: "grey.400",
+              width: "23%",
+              pr: 2,
+            }}
+          >
+            <Box>
+              {isSearchOperation && (
+                <>
+                  <Typography sx={{ color: "primary.dark", mb: 1, mt: 0.5 }}>
+                    Add optional search parameter(s)
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                      gap: 1,
+                      width: 1,
+                    }}
+                  >
+                    <Select
+                      value={selectedLabel}
+                      onChange={handleLabelChange}
+                      size="small"
+                      fullWidth
+                      sx={{ maxWidth: 250 }}
+                    >
+                      {searchParams.map((searchParams) => (
+                        <MenuItem
+                          key={searchParams.paramName}
+                          value={searchParams.paramName}
+                        >
+                          {searchParams.paramName} -{" "}
+                          {searchParams.paramDescription}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    <IconButton
+                      onClick={handleAddInputField}
+                      disabled={!selectedLabel}
+                      size="small"
                       sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        flexWrap: "wrap",
-                        gap: 1,
-                        width: 1,
+                        border: 1,
+                        borderRadius: 1,
+                        borderColor: "grey.400",
                       }}
                     >
-                      <Select
-                        value={selectedLabel}
-                        onChange={handleLabelChange}
-                        size="small"
-                        fullWidth
-                        sx={{ maxWidth: 250 }}
-                      >
-                        {searchParams.map((searchParams) => (
-                          <MenuItem
-                            key={searchParams.paramName}
-                            value={searchParams.paramName}
-                          >
-                            {searchParams.paramName} -{" "}
-                            {searchParams.paramDescription}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                      <IconButton
-                        onClick={handleAddInputField}
-                        disabled={!selectedLabel}
-                        size="small"
-                        sx={{
-                          border: 1,
-                          borderRadius: 1,
-                          borderColor: "grey.400",
-                        }}
-                      >
-                        <AddIcon
-                          sx={{ fontSize: 24, color: "secondary.main" }}
-                        />
-                      </IconButton>
-                    </Box>
-                    {isAdded && (
-                      <Alert
-                        severity="warning"
-                        icon={<InfoOutlineIcon sx={{ fontSize: 18 }} />}
-                        sx={{
-                          fontSize: 12,
-                          py: 0.3,
-                          my: 1,
-                        }}
-                      >
-                        Already added!
-                      </Alert>
-                    )}
-                  </>
-                )}
-                <Box>
-                  {!isSearchOperation && (
-                    <>
-                      <Typography
-                        sx={{
-                          color: "primary.dark",
-                          mb: 1,
-                          mt: 0.5,
-                        }}
-                      >
-                        Add required search parameter(s)
-                      </Typography>
-                    </>
-                  )}
-                  {isInputEmpty && (
+                      <AddIcon sx={{ fontSize: 24, color: "secondary.main" }} />
+                    </IconButton>
+                  </Box>
+                  {isAdded && (
                     <Alert
-                      severity="error"
-                      sx={{ fontSize: 13, my: 1, py: 0.3 }}
+                      severity="warning"
+                      icon={<InfoOutlineIcon sx={{ fontSize: 18 }} />}
+                      sx={{
+                        fontSize: 12,
+                        py: 0.3,
+                        my: 1,
+                      }}
                     >
-                      Please fill all input fields.
+                      Already added!
                     </Alert>
                   )}
-                  <Box sx={{ mt: 2 }}>
-                    {inputFields.map((inputField, index) => (
-                      <InputField
-                        key={index}
-                        {...inputField}
-                        fieldIndex={index}
-                      />
-                    ))}
-                  </Box>
+                </>
+              )}
+              <Box>
+                {!isSearchOperation && (
+                  <>
+                    <Typography
+                      sx={{
+                        color: "primary.dark",
+                        mb: 1,
+                        mt: 0.5,
+                      }}
+                    >
+                      Add required search parameter(s)
+                    </Typography>
+                  </>
+                )}
+                {isInputEmpty && (
+                  <Alert severity="error" sx={{ fontSize: 13, my: 1, py: 0.3 }}>
+                    Please fill all input fields.
+                  </Alert>
+                )}
+                <Box sx={{ mt: 2 }}>
+                  {inputFields.map((inputField, index) => (
+                    <InputField
+                      key={index}
+                      {...inputField}
+                      fieldIndex={index}
+                    />
+                  ))}
                 </Box>
               </Box>
             </Box>
-            <Box sx={{ width: "77%" }}>
-              {isLoading ? (
+          </Box>
+          <Box sx={{ width: "76%" }}>
+            {isLoading ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "calc(100vh - 306px)",
+                }}
+              >
+                <PreLoader setActive={isLoading} />
+                <Typography variant="h5" sx={{ mt: 4, color: "primary.dark" }}>
+                  Loading ...
+                </Typography>
+              </Box>
+            ) : (
+              <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <Box
                   sx={{
                     display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "calc(100vh - 306px)",
+                    justifyContent: "flex-end",
+                    mb: 0.5,
+                    pb: 5.5,
                   }}
                 >
-                  <PreLoader setActive={isLoading} />
-                  <Typography
-                    variant="h5"
-                    sx={{ mt: 4, color: "primary.dark" }}
-                  >
-                    Loading ...
-                  </Typography>
+                  <HeadersTab request={request} response={response} />
                 </Box>
-              ) : (
+                <Divider />
                 <CodeEditor
                   title="Output"
                   value={data ? JSON.stringify(data, null, 2) : ""}
@@ -364,10 +397,10 @@ export const GetResourceContent = ({
                   fileType="json"
                   downloadEnabled
                   width="100%"
-                  height="calc(100vh - 346px)"
+                  height="calc(100vh - 393px)"
                 />
-              )}
-            </Box>
+              </Box>
+            )}
           </Box>
         </Box>
       </Box>

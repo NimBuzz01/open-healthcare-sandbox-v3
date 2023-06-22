@@ -5,7 +5,6 @@ import {
   SamplesModal,
   CodeEditor,
   ResponseAlert,
-  SamplesButton,
 } from "../Common";
 import { DarkModeContext } from "../Contexts/DarkModeContext";
 import { SelectedSampleContext } from "../Contexts/SelectedSampleContext";
@@ -17,7 +16,6 @@ interface State {
   output: string;
   errorMessage: string;
   isError: boolean;
-  isSamplesOpen: boolean;
   isLoading: boolean;
 }
 
@@ -27,12 +25,10 @@ export const CcdaToFhir = () => {
     output: "",
     errorMessage: "",
     isError: false,
-    isSamplesOpen: false,
     isLoading: false,
   });
 
-  const { input, output, errorMessage, isError, isSamplesOpen, isLoading } =
-    state;
+  const { input, output, errorMessage, isError, isLoading } = state;
 
   const { loadSample, setLoadSample } = useContext(SelectedSampleContext);
   const { selectedLabel, setSelectedLabel } = useContext(SelectedSampleContext);
@@ -93,20 +89,6 @@ export const CcdaToFhir = () => {
           }));
         }, 2000);
       });
-  };
-
-  const openSampleModal = () => {
-    setState((prevState) => ({
-      ...prevState,
-      isSamplesOpen: true,
-    }));
-  };
-
-  const closeSampleModal = () => {
-    setState((prevState) => ({
-      ...prevState,
-      isSamplesOpen: false,
-    }));
   };
 
   const closeResponse = () => {
@@ -173,8 +155,7 @@ export const CcdaToFhir = () => {
           justifyContent: "space-between",
         }}
       >
-        <SamplesButton onClick={openSampleModal} />
-        <SamplesModal isOpen={isSamplesOpen} onClose={closeSampleModal} />
+        <SamplesModal />
         <ConvertButton handleSubmit={callBackend} isLoading={isLoading} />
         <Box sx={{ visibility: "hidden" }}>
           <Typography>PLACEHOLDER ABCXY</Typography>

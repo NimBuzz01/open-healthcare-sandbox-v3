@@ -18,20 +18,21 @@ import { CommonButton } from "./CommonButton";
 import { Sample } from "../Configs/AcceleratorConfig";
 import { items } from "../Configs/AcceleratorConfig";
 import CloseIcon from "@mui/icons-material/Close";
+import { SamplesButton } from "./SamplesButton";
 
 interface SamplesModalProps {
-  isOpen: boolean;
-  onClose: () => void;
   selectedAPI?: string;
 }
 
-export const SamplesModal = ({
-  isOpen,
-  onClose,
-  selectedAPI,
-}: SamplesModalProps) => {
+export const SamplesModal = ({ selectedAPI }: SamplesModalProps) => {
   const { loadSample, setLoadSample } = useContext(SelectedSampleContext);
   const { selectedLabel, setSelectedLabel } = useContext(SelectedSampleContext);
+
+  const [open, setOpen] = useState(false);
+
+  const toggleOpen = (isOpen: boolean) => () => {
+    setOpen(isOpen);
+  };
 
   const location = useLocation();
   const currentItem = items.find((item) => item.path === location.pathname);
@@ -62,104 +63,107 @@ export const SamplesModal = ({
     if (selectedSample) {
       setLoadSample(selectedSample);
       setSelectedLabel(label);
-      onClose();
+      setOpen(false);
     }
   };
 
   return (
-    <Modal open={isOpen} onClose={onClose}>
-      <Container
-        maxWidth="xl"
-        sx={{
-          bgcolor: "background.default",
-          height: "90vh",
-          mt: 5,
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <Box
+    <>
+      <SamplesButton onClick={toggleOpen(true)} />
+      <Modal open={open} onClose={toggleOpen(false)}>
+        <Container
+          maxWidth="xl"
           sx={{
+            bgcolor: "background.default",
+            height: "90vh",
+            mt: 5,
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            pt: 1,
+            flexDirection: "column",
           }}
         >
-          <Typography
-            variant="h4"
-            sx={{ fontWeight: 500, color: "primary.dark" }}
-          >
-            {label} Samples
-          </Typography>
-          <IconButton onClick={onClose} sx={{ color: "grey.500" }}>
-            <CloseIcon fontSize="large" />
-          </IconButton>
-        </Box>
-        <Divider />
-        <Box sx={{ flexGrow: 1, display: "flex" }}>
           <Box
             sx={{
-              width: "20%",
-              px: 1,
-              borderRight: 1,
-              borderColor: "grey.400",
               display: "flex",
-              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+              pt: 1,
             }}
           >
-            <List component="nav" sx={{ mb: "auto" }}>
-              {filteredData.map((sample: Sample) => (
-                <ListItem
-                  key={sample.name}
-                  sx={{ p: 0, borderBottom: 1, borderColor: "grey.300" }}
-                >
-                  <ListItemButton
-                    selected={selectedSample === sample}
-                    onClick={() => handleSampleClick(sample)}
-                  >
-                    <ListItemText primary={sample.name} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
+            <Typography
+              variant="h4"
+              sx={{ fontWeight: 500, color: "primary.dark" }}
+            >
+              {label} Samples
+            </Typography>
+            <IconButton onClick={toggleOpen(false)} sx={{ color: "grey.500" }}>
+              <CloseIcon fontSize="large" />
+            </IconButton>
+          </Box>
+          <Divider />
+          <Box sx={{ flexGrow: 1, display: "flex" }}>
             <Box
               sx={{
+                width: "20%",
+                px: 1,
+                borderRight: 1,
+                borderColor: "grey.400",
                 display: "flex",
-                justifyContent: "center",
-                mb: 2,
+                flexDirection: "column",
               }}
             >
-              <CommonButton
-                variant="background"
-                label="Load Sample"
-                onClick={handleSampleLoad}
-              />
+              <List component="nav" sx={{ mb: "auto" }}>
+                {filteredData.map((sample: Sample) => (
+                  <ListItem
+                    key={sample.name}
+                    sx={{ p: 0, borderBottom: 1, borderColor: "grey.300" }}
+                  >
+                    <ListItemButton
+                      selected={selectedSample === sample}
+                      onClick={() => handleSampleClick(sample)}
+                    >
+                      <ListItemText primary={sample.name} />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  mb: 3,
+                }}
+              >
+                <CommonButton
+                  variant="background"
+                  label="Load Sample"
+                  onClick={handleSampleLoad}
+                />
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                width: "80%",
+                display: "flex",
+                mb: 2,
+                justifyContent: "center",
+              }}
+            >
+              {selectedSample && (
+                <CodeEditor
+                  title={selectedSample.name}
+                  value={selectedSample.data}
+                  readOnly
+                  darkMode
+                  placeholder="FHIR Resource will be displayed here..."
+                  downloadEnabled
+                  width="98%"
+                  height="calc(90vh - 110px)"
+                />
+              )}
             </Box>
           </Box>
-          <Box
-            sx={{
-              width: "80%",
-              display: "flex",
-              mb: 2,
-              justifyContent: "center",
-            }}
-          >
-            {selectedSample && (
-              <CodeEditor
-                title={selectedSample.name}
-                value={selectedSample.data}
-                readOnly
-                darkMode
-                placeholder="FHIR Resource will be displayed here..."
-                downloadEnabled
-                width="98%"
-                height="calc(90vh - 110px)"
-              />
-            )}
-          </Box>
-        </Box>
-      </Container>
-    </Modal>
+        </Container>
+      </Modal>
+    </>
   );
 };
