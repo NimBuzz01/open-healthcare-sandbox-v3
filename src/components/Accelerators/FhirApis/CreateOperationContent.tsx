@@ -233,8 +233,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
                   sx={{
                     display: "flex",
                     justifyContent: "flex-end",
-                    mb: 0.5,
-                    pb: 5.5,
+                    my: 0.5,
                   }}
                 >
                   <HeadersTab request={request} response={response} />
@@ -252,7 +251,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
                   readFile={readFile}
                   clearEnabled
                   width="100%"
-                  height={data ? "500px" : "calc(100vh - 393px)"}
+                  height={data ? "500px" : "calc(100vh - 389px)"}
                 />
               </Box>
             )}

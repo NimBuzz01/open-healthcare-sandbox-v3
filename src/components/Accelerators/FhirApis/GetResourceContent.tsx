@@ -381,8 +381,7 @@ export const GetResourceContent = ({
                   sx={{
                     display: "flex",
                     justifyContent: "flex-end",
-                    mb: 0.5,
-                    pb: 5.5,
+                    my: 0.5,
                   }}
                 >
                   <HeadersTab request={request} response={response} />
@@ -397,7 +396,7 @@ export const GetResourceContent = ({
                   fileType="json"
                   downloadEnabled
                   width="100%"
-                  height="calc(100vh - 393px)"
+                  height="calc(100vh - 389px)"
                 />
               </Box>
             )}
