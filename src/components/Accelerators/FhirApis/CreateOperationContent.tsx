@@ -93,6 +93,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
     setIsLoading(true);
     setData("");
     setError("");
+    setSuccessAlert(false);
 
     setRequest({
       reqUrl: backendUrl,

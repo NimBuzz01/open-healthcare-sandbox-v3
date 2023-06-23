@@ -12,14 +12,6 @@ export const FhirData: Sample[] = [
     apiName: "Patient",
     data: `{
       "resourceType":"Patient",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2020-01-21T05:30:29.575+00:00",
-         "source":"#q6YX9FUQ7Kn5auYe",
-         "profile":[
-            "http://hl7.org/fhir/StructureDefinition/Patient"
-         ]
-      },
       "text":{
          "status":"generated",
          "div":"<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><div class=\\"hapiHeaderText\\">Bob <b>ALEXANDER </b></div><table class=\\"hapiPropertyTable\\"><tbody><tr><td>Identifier</td><td>107b71d1-e235-4d52-834c-d3562f15e175</td></tr></tbody></table></div>"
@@ -52,12 +44,6 @@ export const FhirData: Sample[] = [
     apiName: "Patient",
     data: `{
       "resourceType":"Patient",
-      "id":"592344",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2020-01-24T07:21:02.030+00:00",
-         "source":"#RzMUuS5IgBRmiAfz"
-      },
       "text":{
          "status":"generated",
          "div":"<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><div class=\\"hapiHeaderText\\">taro2 <b>HISTORY </b></div><table class=\\"hapiPropertyTable\\"><tbody><tr><td>Identifier</td><td>888002</td></tr><tr><td>Address</td><td><span>3300 Washtenaw </span><br/><span>Ann Harbor </span><span>MI </span><span>USA </span></td></tr><tr><td>Date of birth</td><td><span>25 July 1988</span></td></tr></tbody></table></div>"
@@ -106,12 +92,6 @@ export const FhirData: Sample[] = [
     apiName: "Patient",
     data: `{
       "resourceType":"Patient",
-      "id":"592342",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2020-01-24T06:22:31.273+00:00",
-         "source":"#m5GzTrUh4OQlZxn1"
-      },
       "text":{
          "status":"generated",
          "div":"<div xmlns=\\"http://www.w3.org/1999/xhtml\\">\\n\\t\\t\\t<p>ID: test0114</p>\\n\\t\\t\\t<p>Name: Hanako Yamada</p>\\n\\t\\t\\t<p>Telephone: 06-1234-5678</p>\\n\\t\\t\\t<p>Gender: female</p>\\n\\t\\t\\t<p>BirthDate: 1981-01-23</p>\\n\\t\\t</div>"
@@ -144,12 +124,6 @@ export const FhirData: Sample[] = [
     apiName: "Encounter",
     data: `{
       "resourceType":"Encounter",
-      "id":"25285",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2019-09-24T09:07:37.859+00:00",
-         "source":"#15028800c0691be6"
-      },
       "identifier":[
          {
             "use":"official",
@@ -287,48 +261,136 @@ export const FhirData: Sample[] = [
     apiName: "Encounter",
     data: `{
       "resourceType":"Encounter",
-      "id":"42039",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2019-10-09T22:44:04.005+00:00",
-         "source":"#bde55e27f5134889"
-      },
-      "text":{
-         "status":"generated",
-         "div":"<div xmlns=\\"http://www.w3.org/1999/xhtml\\">Sep 28th 2019 for headache</div>"
-      },
-      "status":"finished",
-      "type":[
+      "identifier":[
          {
-            "text":"OutPatient"
+            "use":"official",
+            "type":{
+               "coding":[
+                  {
+                     "system":"http://terminology.hl7.org/CodeSystem/v2-0203",
+                     "code":"MR",
+                     "display":"Medical record number"
+                  }
+               ]
+            },
+            "value":"12345777"
          }
       ],
+      "status":"finished",
+      "class":{
+         "code":"inpatient"
+      },
+      "priority":{
+         "coding":[
+            {
+               "system":"http://terminology.hl7.org/CodeSystem/v3-ActPriority",
+               "code":"NAVA",
+               "display":"Emergency"
+            }
+         ]
+      },
       "subject":{
-         "reference":"Patient/42024"
+         "reference":"Patient/24739",
+         "display":"Roy Tina A"
       },
       "participant":[
          {
             "individual":{
-               "reference":"Practitioner/30166",
-               "display":"Dr Annette Jones"
+               "reference":"Practitioner/1472"
+            }
+         },
+         {
+            "individual":{
+               "reference":"Practitioner/1473"
+            }
+         },
+         {
+            "individual":{
+               "reference":"Practitioner/1474"
+            }
+         },
+         {
+            "individual":{
+               "reference":"Practitioner/1475"
             }
          }
       ],
       "period":{
-         "start":"2019-09-28T22:44:03.943Z"
+         "start":"2010-11-11T11:12:14.456+07:00",
+         "end":"2010-11-11T11:12:14.456+07:00"
       },
-      "diagnosis":[
+      "reasonCode":[
          {
-            "condition":{
-               "reference":"Condition/42028"
-            }
+            "coding":[
+               {
+                  "system":"http://snomed.info/sct",
+                  "code":"109006",
+                  "display":"Anxiety disorder of childhood OR adolescence (disorder)"
+               }
+            ]
+         }
+      ],
+      "hospitalization":{
+         "preAdmissionIdentifier":{
+            "use":"official",
+            "value":"1234"
          },
+         "admitSource":{
+            "coding":[
+               {
+                  "system":"http://terminology.hl7.org/CodeSystem/admit-source",
+                  "code":"hosp-trans",
+                  "display":"Transferred from other hospital"
+               }
+            ]
+         },
+         "reAdmission":{
+            "coding":[
+               {
+                  "userSelected":true
+               }
+            ]
+         },
+         "dietPreference":[
+            {
+               "coding":[
+                  {
+                     "system":"http://terminology.hl7.org/CodeSystem/diet",
+                     "code":"vegetarian",
+                     "display":"Vegetarian"
+                  }
+               ]
+            }
+         ],
+         "dischargeDisposition":{
+            "coding":[
+               {
+                  "system":"http://terminology.hl7.org/CodeSystem/discharge-disposition",
+                  "code":"aadvice",
+                  "display":"Left against advice"
+               }
+            ]
+         }
+      },
+      "location":[
          {
-            "condition":{
-               "reference":"Condition/42029"
+            "location":{
+               "reference":"Location/25313"
+            },
+            "physicalType":{
+               "coding":[
+                  {
+                     "system":"http://terminology.hl7.org/CodeSystem/location-physical-type",
+                     "code":"wi",
+                     "display":"Wing"
+                  }
+               ]
             }
          }
-      ]
+      ],
+      "serviceProvider":{
+         "reference":"Organization/185"
+      }
    }`,
   },
   {
@@ -336,48 +398,136 @@ export const FhirData: Sample[] = [
     apiName: "Encounter",
     data: `{
       "resourceType":"Encounter",
-      "id":"42038",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2019-10-09T22:44:04.005+00:00",
-         "source":"#bde55e27f5134889"
-      },
-      "text":{
-         "status":"generated",
-         "div":"<div xmlns=\\"http://www.w3.org/1999/xhtml\\">Sep 21st 2019 for headache</div>"
-      },
-      "status":"finished",
-      "type":[
+      "identifier":[
          {
-            "text":"GP"
+            "use":"official",
+            "type":{
+               "coding":[
+                  {
+                     "system":"http://terminology.hl7.org/CodeSystem/v2-0203",
+                     "code":"MR",
+                     "display":"Medical record number"
+                  }
+               ]
+            },
+            "value":"12345777"
          }
       ],
+      "status":"finished",
+      "class":{
+         "code":"inpatient"
+      },
+      "priority":{
+         "coding":[
+            {
+               "system":"http://terminology.hl7.org/CodeSystem/v3-ActPriority",
+               "code":"NAVA",
+               "display":"Emergency"
+            }
+         ]
+      },
       "subject":{
-         "reference":"Patient/42024"
+         "reference":"Patient/24739",
+         "display":"Roy Tina A"
       },
       "participant":[
          {
             "individual":{
-               "reference":"Practitioner/30166",
-               "display":"Dr Annette Jones"
+               "reference":"Practitioner/1472"
+            }
+         },
+         {
+            "individual":{
+               "reference":"Practitioner/1473"
+            }
+         },
+         {
+            "individual":{
+               "reference":"Practitioner/1474"
+            }
+         },
+         {
+            "individual":{
+               "reference":"Practitioner/1475"
             }
          }
       ],
       "period":{
-         "start":"2019-09-21T22:44:03.942Z"
+         "start":"2010-11-11T11:12:14.456+07:00",
+         "end":"2010-11-11T11:12:14.456+07:00"
       },
-      "diagnosis":[
+      "reasonCode":[
          {
-            "condition":{
-               "reference":"Condition/42030"
-            }
+            "coding":[
+               {
+                  "system":"http://snomed.info/sct",
+                  "code":"109006",
+                  "display":"Anxiety disorder of childhood OR adolescence (disorder)"
+               }
+            ]
+         }
+      ],
+      "hospitalization":{
+         "preAdmissionIdentifier":{
+            "use":"official",
+            "value":"1234"
          },
+         "admitSource":{
+            "coding":[
+               {
+                  "system":"http://terminology.hl7.org/CodeSystem/admit-source",
+                  "code":"hosp-trans",
+                  "display":"Transferred from other hospital"
+               }
+            ]
+         },
+         "reAdmission":{
+            "coding":[
+               {
+                  "userSelected":true
+               }
+            ]
+         },
+         "dietPreference":[
+            {
+               "coding":[
+                  {
+                     "system":"http://terminology.hl7.org/CodeSystem/diet",
+                     "code":"vegetarian",
+                     "display":"Vegetarian"
+                  }
+               ]
+            }
+         ],
+         "dischargeDisposition":{
+            "coding":[
+               {
+                  "system":"http://terminology.hl7.org/CodeSystem/discharge-disposition",
+                  "code":"aadvice",
+                  "display":"Left against advice"
+               }
+            ]
+         }
+      },
+      "location":[
          {
-            "condition":{
-               "reference":"Condition/42026"
+            "location":{
+               "reference":"Location/25328"
+            },
+            "physicalType":{
+               "coding":[
+                  {
+                     "system":"http://terminology.hl7.org/CodeSystem/location-physical-type",
+                     "code":"wi",
+                     "display":"Wing"
+                  }
+               ]
             }
          }
-      ]
+      ],
+      "serviceProvider":{
+         "reference":"Organization/185"
+      }
    }`,
   },
   {
@@ -385,12 +535,6 @@ export const FhirData: Sample[] = [
     apiName: "Practitioner",
     data: `{
       "resourceType":"Practitioner",
-      "id":"1895",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2019-09-21T01:18:19.287+00:00",
-         "source":"#38d7fac4852b412f"
-      },
       "identifier":[
          {
             "use":"official",
@@ -405,12 +549,6 @@ export const FhirData: Sample[] = [
     apiName: "Practitioner",
     data: `{
       "resourceType":"Practitioner",
-      "id":"1979",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2019-09-21T01:19:02.479+00:00",
-         "source":"#509d173acd53d467"
-      },
       "identifier":[
          {
             "use":"official",
@@ -425,12 +563,6 @@ export const FhirData: Sample[] = [
     apiName: "Practitioner",
     data: `{
       "resourceType":"Practitioner",
-      "id":"1973",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2019-09-21T01:18:59.222+00:00",
-         "source":"#4b5d7c355152afba"
-      },
       "identifier":[
          {
             "use":"official",
@@ -445,12 +577,6 @@ export const FhirData: Sample[] = [
     apiName: "Organization",
     data: `{
       "resourceType":"Organization",
-      "id":"39998",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2019-10-03T20:50:05.295+00:00",
-         "source":"#727806b69a184f61"
-      },
       "text":{
          "status":"generated",
          "div":"<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p>NPI 1003800194 for ST LUKES EPISCOPAL CHURCH HOME CARE PROGRAM</p></div>"
@@ -531,12 +657,6 @@ export const FhirData: Sample[] = [
     apiName: "Organization",
     data: `{
       "resourceType":"Organization",
-      "id":"40439",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2019-10-04T10:13:10.407+00:00",
-         "source":"#c0410ef3c4d36d82"
-      },
       "name":"bobprivate",
       "address":[
          {
@@ -550,12 +670,6 @@ export const FhirData: Sample[] = [
     apiName: "Organization",
     data: `{
       "resourceType":"Organization",
-      "id":"40186",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2019-10-04T07:51:27.727+00:00",
-         "source":"#eba7755d9ef26634"
-      },
       "name":"Chuck clinical Healthcare"
    }`,
   },
@@ -564,12 +678,6 @@ export const FhirData: Sample[] = [
     apiName: "Observation",
     data: `{
       "resourceType":"Observation",
-      "id":"10552513",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2023-05-21T05:48:46.688+00:00",
-         "source":"#NamqQ41EMyZLRQUL"
-      },
       "status":"final",
       "category":[
          {
@@ -614,12 +722,6 @@ export const FhirData: Sample[] = [
     apiName: "Observation",
     data: `{
       "resourceType":"Observation",
-      "id":"10552523",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2023-05-21T05:49:11.605+00:00",
-         "source":"#pNlNYZLML0zURVRK"
-      },
       "status":"final",
       "category":[
          {
@@ -664,12 +766,6 @@ export const FhirData: Sample[] = [
     apiName: "Observation",
     data: `{
       "resourceType":"Observation",
-      "id":"10552519",
-      "meta":{
-         "versionId":"1",
-         "lastUpdated":"2023-05-21T05:49:01.595+00:00",
-         "source":"#QFvqSLan6SexpfVD"
-      },
       "status":"final",
       "category":[
          {
