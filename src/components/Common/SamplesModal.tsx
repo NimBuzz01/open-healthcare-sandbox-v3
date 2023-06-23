@@ -67,7 +67,12 @@ export const SamplesModal = ({ selectedAPI }: SamplesModalProps) => {
   return (
     <>
       <SamplesButton onClick={toggleOpen(true)} />
-      <Modal open={open} onClose={toggleOpen(false)}>
+      <Modal
+        open={open}
+        onClose={toggleOpen(false)}
+        id="samples-modal"
+        aria-label="samples-modal-title"
+      >
         <Container
           maxWidth="xl"
           sx={{
@@ -89,10 +94,15 @@ export const SamplesModal = ({ selectedAPI }: SamplesModalProps) => {
             <Typography
               variant="h4"
               sx={{ fontWeight: 500, color: "primary.dark" }}
+              id="samples-modal-title"
             >
               {label} Samples
             </Typography>
-            <IconButton onClick={toggleOpen(false)} sx={{ color: "grey.500" }}>
+            <IconButton
+              onClick={toggleOpen(false)}
+              sx={{ color: "grey.500" }}
+              aria-label="Close Modal"
+            >
               <CloseIcon fontSize="large" />
             </IconButton>
           </Box>
@@ -112,7 +122,11 @@ export const SamplesModal = ({ selectedAPI }: SamplesModalProps) => {
                 {filteredData.map((sample: Sample) => (
                   <ListItem
                     key={sample.name}
-                    sx={{ p: 0, borderBottom: 1, borderColor: "grey.300" }}
+                    sx={{
+                      p: 0,
+                      borderBottom: 1,
+                      borderColor: "grey.300",
+                    }}
                   >
                     <ListItemButton
                       selected={selectedSample === sample}
@@ -134,6 +148,7 @@ export const SamplesModal = ({ selectedAPI }: SamplesModalProps) => {
                   variant="background"
                   label="Load Sample"
                   onClick={handleSampleLoad}
+                  id="load-sample-button"
                 />
               </Box>
             </Box>

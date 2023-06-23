@@ -4,6 +4,7 @@ import choreologo from "./../assets/choreo-logo-black.svg";
 export const Logo = () => {
   return (
     <Box
+      id="main-logo"
       sx={{
         display: "flex",
         flexDirection: "column",

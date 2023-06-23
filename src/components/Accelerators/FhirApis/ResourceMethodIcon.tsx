@@ -24,6 +24,7 @@ export const ResourceMethodIcon = ({ resourceMethod }: ContainerProps) => {
 
   return (
     <Typography
+      id="resource-method-icon"
       sx={{
         bgcolor: bgcolor,
         color: "common.white",

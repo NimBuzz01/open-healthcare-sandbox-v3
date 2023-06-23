@@ -98,7 +98,10 @@ export const APIResourceBody = () => {
     ));
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", height: 1 }}>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", height: 1 }}
+      id="main-box"
+    >
       <Box
         sx={{
           display: "flex",
@@ -107,11 +110,13 @@ export const APIResourceBody = () => {
           gap: 1,
           flexWrap: "wrap",
         }}
+        id="tabs-container"
       >
         <Box sx={{ mr: 4 }}>
           <Typography
             variant="h6"
             sx={{ fontWeight: 500, color: "primary.dark" }}
+            id="select-api-heading"
           >
             Select API
           </Typography>
@@ -120,6 +125,8 @@ export const APIResourceBody = () => {
             TabIndicatorProps={{ style: { display: "none" } }}
             onChange={handleChangeAPI}
             sx={tabsContainerStyles}
+            aria-label="API tabs"
+            id="api-tabs"
           >
             {renderAPIs()}
           </Tabs>
@@ -128,6 +135,7 @@ export const APIResourceBody = () => {
           <Typography
             variant="h6"
             sx={{ fontWeight: 500, color: "primary.dark" }}
+            id="select-resource-heading"
           >
             Select Resource
           </Typography>
@@ -137,6 +145,7 @@ export const APIResourceBody = () => {
             aria-label="Resource tabs"
             TabIndicatorProps={{ style: { display: "none" } }}
             sx={tabsContainerStyles}
+            id="resource-tabs"
           >
             {renderResources()}
           </Tabs>
@@ -150,6 +159,7 @@ export const APIResourceBody = () => {
           flexDirection: "column",
           my: 2,
         }}
+        id="resource-content"
       >
         {renderResourceContent(apiList[selectedAPI])}
       </Box>

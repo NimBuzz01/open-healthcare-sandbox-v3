@@ -1,5 +1,5 @@
 import { IconButton, Tooltip } from "@mui/material";
-import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 
 interface Props {
   size?: number;
@@ -37,6 +37,7 @@ export const UploadIcon = ({ size = 30, readFile }: Props) => {
           let file = event.target.files;
           reader(file[0]);
         }}
+        aria-label="Upload File"
       />
       <label htmlFor="icon-button-file">
         <Tooltip key="upload-icon" title="Upload Content" placement="bottom">

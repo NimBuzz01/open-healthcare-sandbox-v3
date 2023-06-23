@@ -3,14 +3,16 @@ import Button from "@mui/material/Button";
 interface ButtonProps {
   variant: "background" | "border";
   label: string;
+  id?: string;
   onClick?: () => void;
 }
 
-export const CommonButton = ({ variant, label, onClick }: ButtonProps) => {
+export const CommonButton = ({ variant, label, id, onClick }: ButtonProps) => {
   return (
     <Button
       onClick={onClick}
       variant="outlined"
+      id={id}
       sx={{
         fontSize: 14,
         borderRadius: 1,

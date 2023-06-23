@@ -18,7 +18,12 @@ export const CopyContent = ({ data, size = 30 }: Props) => {
   }, [isCopied]);
 
   return (
-    <Tooltip key="copy-icon" title="Copy Content" placement="bottom">
+    <Tooltip
+      key="copy-icon"
+      title="Copy Content"
+      placement="bottom"
+      id="copy-tooltip"
+    >
       <Box style={{ display: "flex" }}>
         <Typography component="span">
           {isCopied && (
@@ -26,13 +31,15 @@ export const CopyContent = ({ data, size = 30 }: Props) => {
               severity="success"
               icon={<TaskAltIcon sx={{ fontSize: 15 }} />}
               sx={{ fontSize: 10, py: 0.3 }}
+              id="copy-alert"
             >
               Copied
             </Alert>
           )}
         </Typography>
         <IconButton
-          aria-label="upload file"
+          aria-label="Copy Content"
+          aria-labelledby="copy-button"
           sx={{
             color: "primary.main",
           }}
@@ -41,7 +48,7 @@ export const CopyContent = ({ data, size = 30 }: Props) => {
             setIsCopied(true);
           }}
         >
-          <ContentCopyIcon sx={{ fontSize: size }} />
+          <ContentCopyIcon sx={{ fontSize: size }} aria-hidden="true" />
         </IconButton>
       </Box>
     </Tooltip>

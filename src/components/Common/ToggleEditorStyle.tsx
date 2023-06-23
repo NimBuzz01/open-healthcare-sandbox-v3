@@ -55,10 +55,17 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 export const ToggleEditorStyle = ({ mode, toggleMode }: Props) => {
   return (
     <Box sx={{ display: "flex", alignItems: "center", gap: 1, mr: 0.8 }}>
-      <Typography sx={{ fontSize: 14, color: "primary.dark", fontWeight: 400 }}>
+      <Typography
+        sx={{ fontSize: 14, color: "primary.dark", fontWeight: 400 }}
+        id="editor-style-label"
+      >
         Editor Style
       </Typography>
-      <MaterialUISwitch checked={mode} onChange={toggleMode} />
+      <MaterialUISwitch
+        checked={mode}
+        onChange={toggleMode}
+        id="editor-style-switch"
+      />
     </Box>
   );
 };

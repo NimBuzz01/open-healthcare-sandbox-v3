@@ -26,6 +26,7 @@ export const PreLoader = ({ size = 40, setActive }: Props) => {
         aria-label="Loading Spinner"
         data-testid="loader"
         speedMultiplier={1}
+        id="pre-loader"
       />
     </Box>
   );

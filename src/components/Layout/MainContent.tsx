@@ -26,7 +26,7 @@ export const MainContent = () => {
   });
 
   return (
-    <Box sx={{ flexGrow: 1, display: "flex" }}>
+    <Box sx={{ flexGrow: 1, display: "flex" }} id="main-container">
       <SideNavigation items={renderedItems} />
       <Box
         width={1}
@@ -45,6 +45,7 @@ export const MainContent = () => {
             mb: "auto",
             flexGrow: 1,
           }}
+          id="content-container"
         >
           <Routes items={renderedItems} />
         </Box>

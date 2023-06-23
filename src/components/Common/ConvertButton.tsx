@@ -9,6 +9,7 @@ interface Props {
 export const ConvertButton = ({ isLoading, handleSubmit }: Props) => {
   return (
     <Button
+      id="convert-button"
       variant="contained"
       color="secondary"
       endIcon={

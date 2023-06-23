@@ -10,6 +10,7 @@ export const SamplesButton = ({ onClick }: ButtonProps) => {
     <Button
       variant="contained"
       color="secondary"
+      id="samples-button"
       endIcon={<ArticleOutlinedIcon />}
       sx={{ fontSize: 14, color: "background.default", textTransform: "none" }}
       onClick={onClick}

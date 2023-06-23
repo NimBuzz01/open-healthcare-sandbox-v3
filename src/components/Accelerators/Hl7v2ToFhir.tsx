@@ -135,6 +135,7 @@ export const Hl7v2ToFhir = () => {
 
   return (
     <Container
+      id="hl7v2-to-fhir-container"
       maxWidth={false}
       sx={{ display: "flex", flexDirection: "column", height: 1 }}
     >
@@ -144,6 +145,8 @@ export const Hl7v2ToFhir = () => {
           severity="error"
           message={errorMessage}
           setIsOpen={closeResponse}
+          id="response-alert-error"
+          aria-label="Error Response Alert"
         />
       )}
       {alertOpen && (
@@ -152,6 +155,8 @@ export const Hl7v2ToFhir = () => {
           severity="success"
           message="Sample Loaded"
           setIsOpen={closeAlert}
+          id="response-alert-success"
+          aria-label="Success Response Alert"
         />
       )}
       <Box
@@ -161,8 +166,12 @@ export const Hl7v2ToFhir = () => {
         }}
       >
         <SamplesModal />
-        <ConvertButton handleSubmit={callBackend} isLoading={isLoading} />
-        <Box sx={{ visibility: "hidden" }}>
+        <ConvertButton
+          handleSubmit={callBackend}
+          isLoading={isLoading}
+          aria-label="Convert Button"
+        />
+        <Box sx={{ visibility: "hidden" }} id="placeholder-box">
           <Typography>PLACEHOLDER ABCXY</Typography>
         </Box>
       </Box>
@@ -179,6 +188,8 @@ export const Hl7v2ToFhir = () => {
             pb: 1,
             width: "50%",
           }}
+          id="hl7-resource-box"
+          aria-label="HL7 Resource Box"
         >
           <CodeEditor
             title="HL7 Resource"
@@ -193,6 +204,8 @@ export const Hl7v2ToFhir = () => {
             clearEnabled
             width="100%"
             height="calc(100vh - 197px)"
+            id="hl7-resource-editor"
+            aria-label="HL7 Resource Editor"
           />
         </Box>
         <Box
@@ -201,6 +214,8 @@ export const Hl7v2ToFhir = () => {
             pb: 1,
             width: "50%",
           }}
+          id="fhir-resource-box"
+          aria-label="FHIR Resource Box"
         >
           <CodeEditor
             title="FHIR Resource"
@@ -214,6 +229,8 @@ export const Hl7v2ToFhir = () => {
             clearEnabled
             width="100%"
             height="calc(100vh - 197px)"
+            id="fhir-resource-editor"
+            aria-label="FHIR Resource Editor"
           />
         </Box>
       </Box>

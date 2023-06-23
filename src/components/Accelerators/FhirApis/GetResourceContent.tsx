@@ -40,6 +40,8 @@ export const GetResourceContent = ({
   searchParams,
   resource,
 }: Props) => {
+  const { darkMode } = useContext(DarkModeContext);
+
   const [data, setData] = useState<any>(null);
   const [isError, setIsError] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -48,7 +50,18 @@ export const GetResourceContent = ({
   const [isAdded, setIsAdded] = useState<boolean>(false);
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { darkMode } = useContext(DarkModeContext);
+
+  const [response, setResponse] = useState<any>({
+    statusCode: null,
+    statusText: "",
+    resUrl: "",
+    contentType: "",
+  });
+  const [request, setRequest] = useState<any>({
+    reqUrl: "",
+    contentType: "",
+    method: "",
+  });
 
   useEffect(() => {
     if (!isSearchOperation && searchParams.length > 0) {
@@ -66,18 +79,6 @@ export const GetResourceContent = ({
       setInputFields([initialInputField]);
     }
   }, [isSearchOperation, searchParams]);
-
-  const [response, setResponse] = useState<any>({
-    statusCode: null,
-    statusText: "",
-    resUrl: "",
-    contentType: "",
-  });
-  const [request, setRequest] = useState<any>({
-    reqUrl: "",
-    contentType: "",
-    method: "",
-  });
 
   const handleAddInputField = () => {
     const selectedLabelObject = searchParams.find(
@@ -127,6 +128,27 @@ export const GetResourceContent = ({
 
   const handleLabelChange = (event: SelectChangeEvent<string>) => {
     setSelectedLabel(event.target.value);
+  };
+
+  function isInputFieldProps(obj: any): obj is InputFieldProps {
+    return obj && obj.hasOwnProperty("pValue") && obj.hasOwnProperty("value");
+  }
+
+  const closeResponse = () => {
+    setIsError(false);
+  };
+
+  const handleReset = () => {
+    setData(null);
+    setIsError(false);
+    setError("");
+    setSelectedLabel("");
+    setIsInputEmpty(false);
+    if (isSearchOperation) {
+      setInputFields([]);
+    }
+    setResponse({});
+    setRequest({});
   };
 
   const callBackend = () => {
@@ -200,27 +222,6 @@ export const GetResourceContent = ({
       });
   };
 
-  function isInputFieldProps(obj: any): obj is InputFieldProps {
-    return obj && obj.hasOwnProperty("pValue") && obj.hasOwnProperty("value");
-  }
-
-  const handleReset = () => {
-    setData(null);
-    setIsError(false);
-    setError("");
-    setSelectedLabel("");
-    setIsInputEmpty(false);
-    if (isSearchOperation) {
-      setInputFields([]);
-    }
-    setResponse({});
-    setRequest({});
-  };
-
-  const closeResponse = () => {
-    setIsError(false);
-  };
-
   return (
     <Box
       sx={{
@@ -230,6 +231,7 @@ export const GetResourceContent = ({
         p: 2,
         bgcolor: "common.white",
       }}
+      id="main-box"
     >
       {isError && (
         <ResponseAlert
@@ -237,15 +239,20 @@ export const GetResourceContent = ({
           severity="error"
           message={error}
           setIsOpen={closeResponse}
+          id="error-alert"
         />
       )}
       <Box sx={{ display: "flex", alignItems: "center", gap: 3, mb: 1 }}>
         <ResourceMethodIcon resourceMethod={resource.resourceMethod} />
-        <Typography sx={{ color: "common.dark", fontSize: 14 }}>
+        <Typography
+          sx={{ color: "common.dark", fontSize: 14 }}
+          id="resource-path"
+        >
           {resource.resourcePath}
         </Typography>
         <Typography
           sx={{ color: "grey.500", fontSize: 14, fontWeight: 500, mr: "auto" }}
+          id="resource-description"
         >
           {resource.resourceDescription}
         </Typography>
@@ -254,8 +261,16 @@ export const GetResourceContent = ({
             variant="background"
             label="Execute"
             onClick={callBackend}
+            id="execute-button"
+            aria-label="Execute button"
           />
-          <CommonButton variant="border" label="Reset" onClick={handleReset} />
+          <CommonButton
+            variant="border"
+            label="Reset"
+            onClick={handleReset}
+            id="reset-button"
+            aria-label="Reset button"
+          />
         </Box>
       </Box>
       <Divider />
@@ -272,11 +287,15 @@ export const GetResourceContent = ({
               width: "23%",
               pr: 2,
             }}
+            id="parameter-section"
           >
             <Box>
               {isSearchOperation && (
                 <>
-                  <Typography sx={{ color: "primary.dark", mb: 1, mt: 0.5 }}>
+                  <Typography
+                    sx={{ color: "primary.dark", mb: 1, mt: 0.5 }}
+                    id="optional-search-param-heading"
+                  >
                     Add optional search parameter(s)
                   </Typography>
                   <Box
@@ -287,6 +306,7 @@ export const GetResourceContent = ({
                       gap: 1,
                       width: 1,
                     }}
+                    id="optional-search-params"
                   >
                     <Select
                       value={selectedLabel}
@@ -294,6 +314,8 @@ export const GetResourceContent = ({
                       size="small"
                       fullWidth
                       sx={{ maxWidth: 250 }}
+                      id="search-param-select"
+                      aria-label="Search parameter select"
                     >
                       {searchParams.map((searchParams) => (
                         <MenuItem
@@ -314,8 +336,13 @@ export const GetResourceContent = ({
                         borderRadius: 1,
                         borderColor: "grey.400",
                       }}
+                      id="add-input-field-button"
+                      aria-label="Add input field button"
                     >
-                      <AddIcon sx={{ fontSize: 24, color: "secondary.main" }} />
+                      <AddIcon
+                        sx={{ fontSize: 24, color: "secondary.main" }}
+                        id="add-input-field-icon"
+                      />
                     </IconButton>
                   </Box>
                   {isAdded && (
@@ -327,6 +354,7 @@ export const GetResourceContent = ({
                         py: 0.3,
                         my: 1,
                       }}
+                      id="already-added-alert"
                     >
                       Already added!
                     </Alert>
@@ -342,17 +370,22 @@ export const GetResourceContent = ({
                         mb: 1,
                         mt: 0.5,
                       }}
+                      id="required-search-param-heading"
                     >
                       Add required search parameter(s)
                     </Typography>
                   </>
                 )}
                 {isInputEmpty && (
-                  <Alert severity="error" sx={{ fontSize: 13, my: 1, py: 0.3 }}>
+                  <Alert
+                    severity="error"
+                    sx={{ fontSize: 13, my: 1, py: 0.3 }}
+                    id="input-empty-alert"
+                  >
                     Please fill all input fields.
                   </Alert>
                 )}
-                <Box sx={{ mt: 2 }}>
+                <Box sx={{ mt: 2 }} id="input-fields">
                   {inputFields.map((inputField, index) => (
                     <InputField
                       key={index}
@@ -374,9 +407,14 @@ export const GetResourceContent = ({
                   alignItems: "center",
                   height: "calc(100vh - 306px)",
                 }}
+                id="loading-section"
               >
                 <PreLoader setActive={isLoading} />
-                <Typography variant="h5" sx={{ mt: 4, color: "primary.dark" }}>
+                <Typography
+                  variant="h5"
+                  sx={{ mt: 4, color: "primary.dark" }}
+                  id="loading-text"
+                >
                   Loading ...
                 </Typography>
               </Box>
@@ -388,6 +426,7 @@ export const GetResourceContent = ({
                     justifyContent: "flex-end",
                     my: 0.5,
                   }}
+                  id="headers-tab-section"
                 >
                   <HeadersTab request={request} response={response} />
                 </Box>
@@ -402,6 +441,7 @@ export const GetResourceContent = ({
                   downloadEnabled
                   width="100%"
                   height="calc(100vh - 389px)"
+                  id="fhir-apis-code-editor"
                 />
               </Box>
             )}

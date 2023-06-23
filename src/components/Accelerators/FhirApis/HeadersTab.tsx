@@ -30,6 +30,7 @@ export const HeadersTab = ({ request, response }: Props) => {
         onClick={toggleDrawer(true)}
         color="primary"
         aria-label="view headers"
+        id="view-headers-button"
         endIcon={<SettingsOutlinedIcon />}
         sx={{ textTransform: "none" }}
       >
@@ -37,7 +38,12 @@ export const HeadersTab = ({ request, response }: Props) => {
           View Headers
         </Typography>
       </Button>
-      <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
+      <Drawer
+        id="headers-tab"
+        anchor="right"
+        open={drawerOpen}
+        onClose={toggleDrawer(false)}
+      >
         <Box sx={{ width: 800 }}>
           <Box
             sx={{
@@ -54,6 +60,7 @@ export const HeadersTab = ({ request, response }: Props) => {
           {response.statusCode ? (
             <>
               <Box
+                id="request-headers"
                 sx={{
                   p: 2,
                   m: 2,
@@ -106,10 +113,10 @@ export const HeadersTab = ({ request, response }: Props) => {
                 </Typography>
               </Box>
               <Box
+                id="response-headers"
                 sx={{
                   p: 2,
                   m: 2,
-                  mb: 1,
                   border: 0.5,
                   borderRadius: 1,
                   borderColor: "grey.400",

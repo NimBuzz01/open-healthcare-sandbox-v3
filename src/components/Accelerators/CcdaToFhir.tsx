@@ -135,6 +135,7 @@ export const CcdaToFhir = () => {
 
   return (
     <Container
+      id="ccda-to-fhir-container"
       maxWidth={false}
       sx={{ display: "flex", flexDirection: "column", height: 1 }}
     >
@@ -160,9 +161,13 @@ export const CcdaToFhir = () => {
           justifyContent: "space-between",
         }}
       >
-        <SamplesModal />
-        <ConvertButton handleSubmit={callBackend} isLoading={isLoading} />
-        <Box sx={{ visibility: "hidden" }}>
+        <SamplesModal aria-label="Samples Modal" />
+        <ConvertButton
+          handleSubmit={callBackend}
+          isLoading={isLoading}
+          aria-label="Convert Button"
+        />
+        <Box sx={{ visibility: "hidden" }} id="placeholder-box">
           <Typography>PLACEHOLDER ABCXY</Typography>
         </Box>
       </Box>
@@ -179,6 +184,8 @@ export const CcdaToFhir = () => {
             pb: 1,
             width: "50%",
           }}
+          id="ccda-resource-box"
+          aria-label="C-CDA Resource Box"
         >
           <CodeEditor
             title="C-CDA Resource"
@@ -193,6 +200,8 @@ export const CcdaToFhir = () => {
             clearEnabled
             width="100%"
             height="calc(100vh - 197px)"
+            id="ccda-resource-editor"
+            aria-label="C-CDA Resource Editor"
           />
         </Box>
         <Box
@@ -201,6 +210,8 @@ export const CcdaToFhir = () => {
             pb: 1,
             width: "50%",
           }}
+          id="fhir-resource-box"
+          aria-label="FHIR Resource Box"
         >
           <CodeEditor
             title="FHIR Resource"
@@ -214,6 +225,8 @@ export const CcdaToFhir = () => {
             clearEnabled
             width="100%"
             height="calc(100vh - 197px)"
+            id="fhir-resource-editor"
+            aria-label="FHIR Resource Editor"
           />
         </Box>
       </Box>

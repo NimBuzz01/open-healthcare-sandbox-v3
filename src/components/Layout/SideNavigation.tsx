@@ -31,7 +31,7 @@ export const SideNavigation = ({ items }: Props) => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <Box sx={{ display: "flex", flexDirection: "column" }} id="sidebar">
       <Box
         sx={{
           display: "flex",
@@ -45,6 +45,7 @@ export const SideNavigation = ({ items }: Props) => {
           transition: "0.2s",
           overflow: "hidden",
         }}
+        id="sidebar-content"
       >
         <Box
           sx={{
@@ -54,6 +55,7 @@ export const SideNavigation = ({ items }: Props) => {
             mt: 2,
             mx: 1.8,
           }}
+          id="sidebar-header"
         >
           <Typography
             variant="h6"
@@ -63,6 +65,7 @@ export const SideNavigation = ({ items }: Props) => {
               transition: "0.2s",
               opacity: isExpanded ? 1 : 0,
             }}
+            id="sidebar-title"
           >
             Accelerators
           </Typography>
@@ -77,6 +80,8 @@ export const SideNavigation = ({ items }: Props) => {
               transition: "0.2s",
               fontSize: 20,
             }}
+            id="sidebar-toggle"
+            aria-label={isExpanded ? "Collapse" : "Expand"}
           >
             {isExpanded ? (
               <Tooltip
@@ -105,8 +110,9 @@ export const SideNavigation = ({ items }: Props) => {
             bgcolor: "background.default",
             transition: "0.2s",
           }}
+          id="sidebar-divider"
         />
-        <Box>
+        <Box id="sidebar-items">
           {items.map((item) => (
             <Tooltip
               key={item.path}
@@ -147,6 +153,7 @@ export const SideNavigation = ({ items }: Props) => {
                       paddingLeft: 1.5,
                     }),
                   }}
+                  id={`sidebar-item-${item.path}`}
                 >
                   {item.icon}
                   <Typography

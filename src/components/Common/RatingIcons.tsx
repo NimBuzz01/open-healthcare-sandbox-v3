@@ -85,6 +85,7 @@ export const RatingIcons = ({ toolName }: ToolRatingProps) => {
             transition: "transform 0.2s ease",
           },
         }}
+        aria-label="Thumbs Up"
         onClick={() => handleThumbsUpClick(toolName)}
       >
         <ThumbUpIcon />
@@ -99,6 +100,7 @@ export const RatingIcons = ({ toolName }: ToolRatingProps) => {
             transition: "transform 0.2s ease",
           },
         }}
+        aria-label="Thumbs Down"
         onClick={() => handleThumbsDownClick(toolName)}
       >
         <ThumbDownIcon />
@@ -115,6 +117,7 @@ export const RatingIcons = ({ toolName }: ToolRatingProps) => {
             right: 20,
             zIndex: 1000,
           }}
+          id="rating-alert"
         >
           Thank you for your rating!
         </Alert>

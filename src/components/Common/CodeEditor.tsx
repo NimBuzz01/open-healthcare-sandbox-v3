@@ -6,6 +6,7 @@ import FileSaver from "file-saver";
 import { ClearIcon, CopyContent, DownloadIcon, UploadIcon } from "../Common";
 
 interface CodeEditorProps {
+  id?: string;
   title: string;
   value: string;
   onChange?: (value: string) => void;
@@ -23,6 +24,7 @@ interface CodeEditorProps {
 }
 
 export const CodeEditor = ({
+  id,
   title,
   value,
   onChange,
@@ -56,12 +58,14 @@ export const CodeEditor = ({
 
   return (
     <Box
+      id={id}
       sx={{
         width,
         display: "flex",
         flexDirection: "column",
         height: 1,
       }}
+      aria-label={title}
     >
       <Box
         sx={{

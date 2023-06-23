@@ -18,6 +18,8 @@ export const ComponentTitle = ({ heading, description, url }: Props) => {
             sx={{
               fontWeight: 600,
             }}
+            id="component-heading"
+            aria-label="Component heading"
           >
             {heading}
           </Typography>
@@ -28,6 +30,8 @@ export const ComponentTitle = ({ heading, description, url }: Props) => {
             color="common.black"
             variant="h6"
             sx={{ fontWeight: 400 }}
+            id="component-description"
+            aria-label="Component description"
           >
             {description}.
           </Typography>

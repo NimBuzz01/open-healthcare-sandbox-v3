@@ -131,13 +131,22 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
   };
 
   return (
-    <Box sx={{ border: 0.5, borderRadius: 1, borderColor: "grey.400", p: 2 }}>
+    <Box
+      sx={{
+        border: 0.5,
+        borderRadius: 1,
+        borderColor: "grey.400",
+        p: 2,
+      }}
+      id="main-box"
+    >
       {isError && (
         <ResponseAlert
           isOpen={isError}
           severity="error"
           message={error}
           setIsOpen={closeResponse}
+          id="error-alert"
         />
       )}
       {alertOpen && (
@@ -146,25 +155,58 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
           severity="success"
           message="Sample Loaded"
           setIsOpen={closeAlert}
+          id="success-alert"
         />
       )}
-      <Box sx={{ display: "flex", alignItems: "center", gap: 3, mb: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 3,
+          mb: 1,
+        }}
+        id="resource-info"
+      >
         <ResourceMethodIcon resourceMethod={resource.resourceMethod} />
-        <Typography sx={{ color: "common.dark", fontSize: 14 }}>
+        <Typography
+          sx={{ color: "common.dark", fontSize: 14 }}
+          id="resource-path"
+        >
           {resource.resourcePath}
         </Typography>
         <Typography
-          sx={{ color: "grey.500", fontSize: 14, fontWeight: 500, mr: "auto" }}
+          sx={{
+            color: "grey.500",
+            fontSize: 14,
+            fontWeight: 500,
+            mr: "auto",
+          }}
+          id="resource-description"
         >
           {resource.resourceDescription}
         </Typography>
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+          }}
+          id="button-group"
+        >
           <CommonButton
             variant="background"
             label="Execute"
             onClick={callBackend}
+            id="execute-button"
+            aria-label="Execute button"
           />
-          <CommonButton variant="border" label="Reset" onClick={handleReset} />
+          <CommonButton
+            variant="border"
+            label="Reset"
+            onClick={handleReset}
+            id="reset-button"
+            aria-label="Reset button"
+          />
         </Box>
       </Box>
       <Divider />
@@ -174,6 +216,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
             display: "flex",
             justifyContent: "space-between",
           }}
+          id="content-box"
         >
           <Box
             sx={{
@@ -187,6 +230,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
               mr: 2,
               pr: 2,
             }}
+            id="samples-box"
           >
             <Box sx={{ mt: 1 }}>
               <SamplesModal selectedAPI={selectedAPIName} />
@@ -198,6 +242,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
                 color: "grey.600",
                 mt: 2,
               }}
+              id="note"
             >
               Note: Created resources will be available for 2 hours
             </Typography>
@@ -206,13 +251,14 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
                 variant="h6"
                 color="secondary"
                 sx={{ fontStyle: "italic", mt: "auto", mb: 2 }}
+                id="success-note"
               >
                 Resource created! Run the search operation to view the created
                 resource
               </Typography>
             )}
           </Box>
-          <Box sx={{ width: "76%" }}>
+          <Box sx={{ width: "76%" }} id="editor-box">
             {isLoading ? (
               <Box
                 sx={{
@@ -222,9 +268,14 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
                   alignItems: "center",
                   height: "calc(100vh - 306px)",
                 }}
+                id="loading-box"
               >
                 <PreLoader setActive={isLoading} />
-                <Typography variant="h5" sx={{ mt: 4, color: "primary.dark" }}>
+                <Typography
+                  variant="h5"
+                  sx={{ mt: 4, color: "primary.dark" }}
+                  id="loading-text"
+                >
                   Loading ...
                 </Typography>
               </Box>
@@ -236,6 +287,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
                     justifyContent: "flex-end",
                     my: 0.5,
                   }}
+                  id="headers-tab-box"
                 >
                   <HeadersTab request={request} response={response} />
                 </Box>
@@ -253,6 +305,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
                   clearEnabled
                   width="100%"
                   height="calc(100vh - 389px)"
+                  id="fhir-apis-post-input"
                 />
               </Box>
             )}
@@ -271,6 +324,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
               downloadEnabled
               width="100%"
               height="calc(100vh - 389px)"
+              id="fhir-apis-post-output"
             />
           </>
         )}

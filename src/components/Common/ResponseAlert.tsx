@@ -7,6 +7,7 @@ interface Props {
   severity: AlertColor;
   message: string;
   setIsOpen: any;
+  id?: string;
 }
 
 export interface State extends SnackbarOrigin {
@@ -18,6 +19,7 @@ export const ResponseAlert = ({
   severity,
   message,
   setIsOpen,
+  id,
 }: Props) => {
   const [state] = useState<State>({
     open: isOpen,
@@ -28,6 +30,7 @@ export const ResponseAlert = ({
 
   return (
     <Snackbar
+      id={id}
       open={open}
       onClose={setIsOpen}
       anchorOrigin={{ vertical, horizontal }}

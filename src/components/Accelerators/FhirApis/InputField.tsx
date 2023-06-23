@@ -94,12 +94,15 @@ export const InputField = ({
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 1 }}>
-      <Box sx={{ maxWidth: 250, mb: 1, flexGrow: 1 }}>
+      <Box sx={{ maxWidth: 250, mb: 1, flexGrow: 1 }} id="input-field-box">
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography sx={{ color: "primary.dark" }}>{label}</Typography>
+          <Typography sx={{ color: "primary.dark" }} id="input-field-label">
+            {label}
+          </Typography>
           {isRequired && (
             <Typography
               sx={{ fontSize: 11, alignSelf: "flex-end", color: "#f54545" }}
+              id="required-indicator"
             >
               *required
             </Typography>
@@ -114,6 +117,7 @@ export const InputField = ({
               onChange={(value) =>
                 handleChange("value", value?.format("YYYY-MM-DD"))
               }
+              aria-label="Date picker"
             />
           </LocalizationProvider>
         ) : (
@@ -157,15 +161,21 @@ export const InputField = ({
                       onMouseEnter={handleInfoOpen}
                       onMouseLeave={handleInfoClose}
                       sx={{ p: 0 }}
+                      id="help-icon-button"
+                      aria-label="Help icon button"
                     >
                       <HelpOutlineOutlinedIcon
                         sx={{ fontSize: 20, color: "grey.500" }}
+                        id="help-icon"
+                        aria-label="Help icon"
                       />
                     </IconButton>
                   </MuiTooltip>
                 </InputAdornment>
               ),
             }}
+            id="text-field"
+            aria-label="Text field"
           />
         )}
       </Box>
@@ -180,8 +190,14 @@ export const InputField = ({
             mt: 2.7,
             alignSelf: "flex-start",
           }}
+          id="delete-button"
+          aria-label="Delete button"
         >
-          <CloseIcon sx={{ fontSize: 24, color: "#f54545" }} />
+          <CloseIcon
+            sx={{ fontSize: 24, color: "#f54545" }}
+            id="delete-icon"
+            aria-label="Delete icon"
+          />
         </IconButton>
       )}
     </Box>

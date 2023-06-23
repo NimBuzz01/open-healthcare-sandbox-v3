@@ -3,7 +3,10 @@ import CopyrightIcon from "@mui/icons-material/Copyright";
 
 export const Footer = () => {
   return (
-    <Box sx={{ display: "flex", borderTop: 0.5, borderColor: "grey.400" }}>
+    <Box
+      sx={{ display: "flex", borderTop: 0.5, borderColor: "grey.400" }}
+      id="footer-container"
+    >
       <Box
         sx={{
           display: "flex",
@@ -20,8 +23,13 @@ export const Footer = () => {
             mr: 0.5,
             fontSize: 19,
           }}
+          aria-hidden="true"
         />
-        <Typography variant="h6" sx={{ color: "grey.500", fontWeight: 300 }}>
+        <Typography
+          variant="h6"
+          sx={{ color: "grey.500", fontWeight: 300 }}
+          id="footer-text"
+        >
           2023 WSO2 LLC.
         </Typography>
       </Box>
