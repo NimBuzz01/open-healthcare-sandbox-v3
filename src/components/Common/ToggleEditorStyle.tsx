@@ -1,4 +1,4 @@
-import { Box, Switch, SwitchProps, Typography, styled } from "@mui/material";
+import { Box, Switch, Typography, styled } from "@mui/material";
 
 interface Props {
   mode: any;
@@ -52,7 +52,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export const ToggleDarkMode = ({ mode, toggleMode }: Props) => {
+export const ToggleEditorStyle = ({ mode, toggleMode }: Props) => {
   return (
     <Box sx={{ display: "flex", alignItems: "center", gap: 1, mr: 0.8 }}>
       <Typography sx={{ fontSize: 14, color: "primary.dark", fontWeight: 400 }}>

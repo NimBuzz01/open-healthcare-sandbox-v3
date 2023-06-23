@@ -8,10 +8,9 @@ import {
   PreLoader,
   CodeEditor,
 } from "../../Common";
-import { ResourceMethodIcon } from "./ResourceMethodIcon";
+import { ResourceMethodIcon, HeadersTab } from "../FhirApis";
 import { DarkModeContext } from "../../Contexts/DarkModeContext";
 import { SelectedSampleContext } from "../../Contexts/SelectedSampleContext";
-import { HeadersTab } from "./HeadersTab";
 
 interface Props {
   backendUrl: string;
@@ -58,10 +57,6 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
     }
   }, [loadSample, selectedLabel]);
 
-  const closeAlert = () => {
-    setAlertOpen(false);
-  };
-
   const handleOnChange = useCallback((value: string) => {
     setPostRequest(value);
   }, []);
@@ -70,8 +65,18 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
     setPostRequest("");
   };
 
+  const closeAlert = () => {
+    setAlertOpen(false);
+  };
+
   const closeResponse = () => {
     setIsError(false);
+  };
+
+  const readFile = (fileInput?: string | ArrayBuffer | null) => {
+    if (typeof fileInput === "string") {
+      setPostRequest(fileInput);
+    }
   };
 
   const handleReset = () => {
@@ -80,12 +85,8 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
     setIsError(false);
     setPostRequest("");
     setSuccessAlert(false);
-  };
-
-  const readFile = (fileInput?: string | ArrayBuffer | null) => {
-    if (typeof fileInput === "string") {
-      setPostRequest(fileInput);
-    }
+    setResponse({});
+    setRequest({});
   };
 
   const callBackend = () => {
@@ -251,7 +252,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
                   readFile={readFile}
                   clearEnabled
                   width="100%"
-                  height={data ? "500px" : "calc(100vh - 389px)"}
+                  height="calc(100vh - 389px)"
                 />
               </Box>
             )}
@@ -269,7 +270,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
               fileType="json"
               downloadEnabled
               width="100%"
-              height="500px"
+              height="calc(100vh - 389px)"
             />
           </>
         )}

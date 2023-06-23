@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
-import Routes from "../Routes/AppRoutes";
 import { Footer, SideNavigation } from "../Layout";
+import { ComingSoon } from "../Common";
+import Routes from "../Routes/AppRoutes";
 import { items } from "../Configs/AcceleratorConfig";
 import itemConfig from "../../tool-config.json";
-import { ComingSoon } from "../Common";
 
 interface ItemConfig {
   [key: string]: {

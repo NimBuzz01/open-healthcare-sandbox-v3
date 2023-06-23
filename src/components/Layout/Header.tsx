@@ -2,10 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { Logo } from "../Logo";
-import { AlertModal, ComponentTitle, ToggleDarkMode } from "../Common";
+import { AlertModal, ComponentTitle, ToggleEditorStyle } from "../Common";
 import { items, Item } from "../Configs/AcceleratorConfig";
-import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 import { DarkModeContext } from "../Contexts/DarkModeContext";
+import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 
 export const Header = () => {
   const { darkMode, setDarkMode } = useContext(DarkModeContext);
@@ -50,7 +50,7 @@ export const Header = () => {
           url={url}
         ></ComponentTitle>
         <Box sx={{ ml: "auto", mr: 2, display: "flex", alignItems: "center" }}>
-          <ToggleDarkMode
+          <ToggleEditorStyle
             mode={darkMode}
             toggleMode={() => setDarkMode(!darkMode)}
           />

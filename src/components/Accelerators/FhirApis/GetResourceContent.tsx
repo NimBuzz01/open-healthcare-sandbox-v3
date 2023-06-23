@@ -16,13 +16,16 @@ import {
   CodeEditor,
   PreLoader,
 } from "../../Common";
-import { InputField, Props as InputFieldProps } from "./InputField";
-import { ResourceMethodIcon } from "./ResourceMethodIcon";
-import AddIcon from "@mui/icons-material/Add";
-import InfoOutlineIcon from "@mui/icons-material/InfoOutlined";
+import {
+  InputField,
+  Props as InputFieldProps,
+  HeadersTab,
+  ResourceMethodIcon,
+} from "../FhirApis";
 import { SearchParam } from "../../Configs/ApiConfig";
 import { DarkModeContext } from "../../Contexts/DarkModeContext";
-import { HeadersTab } from "./HeadersTab";
+import AddIcon from "@mui/icons-material/Add";
+import InfoOutlineIcon from "@mui/icons-material/InfoOutlined";
 
 interface Props {
   isSearchOperation?: boolean;
@@ -210,6 +213,8 @@ export const GetResourceContent = ({
     if (isSearchOperation) {
       setInputFields([]);
     }
+    setResponse({});
+    setRequest({});
   };
 
   const closeResponse = () => {

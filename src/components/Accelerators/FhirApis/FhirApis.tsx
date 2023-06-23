@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import { APIResourceBody } from "./APIResourceBody";
+import { APIResourceBody } from "../FhirApis";
 
 export const FhirApis = () => {
   return (

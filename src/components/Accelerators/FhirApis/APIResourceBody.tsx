@@ -1,8 +1,7 @@
 import { useState, SyntheticEvent, ChangeEvent } from "react";
 import { Tabs, Tab, Typography, Box } from "@mui/material";
+import { CreateOperationContent, GetResourceContent } from "../FhirApis";
 import { ApiConfig, OperationTypes, apiList } from "../../Configs/ApiConfig";
-import { CreateOperationContent } from "./CreateOperationContent";
-import { GetResourceContent } from "./GetResourceContent";
 
 const tabStyles = {
   fontSize: 13,
@@ -20,24 +19,12 @@ const tabStyles = {
   minHeight: "40px",
 };
 
-const labelStyles = {
-  fontWeight: 500,
-  color: "primary.dark",
-};
-
 const tabsContainerStyles = {
   bgcolor: "common.white",
   border: 0.5,
   borderRadius: 1,
   borderColor: "grey.400",
   px: 1,
-};
-
-const contentContainerStyles = {
-  gap: 1,
-  display: "flex",
-  flexDirection: "column",
-  my: 2,
 };
 
 export const APIResourceBody = () => {
@@ -122,7 +109,10 @@ export const APIResourceBody = () => {
         }}
       >
         <Box sx={{ mr: 4 }}>
-          <Typography variant="h6" sx={labelStyles}>
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: 500, color: "primary.dark" }}
+          >
             Select API
           </Typography>
           <Tabs
@@ -135,7 +125,10 @@ export const APIResourceBody = () => {
           </Tabs>
         </Box>
         <Box>
-          <Typography variant="h6" sx={labelStyles}>
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: 500, color: "primary.dark" }}
+          >
             Select Resource
           </Typography>
           <Tabs
@@ -149,7 +142,15 @@ export const APIResourceBody = () => {
           </Tabs>
         </Box>
       </Box>
-      <Box key={key} sx={contentContainerStyles}>
+      <Box
+        key={key}
+        sx={{
+          gap: 1,
+          display: "flex",
+          flexDirection: "column",
+          my: 2,
+        }}
+      >
         {renderResourceContent(apiList[selectedAPI])}
       </Box>
     </Box>

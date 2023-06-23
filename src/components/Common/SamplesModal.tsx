@@ -12,21 +12,18 @@ import {
   Modal,
   Typography,
 } from "@mui/material";
-import { CodeEditor } from "./CodeEditor";
+import { CodeEditor, SamplesButton, CommonButton } from "../Common";
 import { SelectedSampleContext } from "../Contexts/SelectedSampleContext";
-import { CommonButton } from "./CommonButton";
-import { Sample } from "../Configs/AcceleratorConfig";
-import { items } from "../Configs/AcceleratorConfig";
+import { items, Sample } from "../Configs/AcceleratorConfig";
 import CloseIcon from "@mui/icons-material/Close";
-import { SamplesButton } from "./SamplesButton";
 
 interface SamplesModalProps {
   selectedAPI?: string;
 }
 
 export const SamplesModal = ({ selectedAPI }: SamplesModalProps) => {
-  const { loadSample, setLoadSample } = useContext(SelectedSampleContext);
-  const { selectedLabel, setSelectedLabel } = useContext(SelectedSampleContext);
+  const { setLoadSample } = useContext(SelectedSampleContext);
+  const { setSelectedLabel } = useContext(SelectedSampleContext);
 
   const [open, setOpen] = useState(false);
 

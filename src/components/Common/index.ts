@@ -9,7 +9,7 @@ export { DownloadIcon } from "./DownloadIcon";
 export { UploadIcon } from "./UploadIcon";
 export { ResponseAlert } from "./ResponseAlert";
 export { SamplesModal } from "./SamplesModal";
-export { ToggleDarkMode } from "./ToggleDarkMode";
+export { ToggleEditorStyle } from "./ToggleEditorStyle";
 export { ClearIcon } from "./ClearIcon";
 export { SamplesButton } from "./SamplesButton";
 export { ComingSoon } from "./ComingSoon";

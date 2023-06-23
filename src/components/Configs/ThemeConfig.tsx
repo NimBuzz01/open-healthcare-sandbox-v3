@@ -18,7 +18,7 @@ export const theme = createTheme({
     common: {
       black: "#222228",
     },
-    //use grey[500] for grey
+    //use grey.500 for grey
   },
   typography: {
     fontFamily: ["Poppins", "sans-serif"].join(","),

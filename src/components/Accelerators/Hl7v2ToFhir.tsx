@@ -6,8 +6,8 @@ import {
   CodeEditor,
   ResponseAlert,
 } from "../Common";
-import { SelectedSampleContext } from "../Contexts/SelectedSampleContext";
 import { DarkModeContext } from "../Contexts/DarkModeContext";
+import { SelectedSampleContext } from "../Contexts/SelectedSampleContext";
 import apiClient from "../../services/api-client";
 import { BFF_BASE_URL } from "../Configs/Constants";
 
@@ -17,6 +17,7 @@ interface State {
   errorMessage: string;
   isError: boolean;
   isLoading: boolean;
+  alertOpen: boolean;
 }
 
 export const Hl7v2ToFhir = () => {
@@ -26,34 +27,75 @@ export const Hl7v2ToFhir = () => {
     errorMessage: "",
     isError: false,
     isLoading: false,
+    alertOpen: false,
   });
 
-  const { input, output, errorMessage, isError, isLoading } = state;
+  const { input, output, errorMessage, isError, isLoading, alertOpen } = state;
 
-  const { loadSample, setLoadSample } = useContext(SelectedSampleContext);
-  const { selectedLabel, setSelectedLabel } = useContext(SelectedSampleContext);
-
+  const { loadSample, setLoadSample, selectedLabel, setSelectedLabel } =
+    useContext(SelectedSampleContext);
   const { darkMode } = useContext(DarkModeContext);
-
-  const [alertOpen, setAlertOpen] = useState(false);
 
   useEffect(() => {
     if (selectedLabel == "HL7V2 To FHIR") {
       setState((prevState) => ({
         ...prevState,
         input: loadSample!.data,
+        alertOpen: true,
       }));
       setLoadSample(null);
       setSelectedLabel("");
-      setAlertOpen(true);
       setTimeout(() => {
-        setAlertOpen(false);
+        setState((prevState) => ({
+          ...prevState,
+          alertOpen: false,
+        }));
       }, 2000);
     }
   }, [loadSample, selectedLabel]);
 
   const closeAlert = () => {
-    setAlertOpen(false);
+    setState((prevState) => ({
+      ...prevState,
+      alertOpen: false,
+    }));
+  };
+
+  const closeResponse = () => {
+    setState((prevState) => ({
+      ...prevState,
+      isError: false,
+    }));
+  };
+
+  const handleInputChange = useCallback((value: string) => {
+    setState((prevState) => ({
+      ...prevState,
+      input: value,
+    }));
+  }, []);
+
+  const handleInputClear = () => {
+    setState((prevState) => ({
+      ...prevState,
+      input: "",
+    }));
+  };
+
+  const handleOutputClear = () => {
+    setState((prevState) => ({
+      ...prevState,
+      output: "",
+    }));
+  };
+
+  const readFile = (fileInput?: string | ArrayBuffer | null) => {
+    if (typeof fileInput == "string") {
+      setState((prevState) => ({
+        ...prevState,
+        input: fileInput,
+      }));
+    }
   };
 
   const callBackend = () => {
@@ -91,43 +133,6 @@ export const Hl7v2ToFhir = () => {
       });
   };
 
-  const closeResponse = () => {
-    setState((prevState) => ({
-      ...prevState,
-      isError: false,
-    }));
-  };
-
-  const handleInputClear = () => {
-    setState((prevState) => ({
-      ...prevState,
-      input: "",
-    }));
-  };
-
-  const handleOutputClear = () => {
-    setState((prevState) => ({
-      ...prevState,
-      output: "",
-    }));
-  };
-
-  const handleInputChange = useCallback((value: string) => {
-    setState((prevState) => ({
-      ...prevState,
-      input: value,
-    }));
-  }, []);
-
-  const readFile = (fileInput?: string | ArrayBuffer | null) => {
-    if (typeof fileInput == "string") {
-      setState((prevState) => ({
-        ...prevState,
-        input: fileInput,
-      }));
-    }
-  };
-
   return (
     <Container
       maxWidth={false}
@@ -136,7 +141,7 @@ export const Hl7v2ToFhir = () => {
       {isError && (
         <ResponseAlert
           isOpen={isError}
-          severity={"error"}
+          severity="error"
           message={errorMessage}
           setIsOpen={closeResponse}
         />
@@ -144,7 +149,7 @@ export const Hl7v2ToFhir = () => {
       {alertOpen && (
         <ResponseAlert
           isOpen={alertOpen}
-          severity={"success"}
+          severity="success"
           message="Sample Loaded"
           setIsOpen={closeAlert}
         />
