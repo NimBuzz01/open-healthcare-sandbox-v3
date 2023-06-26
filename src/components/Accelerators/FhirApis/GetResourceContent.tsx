@@ -290,7 +290,7 @@ export const GetResourceContent = ({
             id="parameter-section"
           >
             <Box>
-              {isSearchOperation && (
+              {isSearchOperation && searchParams[0] ? (
                 <>
                   <Typography
                     sx={{ color: "primary.dark", mb: 1, mt: 0.5 }}
@@ -360,6 +360,10 @@ export const GetResourceContent = ({
                     </Alert>
                   )}
                 </>
+              ) : (
+                <Typography sx={{ fontStyle: "italic", m: 1 }}>
+                  No search parameters available
+                </Typography>
               )}
               <Box>
                 {!isSearchOperation && (

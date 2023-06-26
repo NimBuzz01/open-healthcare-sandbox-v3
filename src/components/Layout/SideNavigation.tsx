@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Box, Divider, Typography, Tooltip } from "@mui/material";
+import { Box, Divider, Typography, Tooltip, IconButton } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
@@ -31,87 +31,83 @@ export const SideNavigation = ({ items }: Props) => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }} id="sidebar">
+    <Box
+      sx={{ display: "flex", flexDirection: "column", bgcolor: "primary.main" }}
+      id="sidebar"
+    >
       <Box
         sx={{
           display: "flex",
-          flexGrow: 1,
-          flexDirection: "column",
-          bgcolor: "primary.main",
+          alignItems: "center",
+          justifyContent: "space-between",
+          mx: isExpanded ? 0.5 : 1.2,
+          my: 0.8,
+        }}
+        id="sidebar-header"
+      >
+        <Typography
+          variant="h6"
+          sx={{
+            color: "background.default",
+            display: isExpanded ? "block" : "none",
+            transition: "0.2s",
+            opacity: isExpanded ? 1 : 0,
+            ml: 1,
+          }}
+          id="sidebar-title"
+        >
+          Accelerators
+        </Typography>
+        <Box
+          id="sidebar-toggle"
+          aria-label={isExpanded ? "Collapse" : "Expand"}
+        >
+          {isExpanded ? (
+            <Tooltip
+              key={"close-icon"}
+              title={<Typography fontSize={11}>Collapse</Typography>}
+              placement="right"
+            >
+              <IconButton
+                onClick={handleToggleExpand}
+                sx={{ color: "background.default" }}
+              >
+                <ChevronLeftIcon sx={{ width: 24, height: 24 }} />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip
+              key={"open-icon"}
+              title={<Typography fontSize={11}>Expand</Typography>}
+              placement="right"
+            >
+              <IconButton
+                onClick={handleToggleExpand}
+                sx={{ color: "background.default" }}
+              >
+                <ChevronRightIcon sx={{ width: 24, height: 24 }} />
+              </IconButton>
+            </Tooltip>
+          )}
+        </Box>
+      </Box>
+      <Divider
+        sx={{
+          transition: "0.2s",
+          bgcolor: "background.default",
+        }}
+        id="sidebar-divider"
+      />
+      <Box
+        sx={{
           py: 1,
           px: 0.5,
           width: isExpanded ? 230 : 60,
-          zIndex: 2,
           transition: "0.2s",
           overflow: "hidden",
         }}
         id="sidebar-content"
       >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            mt: 2,
-            mx: 1.8,
-          }}
-          id="sidebar-header"
-        >
-          <Typography
-            variant="h6"
-            sx={{
-              color: "background.default",
-              display: isExpanded ? "block" : "none",
-              transition: "0.2s",
-              opacity: isExpanded ? 1 : 0,
-            }}
-            id="sidebar-title"
-          >
-            Accelerators
-          </Typography>
-          <Box
-            onClick={handleToggleExpand}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "background.default",
-              cursor: "pointer",
-              transition: "0.2s",
-              fontSize: 20,
-            }}
-            id="sidebar-toggle"
-            aria-label={isExpanded ? "Collapse" : "Expand"}
-          >
-            {isExpanded ? (
-              <Tooltip
-                key={"close-icon"}
-                title={<Typography fontSize={11}>Collapse</Typography>}
-                placement="right"
-              >
-                <ChevronLeftIcon sx={{ width: 23, height: 23 }} />
-              </Tooltip>
-            ) : (
-              <Tooltip
-                key={"open-icon"}
-                title={<Typography fontSize={11}>Expand</Typography>}
-                placement="right"
-              >
-                <ChevronRightIcon sx={{ width: 23, height: 23 }} />
-              </Tooltip>
-            )}
-          </Box>
-        </Box>
-        <Divider
-          light
-          variant="middle"
-          sx={{
-            m: 1,
-            bgcolor: "background.default",
-            transition: "0.2s",
-          }}
-          id="sidebar-divider"
-        />
         <Box id="sidebar-items">
           {items.map((item) => (
             <Tooltip
@@ -144,7 +140,7 @@ export const SideNavigation = ({ items }: Props) => {
                     cursor: "pointer",
                     transition: "0.2s",
                     textDecoration: "none",
-                    borderRadius: "8px 0 0 8px",
+                    borderRadius: "4px 0 0 4px",
                     fontSize: isExpanded ? 16 : 0,
                     ...(currentSelection === item.path && {
                       backgroundColor: "background.default",
