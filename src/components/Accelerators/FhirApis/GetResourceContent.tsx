@@ -50,6 +50,9 @@ export const GetResourceContent = ({
   const [isAdded, setIsAdded] = useState<boolean>(false);
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedAPIName] = useState(
+    resource.resourcePath.slice(resource.resourcePath.indexOf("/") + 1)
+  );
 
   const [response, setResponse] = useState<any>({
     statusCode: null,
@@ -447,6 +450,7 @@ export const GetResourceContent = ({
                   placeholder="Output will be displayed here..."
                   fileType="json"
                   downloadEnabled
+                  downloadName={selectedAPIName.toLowerCase() + "-output"}
                   width="100%"
                   height="calc(100vh - 389px)"
                   id="fhir-apis-code-editor"

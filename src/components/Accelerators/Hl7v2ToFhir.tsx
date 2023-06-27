@@ -226,6 +226,7 @@ export const Hl7v2ToFhir = () => {
             placeholder="FHIR Resource will be displayed here..."
             fileType="json"
             downloadEnabled
+            downloadName="hl7-to-fhir-output"
             clearEnabled
             width="100%"
             height="calc(100vh - 197px)"

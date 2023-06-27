@@ -168,6 +168,11 @@ export const SamplesModal = ({ selectedAPI }: SamplesModalProps) => {
                   darkMode
                   placeholder="FHIR Resource will be displayed here..."
                   downloadEnabled
+                  downloadName={(
+                    selectedSample.name +
+                    "-" +
+                    "sample"
+                  ).toLowerCase()}
                   width="98%"
                   height="calc(90vh - 110px)"
                 />

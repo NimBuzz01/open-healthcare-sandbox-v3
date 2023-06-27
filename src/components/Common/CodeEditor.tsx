@@ -15,6 +15,7 @@ interface CodeEditorProps {
   placeholder?: string;
   fileType?: string;
   downloadEnabled?: boolean;
+  downloadName?: string;
   uploadEnabled?: boolean;
   clearEnabled?: boolean;
   readFile?(fileInput?: string | ArrayBuffer | null): any;
@@ -33,6 +34,7 @@ export const CodeEditor = ({
   placeholder,
   fileType = "jsx",
   downloadEnabled,
+  downloadName,
   uploadEnabled,
   clearEnabled,
   readFile,
@@ -51,7 +53,7 @@ export const CodeEditor = ({
 
   const handleDownloadClick = () => {
     const content = JSON.stringify(value, null, 2);
-    handleDownload(JSON.parse(content), `${title}.json`);
+    handleDownload(JSON.parse(content), `${downloadName}.json`);
   };
 
   const langExtensions: Record<string, () => any> = langs;
