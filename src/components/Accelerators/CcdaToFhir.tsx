@@ -5,6 +5,7 @@ import {
   SamplesModal,
   CodeEditor,
   ResponseAlert,
+  HeadersTab,
 } from "../Common";
 import { DarkModeContext } from "../Contexts/DarkModeContext";
 import { SelectedSampleContext } from "../Contexts/SelectedSampleContext";
@@ -35,6 +36,18 @@ export const CcdaToFhir = () => {
   const { loadSample, setLoadSample, selectedLabel, setSelectedLabel } =
     useContext(SelectedSampleContext);
   const { darkMode } = useContext(DarkModeContext);
+
+  const [response, setResponse] = useState<any>({
+    statusCode: null,
+    statusText: "",
+    resUrl: "",
+    contentType: "",
+  });
+  const [request, setRequest] = useState<any>({
+    reqUrl: "",
+    contentType: "",
+    method: "",
+  });
 
   useEffect(() => {
     if (selectedLabel == "C-CDA To FHIR") {
@@ -110,6 +123,17 @@ export const CcdaToFhir = () => {
     apiClient(BFF_BASE_URL)
       .post("/ccdatofhir/transform", input)
       .then((res) => {
+        setRequest({
+          reqUrl: BFF_BASE_URL + res.config["url"],
+          contentType: res.config.headers["Content-Type"],
+          method: res.config["method"]?.toUpperCase(),
+        });
+        setResponse({
+          statusCode: res.status,
+          statusText: res.statusText,
+          resUrl: res.request["responseURL"],
+          contentType: res.headers["content-type"],
+        });
         setState((prevState) => ({
           ...prevState,
           output: JSON.stringify(res.data, null, 2),
@@ -117,6 +141,17 @@ export const CcdaToFhir = () => {
         }));
       })
       .catch((error) => {
+        setRequest({
+          reqUrl: BFF_BASE_URL + error.config["url"],
+          contentType: error.config.headers["Content-Type"],
+          method: error.config["method"]?.toUpperCase(),
+        });
+        setResponse({
+          statusCode: error.response.status,
+          statusText: error.response.statusText,
+          resUrl: error.response.request["responseURL"],
+          contentType: error.response.headers["content-type"],
+        });
         setState((prevState) => ({
           ...prevState,
           output: JSON.stringify(error.response, null, 2),
@@ -167,8 +202,8 @@ export const CcdaToFhir = () => {
           isLoading={isLoading}
           aria-label="Convert Button"
         />
-        <Box sx={{ visibility: "hidden" }} id="placeholder-box">
-          <Typography>PLACEHOLDER ABCXY</Typography>
+        <Box id="headers-button">
+          <HeadersTab request={request} response={response} />
         </Box>
       </Box>
       <Divider sx={{ mt: 1 }} />

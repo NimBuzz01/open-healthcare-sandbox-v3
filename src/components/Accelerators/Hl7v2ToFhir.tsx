@@ -5,6 +5,7 @@ import {
   SamplesModal,
   CodeEditor,
   ResponseAlert,
+  HeadersTab,
 } from "../Common";
 import { DarkModeContext } from "../Contexts/DarkModeContext";
 import { SelectedSampleContext } from "../Contexts/SelectedSampleContext";
@@ -35,6 +36,18 @@ export const Hl7v2ToFhir = () => {
   const { loadSample, setLoadSample, selectedLabel, setSelectedLabel } =
     useContext(SelectedSampleContext);
   const { darkMode } = useContext(DarkModeContext);
+
+  const [response, setResponse] = useState<any>({
+    statusCode: null,
+    statusText: "",
+    resUrl: "",
+    contentType: "",
+  });
+  const [request, setRequest] = useState<any>({
+    reqUrl: "",
+    contentType: "",
+    method: "",
+  });
 
   useEffect(() => {
     if (selectedLabel == "HL7V2 To FHIR") {
@@ -110,6 +123,17 @@ export const Hl7v2ToFhir = () => {
     apiClient(BFF_BASE_URL)
       .post("/v2tofhir/transform", input)
       .then((res) => {
+        setRequest({
+          reqUrl: BFF_BASE_URL + res.config["url"],
+          contentType: res.config.headers["Content-Type"],
+          method: res.config["method"]?.toUpperCase(),
+        });
+        setResponse({
+          statusCode: res.status,
+          statusText: res.statusText,
+          resUrl: res.request["responseURL"],
+          contentType: res.headers["content-type"],
+        });
         setState((prevState) => ({
           ...prevState,
           output: JSON.stringify(res.data, null, 2),
@@ -117,6 +141,17 @@ export const Hl7v2ToFhir = () => {
         }));
       })
       .catch((error) => {
+        setRequest({
+          reqUrl: BFF_BASE_URL + error.config["url"],
+          contentType: error.config.headers["Content-Type"],
+          method: error.config["method"]?.toUpperCase(),
+        });
+        setResponse({
+          statusCode: error.response.status,
+          statusText: error.response.statusText,
+          resUrl: error.response.request["responseURL"],
+          contentType: error.response.headers["content-type"],
+        });
         setState((prevState) => ({
           ...prevState,
           output: JSON.stringify(error.response, null, 2),
@@ -171,8 +206,8 @@ export const Hl7v2ToFhir = () => {
           isLoading={isLoading}
           aria-label="Convert Button"
         />
-        <Box sx={{ visibility: "hidden" }} id="placeholder-box">
-          <Typography>PLACEHOLDER ABCXY</Typography>
+        <Box id="headers-button">
+          <HeadersTab request={request} response={response} />
         </Box>
       </Box>
       <Divider sx={{ mt: 1 }} />

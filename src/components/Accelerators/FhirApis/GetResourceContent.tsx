@@ -15,11 +15,11 @@ import {
   ResponseAlert,
   CodeEditor,
   PreLoader,
+  HeadersTab,
 } from "../../Common";
 import {
   InputField,
   Props as InputFieldProps,
-  HeadersTab,
   ResourceMethodIcon,
 } from "../FhirApis";
 import { SearchParam } from "../../Configs/ApiConfig";
@@ -190,35 +190,39 @@ export const GetResourceContent = ({
     setData(null);
     setError("");
 
-    setRequest({
-      reqUrl: url,
-      contentType: "application/fhir+json;charset=utf-8",
-      method: "GET",
-    });
-
     axios
       .get(url)
       .then((res) => {
-        setData(res.data);
-        setIsLoading(false);
+        setRequest({
+          reqUrl: res.config["url"],
+          contentType: res.config.headers["Content-Type"],
+          method: res.config["method"]?.toUpperCase(),
+        });
         setResponse({
           statusCode: res.status,
           statusText: res.statusText,
-          resUrl: url,
+          resUrl: res.request["responseURL"],
           contentType: res.headers["content-type"],
         });
+        setData(res.data);
+        setIsLoading(false);
       })
       .catch((error) => {
+        setRequest({
+          reqUrl: error.config["url"],
+          contentType: error.config.headers["Content-Type"],
+          method: error.config["method"]?.toUpperCase(),
+        });
+        setResponse({
+          statusCode: error.response.status,
+          statusText: error.response.statusText,
+          resUrl: error.response.request["responseURL"],
+          contentType: error.response.headers["content-type"],
+        });
         setError(error.message);
         setIsError(true);
         setData(error.response.data);
         setIsLoading(false);
-        setResponse({
-          statusCode: error.response.status,
-          statusText: error.response.statusText,
-          resUrl: url,
-          contentType: error.response.headers["content-type"],
-        });
         setTimeout(() => {
           setIsError(false);
         }, 2000);

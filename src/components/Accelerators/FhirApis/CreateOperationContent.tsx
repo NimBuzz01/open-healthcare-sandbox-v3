@@ -7,8 +7,9 @@ import {
   SamplesModal,
   PreLoader,
   CodeEditor,
+  HeadersTab,
 } from "../../Common";
-import { ResourceMethodIcon, HeadersTab } from "../FhirApis";
+import { ResourceMethodIcon } from "../FhirApis";
 import { DarkModeContext } from "../../Contexts/DarkModeContext";
 import { SelectedSampleContext } from "../../Contexts/SelectedSampleContext";
 
@@ -95,35 +96,39 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
     setError("");
     setSuccessAlert(false);
 
-    setRequest({
-      reqUrl: backendUrl,
-      contentType: "application/fhir+json;charset=utf-8",
-      method: "POST",
-    });
-
     axios
       .post(backendUrl, postRequest)
       .then((res) => {
-        setData(res.data);
-        setIsLoading(false);
-        setSuccessAlert(true);
+        setRequest({
+          reqUrl: res.config["url"],
+          contentType: res.config.headers["Content-Type"],
+          method: res.config["method"]?.toUpperCase(),
+        });
         setResponse({
           statusCode: res.status,
           statusText: res.statusText,
-          resUrl: res.config.url,
+          resUrl: res.request["responseURL"],
           contentType: res.headers["content-type"],
         });
+        setData(res.data);
+        setIsLoading(false);
+        setSuccessAlert(true);
       })
       .catch((error) => {
-        setError(error.message);
-        setIsError(true);
-        setData(error.response);
+        setRequest({
+          reqUrl: error.config["url"],
+          contentType: error.config.headers["Content-Type"],
+          method: error.config["method"]?.toUpperCase(),
+        });
         setResponse({
           statusCode: error.response.status,
           statusText: error.response.statusText,
-          resUrl: error.config.url,
+          resUrl: error.response.request["responseURL"],
           contentType: error.response.headers["content-type"],
         });
+        setError(error.message);
+        setIsError(true);
+        setData(error.response);
         setIsLoading(false);
         setTimeout(() => {
           setIsError(false);
