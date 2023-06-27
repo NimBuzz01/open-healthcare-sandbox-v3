@@ -33,20 +33,20 @@ export interface SearchParam {
 }
 
 export const apiList: ApiConfig[] = [
-  {
-    name: "Metadata",
-    baseUrl: BFF_BASE_URL + "/fhir/r4/metadata",
-    searchParams: [],
-    resources: [
-      {
-        resourceName: "Search",
-        resourceMethod: "GET",
-        resourcePath: "/Metadata",
-        resourceDescription: "Get metadata resources",
-        resourceOperation: OperationTypes.SEARCH,
-      },
-    ],
-  },
+  // {
+  //   name: "Metadata",
+  //   baseUrl: BFF_BASE_URL + "/fhir/r4/metadata",
+  //   searchParams: [],
+  //   resources: [
+  //     {
+  //       resourceName: "Search",
+  //       resourceMethod: "GET",
+  //       resourcePath: "/Metadata",
+  //       resourceDescription: "Get metadata resources",
+  //       resourceOperation: OperationTypes.SEARCH,
+  //     },
+  //   ],
+  // },
   {
     name: "Patient",
     baseUrl: BFF_BASE_URL + "/fhir/r4/patient",

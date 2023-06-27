@@ -323,7 +323,7 @@ export const CreateOperationContent = ({ backendUrl, resource }: Props) => {
               placeholder="Output will be displayed here..."
               fileType="json"
               downloadEnabled
-              downloadName={selectedAPIName.toLowerCase() + "-post-output"}
+              downloadName={selectedAPIName.toLowerCase() + "-create-output"}
               width="100%"
               height="calc(100vh - 389px)"
               id="fhir-apis-post-output"

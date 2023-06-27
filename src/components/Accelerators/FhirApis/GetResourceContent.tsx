@@ -450,7 +450,11 @@ export const GetResourceContent = ({
                   placeholder="Output will be displayed here..."
                   fileType="json"
                   downloadEnabled
-                  downloadName={selectedAPIName.toLowerCase() + "-output"}
+                  downloadName={
+                    selectedAPIName.toLowerCase() +
+                    (isSearchOperation ? "-search" : "-read") +
+                    "-output"
+                  }
                   width="100%"
                   height="calc(100vh - 389px)"
                   id="fhir-apis-code-editor"
